@@ -12,6 +12,7 @@ const server = createServer({
 });
 const VERSION = '3.41.33';
 import GAMEMODES from './miniblox/types/gamemodes.js';
+const DEFAULT_GAMEMODE = "skywars";
 let connected, skipKick = Date.now();
 
 function cleanup(teleport) {
@@ -44,7 +45,7 @@ async function queue(gamemode, server) {
 			},
 			body: JSON.stringify({
 				clientVersion: VERSION,
-				minigameId: gamemode ?? 'kitpvp'
+				minigameId: gamemode ?? DEFAULT_GAMEMODE
 			})
 		});
 	} catch (exception) {
@@ -88,7 +89,7 @@ async function connect(client, requeue, gamemode, code) {
 	console.log(`\x1b[36m[*] Connecting to ${fetched.serverId}\x1b[0m`);
 	if (client.ended) return;
 
-	const gameType = gamemode ?? 'kitpvp';
+	const gameType = gamemode ?? DEFAULT_GAMEMODE;
 	ClientSocket.setUrl(`https://${fetched.serverId}.servers.coolmathblox.ca`, void 0);
 	let session = '';
 	try {
