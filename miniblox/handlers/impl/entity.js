@@ -7,9 +7,10 @@ const DEG2RAD = Math.PI / 180, RAD2DEG = 180 / Math.PI;
 let client, tablist, world;
 
 function convertAngle(ang, ignore, num) {
-	if (!ignore) ang = ang / 256 * Math.PI * 2;
-	ang = (((ang * -1) * RAD2DEG) - (num != undefined ? num : 0)) * 256 / 360;
-	return convertToByte(ang);
+	const angle = ang;
+	if (!ignore) angle = angle / 256 * Math.PI * 2;
+	angle = (((angle * -1) * RAD2DEG) - (num != undefined ? num : 0)) * 256 / 360;
+	return convertToByte(angle);
 }
 
 function clampByte(byte) {
@@ -17,17 +18,17 @@ function clampByte(byte) {
 }
 
 function clampToBox(pos, box) {
-	box = convertServerPos(box);
+	const convertedBox = convertServerPos(box);
 	return {
-		x: Math.min(Math.max(pos.x, box.x - 0.4), box.x + 0.4),
-		y: Math.min(Math.max(pos.y + 1.62, box.y - 0.1), box.y + 1.9),
-		z: Math.min(Math.max(pos.z, box.z - 0.4), box.z + 0.4)
+		x: Math.min(Math.max(pos.x, convertedBox.x - 0.4), convertedBox.x + 0.4),
+		y: Math.min(Math.max(pos.y + 1.62, convertedBox.y - 0.1), convertedBox.y + 1.9),
+		z: Math.min(Math.max(pos.z, convertedBox.z - 0.4), convertedBox.z + 0.4)
 	};
 }
 
 function convertToByte(num) {
-	num &= 0xFF;
-	num = num > 127 ? num - 256 : num;
+	const converted = num & 0xFF;
+	converted = converted > 127 ? converted - 256 : converted;
 	return num;
 }
 
@@ -152,7 +153,7 @@ const self = class EntityHandler extends Handler {
 		}));
 		this.local.lastState = newState;
 	}
-	abilities(movement) {
+	abilities(_movement) {
 		if (this.local.flying == false) return;
 		ClientSocket.sendPacket(new SPacketPlayerAbilities({isFlying: false}));
 		this.local.flying = false;
@@ -385,7 +386,7 @@ const self = class EntityHandler extends Handler {
 				}
 
 				if (packet.pos) {
-					const pos = entity.pos;
+					const {pos} = entity;
 					entity.pos = {x: pos.x + packet.pos.x, y: pos.y + packet.pos.y, z: pos.z + packet.pos.z};
 
 					if (clampByte(packet.pos.x) != packet.pos.x || clampByte(packet.pos.y) != packet.pos.y || clampByte(packet.pos.z) != packet.pos.z) {
