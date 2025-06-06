@@ -129,7 +129,7 @@ const self = class WorldHandler extends Handler {
 		});
 		ClientSocket.on('CPacketParticles', packet => client.write('world_particles', {
 			particleId: packet.particleId,
-			longDistance: false,
+			longDistance: packet.longDistance ?? false,
 			x: packet.x,
 			y: packet.y,
 			z: packet.z,
@@ -189,15 +189,15 @@ const self = class WorldHandler extends Handler {
 			switch (packet.status) {
 				case 0:
 					this.breaking = true;
-					ClientSocket.sendPacket(new SPacketClick({location: location}));
-					ClientSocket.sendPacket(new SPacketBreakBlock({location: location, start: true}));
+					ClientSocket.sendPacket(new SPacketClick({location}));
+					ClientSocket.sendPacket(new SPacketBreakBlock({location, start: true}));
 					return;
 				case 1:
 					this.breaking = false;
 					return;
 				case 2:
 					this.breaking = false;
-					ClientSocket.sendPacket(new SPacketBreakBlock({location: location, start: false}));
+					ClientSocket.sendPacket(new SPacketBreakBlock({location, start: false}));
 					return;
 			}
 			ClientSocket.sendPacket(new SPacketPlayerAction({
