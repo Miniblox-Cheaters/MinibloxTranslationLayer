@@ -29,7 +29,7 @@ function clampToBox(pos, box) {
 function convertToByte(num) {
 	let converted = num & 0xFF;
 	converted = converted > 127 ? converted - 256 : converted;
-	return num;
+	return converted;
 }
 
 function convertServerPos(pos) {
