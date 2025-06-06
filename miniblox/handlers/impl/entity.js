@@ -7,7 +7,7 @@ const DEG2RAD = Math.PI / 180, RAD2DEG = 180 / Math.PI;
 let client, tablist, world;
 
 function convertAngle(ang, ignore, num) {
-	const angle = ang;
+	let angle = ang;
 	if (!ignore) angle = angle / 256 * Math.PI * 2;
 	angle = (((angle * -1) * RAD2DEG) - (num != undefined ? num : 0)) * 256 / 360;
 	return convertToByte(angle);
@@ -18,7 +18,7 @@ function clampByte(byte) {
 }
 
 function clampToBox(pos, box) {
-	const convertedBox = convertServerPos(box);
+	let convertedBox = convertServerPos(box);
 	return {
 		x: Math.min(Math.max(pos.x, convertedBox.x - 0.4), convertedBox.x + 0.4),
 		y: Math.min(Math.max(pos.y + 1.62, convertedBox.y - 0.1), convertedBox.y + 1.9),
@@ -27,7 +27,7 @@ function clampToBox(pos, box) {
 }
 
 function convertToByte(num) {
-	const converted = num & 0xFF;
+	let converted = num & 0xFF;
 	converted = converted > 127 ? converted - 256 : converted;
 	return num;
 }
@@ -627,15 +627,15 @@ const self = class EntityHandler extends Handler {
 
 			ClientSocket.sendPacket(new SPacketPlayerInput({
 				sequenceNumber: this.local.inputSequenceNumber,
-				left: sideways > 0,
-				right: sideways < 0,
-				up: forward > 0,
-				down: forward < 0,
+				left: true,
+				right: true,
+				up: true,
+				down: true,
 				yaw: this.local.yaw,
 				pitch: this.local.pitch,
-				jump: (jump & 1) > 0,
-				sneak: (jump & 2) > 0,
-				sprint: this.local.state[1] ?? false,
+				jump: true,
+				sneak: true,
+				sprint: true,
 				pos: this.desyncFlag ? desyncMath(this.local.pos, this.local.serverPos, 1.98) : this.local.pos
 			}));
 		});
