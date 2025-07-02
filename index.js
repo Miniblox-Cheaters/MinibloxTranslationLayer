@@ -10,7 +10,7 @@ const server = mc.createServer({
 	keepAlive: false,
 	version: '1.8.9'
 });
-const VERSION = '3.41.20';
+const VERSION = '3.41.33';
 const GAMEMODES = require('./miniblox/types/gamemodes.js');
 let connected, skipKick = Date.now();
 
@@ -32,7 +32,7 @@ async function queue(gamemode, server) {
 				'content-type': 'application/json',
 				'pragma': 'no-cache',
 				'priority': 'u=1, i',
-				'sec-ch-ua': '"Microsoft Edge";v="133", "Chromium";v="133", "Not_A Brand";v="99"',
+				'sec-ch-ua': '"Not)A;Brand";v="8", "Chromium";v="138", "Microsoft Edge";v="138"',
 				'sec-ch-ua-mobile': '?0',
 				'sec-ch-ua-platform': '"Windows"',
 				'sec-fetch-dest': 'empty',
@@ -40,7 +40,7 @@ async function queue(gamemode, server) {
 				'sec-fetch-site': 'cross-site',
 				'Referer': 'https://miniblox.io/',
 				'Referrer-Policy': 'strict-origin-when-cross-origin',
-				'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0'
+				'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36 Edg/138.0.0.0'
 			},
 			body: JSON.stringify({
 				clientVersion: VERSION,
@@ -139,6 +139,16 @@ async function connect(client, requeue, gamemode, code) {
 server.on('playerJoin', async function(client) {
 	if (connected) {
 		client.end('A player is already logged in!');
+		return;
+	}
+
+	if (client.username == undefined || client.uuid == undefined) {
+		client.end('Missing Username / UUID, please ensure you are using a valid cracked Minecraft account!');
+		return;
+	}
+
+	if (client.protocolVersion != 47) {
+		console.log(`\x1b[33m[*] Incorrect client version, Please use Minecraft 1.8.9!\x1b[0m`);
 		return;
 	}
 
