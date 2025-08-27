@@ -28,8 +28,8 @@ const self = class TabListHandler extends Handler {
 				name: 'scoreboard'
 			});
 			if (packet.content.length < 15) {
-				packet.content.push({columns: ['']});
-				packet.content.push({columns: ['\\yellow\\miniblox.io']});
+				packet.content.push({ columns: [''] });
+				packet.content.push({ columns: ['\\yellow\\miniblox.online'] });
 			}
 
 			let index = 0;

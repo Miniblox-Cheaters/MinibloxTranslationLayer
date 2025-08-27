@@ -5,18 +5,18 @@ import { encode, decode } from "@msgpack/msgpack";
 import { Message, proto2, proto3 } from "./types/proto.js";
 
 var yT = Object.defineProperty;
-var xT = (j,_,$)=>_ in j ? yT(j, _, {
+var xT = (j, _, $) => _ in j ? yT(j, _, {
 	enumerable: !0,
 	configurable: !0,
 	writable: !0,
 	value: $
 }) : j[_] = $;
-var ST = (j,_)=>()=>(_ || j((_ = {
+var ST = (j, _) => () => (_ || j((_ = {
 	exports: {}
 }).exports, _),
-_.exports);
-var ut = (j,_,$)=>(xT(j, typeof _ != "symbol" ? _ + "" : _, $),
-$);
+	_.exports);
+var ut = (j, _, $) => (xT(j, typeof _ != "symbol" ? _ + "" : _, $),
+	$);
 
 const exports = {};
 
@@ -45,36 +45,36 @@ const SPacketLoginStart = class extends Message {
 };
 export { SPacketLoginStart };
 ut(SPacketLoginStart, "runtime", proto2),
-ut(SPacketLoginStart, "typeName", "SPacketLoginStart"),
-ut(SPacketLoginStart, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "session",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 2,
-	name: "hydration",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 3,
-	name: "metrics_id",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 4,
-	name: "requested_uuid",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 5,
-	name: "client_version",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(SPacketLoginStart, "typeName", "SPacketLoginStart"),
+	ut(SPacketLoginStart, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "session",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 2,
+		name: "hydration",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 3,
+		name: "metrics_id",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 4,
+		name: "requested_uuid",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 5,
+		name: "client_version",
+		kind: "scalar",
+		T: 9
+	}]));
 const PBItemStack = class extends Message {
 	constructor($) {
 		super();
@@ -98,40 +98,40 @@ const PBItemStack = class extends Message {
 		return proto2.util.equals(PBItemStack, $, et)
 	}
 }
-;
+	;
 export { PBItemStack };
 ut(PBItemStack, "runtime", proto2),
-ut(PBItemStack, "typeName", "PBItemStack"),
-ut(PBItemStack, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "present",
-	kind: "scalar",
-	T: 8
-}, {
-	no: 2,
-	name: "id",
-	kind: "scalar",
-	T: 13,
-	opt: !0
-}, {
-	no: 3,
-	name: "stackSize",
-	kind: "scalar",
-	T: 13,
-	opt: !0
-}, {
-	no: 5,
-	name: "durability",
-	kind: "scalar",
-	T: 13,
-	opt: !0
-}, {
-	no: 4,
-	name: "data",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}]));
+	ut(PBItemStack, "typeName", "PBItemStack"),
+	ut(PBItemStack, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "present",
+		kind: "scalar",
+		T: 8
+	}, {
+		no: 2,
+		name: "id",
+		kind: "scalar",
+		T: 13,
+		opt: !0
+	}, {
+		no: 3,
+		name: "stackSize",
+		kind: "scalar",
+		T: 13,
+		opt: !0
+	}, {
+		no: 5,
+		name: "durability",
+		kind: "scalar",
+		T: 13,
+		opt: !0
+	}, {
+		no: 4,
+		name: "data",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}]));
 const PBBlockPos = class extends Message {
 	constructor($) {
 		super();
@@ -155,23 +155,23 @@ const PBBlockPos = class extends Message {
 };
 export { PBBlockPos };
 ut(PBBlockPos, "runtime", proto2),
-ut(PBBlockPos, "typeName", "PBBlockPos"),
-ut(PBBlockPos, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "x",
-	kind: "scalar",
-	T: 17
-}, {
-	no: 2,
-	name: "y",
-	kind: "scalar",
-	T: 17
-}, {
-	no: 3,
-	name: "z",
-	kind: "scalar",
-	T: 17
-}]));
+	ut(PBBlockPos, "typeName", "PBBlockPos"),
+	ut(PBBlockPos, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "x",
+		kind: "scalar",
+		T: 17
+	}, {
+		no: 2,
+		name: "y",
+		kind: "scalar",
+		T: 17
+	}, {
+		no: 3,
+		name: "z",
+		kind: "scalar",
+		T: 17
+	}]));
 export const PBVector3 = class extends Message {
 	constructor($) {
 		super();
@@ -194,23 +194,23 @@ export const PBVector3 = class extends Message {
 	}
 };
 ut(PBVector3, "runtime", proto2),
-ut(PBVector3, "typeName", "PBVector3"),
-ut(PBVector3, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "x",
-	kind: "scalar",
-	T: 17
-}, {
-	no: 2,
-	name: "y",
-	kind: "scalar",
-	T: 17
-}, {
-	no: 3,
-	name: "z",
-	kind: "scalar",
-	T: 17
-}]));
+	ut(PBVector3, "typeName", "PBVector3"),
+	ut(PBVector3, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "x",
+		kind: "scalar",
+		T: 17
+	}, {
+		no: 2,
+		name: "y",
+		kind: "scalar",
+		T: 17
+	}, {
+		no: 3,
+		name: "z",
+		kind: "scalar",
+		T: 17
+	}]));
 export const PBFloatVector3 = class extends Message {
 	constructor($) {
 		super();
@@ -233,23 +233,23 @@ export const PBFloatVector3 = class extends Message {
 	}
 };
 ut(PBFloatVector3, "runtime", proto2),
-ut(PBFloatVector3, "typeName", "PBFloatVector3"),
-ut(PBFloatVector3, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "x",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 2,
-	name: "y",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 3,
-	name: "z",
-	kind: "scalar",
-	T: 2
-}]));
+	ut(PBFloatVector3, "typeName", "PBFloatVector3"),
+	ut(PBFloatVector3, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "x",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 2,
+		name: "y",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 3,
+		name: "z",
+		kind: "scalar",
+		T: 2
+	}]));
 const CPacketEntityVelocity = class extends Message {
 	constructor($) {
 		super();
@@ -272,18 +272,18 @@ const CPacketEntityVelocity = class extends Message {
 };
 export { CPacketEntityVelocity };
 ut(CPacketEntityVelocity, "runtime", proto2),
-ut(CPacketEntityVelocity, "typeName", "CPacketEntityVelocity"),
-ut(CPacketEntityVelocity, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "motion",
-	kind: "message",
-	T: PBFloatVector3
-}]));
+	ut(CPacketEntityVelocity, "typeName", "CPacketEntityVelocity"),
+	ut(CPacketEntityVelocity, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "motion",
+		kind: "message",
+		T: PBFloatVector3
+	}]));
 const CPacketChunkData = class extends Message {
 	constructor($) {
 		super();
@@ -309,41 +309,41 @@ const CPacketChunkData = class extends Message {
 	}
 };
 ut(CPacketChunkData, "runtime", proto3),
-ut(CPacketChunkData, "typeName", "CPacketChunkData"),
-ut(CPacketChunkData, "fields", proto3.util.newFieldList(()=>[{
-	no: 1,
-	name: "x",
-	kind: "scalar",
-	T: 17
-}, {
-	no: 2,
-	name: "z",
-	kind: "scalar",
-	T: 17
-}, {
-	no: 3,
-	name: "cells",
-	kind: "message",
-	T: PBCell,
-	repeated: !0
-}, {
-	no: 4,
-	name: "tileEntities",
-	kind: "message",
-	T: PBTileEntity,
-	repeated: !0
-}, {
-	no: 5,
-	name: "dimension",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 6,
-	name: "biomes",
-	kind: "scalar",
-	T: 13,
-	repeated: !0
-}]));
+	ut(CPacketChunkData, "typeName", "CPacketChunkData"),
+	ut(CPacketChunkData, "fields", proto3.util.newFieldList(() => [{
+		no: 1,
+		name: "x",
+		kind: "scalar",
+		T: 17
+	}, {
+		no: 2,
+		name: "z",
+		kind: "scalar",
+		T: 17
+	}, {
+		no: 3,
+		name: "cells",
+		kind: "message",
+		T: PBCell,
+		repeated: !0
+	}, {
+		no: 4,
+		name: "tileEntities",
+		kind: "message",
+		T: PBTileEntity,
+		repeated: !0
+	}, {
+		no: 5,
+		name: "dimension",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 6,
+		name: "biomes",
+		kind: "scalar",
+		T: 13,
+		repeated: !0
+	}]));
 const PBCell = class extends Message {
 	constructor($) {
 		super();
@@ -368,34 +368,34 @@ const PBCell = class extends Message {
 	}
 };
 ut(PBCell, "runtime", proto3),
-ut(PBCell, "typeName", "PBCell"),
-ut(PBCell, "fields", proto3.util.newFieldList(()=>[{
-	no: 7,
-	name: "y",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "bitsPerEntry",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 3,
-	name: "palette",
-	kind: "scalar",
-	T: 13,
-	repeated: !0
-}, {
-	no: 6,
-	name: "bitArray",
-	kind: "scalar",
-	T: 12
-}, {
-	no: 5,
-	name: "blockRefCount",
-	kind: "scalar",
-	T: 13
-}]));
+	ut(PBCell, "typeName", "PBCell"),
+	ut(PBCell, "fields", proto3.util.newFieldList(() => [{
+		no: 7,
+		name: "y",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "bitsPerEntry",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 3,
+		name: "palette",
+		kind: "scalar",
+		T: 13,
+		repeated: !0
+	}, {
+		no: 6,
+		name: "bitArray",
+		kind: "scalar",
+		T: 12
+	}, {
+		no: 5,
+		name: "blockRefCount",
+		kind: "scalar",
+		T: 13
+	}]));
 const PBTileEntity = class extends Message {
 	constructor($) {
 		super();
@@ -419,28 +419,28 @@ const PBTileEntity = class extends Message {
 	}
 };
 ut(PBTileEntity, "runtime", proto3),
-ut(PBTileEntity, "typeName", "PBTileEntity"),
-ut(PBTileEntity, "fields", proto3.util.newFieldList(()=>[{
-	no: 1,
-	name: "x",
-	kind: "scalar",
-	T: 17
-}, {
-	no: 2,
-	name: "y",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 3,
-	name: "z",
-	kind: "scalar",
-	T: 17
-}, {
-	no: 5,
-	name: "nbt",
-	kind: "scalar",
-	T: 12
-}]));
+	ut(PBTileEntity, "typeName", "PBTileEntity"),
+	ut(PBTileEntity, "fields", proto3.util.newFieldList(() => [{
+		no: 1,
+		name: "x",
+		kind: "scalar",
+		T: 17
+	}, {
+		no: 2,
+		name: "y",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 3,
+		name: "z",
+		kind: "scalar",
+		T: 17
+	}, {
+		no: 5,
+		name: "nbt",
+		kind: "scalar",
+		T: 12
+	}]));
 const CPacketEntityEquipment = class extends Message {
 	constructor($) {
 		super();
@@ -463,19 +463,19 @@ const CPacketEntityEquipment = class extends Message {
 };
 export { CPacketEntityEquipment };
 ut(CPacketEntityEquipment, "runtime", proto2),
-ut(CPacketEntityEquipment, "typeName", "CPacketEntityEquipment"),
-ut(CPacketEntityEquipment, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "equipment",
-	kind: "message",
-	T: Equipment,
-	repeated: !0
-}]));
+	ut(CPacketEntityEquipment, "typeName", "CPacketEntityEquipment"),
+	ut(CPacketEntityEquipment, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "equipment",
+		kind: "message",
+		T: Equipment,
+		repeated: !0
+	}]));
 const Equipment = class extends Message {
 	constructor($) {
 		super();
@@ -498,26 +498,26 @@ const Equipment = class extends Message {
 };
 export { Equipment };
 ut(Equipment, "runtime", proto2),
-ut(Equipment, "typeName", "Equipment"),
-ut(Equipment, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "slot",
-	kind: "enum",
-	T: proto2.getEnumType(Equipment_Slot)
-}, {
-	no: 2,
-	name: "item",
-	kind: "message",
-	T: PBItemStack
-}]));
-var Equipment_Slot = (j=>(j[j.UNDEFINED_SLOT = 0] = "UNDEFINED_SLOT",
-j[j.MAIN_HAND = 1] = "MAIN_HAND",
-j[j.OFF_HAND = 2] = "OFF_HAND",
-j[j.HELMET = 3] = "HELMET",
-j[j.CHESTPLATE = 4] = "CHESTPLATE",
-j[j.LEGGINGS = 5] = "LEGGINGS",
-j[j.BOOTS = 6] = "BOOTS",
-j))(Equipment_Slot || {});
+	ut(Equipment, "typeName", "Equipment"),
+	ut(Equipment, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "slot",
+		kind: "enum",
+		T: proto2.getEnumType(Equipment_Slot)
+	}, {
+		no: 2,
+		name: "item",
+		kind: "message",
+		T: PBItemStack
+	}]));
+var Equipment_Slot = (j => (j[j.UNDEFINED_SLOT = 0] = "UNDEFINED_SLOT",
+	j[j.MAIN_HAND = 1] = "MAIN_HAND",
+	j[j.OFF_HAND = 2] = "OFF_HAND",
+	j[j.HELMET = 3] = "HELMET",
+	j[j.CHESTPLATE = 4] = "CHESTPLATE",
+	j[j.LEGGINGS = 5] = "LEGGINGS",
+	j[j.BOOTS = 6] = "BOOTS",
+	j))(Equipment_Slot || {});
 proto2.util.setEnumType(Equipment_Slot, "Equipment.Slot", [{
 	no: 0,
 	name: "UNDEFINED_SLOT"
@@ -563,25 +563,25 @@ const SPacketUpdateInventory = class extends Message {
 };
 export { SPacketUpdateInventory };
 ut(SPacketUpdateInventory, "runtime", proto2),
-ut(SPacketUpdateInventory, "typeName", "SPacketUpdateInventory"),
-ut(SPacketUpdateInventory, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "main",
-	kind: "message",
-	T: PBItemStack,
-	repeated: !0
-}, {
-	no: 2,
-	name: "armor",
-	kind: "message",
-	T: PBItemStack,
-	repeated: !0
-}, {
-	no: 3,
-	name: "idkWhatThisIs",
-	kind: "message",
-	T: PBItemStack
-}]));
+	ut(SPacketUpdateInventory, "typeName", "SPacketUpdateInventory"),
+	ut(SPacketUpdateInventory, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "main",
+		kind: "message",
+		T: PBItemStack,
+		repeated: !0
+	}, {
+		no: 2,
+		name: "armor",
+		kind: "message",
+		T: PBItemStack,
+		repeated: !0
+	}, {
+		no: 3,
+		name: "idkWhatThisIs",
+		kind: "message",
+		T: PBItemStack
+	}]));
 const CPacketUpdateSign = class extends Message {
 	constructor($) {
 		super();
@@ -604,19 +604,19 @@ const CPacketUpdateSign = class extends Message {
 };
 export { CPacketUpdateSign };
 ut(CPacketUpdateSign, "runtime", proto2),
-ut(CPacketUpdateSign, "typeName", "CPacketUpdateSign"),
-ut(CPacketUpdateSign, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "pos",
-	kind: "message",
-	T: PBBlockPos
-}, {
-	no: 2,
-	name: "lines",
-	kind: "scalar",
-	T: 9,
-	repeated: !0
-}]));
+	ut(CPacketUpdateSign, "typeName", "CPacketUpdateSign"),
+	ut(CPacketUpdateSign, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "pos",
+		kind: "message",
+		T: PBBlockPos
+	}, {
+		no: 2,
+		name: "lines",
+		kind: "scalar",
+		T: 9,
+		repeated: !0
+	}]));
 const CPacketUpdateCommandBlock = class extends Message {
 	constructor($) {
 		super();
@@ -641,31 +641,31 @@ const CPacketUpdateCommandBlock = class extends Message {
 };
 export { CPacketUpdateCommandBlock };
 ut(CPacketUpdateCommandBlock, "runtime", proto2),
-ut(CPacketUpdateCommandBlock, "typeName", "CPacketUpdateCommandBlock"),
-ut(CPacketUpdateCommandBlock, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "pos",
-	kind: "message",
-	T: PBBlockPos
-}, {
-	no: 2,
-	name: "command",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 3,
-	name: "commands",
-	kind: "scalar",
-	T: 9,
-	repeated: !0
-}, {
-	no: 4,
-	name: "repeat",
-	kind: "scalar",
-	T: 5,
-	opt: !0
-}]));
+	ut(CPacketUpdateCommandBlock, "typeName", "CPacketUpdateCommandBlock"),
+	ut(CPacketUpdateCommandBlock, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "pos",
+		kind: "message",
+		T: PBBlockPos
+	}, {
+		no: 2,
+		name: "command",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 3,
+		name: "commands",
+		kind: "scalar",
+		T: 9,
+		repeated: !0
+	}, {
+		no: 4,
+		name: "repeat",
+		kind: "scalar",
+		T: 5,
+		opt: !0
+	}]));
 const SPacketCloseWindow = class extends Message {
 	constructor($) {
 		super();
@@ -687,13 +687,13 @@ const SPacketCloseWindow = class extends Message {
 };
 export { SPacketCloseWindow };
 ut(SPacketCloseWindow, "runtime", proto2),
-ut(SPacketCloseWindow, "typeName", "SPacketCloseWindow"),
-ut(SPacketCloseWindow, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "windowId",
-	kind: "scalar",
-	T: 5
-}]));
+	ut(SPacketCloseWindow, "typeName", "SPacketCloseWindow"),
+	ut(SPacketCloseWindow, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "windowId",
+		kind: "scalar",
+		T: 5
+	}]));
 const SPacketEntityAction = class extends Message {
 	constructor($) {
 		super();
@@ -720,43 +720,43 @@ const SPacketEntityAction = class extends Message {
 };
 export { SPacketEntityAction };
 ut(SPacketEntityAction, "runtime", proto2),
-ut(SPacketEntityAction, "typeName", "SPacketEntityAction"),
-ut(SPacketEntityAction, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "sneak",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}, {
-	no: 3,
-	name: "sprinting",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}, {
-	no: 4,
-	name: "punching",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}, {
-	no: 20,
-	name: "fire",
-	kind: "scalar",
-	T: 5,
-	opt: !0
-}, {
-	no: 21,
-	name: "stopSleeping",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}]));
+	ut(SPacketEntityAction, "typeName", "SPacketEntityAction"),
+	ut(SPacketEntityAction, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "sneak",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}, {
+		no: 3,
+		name: "sprinting",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}, {
+		no: 4,
+		name: "punching",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}, {
+		no: 20,
+		name: "fire",
+		kind: "scalar",
+		T: 5,
+		opt: !0
+	}, {
+		no: 21,
+		name: "stopSleeping",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}]));
 const SPacketPlayerAbilities = class extends Message {
 	constructor($) {
 		super();
@@ -778,14 +778,14 @@ const SPacketPlayerAbilities = class extends Message {
 };
 export { SPacketPlayerAbilities };
 ut(SPacketPlayerAbilities, "runtime", proto2),
-ut(SPacketPlayerAbilities, "typeName", "SPacketPlayerAbilities"),
-ut(SPacketPlayerAbilities, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "isFlying",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}]));
+	ut(SPacketPlayerAbilities, "typeName", "SPacketPlayerAbilities"),
+	ut(SPacketPlayerAbilities, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "isFlying",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}]));
 const SPacketPlayerPosLook = class extends Message {
 	constructor($) {
 		super();
@@ -810,31 +810,31 @@ const SPacketPlayerPosLook = class extends Message {
 };
 export { SPacketPlayerPosLook };
 ut(SPacketPlayerPosLook, "runtime", proto2),
-ut(SPacketPlayerPosLook, "typeName", "SPacketPlayerPosLook"),
-ut(SPacketPlayerPosLook, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "pos",
-	kind: "message",
-	T: Vector3,
-	opt: !0
-}, {
-	no: 2,
-	name: "yaw",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 3,
-	name: "pitch",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 4,
-	name: "onGround",
-	kind: "scalar",
-	T: 8
-}]));
+	ut(SPacketPlayerPosLook, "typeName", "SPacketPlayerPosLook"),
+	ut(SPacketPlayerPosLook, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "pos",
+		kind: "message",
+		T: Vector3,
+		opt: !0
+	}, {
+		no: 2,
+		name: "yaw",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 3,
+		name: "pitch",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 4,
+		name: "onGround",
+		kind: "scalar",
+		T: 8
+	}]));
 export const Vector3 = class extends Message {
 	constructor($) {
 		super();
@@ -857,27 +857,27 @@ export const Vector3 = class extends Message {
 	}
 };
 ut(Vector3, "runtime", proto2),
-ut(Vector3, "typeName", "Vector3"),
-ut(Vector3, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "x",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 2,
-	name: "y",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 3,
-	name: "z",
-	kind: "scalar",
-	T: 2
-}]));
+	ut(Vector3, "typeName", "Vector3"),
+	ut(Vector3, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "x",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 2,
+		name: "y",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 3,
+		name: "z",
+		kind: "scalar",
+		T: 2
+	}]));
 export let SPacketRespawn$1 = class extends Message {
 	constructor(_) {
 		super(),
-		proto2.util.initPartial(_, this)
+			proto2.util.initPartial(_, this)
 	}
 	static fromBinary(_, $) {
 		return new SPacketRespawn$1().fromBinary(_, $)
@@ -893,12 +893,12 @@ export let SPacketRespawn$1 = class extends Message {
 	}
 };
 ut(SPacketRespawn$1, "runtime", proto2),
-ut(SPacketRespawn$1, "typeName", "SPacketRespawn"),
-ut(SPacketRespawn$1, "fields", proto2.util.newFieldList(()=>[]));
+	ut(SPacketRespawn$1, "typeName", "SPacketRespawn"),
+	ut(SPacketRespawn$1, "fields", proto2.util.newFieldList(() => []));
 const SPacketOpenShop = class extends Message {
 	constructor(_) {
 		super(),
-		proto2.util.initPartial(_, this)
+			proto2.util.initPartial(_, this)
 	}
 	static fromBinary(_, $) {
 		return new SPacketOpenShop().fromBinary(_, $)
@@ -915,22 +915,22 @@ const SPacketOpenShop = class extends Message {
 };
 export { SPacketOpenShop };
 ut(SPacketOpenShop, "runtime", proto2),
-ut(SPacketOpenShop, "typeName", "SPacketOpenShop"),
-ut(SPacketOpenShop, "fields", proto2.util.newFieldList(()=>[]));
-var WorldGenerationType = (j=>(j.FLAT = "FLAT",
-j.NORMAL = "NORMAL",
-j.VOID = "VOID",
-j.DEBUG = "DEBUG",
-j.SKYBLOCK = "SKYBLOCK",
-j.ONEBLOCK = "ONEBLOCK",
-j))(WorldGenerationType || {})
-	, PBAction = (j=>(j[j.START_DESTROY_BLOCK = 0] = "START_DESTROY_BLOCK",
-j[j.ABORT_DESTROY_BLOCK = 1] = "ABORT_DESTROY_BLOCK",
-j[j.STOP_DESTROY_BLOCK = 2] = "STOP_DESTROY_BLOCK",
-j[j.DROP_ALL_ITEMS = 3] = "DROP_ALL_ITEMS",
-j[j.DROP_ITEM = 4] = "DROP_ITEM",
-j[j.RELEASE_USE_ITEM = 5] = "RELEASE_USE_ITEM",
-j))(PBAction || {});
+	ut(SPacketOpenShop, "typeName", "SPacketOpenShop"),
+	ut(SPacketOpenShop, "fields", proto2.util.newFieldList(() => []));
+var WorldGenerationType = (j => (j.FLAT = "FLAT",
+	j.NORMAL = "NORMAL",
+	j.VOID = "VOID",
+	j.DEBUG = "DEBUG",
+	j.SKYBLOCK = "SKYBLOCK",
+	j.ONEBLOCK = "ONEBLOCK",
+	j))(WorldGenerationType || {})
+	, PBAction = (j => (j[j.START_DESTROY_BLOCK = 0] = "START_DESTROY_BLOCK",
+		j[j.ABORT_DESTROY_BLOCK = 1] = "ABORT_DESTROY_BLOCK",
+		j[j.STOP_DESTROY_BLOCK = 2] = "STOP_DESTROY_BLOCK",
+		j[j.DROP_ALL_ITEMS = 3] = "DROP_ALL_ITEMS",
+		j[j.DROP_ITEM = 4] = "DROP_ITEM",
+		j[j.RELEASE_USE_ITEM = 5] = "RELEASE_USE_ITEM",
+		j))(PBAction || {});
 const _PBAction = PBAction;
 export { _PBAction as PBAction };
 proto2.util.setEnumType(PBAction, "PBAction", [{
@@ -952,14 +952,14 @@ proto2.util.setEnumType(PBAction, "PBAction", [{
 	no: 5,
 	name: "RELEASE_USE_ITEM"
 }]);
-var PBEnumFacing = (j=>(j[j.UNDEFINED_FACE = 0] = "UNDEFINED_FACE",
-j[j.DOWN = 1] = "DOWN",
-j[j.UP = 2] = "UP",
-j[j.NORTH = 3] = "NORTH",
-j[j.SOUTH = 4] = "SOUTH",
-j[j.WEST = 5] = "WEST",
-j[j.EAST = 6] = "EAST",
-j))(PBEnumFacing || {});
+var PBEnumFacing = (j => (j[j.UNDEFINED_FACE = 0] = "UNDEFINED_FACE",
+	j[j.DOWN = 1] = "DOWN",
+	j[j.UP = 2] = "UP",
+	j[j.NORTH = 3] = "NORTH",
+	j[j.SOUTH = 4] = "SOUTH",
+	j[j.WEST = 5] = "WEST",
+	j[j.EAST = 6] = "EAST",
+	j))(PBEnumFacing || {});
 const _PBEnumFacing = PBEnumFacing;
 export { _PBEnumFacing as PBEnumFacing };
 proto2.util.setEnumType(PBEnumFacing, "PBEnumFacing", [{
@@ -1006,19 +1006,19 @@ const SPacketBreakBlock = class extends Message {
 };
 export { SPacketBreakBlock };
 ut(SPacketBreakBlock, "runtime", proto2),
-ut(SPacketBreakBlock, "typeName", "SPacketBreakBlock"),
-ut(SPacketBreakBlock, "fields", proto2.util.newFieldList(() => [{
-	no: 1,
-	name: "location",
-	kind: "message",
-	T: PBBlockPos
-}, {
-	no: 2,
-	name: "start",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}]));
+	ut(SPacketBreakBlock, "typeName", "SPacketBreakBlock"),
+	ut(SPacketBreakBlock, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "location",
+		kind: "message",
+		T: PBBlockPos
+	}, {
+		no: 2,
+		name: "start",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}]));
 const SPacketClick = class extends Message {
 	constructor($) {
 		super();
@@ -1040,14 +1040,14 @@ const SPacketClick = class extends Message {
 };
 export { SPacketClick };
 ut(SPacketClick, "runtime", proto2),
-ut(SPacketClick, "typeName", "SPacketClick"),
-ut(SPacketClick, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "location",
-	kind: "message",
-	T: PBBlockPos,
-	opt: !0
-}]));
+	ut(SPacketClick, "typeName", "SPacketClick"),
+	ut(SPacketClick, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "location",
+		kind: "message",
+		T: PBBlockPos,
+		opt: !0
+	}]));
 const SPacketPlaceBlock = class extends Message {
 	constructor($) {
 		super();
@@ -1073,37 +1073,37 @@ const SPacketPlaceBlock = class extends Message {
 };
 export { SPacketPlaceBlock };
 ut(SPacketPlaceBlock, "runtime", proto2),
-ut(SPacketPlaceBlock, "typeName", "SPacketPlaceBlock"),
-ut(SPacketPlaceBlock, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "positionIn",
-	kind: "message",
-	T: PBBlockPos
-}, {
-	no: 2,
-	name: "side",
-	kind: "enum",
-	T: proto2.getEnumType(PBEnumFacing)
-}, {
-	no: 4,
-	name: "hitX",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 5,
-	name: "hitY",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 6,
-	name: "hitZ",
-	kind: "scalar",
-	T: 2
-}]));
+	ut(SPacketPlaceBlock, "typeName", "SPacketPlaceBlock"),
+	ut(SPacketPlaceBlock, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "positionIn",
+		kind: "message",
+		T: PBBlockPos
+	}, {
+		no: 2,
+		name: "side",
+		kind: "enum",
+		T: proto2.getEnumType(PBEnumFacing)
+	}, {
+		no: 4,
+		name: "hitX",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 5,
+		name: "hitY",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 6,
+		name: "hitZ",
+		kind: "scalar",
+		T: 2
+	}]));
 const SPacketUseItem = class extends Message {
 	constructor(_) {
 		super(),
-		proto2.util.initPartial(_, this)
+			proto2.util.initPartial(_, this)
 	}
 	static fromBinary(_, $) {
 		return new SPacketUseItem().fromBinary(_, $)
@@ -1120,8 +1120,8 @@ const SPacketUseItem = class extends Message {
 };
 export { SPacketUseItem };
 ut(SPacketUseItem, "runtime", proto2),
-ut(SPacketUseItem, "typeName", "SPacketUseItem"),
-ut(SPacketUseItem, "fields", proto2.util.newFieldList(()=>[]));
+	ut(SPacketUseItem, "typeName", "SPacketUseItem"),
+	ut(SPacketUseItem, "fields", proto2.util.newFieldList(() => []));
 const SPacketClickWindow = class extends Message {
 	constructor($) {
 		super();
@@ -1148,38 +1148,38 @@ const SPacketClickWindow = class extends Message {
 };
 export { SPacketClickWindow };
 ut(SPacketClickWindow, "runtime", proto2),
-ut(SPacketClickWindow, "typeName", "SPacketClickWindow"),
-ut(SPacketClickWindow, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "windowId",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 2,
-	name: "slotId",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 4,
-	name: "button",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 5,
-	name: "mode",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 6,
-	name: "itemStack",
-	kind: "message",
-	T: PBItemStack
-}, {
-	no: 7,
-	name: "transactionId",
-	kind: "scalar",
-	T: 5
-}]));
+	ut(SPacketClickWindow, "typeName", "SPacketClickWindow"),
+	ut(SPacketClickWindow, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "windowId",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 2,
+		name: "slotId",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 4,
+		name: "button",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 5,
+		name: "mode",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 6,
+		name: "itemStack",
+		kind: "message",
+		T: PBItemStack
+	}, {
+		no: 7,
+		name: "transactionId",
+		kind: "scalar",
+		T: 5
+	}]));
 const SPacketPlayerAction = class extends Message {
 	constructor($) {
 		super();
@@ -1203,23 +1203,23 @@ const SPacketPlayerAction = class extends Message {
 };
 export { SPacketPlayerAction };
 ut(SPacketPlayerAction, "runtime", proto2),
-ut(SPacketPlayerAction, "typeName", "SPacketPlayerAction"),
-ut(SPacketPlayerAction, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "position",
-	kind: "message",
-	T: PBBlockPos
-}, {
-	no: 2,
-	name: "facing",
-	kind: "enum",
-	T: proto2.getEnumType(PBEnumFacing)
-}, {
-	no: 3,
-	name: "action",
-	kind: "enum",
-	T: proto2.getEnumType(PBAction)
-}]));
+	ut(SPacketPlayerAction, "typeName", "SPacketPlayerAction"),
+	ut(SPacketPlayerAction, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "position",
+		kind: "message",
+		T: PBBlockPos
+	}, {
+		no: 2,
+		name: "facing",
+		kind: "enum",
+		T: proto2.getEnumType(PBEnumFacing)
+	}, {
+		no: 3,
+		name: "action",
+		kind: "enum",
+		T: proto2.getEnumType(PBAction)
+	}]));
 const SPacketUseEntity = class extends Message {
 	constructor($) {
 		super();
@@ -1243,28 +1243,28 @@ const SPacketUseEntity = class extends Message {
 };
 export { SPacketUseEntity };
 ut(SPacketUseEntity, "runtime", proto2),
-ut(SPacketUseEntity, "typeName", "SPacketUseEntity"),
-ut(SPacketUseEntity, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "action",
-	kind: "enum",
-	T: proto2.getEnumType(SPacketUseEntity_Action)
-}, {
-	no: 3,
-	name: "hitVec",
-	kind: "message",
-	T: PBFloatVector3,
-	opt: !0
-}]));
-var SPacketUseEntity_Action = (j=>(j[j.INTERACT = 0] = "INTERACT",
-j[j.ATTACK = 1] = "ATTACK",
-j[j.INTERACT_AT = 2] = "INTERACT_AT",
-j))(SPacketUseEntity_Action || {});
+	ut(SPacketUseEntity, "typeName", "SPacketUseEntity"),
+	ut(SPacketUseEntity, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "action",
+		kind: "enum",
+		T: proto2.getEnumType(SPacketUseEntity_Action)
+	}, {
+		no: 3,
+		name: "hitVec",
+		kind: "message",
+		T: PBFloatVector3,
+		opt: !0
+	}]));
+var SPacketUseEntity_Action = (j => (j[j.INTERACT = 0] = "INTERACT",
+	j[j.ATTACK = 1] = "ATTACK",
+	j[j.INTERACT_AT = 2] = "INTERACT_AT",
+	j))(SPacketUseEntity_Action || {});
 proto2.util.setEnumType(SPacketUseEntity_Action, "SPacketUseEntity.Action", [{
 	no: 0,
 	name: "INTERACT"
@@ -1296,13 +1296,13 @@ const SPacketMessage = class extends Message {
 };
 export { SPacketMessage };
 ut(SPacketMessage, "runtime", proto2),
-ut(SPacketMessage, "typeName", "SPacketMessage"),
-ut(SPacketMessage, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "text",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(SPacketMessage, "typeName", "SPacketMessage"),
+	ut(SPacketMessage, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "text",
+		kind: "scalar",
+		T: 9
+	}]));
 const CPacketAnimation = class extends Message {
 	constructor($) {
 		super();
@@ -1325,18 +1325,18 @@ const CPacketAnimation = class extends Message {
 };
 export { CPacketAnimation };
 ut(CPacketAnimation, "runtime", proto2),
-ut(CPacketAnimation, "typeName", "CPacketAnimation"),
-ut(CPacketAnimation, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "type",
-	kind: "scalar",
-	T: 13
-}]));
+	ut(CPacketAnimation, "typeName", "CPacketAnimation"),
+	ut(CPacketAnimation, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "type",
+		kind: "scalar",
+		T: 13
+	}]));
 const CPacketBlockAction = class extends Message {
 	constructor($) {
 		super();
@@ -1361,28 +1361,28 @@ const CPacketBlockAction = class extends Message {
 };
 export { CPacketBlockAction };
 ut(CPacketBlockAction, "runtime", proto2),
-ut(CPacketBlockAction, "typeName", "CPacketBlockAction"),
-ut(CPacketBlockAction, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "blockPos",
-	kind: "message",
-	T: PBBlockPos
-}, {
-	no: 2,
-	name: "instrument",
-	kind: "scalar",
-	T: 17
-}, {
-	no: 3,
-	name: "pitch",
-	kind: "scalar",
-	T: 17
-}, {
-	no: 4,
-	name: "blockId",
-	kind: "scalar",
-	T: 13
-}]));
+	ut(CPacketBlockAction, "typeName", "CPacketBlockAction"),
+	ut(CPacketBlockAction, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "blockPos",
+		kind: "message",
+		T: PBBlockPos
+	}, {
+		no: 2,
+		name: "instrument",
+		kind: "scalar",
+		T: 17
+	}, {
+		no: 3,
+		name: "pitch",
+		kind: "scalar",
+		T: 17
+	}, {
+		no: 4,
+		name: "blockId",
+		kind: "scalar",
+		T: 13
+	}]));
 const CPacketBlockUpdate = class extends Message {
 	constructor($) {
 		super();
@@ -1408,34 +1408,34 @@ const CPacketBlockUpdate = class extends Message {
 };
 export { CPacketBlockUpdate };
 ut(CPacketBlockUpdate, "runtime", proto2),
-ut(CPacketBlockUpdate, "typeName", "CPacketBlockUpdate"),
-ut(CPacketBlockUpdate, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "x",
-	kind: "scalar",
-	T: 17
-}, {
-	no: 3,
-	name: "y",
-	kind: "scalar",
-	T: 17
-}, {
-	no: 4,
-	name: "z",
-	kind: "scalar",
-	T: 17
-}, {
-	no: 5,
-	name: "prerender",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}]));
+	ut(CPacketBlockUpdate, "typeName", "CPacketBlockUpdate"),
+	ut(CPacketBlockUpdate, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "x",
+		kind: "scalar",
+		T: 17
+	}, {
+		no: 3,
+		name: "y",
+		kind: "scalar",
+		T: 17
+	}, {
+		no: 4,
+		name: "z",
+		kind: "scalar",
+		T: 17
+	}, {
+		no: 5,
+		name: "prerender",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}]));
 const CPacketChangeServers = class extends Message {
 	constructor($) {
 		super();
@@ -1457,13 +1457,13 @@ const CPacketChangeServers = class extends Message {
 };
 export { CPacketChangeServers };
 ut(CPacketChangeServers, "runtime", proto2),
-ut(CPacketChangeServers, "typeName", "CPacketChangeServers"),
-ut(CPacketChangeServers, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "url",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(CPacketChangeServers, "typeName", "CPacketChangeServers"),
+	ut(CPacketChangeServers, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "url",
+		kind: "scalar",
+		T: 9
+	}]));
 const CPacketCloseWindow = class extends Message {
 	constructor($) {
 		super();
@@ -1485,13 +1485,13 @@ const CPacketCloseWindow = class extends Message {
 };
 export { CPacketCloseWindow };
 ut(CPacketCloseWindow, "runtime", proto2),
-ut(CPacketCloseWindow, "typeName", "CPacketCloseWindow"),
-ut(CPacketCloseWindow, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "windowId",
-	kind: "scalar",
-	T: 13
-}]));
+	ut(CPacketCloseWindow, "typeName", "CPacketCloseWindow"),
+	ut(CPacketCloseWindow, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "windowId",
+		kind: "scalar",
+		T: 13
+	}]));
 const CPacketConfirmTransaction = class extends Message {
 	constructor($) {
 		super();
@@ -1515,23 +1515,23 @@ const CPacketConfirmTransaction = class extends Message {
 };
 export { CPacketConfirmTransaction };
 ut(CPacketConfirmTransaction, "runtime", proto2),
-ut(CPacketConfirmTransaction, "typeName", "CPacketConfirmTransaction"),
-ut(CPacketConfirmTransaction, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "windowId",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 2,
-	name: "uid",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 3,
-	name: "accepted",
-	kind: "scalar",
-	T: 8
-}]));
+	ut(CPacketConfirmTransaction, "typeName", "CPacketConfirmTransaction"),
+	ut(CPacketConfirmTransaction, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "windowId",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 2,
+		name: "uid",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 3,
+		name: "accepted",
+		kind: "scalar",
+		T: 8
+	}]));
 const CPacketDestroyEntities = class extends Message {
 	constructor($) {
 		super();
@@ -1553,14 +1553,14 @@ const CPacketDestroyEntities = class extends Message {
 };
 export { CPacketDestroyEntities };
 ut(CPacketDestroyEntities, "runtime", proto2),
-ut(CPacketDestroyEntities, "typeName", "CPacketDestroyEntities"),
-ut(CPacketDestroyEntities, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "ids",
-	kind: "scalar",
-	T: 13,
-	repeated: !0
-}]));
+	ut(CPacketDestroyEntities, "typeName", "CPacketDestroyEntities"),
+	ut(CPacketDestroyEntities, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "ids",
+		kind: "scalar",
+		T: 13,
+		repeated: !0
+	}]));
 const CPacketDisconnect = class extends Message {
 	constructor($) {
 		super();
@@ -1582,13 +1582,13 @@ const CPacketDisconnect = class extends Message {
 };
 export { CPacketDisconnect };
 ut(CPacketDisconnect, "runtime", proto2),
-ut(CPacketDisconnect, "typeName", "CPacketDisconnect"),
-ut(CPacketDisconnect, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "reason",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(CPacketDisconnect, "typeName", "CPacketDisconnect"),
+	ut(CPacketDisconnect, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "reason",
+		kind: "scalar",
+		T: 9
+	}]));
 const CPacketEntityAction = class extends Message {
 	constructor($) {
 		super();
@@ -1614,37 +1614,37 @@ const CPacketEntityAction = class extends Message {
 };
 export { CPacketEntityAction };
 ut(CPacketEntityAction, "runtime", proto2),
-ut(CPacketEntityAction, "typeName", "CPacketEntityAction"),
-ut(CPacketEntityAction, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "sneak",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}, {
-	no: 3,
-	name: "sprinting",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}, {
-	no: 4,
-	name: "punching",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}, {
-	no: 20,
-	name: "fire",
-	kind: "scalar",
-	T: 5,
-	opt: !0
-}]));
+	ut(CPacketEntityAction, "typeName", "CPacketEntityAction"),
+	ut(CPacketEntityAction, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "sneak",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}, {
+		no: 3,
+		name: "sprinting",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}, {
+		no: 4,
+		name: "punching",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}, {
+		no: 20,
+		name: "fire",
+		kind: "scalar",
+		T: 5,
+		opt: !0
+	}]));
 const CPacketEntityAttach = class extends Message {
 	constructor($) {
 		super();
@@ -1668,23 +1668,23 @@ const CPacketEntityAttach = class extends Message {
 };
 export { CPacketEntityAttach };
 ut(CPacketEntityAttach, "runtime", proto2),
-ut(CPacketEntityAttach, "typeName", "CPacketEntityAttach"),
-ut(CPacketEntityAttach, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "leash",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "entity",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 3,
-	name: "vehicle",
-	kind: "scalar",
-	T: 17
-}]));
+	ut(CPacketEntityAttach, "typeName", "CPacketEntityAttach"),
+	ut(CPacketEntityAttach, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "leash",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "entity",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 3,
+		name: "vehicle",
+		kind: "scalar",
+		T: 17
+	}]));
 const CPacketEntityMetadata = class extends Message {
 	constructor($) {
 		super();
@@ -1707,19 +1707,19 @@ const CPacketEntityMetadata = class extends Message {
 };
 export { CPacketEntityMetadata };
 ut(CPacketEntityMetadata, "runtime", proto2),
-ut(CPacketEntityMetadata, "typeName", "CPacketEntityMetadata"),
-ut(CPacketEntityMetadata, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "data",
-	kind: "message",
-	T: PBWatchableObject,
-	repeated: !0
-}]));
+	ut(CPacketEntityMetadata, "typeName", "CPacketEntityMetadata"),
+	ut(CPacketEntityMetadata, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "data",
+		kind: "message",
+		T: PBWatchableObject,
+		repeated: !0
+	}]));
 const PBWatchableObject = class extends Message {
 	constructor($) {
 		super();
@@ -1748,54 +1748,54 @@ const PBWatchableObject = class extends Message {
 };
 export { PBWatchableObject };
 ut(PBWatchableObject, "runtime", proto2),
-ut(PBWatchableObject, "typeName", "PBWatchableObject"),
-ut(PBWatchableObject, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "dataValueId",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "objectType",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 3,
-	name: "intValue",
-	kind: "scalar",
-	T: 17,
-	opt: !0
-}, {
-	no: 4,
-	name: "floatValue",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 5,
-	name: "stringValue",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 6,
-	name: "vector",
-	kind: "message",
-	T: PBVector3,
-	opt: !0
-}, {
-	no: 7,
-	name: "itemStack",
-	kind: "message",
-	T: PBItemStack,
-	opt: !0
-}, {
-	no: 8,
-	name: "blockPos",
-	kind: "message",
-	T: PBBlockPos,
-	opt: !0
-}]));
+	ut(PBWatchableObject, "typeName", "PBWatchableObject"),
+	ut(PBWatchableObject, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "dataValueId",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "objectType",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 3,
+		name: "intValue",
+		kind: "scalar",
+		T: 17,
+		opt: !0
+	}, {
+		no: 4,
+		name: "floatValue",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 5,
+		name: "stringValue",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 6,
+		name: "vector",
+		kind: "message",
+		T: PBVector3,
+		opt: !0
+	}, {
+		no: 7,
+		name: "itemStack",
+		kind: "message",
+		T: PBItemStack,
+		opt: !0
+	}, {
+		no: 8,
+		name: "blockPos",
+		kind: "message",
+		T: PBBlockPos,
+		opt: !0
+	}]));
 const CPacketEntityPositionAndRotation = class extends Message {
 	constructor($) {
 		super();
@@ -1822,43 +1822,43 @@ const CPacketEntityPositionAndRotation = class extends Message {
 };
 export { CPacketEntityPositionAndRotation };
 ut(CPacketEntityPositionAndRotation, "runtime", proto2),
-ut(CPacketEntityPositionAndRotation, "typeName", "CPacketEntityPositionAndRotation"),
-ut(CPacketEntityPositionAndRotation, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "pos",
-	kind: "message",
-	T: PBVector3,
-	opt: !0
-}, {
-	no: 3,
-	name: "vel",
-	kind: "message",
-	T: PBVector3,
-	opt: !0
-}, {
-	no: 4,
-	name: "yaw",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 5,
-	name: "pitch",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 6,
-	name: "onGround",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}]));
+	ut(CPacketEntityPositionAndRotation, "typeName", "CPacketEntityPositionAndRotation"),
+	ut(CPacketEntityPositionAndRotation, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "pos",
+		kind: "message",
+		T: PBVector3,
+		opt: !0
+	}, {
+		no: 3,
+		name: "vel",
+		kind: "message",
+		T: PBVector3,
+		opt: !0
+	}, {
+		no: 4,
+		name: "yaw",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 5,
+		name: "pitch",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 6,
+		name: "onGround",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}]));
 const CPacketEntityRelativePositionAndRotation = class extends Message {
 	constructor($) {
 		super();
@@ -1885,43 +1885,43 @@ const CPacketEntityRelativePositionAndRotation = class extends Message {
 };
 export { CPacketEntityRelativePositionAndRotation };
 ut(CPacketEntityRelativePositionAndRotation, "runtime", proto2),
-ut(CPacketEntityRelativePositionAndRotation, "typeName", "CPacketEntityRelativePositionAndRotation"),
-ut(CPacketEntityRelativePositionAndRotation, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "pos",
-	kind: "message",
-	T: PBVector3,
-	opt: !0
-}, {
-	no: 3,
-	name: "vel",
-	kind: "message",
-	T: PBVector3,
-	opt: !0
-}, {
-	no: 4,
-	name: "yaw",
-	kind: "scalar",
-	T: 17,
-	opt: !0
-}, {
-	no: 5,
-	name: "pitch",
-	kind: "scalar",
-	T: 17,
-	opt: !0
-}, {
-	no: 6,
-	name: "onGround",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}]));
+	ut(CPacketEntityRelativePositionAndRotation, "typeName", "CPacketEntityRelativePositionAndRotation"),
+	ut(CPacketEntityRelativePositionAndRotation, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "pos",
+		kind: "message",
+		T: PBVector3,
+		opt: !0
+	}, {
+		no: 3,
+		name: "vel",
+		kind: "message",
+		T: PBVector3,
+		opt: !0
+	}, {
+		no: 4,
+		name: "yaw",
+		kind: "scalar",
+		T: 17,
+		opt: !0
+	}, {
+		no: 5,
+		name: "pitch",
+		kind: "scalar",
+		T: 17,
+		opt: !0
+	}, {
+		no: 6,
+		name: "onGround",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}]));
 const CPacketEntityStatus = class extends Message {
 	constructor($) {
 		super();
@@ -1944,18 +1944,18 @@ const CPacketEntityStatus = class extends Message {
 };
 export { CPacketEntityStatus };
 ut(CPacketEntityStatus, "runtime", proto2),
-ut(CPacketEntityStatus, "typeName", "CPacketEntityStatus"),
-ut(CPacketEntityStatus, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "entityId",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "entityStatus",
-	kind: "scalar",
-	T: 5
-}]));
+	ut(CPacketEntityStatus, "typeName", "CPacketEntityStatus"),
+	ut(CPacketEntityStatus, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "entityId",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "entityStatus",
+		kind: "scalar",
+		T: 5
+	}]));
 const CPacketExplosion = class extends Message {
 	constructor($) {
 		super();
@@ -1980,29 +1980,29 @@ const CPacketExplosion = class extends Message {
 };
 export { CPacketExplosion };
 ut(CPacketExplosion, "runtime", proto2),
-ut(CPacketExplosion, "typeName", "CPacketExplosion"),
-ut(CPacketExplosion, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "pos",
-	kind: "message",
-	T: PBFloatVector3
-}, {
-	no: 2,
-	name: "strength",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 3,
-	name: "blocks",
-	kind: "message",
-	T: PBBlockPos,
-	repeated: !0
-}, {
-	no: 4,
-	name: "playerPos",
-	kind: "message",
-	T: PBFloatVector3
-}]));
+	ut(CPacketExplosion, "typeName", "CPacketExplosion"),
+	ut(CPacketExplosion, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "pos",
+		kind: "message",
+		T: PBFloatVector3
+	}, {
+		no: 2,
+		name: "strength",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 3,
+		name: "blocks",
+		kind: "message",
+		T: PBBlockPos,
+		repeated: !0
+	}, {
+		no: 4,
+		name: "playerPos",
+		kind: "message",
+		T: PBFloatVector3
+	}]));
 const PBCosmetics = class extends Message {
 	constructor($) {
 		super();
@@ -2029,44 +2029,44 @@ const PBCosmetics = class extends Message {
 };
 export { PBCosmetics };
 ut(PBCosmetics, "runtime", proto2),
-ut(PBCosmetics, "typeName", "PBCosmetics"),
-ut(PBCosmetics, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "skin",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 2,
-	name: "cape",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 3,
-	name: "aura",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 4,
-	name: "trail",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 5,
-	name: "color",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 6,
-	name: "hat",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}]));
+	ut(PBCosmetics, "typeName", "PBCosmetics"),
+	ut(PBCosmetics, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "skin",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 2,
+		name: "cape",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 3,
+		name: "aura",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 4,
+		name: "trail",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 5,
+		name: "color",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 6,
+		name: "hat",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}]));
 const CPacketServerInfo = class extends Message {
 	constructor($) {
 		super();
@@ -2101,85 +2101,85 @@ const CPacketServerInfo = class extends Message {
 };
 export { CPacketServerInfo };
 ut(CPacketServerInfo, "runtime", proto2),
-ut(CPacketServerInfo, "typeName", "CPacketServerInfo"),
-ut(CPacketServerInfo, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "server_id",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 2,
-	name: "server_name",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 3,
-	name: "server_version",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 4,
-	name: "server_category",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 5,
-	name: "access_control",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 11,
-	name: "world_type",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 13,
-	name: "do_daylight_cycle",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}, {
-	no: 6,
-	name: "invite_code",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 7,
-	name: "cheats",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 8,
-	name: "pvp_enabled",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}, {
-	no: 9,
-	name: "start_time",
-	kind: "scalar",
-	T: 4
-}, {
-	no: 10,
-	name: "player_permission_entries",
-	kind: "message",
-	T: PlayerPermissionEntry,
-	repeated: !0
-}, {
-	no: 12,
-	name: "metadata",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 14,
-	name: "command_blocks_enabled",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}]));
+	ut(CPacketServerInfo, "typeName", "CPacketServerInfo"),
+	ut(CPacketServerInfo, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "server_id",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 2,
+		name: "server_name",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 3,
+		name: "server_version",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 4,
+		name: "server_category",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 5,
+		name: "access_control",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 11,
+		name: "world_type",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 13,
+		name: "do_daylight_cycle",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}, {
+		no: 6,
+		name: "invite_code",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 7,
+		name: "cheats",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 8,
+		name: "pvp_enabled",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}, {
+		no: 9,
+		name: "start_time",
+		kind: "scalar",
+		T: 4
+	}, {
+		no: 10,
+		name: "player_permission_entries",
+		kind: "message",
+		T: PlayerPermissionEntry,
+		repeated: !0
+	}, {
+		no: 12,
+		name: "metadata",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 14,
+		name: "command_blocks_enabled",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}]));
 const PlayerPermissionEntry = class extends Message {
 	constructor($) {
 		super();
@@ -2207,47 +2207,47 @@ const PlayerPermissionEntry = class extends Message {
 };
 export { PlayerPermissionEntry };
 ut(PlayerPermissionEntry, "runtime", proto2),
-ut(PlayerPermissionEntry, "typeName", "PlayerPermissionEntry"),
-ut(PlayerPermissionEntry, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "uuid",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 2,
-	name: "username",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 3,
-	name: "permission_level",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 4,
-	name: "color",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 5,
-	name: "rank",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 6,
-	name: "level",
-	kind: "scalar",
-	T: 13,
-	opt: !0
-}, {
-	no: 7,
-	name: "verified",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}]));
+	ut(PlayerPermissionEntry, "typeName", "PlayerPermissionEntry"),
+	ut(PlayerPermissionEntry, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "uuid",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 2,
+		name: "username",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 3,
+		name: "permission_level",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 4,
+		name: "color",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 5,
+		name: "rank",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 6,
+		name: "level",
+		kind: "scalar",
+		T: 13,
+		opt: !0
+	}, {
+		no: 7,
+		name: "verified",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}]));
 const CPacketJoinGame = class extends Message {
 	constructor($) {
 		super();
@@ -2279,73 +2279,73 @@ const CPacketJoinGame = class extends Message {
 };
 export { CPacketJoinGame };
 ut(CPacketJoinGame, "runtime", proto2),
-ut(CPacketJoinGame, "typeName", "CPacketJoinGame"),
-ut(CPacketJoinGame, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "can_connect",
-	kind: "scalar",
-	T: 8
-}, {
-	no: 2,
-	name: "error_message",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 3,
-	name: "tick",
-	kind: "scalar",
-	T: 5,
-	opt: !0
-}, {
-	no: 6,
-	name: "gamemode",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 7,
-	name: "name",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 10,
-	name: "enable_player_collision",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}, {
-	no: 11,
-	name: "cosmetics",
-	kind: "message",
-	T: PBCosmetics,
-	opt: !0
-}, {
-	no: 12,
-	name: "rank",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 13,
-	name: "server_info",
-	kind: "message",
-	T: CPacketServerInfo,
-	opt: !0
-}, {
-	no: 14,
-	name: "uuid",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 15,
-	name: "dimension",
-	kind: "scalar",
-	T: 5,
-	opt: !0
-}]));
+	ut(CPacketJoinGame, "typeName", "CPacketJoinGame"),
+	ut(CPacketJoinGame, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "can_connect",
+		kind: "scalar",
+		T: 8
+	}, {
+		no: 2,
+		name: "error_message",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 3,
+		name: "tick",
+		kind: "scalar",
+		T: 5,
+		opt: !0
+	}, {
+		no: 6,
+		name: "gamemode",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 7,
+		name: "name",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 10,
+		name: "enable_player_collision",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}, {
+		no: 11,
+		name: "cosmetics",
+		kind: "message",
+		T: PBCosmetics,
+		opt: !0
+	}, {
+		no: 12,
+		name: "rank",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 13,
+		name: "server_info",
+		kind: "message",
+		T: CPacketServerInfo,
+		opt: !0
+	}, {
+		no: 14,
+		name: "uuid",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 15,
+		name: "dimension",
+		kind: "scalar",
+		T: 5,
+		opt: !0
+	}]));
 const CPacketLeaderboard = class extends Message {
 	constructor($) {
 		super();
@@ -2371,35 +2371,35 @@ const CPacketLeaderboard = class extends Message {
 };
 export { CPacketLeaderboard };
 ut(CPacketLeaderboard, "runtime", proto2),
-ut(CPacketLeaderboard, "typeName", "CPacketLeaderboard"),
-ut(CPacketLeaderboard, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 2,
-	name: "pos",
-	kind: "message",
-	T: PBVector3
-}, {
-	no: 3,
-	name: "yaw",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 4,
-	name: "title",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 5,
-	name: "content",
-	kind: "scalar",
-	T: 9,
-	repeated: !0
-}]));
+	ut(CPacketLeaderboard, "typeName", "CPacketLeaderboard"),
+	ut(CPacketLeaderboard, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 2,
+		name: "pos",
+		kind: "message",
+		T: PBVector3
+	}, {
+		no: 3,
+		name: "yaw",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 4,
+		name: "title",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 5,
+		name: "content",
+		kind: "scalar",
+		T: 9,
+		repeated: !0
+	}]));
 const CPacketLocalStorage = class extends Message {
 	constructor($) {
 		super();
@@ -2423,28 +2423,28 @@ const CPacketLocalStorage = class extends Message {
 };
 export { CPacketLocalStorage };
 ut(CPacketLocalStorage, "runtime", proto2),
-ut(CPacketLocalStorage, "typeName", "CPacketLocalStorage"),
-ut(CPacketLocalStorage, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "action",
-	kind: "enum",
-	T: proto2.getEnumType(CPacketLocalStorage_Action)
-}, {
-	no: 2,
-	name: "key",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 3,
-	name: "value",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}]));
-var CPacketLocalStorage_Action = (j=>(j[j.DEFAULT = 0] = "DEFAULT",
-j[j.REMOVE = 1] = "REMOVE",
-j[j.SET = 2] = "SET",
-j))(CPacketLocalStorage_Action || {});
+	ut(CPacketLocalStorage, "typeName", "CPacketLocalStorage"),
+	ut(CPacketLocalStorage, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "action",
+		kind: "enum",
+		T: proto2.getEnumType(CPacketLocalStorage_Action)
+	}, {
+		no: 2,
+		name: "key",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 3,
+		name: "value",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}]));
+var CPacketLocalStorage_Action = (j => (j[j.DEFAULT = 0] = "DEFAULT",
+	j[j.REMOVE = 1] = "REMOVE",
+	j[j.SET = 2] = "SET",
+	j))(CPacketLocalStorage_Action || {});
 proto2.util.setEnumType(CPacketLocalStorage_Action, "CPacketLocalStorage.Action", [{
 	no: 0,
 	name: "DEFAULT"
@@ -2481,44 +2481,44 @@ const CPacketMessage = class extends Message {
 };
 export { CPacketMessage };
 ut(CPacketMessage, "runtime", proto2),
-ut(CPacketMessage, "typeName", "CPacketMessage"),
-ut(CPacketMessage, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "text",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 3,
-	name: "id",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 4,
-	name: "color",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 5,
-	name: "discard",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}, {
-	no: 6,
-	name: "toast",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}, {
-	no: 7,
-	name: "timer",
-	kind: "scalar",
-	T: 5,
-	opt: !0
-}]));
+	ut(CPacketMessage, "typeName", "CPacketMessage"),
+	ut(CPacketMessage, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "text",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 3,
+		name: "id",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 4,
+		name: "color",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 5,
+		name: "discard",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}, {
+		no: 6,
+		name: "toast",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}, {
+		no: 7,
+		name: "timer",
+		kind: "scalar",
+		T: 5,
+		opt: !0
+	}]));
 const CPacketOpenShop = class extends Message {
 	constructor($) {
 		super();
@@ -2540,13 +2540,13 @@ const CPacketOpenShop = class extends Message {
 };
 export { CPacketOpenShop };
 ut(CPacketOpenShop, "runtime", proto2),
-ut(CPacketOpenShop, "typeName", "CPacketOpenShop"),
-ut(CPacketOpenShop, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "type",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(CPacketOpenShop, "typeName", "CPacketOpenShop"),
+	ut(CPacketOpenShop, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "type",
+		kind: "scalar",
+		T: 9
+	}]));
 const CPacketOpenWindow = class extends Message {
 	constructor($) {
 		super();
@@ -2571,30 +2571,30 @@ const CPacketOpenWindow = class extends Message {
 };
 export { CPacketOpenWindow };
 ut(CPacketOpenWindow, "runtime", proto2),
-ut(CPacketOpenWindow, "typeName", "CPacketOpenWindow"),
-ut(CPacketOpenWindow, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "windowId",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 2,
-	name: "guiID",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 3,
-	name: "title",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 4,
-	name: "size",
-	kind: "scalar",
-	T: 5,
-	opt: !0
-}]));
+	ut(CPacketOpenWindow, "typeName", "CPacketOpenWindow"),
+	ut(CPacketOpenWindow, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "windowId",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 2,
+		name: "guiID",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 3,
+		name: "title",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 4,
+		name: "size",
+		kind: "scalar",
+		T: 5,
+		opt: !0
+	}]));
 const CPacketParticles = class extends Message {
 	constructor($) {
 		super();
@@ -2626,73 +2626,73 @@ const CPacketParticles = class extends Message {
 };
 export { CPacketParticles };
 ut(CPacketParticles, "runtime", proto2),
-ut(CPacketParticles, "typeName", "CPacketParticles"),
-ut(CPacketParticles, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "particleId",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 2,
-	name: "longDistance",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}, {
-	no: 3,
-	name: "x",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 4,
-	name: "y",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 5,
-	name: "z",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 6,
-	name: "xOffset",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 7,
-	name: "yOffset",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 8,
-	name: "zOffset",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 9,
-	name: "speed",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 10,
-	name: "count",
-	kind: "scalar",
-	T: 5,
-	opt: !0
-}, {
-	no: 11,
-	name: "particleArguments",
-	kind: "scalar",
-	T: 5,
-	repeated: !0
-}]));
+	ut(CPacketParticles, "typeName", "CPacketParticles"),
+	ut(CPacketParticles, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "particleId",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 2,
+		name: "longDistance",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}, {
+		no: 3,
+		name: "x",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 4,
+		name: "y",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 5,
+		name: "z",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 6,
+		name: "xOffset",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 7,
+		name: "yOffset",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 8,
+		name: "zOffset",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 9,
+		name: "speed",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 10,
+		name: "count",
+		kind: "scalar",
+		T: 5,
+		opt: !0
+	}, {
+		no: 11,
+		name: "particleArguments",
+		kind: "scalar",
+		T: 5,
+		repeated: !0
+	}]));
 const CPacketPlayerList = class extends Message {
 	constructor($) {
 		super();
@@ -2714,14 +2714,14 @@ const CPacketPlayerList = class extends Message {
 };
 export { CPacketPlayerList };
 ut(CPacketPlayerList, "runtime", proto2),
-ut(CPacketPlayerList, "typeName", "CPacketPlayerList"),
-ut(CPacketPlayerList, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "players",
-	kind: "message",
-	T: PlayerData,
-	repeated: !0
-}]));
+	ut(CPacketPlayerList, "typeName", "CPacketPlayerList"),
+	ut(CPacketPlayerList, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "players",
+		kind: "message",
+		T: PlayerData,
+		repeated: !0
+	}]));
 const PlayerData = class extends Message {
 	constructor($) {
 		super();
@@ -2751,59 +2751,59 @@ const PlayerData = class extends Message {
 };
 export { PlayerData };
 ut(PlayerData, "runtime", proto2),
-ut(PlayerData, "typeName", "PlayerData"),
-ut(PlayerData, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 9,
-	name: "uuid",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 10,
-	name: "permission_level",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 2,
-	name: "ping",
-	kind: "scalar",
-	T: 13,
-	opt: !0
-}, {
-	no: 4,
-	name: "name",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 5,
-	name: "color",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 6,
-	name: "rank",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 7,
-	name: "level",
-	kind: "scalar",
-	T: 13,
-	opt: !0
-}, {
-	no: 8,
-	name: "verified",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}]));
+	ut(PlayerData, "typeName", "PlayerData"),
+	ut(PlayerData, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 9,
+		name: "uuid",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 10,
+		name: "permission_level",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 2,
+		name: "ping",
+		kind: "scalar",
+		T: 13,
+		opt: !0
+	}, {
+		no: 4,
+		name: "name",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 5,
+		name: "color",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 6,
+		name: "rank",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 7,
+		name: "level",
+		kind: "scalar",
+		T: 13,
+		opt: !0
+	}, {
+		no: 8,
+		name: "verified",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}]));
 const CPacketPlayerPosLook = class extends Message {
 	constructor($) {
 		super();
@@ -2829,33 +2829,33 @@ const CPacketPlayerPosLook = class extends Message {
 };
 export { CPacketPlayerPosLook };
 ut(CPacketPlayerPosLook, "runtime", proto2),
-ut(CPacketPlayerPosLook, "typeName", "CPacketPlayerPosLook"),
-ut(CPacketPlayerPosLook, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "x",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 2,
-	name: "y",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 3,
-	name: "z",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 4,
-	name: "yaw",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 5,
-	name: "pitch",
-	kind: "scalar",
-	T: 2
-}]));
+	ut(CPacketPlayerPosLook, "typeName", "CPacketPlayerPosLook"),
+	ut(CPacketPlayerPosLook, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "x",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 2,
+		name: "y",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 3,
+		name: "z",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 4,
+		name: "yaw",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 5,
+		name: "pitch",
+		kind: "scalar",
+		T: 2
+	}]));
 const CPacketPlayerPosition = class extends Message {
 	constructor($) {
 		super();
@@ -2879,23 +2879,23 @@ const CPacketPlayerPosition = class extends Message {
 };
 export { CPacketPlayerPosition };
 ut(CPacketPlayerPosition, "runtime", proto2),
-ut(CPacketPlayerPosition, "typeName", "CPacketPlayerPosition"),
-ut(CPacketPlayerPosition, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "x",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 2,
-	name: "y",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 3,
-	name: "z",
-	kind: "scalar",
-	T: 2
-}]));
+	ut(CPacketPlayerPosition, "typeName", "CPacketPlayerPosition"),
+	ut(CPacketPlayerPosition, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "x",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 2,
+		name: "y",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 3,
+		name: "z",
+		kind: "scalar",
+		T: 2
+	}]));
 const CPacketPlayerReconciliation = class CPacketPlayerReconciliation extends Message {
 	constructor($) {
 		super();
@@ -2923,44 +2923,44 @@ const CPacketPlayerReconciliation = class CPacketPlayerReconciliation extends Me
 };
 export { CPacketPlayerReconciliation };
 ut(CPacketPlayerReconciliation, "runtime", proto2),
-ut(CPacketPlayerReconciliation, "typeName", "CPacketPlayerReconciliation"),
-ut(CPacketPlayerReconciliation, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "x",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 2,
-	name: "y",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 3,
-	name: "z",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 4,
-	name: "yaw",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 5,
-	name: "pitch",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 6,
-	name: "lastProcessedInput",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 7,
-	name: "reset",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}]));
+	ut(CPacketPlayerReconciliation, "typeName", "CPacketPlayerReconciliation"),
+	ut(CPacketPlayerReconciliation, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "x",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 2,
+		name: "y",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 3,
+		name: "z",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 4,
+		name: "yaw",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 5,
+		name: "pitch",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 6,
+		name: "lastProcessedInput",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 7,
+		name: "reset",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}]));
 const CPacketPong = class extends Message {
 	constructor($) {
 		super();
@@ -2984,23 +2984,23 @@ const CPacketPong = class extends Message {
 };
 export { CPacketPong };
 ut(CPacketPong, "runtime", proto2),
-ut(CPacketPong, "typeName", "CPacketPong"),
-ut(CPacketPong, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "time",
-	kind: "scalar",
-	T: 4
-}, {
-	no: 2,
-	name: "mspt",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 4,
-	name: "tick",
-	kind: "scalar",
-	T: 13
-}]));
+	ut(CPacketPong, "typeName", "CPacketPong"),
+	ut(CPacketPong, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "time",
+		kind: "scalar",
+		T: 4
+	}, {
+		no: 2,
+		name: "mspt",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 4,
+		name: "tick",
+		kind: "scalar",
+		T: 13
+	}]));
 const CPacketRespawn = class extends Message {
 	constructor($) {
 		super();
@@ -3024,26 +3024,26 @@ const CPacketRespawn = class extends Message {
 };
 export { CPacketRespawn };
 ut(CPacketRespawn, "runtime", proto2),
-ut(CPacketRespawn, "typeName", "CPacketRespawn"),
-ut(CPacketRespawn, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "notDeath",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}, {
-	no: 2,
-	name: "client",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}, {
-	no: 3,
-	name: "dimension",
-	kind: "scalar",
-	T: 5,
-	opt: !0
-}]));
+	ut(CPacketRespawn, "typeName", "CPacketRespawn"),
+	ut(CPacketRespawn, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "notDeath",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}, {
+		no: 2,
+		name: "client",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}, {
+		no: 3,
+		name: "dimension",
+		kind: "scalar",
+		T: 5,
+		opt: !0
+	}]));
 const CPacketScoreboard = class extends Message {
 	constructor($) {
 		super();
@@ -3066,19 +3066,19 @@ const CPacketScoreboard = class extends Message {
 };
 export { CPacketScoreboard };
 ut(CPacketScoreboard, "runtime", proto2),
-ut(CPacketScoreboard, "typeName", "CPacketScoreboard"),
-ut(CPacketScoreboard, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "title",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 2,
-	name: "content",
-	kind: "message",
-	T: ScoreboardContent,
-	repeated: !0
-}]));
+	ut(CPacketScoreboard, "typeName", "CPacketScoreboard"),
+	ut(CPacketScoreboard, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "title",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 2,
+		name: "content",
+		kind: "message",
+		T: ScoreboardContent,
+		repeated: !0
+	}]));
 const ScoreboardContent = class extends Message {
 	constructor($) {
 		super();
@@ -3100,14 +3100,14 @@ const ScoreboardContent = class extends Message {
 };
 export { ScoreboardContent };
 ut(ScoreboardContent, "runtime", proto2),
-ut(ScoreboardContent, "typeName", "ScoreboardContent"),
-ut(ScoreboardContent, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "columns",
-	kind: "scalar",
-	T: 9,
-	repeated: !0
-}]));
+	ut(ScoreboardContent, "typeName", "ScoreboardContent"),
+	ut(ScoreboardContent, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "columns",
+		kind: "scalar",
+		T: 9,
+		repeated: !0
+	}]));
 const CPacketServerMetadata = class extends Message {
 	constructor($) {
 		super();
@@ -3129,13 +3129,13 @@ const CPacketServerMetadata = class extends Message {
 };
 export { CPacketServerMetadata };
 ut(CPacketServerMetadata, "runtime", proto2),
-ut(CPacketServerMetadata, "typeName", "CPacketServerMetadata"),
-ut(CPacketServerMetadata, "fields", proto2.util.newFieldList(()=>[{
-	no: 12,
-	name: "metadata",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(CPacketServerMetadata, "typeName", "CPacketServerMetadata"),
+	ut(CPacketServerMetadata, "fields", proto2.util.newFieldList(() => [{
+		no: 12,
+		name: "metadata",
+		kind: "scalar",
+		T: 9
+	}]));
 const CPacketSetSlot = class extends Message {
 	constructor($) {
 		super();
@@ -3159,23 +3159,23 @@ const CPacketSetSlot = class extends Message {
 };
 export { CPacketSetSlot };
 ut(CPacketSetSlot, "runtime", proto2),
-ut(CPacketSetSlot, "typeName", "CPacketSetSlot"),
-ut(CPacketSetSlot, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "window_id",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 2,
-	name: "slot",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 3,
-	name: "slot_data",
-	kind: "message",
-	T: PBItemStack
-}]));
+	ut(CPacketSetSlot, "typeName", "CPacketSetSlot"),
+	ut(CPacketSetSlot, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "window_id",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 2,
+		name: "slot",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 3,
+		name: "slot_data",
+		kind: "message",
+		T: PBItemStack
+	}]));
 const CPacketSignEditorOpen = class extends Message {
 	constructor($) {
 		super();
@@ -3197,13 +3197,13 @@ const CPacketSignEditorOpen = class extends Message {
 };
 export { CPacketSignEditorOpen };
 ut(CPacketSignEditorOpen, "runtime", proto2),
-ut(CPacketSignEditorOpen, "typeName", "CPacketSignEditorOpen"),
-ut(CPacketSignEditorOpen, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "signPosition",
-	kind: "message",
-	T: PBBlockPos
-}]));
+	ut(CPacketSignEditorOpen, "typeName", "CPacketSignEditorOpen"),
+	ut(CPacketSignEditorOpen, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "signPosition",
+		kind: "message",
+		T: PBBlockPos
+	}]));
 const CPacketSoundEffect = class extends Message {
 	constructor($) {
 		super();
@@ -3228,31 +3228,31 @@ const CPacketSoundEffect = class extends Message {
 };
 export { CPacketSoundEffect };
 ut(CPacketSoundEffect, "runtime", proto2),
-ut(CPacketSoundEffect, "typeName", "CPacketSoundEffect"),
-ut(CPacketSoundEffect, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "sound",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 2,
-	name: "location",
-	kind: "message",
-	T: PBVector3,
-	opt: !0
-}, {
-	no: 3,
-	name: "volume",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 4,
-	name: "pitch",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}]));
+	ut(CPacketSoundEffect, "typeName", "CPacketSoundEffect"),
+	ut(CPacketSoundEffect, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "sound",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 2,
+		name: "location",
+		kind: "message",
+		T: PBVector3,
+		opt: !0
+	}, {
+		no: 3,
+		name: "volume",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 4,
+		name: "pitch",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}]));
 const CPacketSpawnEntity = class extends Message {
 	constructor($) {
 		super();
@@ -3283,66 +3283,66 @@ const CPacketSpawnEntity = class extends Message {
 };
 export { CPacketSpawnEntity };
 ut(CPacketSpawnEntity, "runtime", proto2),
-ut(CPacketSpawnEntity, "typeName", "CPacketSpawnEntity"),
-ut(CPacketSpawnEntity, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "type",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 3,
-	name: "pos",
-	kind: "message",
-	T: PBVector3,
-	opt: !0
-}, {
-	no: 4,
-	name: "yaw",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 5,
-	name: "pitch",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 6,
-	name: "motion",
-	kind: "message",
-	T: PBFloatVector3,
-	opt: !0
-}, {
-	no: 7,
-	name: "item",
-	kind: "message",
-	T: PBItemStack,
-	opt: !0
-}, {
-	no: 8,
-	name: "shooterId",
-	kind: "scalar",
-	T: 13,
-	opt: !0
-}, {
-	no: 9,
-	name: "state",
-	kind: "scalar",
-	T: 5,
-	opt: !0
-}, {
-	no: 10,
-	name: "texture",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}]));
+	ut(CPacketSpawnEntity, "typeName", "CPacketSpawnEntity"),
+	ut(CPacketSpawnEntity, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "type",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 3,
+		name: "pos",
+		kind: "message",
+		T: PBVector3,
+		opt: !0
+	}, {
+		no: 4,
+		name: "yaw",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 5,
+		name: "pitch",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 6,
+		name: "motion",
+		kind: "message",
+		T: PBFloatVector3,
+		opt: !0
+	}, {
+		no: 7,
+		name: "item",
+		kind: "message",
+		T: PBItemStack,
+		opt: !0
+	}, {
+		no: 8,
+		name: "shooterId",
+		kind: "scalar",
+		T: 13,
+		opt: !0
+	}, {
+		no: 9,
+		name: "state",
+		kind: "scalar",
+		T: 5,
+		opt: !0
+	}, {
+		no: 10,
+		name: "texture",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}]));
 const CPacketSpawnExperienceOrb = class extends Message {
 	constructor($) {
 		super();
@@ -3368,33 +3368,33 @@ const CPacketSpawnExperienceOrb = class extends Message {
 };
 export { CPacketSpawnExperienceOrb };
 ut(CPacketSpawnExperienceOrb, "runtime", proto2),
-ut(CPacketSpawnExperienceOrb, "typeName", "CPacketSpawnExperienceOrb"),
-ut(CPacketSpawnExperienceOrb, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "x",
-	kind: "scalar",
-	T: 17
-}, {
-	no: 3,
-	name: "y",
-	kind: "scalar",
-	T: 17
-}, {
-	no: 4,
-	name: "z",
-	kind: "scalar",
-	T: 17
-}, {
-	no: 5,
-	name: "xpValue",
-	kind: "scalar",
-	T: 13
-}]));
+	ut(CPacketSpawnExperienceOrb, "typeName", "CPacketSpawnExperienceOrb"),
+	ut(CPacketSpawnExperienceOrb, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "x",
+		kind: "scalar",
+		T: 17
+	}, {
+		no: 3,
+		name: "y",
+		kind: "scalar",
+		T: 17
+	}, {
+		no: 4,
+		name: "z",
+		kind: "scalar",
+		T: 17
+	}, {
+		no: 5,
+		name: "xpValue",
+		kind: "scalar",
+		T: 13
+	}]));
 const CPacketSpawnPlayer = class extends Message {
 	constructor($) {
 		super();
@@ -3425,60 +3425,60 @@ const CPacketSpawnPlayer = class extends Message {
 };
 export { CPacketSpawnPlayer };
 ut(CPacketSpawnPlayer, "runtime", proto2),
-ut(CPacketSpawnPlayer, "typeName", "CPacketSpawnPlayer"),
-ut(CPacketSpawnPlayer, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "name",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 3,
-	name: "gamemode",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 4,
-	name: "operator",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}, {
-	no: 5,
-	name: "pos",
-	kind: "message",
-	T: PBFloatVector3
-}, {
-	no: 6,
-	name: "yaw",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 7,
-	name: "pitch",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 8,
-	name: "cosmetics",
-	kind: "message",
-	T: PBCosmetics
-}, {
-	no: 9,
-	name: "rank",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 10,
-	name: "socketId",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(CPacketSpawnPlayer, "typeName", "CPacketSpawnPlayer"),
+	ut(CPacketSpawnPlayer, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "name",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 3,
+		name: "gamemode",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 4,
+		name: "operator",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}, {
+		no: 5,
+		name: "pos",
+		kind: "message",
+		T: PBFloatVector3
+	}, {
+		no: 6,
+		name: "yaw",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 7,
+		name: "pitch",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 8,
+		name: "cosmetics",
+		kind: "message",
+		T: PBCosmetics
+	}, {
+		no: 9,
+		name: "rank",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 10,
+		name: "socketId",
+		kind: "scalar",
+		T: 9
+	}]));
 const CPacketTabComplete = class extends Message {
 	constructor($) {
 		super();
@@ -3500,14 +3500,14 @@ const CPacketTabComplete = class extends Message {
 };
 export { CPacketTabComplete };
 ut(CPacketTabComplete, "runtime", proto2),
-ut(CPacketTabComplete, "typeName", "CPacketTabComplete"),
-ut(CPacketTabComplete, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "matches",
-	kind: "scalar",
-	T: 9,
-	repeated: !0
-}]));
+	ut(CPacketTabComplete, "typeName", "CPacketTabComplete"),
+	ut(CPacketTabComplete, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "matches",
+		kind: "scalar",
+		T: 9,
+		repeated: !0
+	}]));
 const CPacketTitle = class extends Message {
 	constructor($) {
 		super();
@@ -3530,18 +3530,18 @@ const CPacketTitle = class extends Message {
 };
 export { CPacketTitle };
 ut(CPacketTitle, "runtime", proto2),
-ut(CPacketTitle, "typeName", "CPacketTitle"),
-ut(CPacketTitle, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "title",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 2,
-	name: "duration",
-	kind: "scalar",
-	T: 13
-}]));
+	ut(CPacketTitle, "typeName", "CPacketTitle"),
+	ut(CPacketTitle, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "title",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 2,
+		name: "duration",
+		kind: "scalar",
+		T: 13
+	}]));
 const CPacketUpdateHealth = class extends Message {
 	constructor($) {
 		super();
@@ -3567,37 +3567,37 @@ const CPacketUpdateHealth = class extends Message {
 };
 export { CPacketUpdateHealth };
 ut(CPacketUpdateHealth, "runtime", proto2),
-ut(CPacketUpdateHealth, "typeName", "CPacketUpdateHealth"),
-ut(CPacketUpdateHealth, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "hp",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 3,
-	name: "food",
-	kind: "scalar",
-	T: 5,
-	opt: !0
-}, {
-	no: 4,
-	name: "foodSaturation",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}, {
-	no: 5,
-	name: "oxygen",
-	kind: "scalar",
-	T: 2,
-	opt: !0
-}]));
+	ut(CPacketUpdateHealth, "typeName", "CPacketUpdateHealth"),
+	ut(CPacketUpdateHealth, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "hp",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 3,
+		name: "food",
+		kind: "scalar",
+		T: 5,
+		opt: !0
+	}, {
+		no: 4,
+		name: "foodSaturation",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}, {
+		no: 5,
+		name: "oxygen",
+		kind: "scalar",
+		T: 2,
+		opt: !0
+	}]));
 const CPacketUpdateLeaderboard = class extends Message {
 	constructor($) {
 		super();
@@ -3620,19 +3620,19 @@ const CPacketUpdateLeaderboard = class extends Message {
 };
 export { CPacketUpdateLeaderboard };
 ut(CPacketUpdateLeaderboard, "runtime", proto2),
-ut(CPacketUpdateLeaderboard, "typeName", "CPacketUpdateLeaderboard"),
-ut(CPacketUpdateLeaderboard, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 5,
-	name: "content",
-	kind: "scalar",
-	T: 9,
-	repeated: !0
-}]));
+	ut(CPacketUpdateLeaderboard, "typeName", "CPacketUpdateLeaderboard"),
+	ut(CPacketUpdateLeaderboard, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 5,
+		name: "content",
+		kind: "scalar",
+		T: 9,
+		repeated: !0
+	}]));
 const CPacketUpdateScoreboard = class extends Message {
 	constructor($) {
 		super();
@@ -3655,19 +3655,19 @@ const CPacketUpdateScoreboard = class extends Message {
 };
 export { CPacketUpdateScoreboard };
 ut(CPacketUpdateScoreboard, "runtime", proto2),
-ut(CPacketUpdateScoreboard, "typeName", "CPacketUpdateScoreboard"),
-ut(CPacketUpdateScoreboard, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "index",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "columns",
-	kind: "scalar",
-	T: 9,
-	repeated: !0
-}]));
+	ut(CPacketUpdateScoreboard, "typeName", "CPacketUpdateScoreboard"),
+	ut(CPacketUpdateScoreboard, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "index",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "columns",
+		kind: "scalar",
+		T: 9,
+		repeated: !0
+	}]));
 const CPacketUpdateStatus = class extends Message {
 	constructor($) {
 		super();
@@ -3693,37 +3693,37 @@ const CPacketUpdateStatus = class extends Message {
 };
 export { CPacketUpdateStatus };
 ut(CPacketUpdateStatus, "runtime", proto2),
-ut(CPacketUpdateStatus, "typeName", "CPacketUpdateStatus"),
-ut(CPacketUpdateStatus, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "mode",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 4,
-	name: "rank",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 5,
-	name: "color",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 6,
-	name: "hidePlayers",
-	kind: "scalar",
-	T: 8,
-	opt: !0
-}]));
+	ut(CPacketUpdateStatus, "typeName", "CPacketUpdateStatus"),
+	ut(CPacketUpdateStatus, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "mode",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 4,
+		name: "rank",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 5,
+		name: "color",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 6,
+		name: "hidePlayers",
+		kind: "scalar",
+		T: 8,
+		opt: !0
+	}]));
 const CPacketUpdate = class extends Message {
 	constructor($) {
 		super();
@@ -3747,23 +3747,23 @@ const CPacketUpdate = class extends Message {
 };
 export { CPacketUpdate };
 ut(CPacketUpdate, "runtime", proto2),
-ut(CPacketUpdate, "typeName", "CPacketUpdate"),
-ut(CPacketUpdate, "fields", proto2.util.newFieldList(()=>[{
-	no: 4,
-	name: "tick",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 5,
-	name: "t",
-	kind: "scalar",
-	T: 4
-}, {
-	no: 6,
-	name: "mspt",
-	kind: "scalar",
-	T: 2
-}]));
+	ut(CPacketUpdate, "typeName", "CPacketUpdate"),
+	ut(CPacketUpdate, "fields", proto2.util.newFieldList(() => [{
+		no: 4,
+		name: "tick",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 5,
+		name: "t",
+		kind: "scalar",
+		T: 4
+	}, {
+		no: 6,
+		name: "mspt",
+		kind: "scalar",
+		T: 2
+	}]));
 const CPacketWindowItems = class extends Message {
 	constructor($) {
 		super();
@@ -3786,19 +3786,19 @@ const CPacketWindowItems = class extends Message {
 };
 export { CPacketWindowItems };
 ut(CPacketWindowItems, "runtime", proto2),
-ut(CPacketWindowItems, "typeName", "CPacketWindowItems"),
-ut(CPacketWindowItems, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "window_id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "items",
-	kind: "message",
-	T: PBItemStack,
-	repeated: !0
-}]));
+	ut(CPacketWindowItems, "typeName", "CPacketWindowItems"),
+	ut(CPacketWindowItems, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "window_id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "items",
+		kind: "message",
+		T: PBItemStack,
+		repeated: !0
+	}]));
 const CPacketWindowProperty = class extends Message {
 	constructor($) {
 		super();
@@ -3822,27 +3822,27 @@ const CPacketWindowProperty = class extends Message {
 };
 export { CPacketWindowProperty };
 ut(CPacketWindowProperty, "runtime", proto2),
-ut(CPacketWindowProperty, "typeName", "CPacketWindowProperty"),
-ut(CPacketWindowProperty, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "windowId",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "varIndex",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 3,
-	name: "varValue",
-	kind: "scalar",
-	T: 5
-}]));
+	ut(CPacketWindowProperty, "typeName", "CPacketWindowProperty"),
+	ut(CPacketWindowProperty, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "windowId",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "varIndex",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 3,
+		name: "varValue",
+		kind: "scalar",
+		T: 5
+	}]));
 const SPacketRespawn = class extends Message {
 	constructor(_) {
 		super(),
-		proto2.util.initPartial(_, this)
+			proto2.util.initPartial(_, this)
 	}
 	static fromBinary(_, $) {
 		return new SPacketRespawn().fromBinary(_, $)
@@ -3859,8 +3859,8 @@ const SPacketRespawn = class extends Message {
 };
 export { SPacketRespawn };
 ut(SPacketRespawn, "runtime", proto2),
-ut(SPacketRespawn, "typeName", "SPacketRespawn"),
-ut(SPacketRespawn, "fields", proto2.util.newFieldList(()=>[]));
+	ut(SPacketRespawn, "typeName", "SPacketRespawn"),
+	ut(SPacketRespawn, "fields", proto2.util.newFieldList(() => []));
 var su;
 export let SPacketTabComplete$1 = class extends Message {
 	constructor($) {
@@ -3882,13 +3882,13 @@ export let SPacketTabComplete$1 = class extends Message {
 	}
 };
 ut(SPacketTabComplete$1, "runtime", proto2),
-ut(SPacketTabComplete$1, "typeName", "SPacketTabComplete"),
-ut(SPacketTabComplete$1, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "message",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(SPacketTabComplete$1, "typeName", "SPacketTabComplete"),
+	ut(SPacketTabComplete$1, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "message",
+		kind: "scalar",
+		T: 9
+	}]));
 const SPacketCraftItem = class extends Message {
 	constructor($) {
 		super();
@@ -3910,13 +3910,13 @@ const SPacketCraftItem = class extends Message {
 };
 export { SPacketCraftItem };
 ut(SPacketCraftItem, "runtime", proto2),
-ut(SPacketCraftItem, "typeName", "SPacketCraftItem"),
-ut(SPacketCraftItem, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "data",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(SPacketCraftItem, "typeName", "SPacketCraftItem"),
+	ut(SPacketCraftItem, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "data",
+		kind: "scalar",
+		T: 9
+	}]));
 const SPacketRequestChunk = class extends Message {
 	constructor($) {
 		super();
@@ -3939,18 +3939,18 @@ const SPacketRequestChunk = class extends Message {
 };
 export { SPacketRequestChunk };
 ut(SPacketRequestChunk, "runtime", proto2),
-ut(SPacketRequestChunk, "typeName", "SPacketRequestChunk"),
-ut(SPacketRequestChunk, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "x",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 2,
-	name: "z",
-	kind: "scalar",
-	T: 5
-}]));
+	ut(SPacketRequestChunk, "typeName", "SPacketRequestChunk"),
+	ut(SPacketRequestChunk, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "x",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 2,
+		name: "z",
+		kind: "scalar",
+		T: 5
+	}]));
 const SPacketAdminAction = class extends Message {
 	constructor($) {
 		super();
@@ -3974,62 +3974,62 @@ const SPacketAdminAction = class extends Message {
 };
 export { SPacketAdminAction };
 ut(SPacketAdminAction, "runtime", proto2),
-ut(SPacketAdminAction, "typeName", "SPacketAdminAction"),
-ut(SPacketAdminAction, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "kick_player",
-	kind: "message",
-	T: KickPlayer,
-	oneof: "action"
-}, {
-	no: 2,
-	name: "ban_player",
-	kind: "message",
-	T: BanPlayer,
-	oneof: "action"
-}, {
-	no: 9,
-	name: "unban_player",
-	kind: "message",
-	T: UnbanPlayer,
-	oneof: "action"
-}, {
-	no: 3,
-	name: "stop_server",
-	kind: "message",
-	T: StopServer,
-	oneof: "action"
-}, {
-	no: 4,
-	name: "promote_player",
-	kind: "message",
-	T: PromotePlayer,
-	oneof: "action"
-}, {
-	no: 5,
-	name: "demote_player",
-	kind: "message",
-	T: DemotePlayer,
-	oneof: "action"
-}, {
-	no: 6,
-	name: "update_access_control",
-	kind: "message",
-	T: UpdateAccessControl,
-	oneof: "action"
-}, {
-	no: 7,
-	name: "update_cheats",
-	kind: "message",
-	T: UpdateCheats,
-	oneof: "action"
-}, {
-	no: 8,
-	name: "update_pvp",
-	kind: "message",
-	T: UpdatePvP,
-	oneof: "action"
-}]));
+	ut(SPacketAdminAction, "typeName", "SPacketAdminAction"),
+	ut(SPacketAdminAction, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "kick_player",
+		kind: "message",
+		T: KickPlayer,
+		oneof: "action"
+	}, {
+		no: 2,
+		name: "ban_player",
+		kind: "message",
+		T: BanPlayer,
+		oneof: "action"
+	}, {
+		no: 9,
+		name: "unban_player",
+		kind: "message",
+		T: UnbanPlayer,
+		oneof: "action"
+	}, {
+		no: 3,
+		name: "stop_server",
+		kind: "message",
+		T: StopServer,
+		oneof: "action"
+	}, {
+		no: 4,
+		name: "promote_player",
+		kind: "message",
+		T: PromotePlayer,
+		oneof: "action"
+	}, {
+		no: 5,
+		name: "demote_player",
+		kind: "message",
+		T: DemotePlayer,
+		oneof: "action"
+	}, {
+		no: 6,
+		name: "update_access_control",
+		kind: "message",
+		T: UpdateAccessControl,
+		oneof: "action"
+	}, {
+		no: 7,
+		name: "update_cheats",
+		kind: "message",
+		T: UpdateCheats,
+		oneof: "action"
+	}, {
+		no: 8,
+		name: "update_pvp",
+		kind: "message",
+		T: UpdatePvP,
+		oneof: "action"
+	}]));
 const KickPlayer = class extends Message {
 	constructor($) {
 		super();
@@ -4051,13 +4051,13 @@ const KickPlayer = class extends Message {
 };
 export { KickPlayer };
 ut(KickPlayer, "runtime", proto2),
-ut(KickPlayer, "typeName", "KickPlayer"),
-ut(KickPlayer, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "uuid",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(KickPlayer, "typeName", "KickPlayer"),
+	ut(KickPlayer, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "uuid",
+		kind: "scalar",
+		T: 9
+	}]));
 const BanPlayer = class extends Message {
 	constructor($) {
 		super();
@@ -4079,13 +4079,13 @@ const BanPlayer = class extends Message {
 };
 export { BanPlayer };
 ut(BanPlayer, "runtime", proto2),
-ut(BanPlayer, "typeName", "BanPlayer"),
-ut(BanPlayer, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "uuid",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(BanPlayer, "typeName", "BanPlayer"),
+	ut(BanPlayer, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "uuid",
+		kind: "scalar",
+		T: 9
+	}]));
 const UnbanPlayer = class extends Message {
 	constructor($) {
 		super();
@@ -4107,17 +4107,17 @@ const UnbanPlayer = class extends Message {
 };
 export { UnbanPlayer };
 ut(UnbanPlayer, "runtime", proto2),
-ut(UnbanPlayer, "typeName", "UnbanPlayer"),
-ut(UnbanPlayer, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "uuid",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(UnbanPlayer, "typeName", "UnbanPlayer"),
+	ut(UnbanPlayer, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "uuid",
+		kind: "scalar",
+		T: 9
+	}]));
 const StopServer = class extends Message {
 	constructor(_) {
 		super(),
-		proto2.util.initPartial(_, this)
+			proto2.util.initPartial(_, this)
 	}
 	static fromBinary(_, $) {
 		return new StopServer().fromBinary(_, $)
@@ -4134,8 +4134,8 @@ const StopServer = class extends Message {
 };
 export { StopServer };
 ut(StopServer, "runtime", proto2),
-ut(StopServer, "typeName", "StopServer"),
-ut(StopServer, "fields", proto2.util.newFieldList(()=>[]));
+	ut(StopServer, "typeName", "StopServer"),
+	ut(StopServer, "fields", proto2.util.newFieldList(() => []));
 const PromotePlayer = class extends Message {
 	constructor($) {
 		super();
@@ -4157,13 +4157,13 @@ const PromotePlayer = class extends Message {
 };
 export { PromotePlayer };
 ut(PromotePlayer, "runtime", proto2),
-ut(PromotePlayer, "typeName", "PromotePlayer"),
-ut(PromotePlayer, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "uuid",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(PromotePlayer, "typeName", "PromotePlayer"),
+	ut(PromotePlayer, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "uuid",
+		kind: "scalar",
+		T: 9
+	}]));
 const DemotePlayer = class extends Message {
 	constructor($) {
 		super();
@@ -4185,13 +4185,13 @@ const DemotePlayer = class extends Message {
 };
 export { DemotePlayer };
 ut(DemotePlayer, "runtime", proto2),
-ut(DemotePlayer, "typeName", "DemotePlayer"),
-ut(DemotePlayer, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "uuid",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(DemotePlayer, "typeName", "DemotePlayer"),
+	ut(DemotePlayer, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "uuid",
+		kind: "scalar",
+		T: 9
+	}]));
 const UpdateAccessControl = class extends Message {
 	constructor($) {
 		super();
@@ -4213,13 +4213,13 @@ const UpdateAccessControl = class extends Message {
 };
 export { UpdateAccessControl };
 ut(UpdateAccessControl, "runtime", proto2),
-ut(UpdateAccessControl, "typeName", "UpdateAccessControl"),
-ut(UpdateAccessControl, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "accessControl",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(UpdateAccessControl, "typeName", "UpdateAccessControl"),
+	ut(UpdateAccessControl, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "accessControl",
+		kind: "scalar",
+		T: 9
+	}]));
 const UpdateCheats = class extends Message {
 	constructor($) {
 		super();
@@ -4241,13 +4241,13 @@ const UpdateCheats = class extends Message {
 };
 export { UpdateCheats };
 ut(UpdateCheats, "runtime", proto2),
-ut(UpdateCheats, "typeName", "UpdateCheats"),
-ut(UpdateCheats, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "cheats",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(UpdateCheats, "typeName", "UpdateCheats"),
+	ut(UpdateCheats, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "cheats",
+		kind: "scalar",
+		T: 9
+	}]));
 const UpdatePvP = class extends Message {
 	constructor($) {
 		super();
@@ -4269,13 +4269,13 @@ const UpdatePvP = class extends Message {
 };
 export { UpdatePvP };
 ut(UpdatePvP, "runtime", proto2),
-ut(UpdatePvP, "typeName", "UpdatePvP"),
-ut(UpdatePvP, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "enabled",
-	kind: "scalar",
-	T: 8
-}]));
+	ut(UpdatePvP, "typeName", "UpdatePvP"),
+	ut(UpdatePvP, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "enabled",
+		kind: "scalar",
+		T: 8
+	}]));
 const SPacketAnalytics = class extends Message {
 	constructor($) {
 		super();
@@ -4298,18 +4298,18 @@ const SPacketAnalytics = class extends Message {
 };
 export { SPacketAnalytics };
 ut(SPacketAnalytics, "runtime", proto2),
-ut(SPacketAnalytics, "typeName", "SPacketAnalytics"),
-ut(SPacketAnalytics, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "fps",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 2,
-	name: "ping",
-	kind: "scalar",
-	T: 2
-}]));
+	ut(SPacketAnalytics, "typeName", "SPacketAnalytics"),
+	ut(SPacketAnalytics, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "fps",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 2,
+		name: "ping",
+		kind: "scalar",
+		T: 2
+	}]));
 const SPacketConfirmTransaction = class extends Message {
 	constructor($) {
 		super();
@@ -4333,23 +4333,23 @@ const SPacketConfirmTransaction = class extends Message {
 };
 export { SPacketConfirmTransaction };
 ut(SPacketConfirmTransaction, "runtime", proto2),
-ut(SPacketConfirmTransaction, "typeName", "SPacketConfirmTransaction"),
-ut(SPacketConfirmTransaction, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "windowId",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 2,
-	name: "actionNumber",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 3,
-	name: "accepted",
-	kind: "scalar",
-	T: 8
-}]));
+	ut(SPacketConfirmTransaction, "typeName", "SPacketConfirmTransaction"),
+	ut(SPacketConfirmTransaction, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "windowId",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 2,
+		name: "actionNumber",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 3,
+		name: "accepted",
+		kind: "scalar",
+		T: 8
+	}]));
 const SPacketHeldItemChange = class extends Message {
 	constructor($) {
 		super();
@@ -4371,13 +4371,13 @@ const SPacketHeldItemChange = class extends Message {
 };
 export { SPacketHeldItemChange };
 ut(SPacketHeldItemChange, "runtime", proto2),
-ut(SPacketHeldItemChange, "typeName", "SPacketHeldItemChange"),
-ut(SPacketHeldItemChange, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "slot",
-	kind: "scalar",
-	T: 5
-}]));
+	ut(SPacketHeldItemChange, "typeName", "SPacketHeldItemChange"),
+	ut(SPacketHeldItemChange, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "slot",
+		kind: "scalar",
+		T: 5
+	}]));
 const SPacketPlayerInput = class extends Message {
 	constructor($) {
 		super();
@@ -4409,63 +4409,63 @@ const SPacketPlayerInput = class extends Message {
 };
 export { SPacketPlayerInput };
 ut(SPacketPlayerInput, "runtime", proto2),
-ut(SPacketPlayerInput, "typeName", "SPacketPlayerInput"),
-ut(SPacketPlayerInput, "fields", proto2.util.newFieldList( () => [{
-	no: 1,
-	name: "sequenceNumber",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "left",
-	kind: "scalar",
-	T: 8
-}, {
-	no: 3,
-	name: "right",
-	kind: "scalar",
-	T: 8
-}, {
-	no: 4,
-	name: "up",
-	kind: "scalar",
-	T: 8
-}, {
-	no: 5,
-	name: "down",
-	kind: "scalar",
-	T: 8
-}, {
-	no: 6,
-	name: "yaw",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 7,
-	name: "pitch",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 8,
-	name: "jump",
-	kind: "scalar",
-	T: 8
-}, {
-	no: 9,
-	name: "sneak",
-	kind: "scalar",
-	T: 8
-}, {
-	no: 10,
-	name: "sprint",
-	kind: "scalar",
-	T: 8
-}, {
-	no: 11,
-	name: "pos",
-	kind: "message",
-	T: PBFloatVector3
-}]));
+	ut(SPacketPlayerInput, "typeName", "SPacketPlayerInput"),
+	ut(SPacketPlayerInput, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "sequenceNumber",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "left",
+		kind: "scalar",
+		T: 8
+	}, {
+		no: 3,
+		name: "right",
+		kind: "scalar",
+		T: 8
+	}, {
+		no: 4,
+		name: "up",
+		kind: "scalar",
+		T: 8
+	}, {
+		no: 5,
+		name: "down",
+		kind: "scalar",
+		T: 8
+	}, {
+		no: 6,
+		name: "yaw",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 7,
+		name: "pitch",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 8,
+		name: "jump",
+		kind: "scalar",
+		T: 8
+	}, {
+		no: 9,
+		name: "sneak",
+		kind: "scalar",
+		T: 8
+	}, {
+		no: 10,
+		name: "sprint",
+		kind: "scalar",
+		T: 8
+	}, {
+		no: 11,
+		name: "pos",
+		kind: "message",
+		T: PBFloatVector3
+	}]));
 const SPacketPing = class extends Message {
 	constructor($) {
 		super();
@@ -4487,13 +4487,13 @@ const SPacketPing = class extends Message {
 };
 export { SPacketPing };
 ut(SPacketPing, "runtime", proto2),
-ut(SPacketPing, "typeName", "SPacketPing"),
-ut(SPacketPing, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "time",
-	kind: "scalar",
-	T: 4
-}]));
+	ut(SPacketPing, "typeName", "SPacketPing"),
+	ut(SPacketPing, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "time",
+		kind: "scalar",
+		T: 4
+	}]));
 const SPacketUpdateSign = class extends Message {
 	constructor($) {
 		super();
@@ -4516,19 +4516,19 @@ const SPacketUpdateSign = class extends Message {
 };
 export { SPacketUpdateSign };
 ut(SPacketUpdateSign, "runtime", proto2),
-ut(SPacketUpdateSign, "typeName", "SPacketUpdateSign"),
-ut(SPacketUpdateSign, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "pos",
-	kind: "message",
-	T: PBBlockPos
-}, {
-	no: 2,
-	name: "lines",
-	kind: "scalar",
-	T: 9,
-	repeated: !0
-}]));
+	ut(SPacketUpdateSign, "typeName", "SPacketUpdateSign"),
+	ut(SPacketUpdateSign, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "pos",
+		kind: "message",
+		T: PBBlockPos
+	}, {
+		no: 2,
+		name: "lines",
+		kind: "scalar",
+		T: 9,
+		repeated: !0
+	}]));
 const CPacketEntityEffect = class extends Message {
 	constructor($) {
 		super();
@@ -4554,33 +4554,33 @@ const CPacketEntityEffect = class extends Message {
 };
 export { CPacketEntityEffect };
 ut(CPacketEntityEffect, "runtime", proto2),
-ut(CPacketEntityEffect, "typeName", "CPacketEntityEffect"),
-ut(CPacketEntityEffect, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "effectId",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 3,
-	name: "amplifier",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 4,
-	name: "duration",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 5,
-	name: "hideParticles",
-	kind: "scalar",
-	T: 8
-}]));
+	ut(CPacketEntityEffect, "typeName", "CPacketEntityEffect"),
+	ut(CPacketEntityEffect, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "effectId",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 3,
+		name: "amplifier",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 4,
+		name: "duration",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 5,
+		name: "hideParticles",
+		kind: "scalar",
+		T: 8
+	}]));
 const CPacketEntityProperties = class extends Message {
 	constructor($) {
 		super();
@@ -4603,19 +4603,19 @@ const CPacketEntityProperties = class extends Message {
 };
 export { CPacketEntityProperties };
 ut(CPacketEntityProperties, "runtime", proto2),
-ut(CPacketEntityProperties, "typeName", "CPacketEntityProperties"),
-ut(CPacketEntityProperties, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "data",
-	kind: "message",
-	T: PBSnapshot,
-	repeated: !0
-}]));
+	ut(CPacketEntityProperties, "typeName", "CPacketEntityProperties"),
+	ut(CPacketEntityProperties, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "data",
+		kind: "message",
+		T: PBSnapshot,
+		repeated: !0
+	}]));
 const PBSnapshot = class extends Message {
 	constructor($) {
 		super();
@@ -4639,24 +4639,24 @@ const PBSnapshot = class extends Message {
 };
 export { PBSnapshot };
 ut(PBSnapshot, "runtime", proto2),
-ut(PBSnapshot, "typeName", "PBSnapshot"),
-ut(PBSnapshot, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 2,
-	name: "value",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 3,
-	name: "modifiers",
-	kind: "message",
-	T: PBModifier,
-	repeated: !0
-}]));
+	ut(PBSnapshot, "typeName", "PBSnapshot"),
+	ut(PBSnapshot, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 2,
+		name: "value",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 3,
+		name: "modifiers",
+		kind: "message",
+		T: PBModifier,
+		repeated: !0
+	}]));
 const PBModifier = class extends Message {
 	constructor($) {
 		super();
@@ -4680,23 +4680,23 @@ const PBModifier = class extends Message {
 };
 export { PBModifier };
 ut(PBModifier, "runtime", proto2),
-ut(PBModifier, "typeName", "PBModifier"),
-ut(PBModifier, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 2,
-	name: "amount",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 3,
-	name: "operation",
-	kind: "scalar",
-	T: 13
-}]));
+	ut(PBModifier, "typeName", "PBModifier"),
+	ut(PBModifier, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 2,
+		name: "amount",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 3,
+		name: "operation",
+		kind: "scalar",
+		T: 13
+	}]));
 const CPacketQueueNext = class extends Message {
 	constructor($) {
 		super();
@@ -4719,18 +4719,18 @@ const CPacketQueueNext = class extends Message {
 };
 export { CPacketQueueNext };
 ut(CPacketQueueNext, "runtime", proto2),
-ut(CPacketQueueNext, "typeName", "CPacketQueueNext"),
-ut(CPacketQueueNext, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "minigameId",
-	kind: "scalar",
-	T: 9
-}, {
-	no: 2,
-	name: "minigameConfig",
-	kind: "scalar",
-	T: 9
-}]));
+	ut(CPacketQueueNext, "typeName", "CPacketQueueNext"),
+	ut(CPacketQueueNext, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "minigameId",
+		kind: "scalar",
+		T: 9
+	}, {
+		no: 2,
+		name: "minigameConfig",
+		kind: "scalar",
+		T: 9
+	}]));
 const CPacketRemoveEntityEffect = class extends Message {
 	constructor($) {
 		super();
@@ -4753,18 +4753,18 @@ const CPacketRemoveEntityEffect = class extends Message {
 };
 export { CPacketRemoveEntityEffect };
 ut(CPacketRemoveEntityEffect, "runtime", proto2),
-ut(CPacketRemoveEntityEffect, "typeName", "CPacketRemoveEntityEffect"),
-ut(CPacketRemoveEntityEffect, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "effectId",
-	kind: "scalar",
-	T: 13
-}]));
+	ut(CPacketRemoveEntityEffect, "typeName", "CPacketRemoveEntityEffect"),
+	ut(CPacketRemoveEntityEffect, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "effectId",
+		kind: "scalar",
+		T: 13
+	}]));
 const CPacketSetExperience = class extends Message {
 	constructor($) {
 		super();
@@ -4788,23 +4788,23 @@ const CPacketSetExperience = class extends Message {
 };
 export { CPacketSetExperience };
 ut(CPacketSetExperience, "runtime", proto2),
-ut(CPacketSetExperience, "typeName", "CPacketSetExperience"),
-ut(CPacketSetExperience, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "experience",
-	kind: "scalar",
-	T: 2
-}, {
-	no: 2,
-	name: "experienceTotal",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 3,
-	name: "level",
-	kind: "scalar",
-	T: 5
-}]));
+	ut(CPacketSetExperience, "typeName", "CPacketSetExperience"),
+	ut(CPacketSetExperience, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "experience",
+		kind: "scalar",
+		T: 2
+	}, {
+		no: 2,
+		name: "experienceTotal",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 3,
+		name: "level",
+		kind: "scalar",
+		T: 5
+	}]));
 const CPacketShopProperty = class extends Message {
 	constructor($) {
 		super();
@@ -4827,20 +4827,20 @@ const CPacketShopProperty = class extends Message {
 };
 export { CPacketShopProperty };
 ut(CPacketShopProperty, "runtime", proto2),
-ut(CPacketShopProperty, "typeName", "CPacketShopProperty"),
-ut(CPacketShopProperty, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "name",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 2,
-	name: "value",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}]));
+	ut(CPacketShopProperty, "typeName", "CPacketShopProperty"),
+	ut(CPacketShopProperty, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "name",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 2,
+		name: "value",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}]));
 const CPacketShopProperties = class extends Message {
 	constructor($) {
 		super();
@@ -4862,14 +4862,14 @@ const CPacketShopProperties = class extends Message {
 };
 export { CPacketShopProperties };
 ut(CPacketShopProperties, "runtime", proto2),
-ut(CPacketShopProperties, "typeName", "CPacketShopProperties"),
-ut(CPacketShopProperties, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "properties",
-	kind: "message",
-	T: CPacketShopProperty,
-	repeated: !0
-}]));
+	ut(CPacketShopProperties, "typeName", "CPacketShopProperties"),
+	ut(CPacketShopProperties, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "properties",
+		kind: "message",
+		T: CPacketShopProperty,
+		repeated: !0
+	}]));
 const CPacketUseBed = class extends Message {
 	constructor($) {
 		super();
@@ -4892,18 +4892,18 @@ const CPacketUseBed = class extends Message {
 };
 export { CPacketUseBed };
 ut(CPacketUseBed, "runtime", proto2),
-ut(CPacketUseBed, "typeName", "CPacketUseBed"),
-ut(CPacketUseBed, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "id",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "bedPos",
-	kind: "message",
-	T: PBBlockPos
-}]));
+	ut(CPacketUseBed, "typeName", "CPacketUseBed"),
+	ut(CPacketUseBed, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "id",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "bedPos",
+		kind: "message",
+		T: PBBlockPos
+	}]));
 const CPacketTimeUpdate = class extends Message {
 	constructor($) {
 		super();
@@ -4926,18 +4926,18 @@ const CPacketTimeUpdate = class extends Message {
 };
 export { CPacketTimeUpdate };
 ut(CPacketTimeUpdate, "runtime", proto2),
-ut(CPacketTimeUpdate, "typeName", "CPacketTimeUpdate"),
-ut(CPacketTimeUpdate, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "totalTime",
-	kind: "scalar",
-	T: 13
-}, {
-	no: 2,
-	name: "worldTime",
-	kind: "scalar",
-	T: 13
-}]));
+	ut(CPacketTimeUpdate, "typeName", "CPacketTimeUpdate"),
+	ut(CPacketTimeUpdate, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "totalTime",
+		kind: "scalar",
+		T: 13
+	}, {
+		no: 2,
+		name: "worldTime",
+		kind: "scalar",
+		T: 13
+	}]));
 const ClientBoundCombined = class extends Message {
 	constructor($) {
 		super();
@@ -4959,14 +4959,14 @@ const ClientBoundCombined = class extends Message {
 };
 export { ClientBoundCombined };
 ut(ClientBoundCombined, "runtime", proto2),
-ut(ClientBoundCombined, "typeName", "ClientBoundCombined"),
-ut(ClientBoundCombined, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "packets",
-	kind: "message",
-	T: ClientBoundCombined_CPacket,
-	repeated: !0
-}]));
+	ut(ClientBoundCombined, "typeName", "ClientBoundCombined"),
+	ut(ClientBoundCombined, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "packets",
+		kind: "message",
+		T: ClientBoundCombined_CPacket,
+		repeated: !0
+	}]));
 const ClientBoundCombined_CPacket = class extends Message {
 	constructor($) {
 		super();
@@ -4990,356 +4990,356 @@ const ClientBoundCombined_CPacket = class extends Message {
 };
 export { ClientBoundCombined_CPacket };
 ut(ClientBoundCombined_CPacket, "runtime", proto2),
-ut(ClientBoundCombined_CPacket, "typeName", "ClientBoundCombined.CPacket"),
-ut(ClientBoundCombined_CPacket, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "CPacketAnimation",
-	kind: "message",
-	T: CPacketAnimation,
-	oneof: "packet"
-}, {
-	no: 2,
-	name: "CPacketBlockAction",
-	kind: "message",
-	T: CPacketBlockAction,
-	oneof: "packet"
-}, {
-	no: 3,
-	name: "CPacketBlockUpdate",
-	kind: "message",
-	T: CPacketBlockUpdate,
-	oneof: "packet"
-}, {
-	no: 4,
-	name: "CPacketChangeServers",
-	kind: "message",
-	T: CPacketChangeServers,
-	oneof: "packet"
-}, {
-	no: 5,
-	name: "CPacketChunkData",
-	kind: "message",
-	T: CPacketChunkData,
-	oneof: "packet"
-}, {
-	no: 6,
-	name: "CPacketCloseWindow",
-	kind: "message",
-	T: CPacketCloseWindow,
-	oneof: "packet"
-}, {
-	no: 7,
-	name: "CPacketConfirmTransaction",
-	kind: "message",
-	T: CPacketConfirmTransaction,
-	oneof: "packet"
-}, {
-	no: 8,
-	name: "CPacketDestroyEntities",
-	kind: "message",
-	T: CPacketDestroyEntities,
-	oneof: "packet"
-}, {
-	no: 9,
-	name: "CPacketDisconnect",
-	kind: "message",
-	T: CPacketDisconnect,
-	oneof: "packet"
-}, {
-	no: 10,
-	name: "CPacketEntityAction",
-	kind: "message",
-	T: CPacketEntityAction,
-	oneof: "packet"
-}, {
-	no: 11,
-	name: "CPacketEntityEffect",
-	kind: "message",
-	T: CPacketEntityEffect,
-	oneof: "packet"
-}, {
-	no: 12,
-	name: "CPacketEntityEquipment",
-	kind: "message",
-	T: CPacketEntityEquipment,
-	oneof: "packet"
-}, {
-	no: 13,
-	name: "CPacketEntityMetadata",
-	kind: "message",
-	T: CPacketEntityMetadata,
-	oneof: "packet"
-}, {
-	no: 14,
-	name: "CPacketEntityPositionAndRotation",
-	kind: "message",
-	T: CPacketEntityPositionAndRotation,
-	oneof: "packet"
-}, {
-	no: 15,
-	name: "CPacketEntityProperties",
-	kind: "message",
-	T: CPacketEntityProperties,
-	oneof: "packet"
-}, {
-	no: 16,
-	name: "CPacketEntityRelativePositionAndRotation",
-	kind: "message",
-	T: CPacketEntityRelativePositionAndRotation,
-	oneof: "packet"
-}, {
-	no: 17,
-	name: "CPacketEntityStatus",
-	kind: "message",
-	T: CPacketEntityStatus,
-	oneof: "packet"
-}, {
-	no: 18,
-	name: "CPacketEntityVelocity",
-	kind: "message",
-	T: CPacketEntityVelocity,
-	oneof: "packet"
-}, {
-	no: 19,
-	name: "CPacketExplosion",
-	kind: "message",
-	T: CPacketExplosion,
-	oneof: "packet"
-}, {
-	no: 20,
-	name: "CPacketJoinGame",
-	kind: "message",
-	T: CPacketJoinGame,
-	oneof: "packet"
-}, {
-	no: 21,
-	name: "CPacketLeaderboard",
-	kind: "message",
-	T: CPacketLeaderboard,
-	oneof: "packet"
-}, {
-	no: 22,
-	name: "CPacketLocalStorage",
-	kind: "message",
-	T: CPacketLocalStorage,
-	oneof: "packet"
-}, {
-	no: 23,
-	name: "CPacketMessage",
-	kind: "message",
-	T: CPacketMessage,
-	oneof: "packet"
-}, {
-	no: 24,
-	name: "CPacketOpenShop",
-	kind: "message",
-	T: CPacketOpenShop,
-	oneof: "packet"
-}, {
-	no: 25,
-	name: "CPacketOpenWindow",
-	kind: "message",
-	T: CPacketOpenWindow,
-	oneof: "packet"
-}, {
-	no: 26,
-	name: "CPacketParticles",
-	kind: "message",
-	T: CPacketParticles,
-	oneof: "packet"
-}, {
-	no: 27,
-	name: "CPacketPlayerList",
-	kind: "message",
-	T: CPacketPlayerList,
-	oneof: "packet"
-}, {
-	no: 28,
-	name: "CPacketPlayerPosLook",
-	kind: "message",
-	T: CPacketPlayerPosLook,
-	oneof: "packet"
-}, {
-	no: 29,
-	name: "CPacketPlayerPosition",
-	kind: "message",
-	T: CPacketPlayerPosition,
-	oneof: "packet"
-}, {
-	no: 30,
-	name: "CPacketPong",
-	kind: "message",
-	T: CPacketPong,
-	oneof: "packet"
-}, {
-	no: 31,
-	name: "CPacketQueueNext",
-	kind: "message",
-	T: CPacketQueueNext,
-	oneof: "packet"
-}, {
-	no: 32,
-	name: "CPacketRemoveEntityEffect",
-	kind: "message",
-	T: CPacketRemoveEntityEffect,
-	oneof: "packet"
-}, {
-	no: 33,
-	name: "CPacketRespawn",
-	kind: "message",
-	T: CPacketRespawn,
-	oneof: "packet"
-}, {
-	no: 34,
-	name: "CPacketScoreboard",
-	kind: "message",
-	T: CPacketScoreboard,
-	oneof: "packet"
-}, {
-	no: 35,
-	name: "CPacketServerInfo",
-	kind: "message",
-	T: CPacketServerInfo,
-	oneof: "packet"
-}, {
-	no: 36,
-	name: "CPacketSetExperience",
-	kind: "message",
-	T: CPacketSetExperience,
-	oneof: "packet"
-}, {
-	no: 37,
-	name: "CPacketSetSlot",
-	kind: "message",
-	T: CPacketSetSlot,
-	oneof: "packet"
-}, {
-	no: 38,
-	name: "CPacketShopProperties",
-	kind: "message",
-	T: CPacketShopProperties,
-	oneof: "packet"
-}, {
-	no: 39,
-	name: "CPacketSignEditorOpen",
-	kind: "message",
-	T: CPacketSignEditorOpen,
-	oneof: "packet"
-}, {
-	no: 40,
-	name: "CPacketSoundEffect",
-	kind: "message",
-	T: CPacketSoundEffect,
-	oneof: "packet"
-}, {
-	no: 41,
-	name: "CPacketSpawnEntity",
-	kind: "message",
-	T: CPacketSpawnEntity,
-	oneof: "packet"
-}, {
-	no: 42,
-	name: "CPacketSpawnExperienceOrb",
-	kind: "message",
-	T: CPacketSpawnExperienceOrb,
-	oneof: "packet"
-}, {
-	no: 43,
-	name: "CPacketSpawnPlayer",
-	kind: "message",
-	T: CPacketSpawnPlayer,
-	oneof: "packet"
-}, {
-	no: 44,
-	name: "CPacketTabComplete",
-	kind: "message",
-	T: CPacketTabComplete,
-	oneof: "packet"
-}, {
-	no: 45,
-	name: "CPacketTitle",
-	kind: "message",
-	T: CPacketTitle,
-	oneof: "packet"
-}, {
-	no: 46,
-	name: "CPacketUpdateCommandBlock",
-	kind: "message",
-	T: CPacketUpdateCommandBlock,
-	oneof: "packet"
-}, {
-	no: 47,
-	name: "CPacketUpdateHealth",
-	kind: "message",
-	T: CPacketUpdateHealth,
-	oneof: "packet"
-}, {
-	no: 48,
-	name: "CPacketUpdateLeaderboard",
-	kind: "message",
-	T: CPacketUpdateLeaderboard,
-	oneof: "packet"
-}, {
-	no: 49,
-	name: "CPacketUpdateScoreboard",
-	kind: "message",
-	T: CPacketUpdateScoreboard,
-	oneof: "packet"
-}, {
-	no: 50,
-	name: "CPacketUpdateSign",
-	kind: "message",
-	T: CPacketUpdateSign,
-	oneof: "packet"
-}, {
-	no: 51,
-	name: "CPacketUpdateStatus",
-	kind: "message",
-	T: CPacketUpdateStatus,
-	oneof: "packet"
-}, {
-	no: 52,
-	name: "CPacketUseBed",
-	kind: "message",
-	T: CPacketUseBed,
-	oneof: "packet"
-}, {
-	no: 53,
-	name: "CPacketWindowItems",
-	kind: "message",
-	T: CPacketWindowItems,
-	oneof: "packet"
-}, {
-	no: 54,
-	name: "CPacketWindowProperty",
-	kind: "message",
-	T: CPacketWindowProperty,
-	oneof: "packet"
-}, {
-	no: 55,
-	name: "CPacketEntityAttach",
-	kind: "message",
-	T: CPacketEntityAttach,
-	oneof: "packet"
-}, {
-	no: 56,
-	name: "CPacketServerMetadata",
-	kind: "message",
-	T: CPacketServerMetadata,
-	oneof: "packet"
-}, {
-	no: 57,
-	name: "CPacketTimeUpdate",
-	kind: "message",
-	T: CPacketTimeUpdate,
-	oneof: "packet"
-}, {
-	no: 58,
-	name: "CPacketPlayerReconciliation",
-	kind: "message",
-	T: CPacketPlayerReconciliation,
-	oneof: "packet"
-}]));
+	ut(ClientBoundCombined_CPacket, "typeName", "ClientBoundCombined.CPacket"),
+	ut(ClientBoundCombined_CPacket, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "CPacketAnimation",
+		kind: "message",
+		T: CPacketAnimation,
+		oneof: "packet"
+	}, {
+		no: 2,
+		name: "CPacketBlockAction",
+		kind: "message",
+		T: CPacketBlockAction,
+		oneof: "packet"
+	}, {
+		no: 3,
+		name: "CPacketBlockUpdate",
+		kind: "message",
+		T: CPacketBlockUpdate,
+		oneof: "packet"
+	}, {
+		no: 4,
+		name: "CPacketChangeServers",
+		kind: "message",
+		T: CPacketChangeServers,
+		oneof: "packet"
+	}, {
+		no: 5,
+		name: "CPacketChunkData",
+		kind: "message",
+		T: CPacketChunkData,
+		oneof: "packet"
+	}, {
+		no: 6,
+		name: "CPacketCloseWindow",
+		kind: "message",
+		T: CPacketCloseWindow,
+		oneof: "packet"
+	}, {
+		no: 7,
+		name: "CPacketConfirmTransaction",
+		kind: "message",
+		T: CPacketConfirmTransaction,
+		oneof: "packet"
+	}, {
+		no: 8,
+		name: "CPacketDestroyEntities",
+		kind: "message",
+		T: CPacketDestroyEntities,
+		oneof: "packet"
+	}, {
+		no: 9,
+		name: "CPacketDisconnect",
+		kind: "message",
+		T: CPacketDisconnect,
+		oneof: "packet"
+	}, {
+		no: 10,
+		name: "CPacketEntityAction",
+		kind: "message",
+		T: CPacketEntityAction,
+		oneof: "packet"
+	}, {
+		no: 11,
+		name: "CPacketEntityEffect",
+		kind: "message",
+		T: CPacketEntityEffect,
+		oneof: "packet"
+	}, {
+		no: 12,
+		name: "CPacketEntityEquipment",
+		kind: "message",
+		T: CPacketEntityEquipment,
+		oneof: "packet"
+	}, {
+		no: 13,
+		name: "CPacketEntityMetadata",
+		kind: "message",
+		T: CPacketEntityMetadata,
+		oneof: "packet"
+	}, {
+		no: 14,
+		name: "CPacketEntityPositionAndRotation",
+		kind: "message",
+		T: CPacketEntityPositionAndRotation,
+		oneof: "packet"
+	}, {
+		no: 15,
+		name: "CPacketEntityProperties",
+		kind: "message",
+		T: CPacketEntityProperties,
+		oneof: "packet"
+	}, {
+		no: 16,
+		name: "CPacketEntityRelativePositionAndRotation",
+		kind: "message",
+		T: CPacketEntityRelativePositionAndRotation,
+		oneof: "packet"
+	}, {
+		no: 17,
+		name: "CPacketEntityStatus",
+		kind: "message",
+		T: CPacketEntityStatus,
+		oneof: "packet"
+	}, {
+		no: 18,
+		name: "CPacketEntityVelocity",
+		kind: "message",
+		T: CPacketEntityVelocity,
+		oneof: "packet"
+	}, {
+		no: 19,
+		name: "CPacketExplosion",
+		kind: "message",
+		T: CPacketExplosion,
+		oneof: "packet"
+	}, {
+		no: 20,
+		name: "CPacketJoinGame",
+		kind: "message",
+		T: CPacketJoinGame,
+		oneof: "packet"
+	}, {
+		no: 21,
+		name: "CPacketLeaderboard",
+		kind: "message",
+		T: CPacketLeaderboard,
+		oneof: "packet"
+	}, {
+		no: 22,
+		name: "CPacketLocalStorage",
+		kind: "message",
+		T: CPacketLocalStorage,
+		oneof: "packet"
+	}, {
+		no: 23,
+		name: "CPacketMessage",
+		kind: "message",
+		T: CPacketMessage,
+		oneof: "packet"
+	}, {
+		no: 24,
+		name: "CPacketOpenShop",
+		kind: "message",
+		T: CPacketOpenShop,
+		oneof: "packet"
+	}, {
+		no: 25,
+		name: "CPacketOpenWindow",
+		kind: "message",
+		T: CPacketOpenWindow,
+		oneof: "packet"
+	}, {
+		no: 26,
+		name: "CPacketParticles",
+		kind: "message",
+		T: CPacketParticles,
+		oneof: "packet"
+	}, {
+		no: 27,
+		name: "CPacketPlayerList",
+		kind: "message",
+		T: CPacketPlayerList,
+		oneof: "packet"
+	}, {
+		no: 28,
+		name: "CPacketPlayerPosLook",
+		kind: "message",
+		T: CPacketPlayerPosLook,
+		oneof: "packet"
+	}, {
+		no: 29,
+		name: "CPacketPlayerPosition",
+		kind: "message",
+		T: CPacketPlayerPosition,
+		oneof: "packet"
+	}, {
+		no: 30,
+		name: "CPacketPong",
+		kind: "message",
+		T: CPacketPong,
+		oneof: "packet"
+	}, {
+		no: 31,
+		name: "CPacketQueueNext",
+		kind: "message",
+		T: CPacketQueueNext,
+		oneof: "packet"
+	}, {
+		no: 32,
+		name: "CPacketRemoveEntityEffect",
+		kind: "message",
+		T: CPacketRemoveEntityEffect,
+		oneof: "packet"
+	}, {
+		no: 33,
+		name: "CPacketRespawn",
+		kind: "message",
+		T: CPacketRespawn,
+		oneof: "packet"
+	}, {
+		no: 34,
+		name: "CPacketScoreboard",
+		kind: "message",
+		T: CPacketScoreboard,
+		oneof: "packet"
+	}, {
+		no: 35,
+		name: "CPacketServerInfo",
+		kind: "message",
+		T: CPacketServerInfo,
+		oneof: "packet"
+	}, {
+		no: 36,
+		name: "CPacketSetExperience",
+		kind: "message",
+		T: CPacketSetExperience,
+		oneof: "packet"
+	}, {
+		no: 37,
+		name: "CPacketSetSlot",
+		kind: "message",
+		T: CPacketSetSlot,
+		oneof: "packet"
+	}, {
+		no: 38,
+		name: "CPacketShopProperties",
+		kind: "message",
+		T: CPacketShopProperties,
+		oneof: "packet"
+	}, {
+		no: 39,
+		name: "CPacketSignEditorOpen",
+		kind: "message",
+		T: CPacketSignEditorOpen,
+		oneof: "packet"
+	}, {
+		no: 40,
+		name: "CPacketSoundEffect",
+		kind: "message",
+		T: CPacketSoundEffect,
+		oneof: "packet"
+	}, {
+		no: 41,
+		name: "CPacketSpawnEntity",
+		kind: "message",
+		T: CPacketSpawnEntity,
+		oneof: "packet"
+	}, {
+		no: 42,
+		name: "CPacketSpawnExperienceOrb",
+		kind: "message",
+		T: CPacketSpawnExperienceOrb,
+		oneof: "packet"
+	}, {
+		no: 43,
+		name: "CPacketSpawnPlayer",
+		kind: "message",
+		T: CPacketSpawnPlayer,
+		oneof: "packet"
+	}, {
+		no: 44,
+		name: "CPacketTabComplete",
+		kind: "message",
+		T: CPacketTabComplete,
+		oneof: "packet"
+	}, {
+		no: 45,
+		name: "CPacketTitle",
+		kind: "message",
+		T: CPacketTitle,
+		oneof: "packet"
+	}, {
+		no: 46,
+		name: "CPacketUpdateCommandBlock",
+		kind: "message",
+		T: CPacketUpdateCommandBlock,
+		oneof: "packet"
+	}, {
+		no: 47,
+		name: "CPacketUpdateHealth",
+		kind: "message",
+		T: CPacketUpdateHealth,
+		oneof: "packet"
+	}, {
+		no: 48,
+		name: "CPacketUpdateLeaderboard",
+		kind: "message",
+		T: CPacketUpdateLeaderboard,
+		oneof: "packet"
+	}, {
+		no: 49,
+		name: "CPacketUpdateScoreboard",
+		kind: "message",
+		T: CPacketUpdateScoreboard,
+		oneof: "packet"
+	}, {
+		no: 50,
+		name: "CPacketUpdateSign",
+		kind: "message",
+		T: CPacketUpdateSign,
+		oneof: "packet"
+	}, {
+		no: 51,
+		name: "CPacketUpdateStatus",
+		kind: "message",
+		T: CPacketUpdateStatus,
+		oneof: "packet"
+	}, {
+		no: 52,
+		name: "CPacketUseBed",
+		kind: "message",
+		T: CPacketUseBed,
+		oneof: "packet"
+	}, {
+		no: 53,
+		name: "CPacketWindowItems",
+		kind: "message",
+		T: CPacketWindowItems,
+		oneof: "packet"
+	}, {
+		no: 54,
+		name: "CPacketWindowProperty",
+		kind: "message",
+		T: CPacketWindowProperty,
+		oneof: "packet"
+	}, {
+		no: 55,
+		name: "CPacketEntityAttach",
+		kind: "message",
+		T: CPacketEntityAttach,
+		oneof: "packet"
+	}, {
+		no: 56,
+		name: "CPacketServerMetadata",
+		kind: "message",
+		T: CPacketServerMetadata,
+		oneof: "packet"
+	}, {
+		no: 57,
+		name: "CPacketTimeUpdate",
+		kind: "message",
+		T: CPacketTimeUpdate,
+		oneof: "packet"
+	}, {
+		no: 58,
+		name: "CPacketPlayerReconciliation",
+		kind: "message",
+		T: CPacketPlayerReconciliation,
+		oneof: "packet"
+	}]));
 const SPacketEnchantItem = class extends Message {
 	constructor($) {
 		super();
@@ -5362,22 +5362,22 @@ const SPacketEnchantItem = class extends Message {
 };
 export { SPacketEnchantItem };
 ut(SPacketEnchantItem, "runtime", proto2),
-ut(SPacketEnchantItem, "typeName", "SPacketEnchantItem"),
-ut(SPacketEnchantItem, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "windowId",
-	kind: "scalar",
-	T: 5
-}, {
-	no: 2,
-	name: "button",
-	kind: "scalar",
-	T: 5
-}]));
+	ut(SPacketEnchantItem, "typeName", "SPacketEnchantItem"),
+	ut(SPacketEnchantItem, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "windowId",
+		kind: "scalar",
+		T: 5
+	}, {
+		no: 2,
+		name: "button",
+		kind: "scalar",
+		T: 5
+	}]));
 const SPacketQueueNext = class extends Message {
 	constructor(_) {
 		super(),
-		proto2.util.initPartial(_, this)
+			proto2.util.initPartial(_, this)
 	}
 	static fromBinary(_, $) {
 		return new SPacketQueueNext().fromBinary(_, $)
@@ -5394,8 +5394,8 @@ const SPacketQueueNext = class extends Message {
 };
 export { SPacketQueueNext };
 ut(SPacketQueueNext, "runtime", proto2),
-ut(SPacketQueueNext, "typeName", "SPacketQueueNext"),
-ut(SPacketQueueNext, "fields", proto2.util.newFieldList(()=>[]));
+	ut(SPacketQueueNext, "typeName", "SPacketQueueNext"),
+	ut(SPacketQueueNext, "fields", proto2.util.newFieldList(() => []));
 const SPacketUpdateCommandBlock = class extends Message {
 	constructor($) {
 		super();
@@ -5420,31 +5420,31 @@ const SPacketUpdateCommandBlock = class extends Message {
 };
 export { SPacketUpdateCommandBlock };
 ut(SPacketUpdateCommandBlock, "runtime", proto2),
-ut(SPacketUpdateCommandBlock, "typeName", "SPacketUpdateCommandBlock"),
-ut(SPacketUpdateCommandBlock, "fields", proto2.util.newFieldList(()=>[{
-	no: 1,
-	name: "pos",
-	kind: "message",
-	T: PBBlockPos
-}, {
-	no: 2,
-	name: "command",
-	kind: "scalar",
-	T: 9,
-	opt: !0
-}, {
-	no: 3,
-	name: "commands",
-	kind: "scalar",
-	T: 9,
-	repeated: !0
-}, {
-	no: 4,
-	name: "repeat",
-	kind: "scalar",
-	T: 5,
-	opt: !0
-}]));
+	ut(SPacketUpdateCommandBlock, "typeName", "SPacketUpdateCommandBlock"),
+	ut(SPacketUpdateCommandBlock, "fields", proto2.util.newFieldList(() => [{
+		no: 1,
+		name: "pos",
+		kind: "message",
+		T: PBBlockPos
+	}, {
+		no: 2,
+		name: "command",
+		kind: "scalar",
+		T: 9,
+		opt: !0
+	}, {
+		no: 3,
+		name: "commands",
+		kind: "scalar",
+		T: 9,
+		repeated: !0
+	}, {
+		no: 4,
+		name: "repeat",
+		kind: "scalar",
+		T: 5,
+		opt: !0
+	}]));
 const CPACKET_MAP = {
 	CPacketAnimation,
 	CPacketBlockAction,
@@ -5507,51 +5507,51 @@ const CPACKET_MAP = {
 	CPacketTimeUpdate,
 	ClientBoundCombined
 }
-  , SPACKET_MAP = {
-	SPacketAdminAction,
-	SPacketAnalytics,
-	SPacketClickWindow,
-	SPacketCloseWindow,
-	SPacketConfirmTransaction,
-	SPacketEnchantItem,
-	SPacketEntityAction,
-	SPacketHeldItemChange,
-	SPacketLoginStart,
-	SPacketMessage,
-	SPacketOpenShop,
-	SPacketPing,
-	SPacketPlayerAbilities,
-	SPacketPlayerAction,
-	SPacketPlayerPosLook,
-	SPacketRespawn,
-	SPacketTabComplete: SPacketTabComplete$1,
-	SPacketUpdateSign,
-	SPacketUseEntity,
-	SPacketUpdateCommandBlock,
-	SPacketQueueNext,
-	SPacketPlayerInput,
-	SPacketBreakBlock,
-	SPacketClick,
-	SPacketCraftItem,
-	SPacketPlaceBlock,
-	SPacketRequestChunk,
-	SPacketUpdateInventory,
-	SPacketUseItem
-}
-  , NAME_TO_ID = {}
-  , ID_TO_PACKET = {}
-  , ID_TO_NAME = {};
+	, SPACKET_MAP = {
+		SPacketAdminAction,
+		SPacketAnalytics,
+		SPacketClickWindow,
+		SPacketCloseWindow,
+		SPacketConfirmTransaction,
+		SPacketEnchantItem,
+		SPacketEntityAction,
+		SPacketHeldItemChange,
+		SPacketLoginStart,
+		SPacketMessage,
+		SPacketOpenShop,
+		SPacketPing,
+		SPacketPlayerAbilities,
+		SPacketPlayerAction,
+		SPacketPlayerPosLook,
+		SPacketRespawn,
+		SPacketTabComplete: SPacketTabComplete$1,
+		SPacketUpdateSign,
+		SPacketUseEntity,
+		SPacketUpdateCommandBlock,
+		SPacketQueueNext,
+		SPacketPlayerInput,
+		SPacketBreakBlock,
+		SPacketClick,
+		SPacketCraftItem,
+		SPacketPlaceBlock,
+		SPacketRequestChunk,
+		SPacketUpdateInventory,
+		SPacketUseItem
+	}
+	, NAME_TO_ID = {}
+	, ID_TO_PACKET = {}
+	, ID_TO_NAME = {};
 let currentId = 0;
-for (const [j,_] of Object.entries(CPACKET_MAP))
+for (const [j, _] of Object.entries(CPACKET_MAP))
 	NAME_TO_ID[j] = currentId,
-	ID_TO_PACKET[currentId] = _,
-	ID_TO_NAME[currentId] = j,
-	currentId++;
-for (const [j,_] of Object.entries(SPACKET_MAP))
+		ID_TO_PACKET[currentId] = _,
+		ID_TO_NAME[currentId] = j,
+		currentId++;
+for (const [j, _] of Object.entries(SPACKET_MAP))
 	NAME_TO_ID[j] = currentId,
-	ID_TO_PACKET[currentId] = _,
-	ID_TO_NAME[currentId] = j,
-	currentId++;
+		ID_TO_PACKET[currentId] = _,
+		ID_TO_NAME[currentId] = j,
+		currentId++;
 
 export class BitArray {
 	constructor(_, $, et) {
@@ -5565,12 +5565,12 @@ export class BitArray {
 		if ($ > 32)
 			throw new Error(`${$} bits per value exceeds 32`);
 		this.capacity = _,
-		this.bitsPerValue = $,
-		this.valuesPerLong = Math.floor(64 / $),
-		this.valueMask = (1 << $) - 1;
+			this.bitsPerValue = $,
+			this.valuesPerLong = Math.floor(64 / $),
+			this.valueMask = (1 << $) - 1;
 		const tt = new ArrayBuffer(Math.ceil(_ / this.valuesPerLong) * 8);
 		if (this.data = new Uint32Array(tt),
-		et) {
+			et) {
 			if (et.byteLength !== tt.byteLength)
 				throw new Error("initial data length does not match buffer length");
 			new Uint8Array(tt).set(et)
@@ -5580,7 +5580,7 @@ export class BitArray {
 		return this.bitsPerValue
 	}
 	getDataArray() {
-		return new Uint8Array(this.data.buffer,this.data.byteOffset,this.data.byteLength)
+		return new Uint8Array(this.data.buffer, this.data.byteOffset, this.data.byteLength)
 	}
 	writeUint32(_, $) {
 		this.data[_] = $ >>> 0
@@ -5617,7 +5617,7 @@ export class BitArray {
 		rt > 32 && (this.data[et * 2 + 1] = this.data[et * 2 + 1] & ~((1 << rt - 32) - 1) | $ >>> 32 - tt)
 	}
 	resizeTo(_) {
-		const $ = new BitArray(this.capacity,_);
+		const $ = new BitArray(this.capacity, _);
 		for (let et = 0; et < this.capacity; ++et) {
 			const tt = this.get(et);
 			if (neededBits(tt) > _)
@@ -5633,31 +5633,31 @@ export class BitArray {
 
 class ClientEncoder {
 	constructor() {
-		ut(this, "encode", _=>(_.t = _.type,
-		_.d = _.data,
-		delete _.type,
-		delete _.nsp,
-		delete _.data,
-		_.t === 2 && _.d[1] && _.d[1].toJson && (_.d[1] = _.d[1].toJson(),
-		_.d[0] = NAME_TO_ID[_.d[0]]),
-		[encode(_)]))
+		ut(this, "encode", _ => (_.t = _.type,
+			_.d = _.data,
+			delete _.type,
+			delete _.nsp,
+			delete _.data,
+			_.t === 2 && _.d[1] && _.d[1].toJson && (_.d[1] = _.d[1].toJson(),
+				_.d[0] = NAME_TO_ID[_.d[0]]),
+			[encode(_)]))
 	}
 }
 
 class ClientDecoder extends Decoder {
 	constructor() {
 		super(...arguments);
-		ut(this, "add", async $=>{
+		ut(this, "add", async $ => {
 			try {
 				const tt = new Uint8Array($)[0]
-				  , rt = tt & 1;
-				let nt = new Uint8Array($,1,$.byteLength - 1);
+					, rt = tt & 1;
+				let nt = new Uint8Array($, 1, $.byteLength - 1);
 				nt = nt.slice(1);
 				if (rt) {
 					const it = tt >> 2, at = tt & 2, st = ID_TO_PACKET[it];
 					at && (nt = decompress(nt));
 					const ot = st.fromBinary(nt);
-					st.typeName === "ClientBoundCombined" ? ot.packets.forEach(ct=>{
+					st.typeName === "ClientBoundCombined" ? ot.packets.forEach(ct => {
 						this.emit("decoded", {
 							type: 2,
 							nsp: "/",
@@ -5694,7 +5694,7 @@ export class ClientSocket {
 		this.socket = io(_, {
 			transports: ["websocket"],
 			extraHeaders: {
-				'Origin': 'https://miniblox.io',
+				'Origin': 'https://miniblox.online',
 				'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36 Edg/138.0.0.0'
 			},
 			autoConnect: !1,
@@ -5707,14 +5707,14 @@ export class ClientSocket {
 		})
 	}
 	static connect() {
-		this.socket.on("connect", ()=>{
+		this.socket.on("connect", () => {
 			ClientSocket.id = this.socket.id
 		}),
-		this.socket.connect()
+			this.socket.connect()
 	}
 	static disconnect(_) {
 		if (this.disconnectMessage = _,
-		!this.socket) {
+			!this.socket) {
 			console.error("CSocket.disconnect: socket is null");
 			return
 		}
@@ -5725,7 +5725,7 @@ export class ClientSocket {
 	}
 	static on(_, $) {
 		let et = !0;
-		const tt = (...rt)=>{
+		const tt = (...rt) => {
 			try {
 				$.apply(null, rt)
 			} catch (nt) {

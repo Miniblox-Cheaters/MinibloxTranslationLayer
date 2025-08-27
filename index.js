@@ -21,7 +21,7 @@ function cleanup(teleport) {
 }
 
 async function queue(gamemode, server) {
-	if (server) return {ok: true, json: function() { return {serverId: server}; }};
+	if (server) return { ok: true, json: function () { return { serverId: server }; } };
 	let fetched
 	try {
 		fetched = await fetch('https://session.coolmathblox.ca/launch/queue_minigame', {
@@ -39,7 +39,7 @@ async function queue(gamemode, server) {
 				'sec-fetch-dest': 'empty',
 				'sec-fetch-mode': 'cors',
 				'sec-fetch-site': 'cross-site',
-				'Referer': 'https://miniblox.io/',
+				'Referer': 'https://miniblox.online/',
 				'Referrer-Policy': 'strict-origin-when-cross-origin',
 				'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36 Edg/138.0.0.0'
 			},
@@ -49,7 +49,7 @@ async function queue(gamemode, server) {
 			})
 		});
 	} catch (exception) {
-		fetched = {text: function() { return exception; }};
+		fetched = { text: function () { return exception; } };
 	}
 	return fetched;
 }
@@ -93,8 +93,8 @@ async function connect(client, requeue, gamemode, code) {
 	ClientSocket.setUrl(`https://${fetched.serverId}.servers.coolmathblox.ca`, void 0);
 	let session = '';
 	try {
-		session = await readFileSync('login.token', {encoding: 'utf8'});
-	} catch (exception) {}
+		session = await readFileSync('login.token', { encoding: 'utf8' });
+	} catch (exception) { }
 
 	// MINIBLOX CONNECTION
 	ClientSocket.once('connect', () => {
@@ -137,9 +137,19 @@ async function connect(client, requeue, gamemode, code) {
 	ClientSocket.connect();
 }
 
-server.on('playerJoin', async function(client) {
+server.on('playerJoin', async function (client) {
 	if (connected) {
 		client.end('A player is already logged in!');
+		return;
+	}
+
+	if (client.username == undefined || client.uuid == undefined) {
+		client.end('Missing Username / UUID, please ensure you are using a valid cracked Minecraft account!');
+		return;
+	}
+
+	if (client.protocolVersion != 47) {
+		console.log(`\x1b[33m[*] Incorrect client version, Please use Minecraft 1.8.9!\x1b[0m`);
 		return;
 	}
 

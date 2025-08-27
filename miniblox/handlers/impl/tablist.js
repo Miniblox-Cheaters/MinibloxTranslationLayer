@@ -30,8 +30,8 @@ const self = class TabListHandler extends Handler {
 
 				let addTeam = !oldTab;
 				if (oldTab) {
-					if (gamemode != oldTab.gamemode) lists[1].push({UUID: uuid, gamemode: gamemode});
-					if (entry.ping != oldTab.ping) lists[2].push({UUID: uuid, ping: entry.ping});
+					if (gamemode != oldTab.gamemode) lists[1].push({ UUID: uuid, gamemode: gamemode });
+					if (entry.ping != oldTab.ping) lists[2].push({ UUID: uuid, ping: entry.ping });
 					if (prefix != oldTab.prefix || suffix != oldTab.suffix) {
 						addTeam = true;
 						client.write('scoreboard_team', {
@@ -43,7 +43,7 @@ const self = class TabListHandler extends Handler {
 					lists[0].push({
 						UUID: uuid,
 						name: name,
-						properties: [{name: 'textures', value: skin[0], signature: skin[1]}],
+						properties: [{ name: 'textures', value: skin[0], signature: skin[1] }],
 						gamemode: gamemode,
 						ping: entry.ping
 					});
@@ -66,7 +66,7 @@ const self = class TabListHandler extends Handler {
 
 			for (const entry of Object.keys(this.entries)) {
 				if (!exists[entry]) {
-					lists[4].push({UUID: this.entries[entry]});
+					lists[4].push({ UUID: this.entries[entry] });
 					delete this.entries[entry];
 					delete this.tabs[entry];
 				}
@@ -83,8 +83,8 @@ const self = class TabListHandler extends Handler {
 			}
 
 			client.write('playerlist_header', {
-				header: JSON.stringify({text: translateText('\\cyan\\You are playing on \\lime\\miniblox.io')}),
-				footer: JSON.stringify({text: translateText('\\gold\\Translation layer made by 7GrandDad')})
+				header: JSON.stringify({ text: translateText('\\cyan\\You are playing on \\lime\\miniblox.online') }),
+				footer: JSON.stringify({ text: translateText('\\gold\\Translation layer made by 7GrandDad') })
 			});
 		});
 		ClientSocket.on("CPacketPong", packet => {
@@ -94,7 +94,7 @@ const self = class TabListHandler extends Handler {
 	minecraft(mcClient) {
 		client = mcClient;
 		client.on('keep_alive', packet => {
-			if (packet.keepAliveId > 0) ClientSocket.sendPacket(new SPacketPing({time: BigInt(Date.now())}));
+			if (packet.keepAliveId > 0) ClientSocket.sendPacket(new SPacketPing({ time: BigInt(Date.now()) }));
 		});
 	}
 	cleanup(requeue) {
@@ -103,7 +103,7 @@ const self = class TabListHandler extends Handler {
 		if (this.analyticsLoop) clearInterval(this.analyticsLoop);
 		if (requeue) {
 			this.pingLoop = setInterval(() => {
-				client.write('keep_alive', {keepAliveId: Math.floor(Math.random() * 10000)});
+				client.write('keep_alive', { keepAliveId: Math.floor(Math.random() * 10000) });
 			}, 1000);
 			this.analyticsLoop = setInterval(() => {
 				ClientSocket.sendPacket(new SPacketAnalytics({
@@ -114,7 +114,7 @@ const self = class TabListHandler extends Handler {
 			if (client) {
 				let data = [];
 				Object.values(this.entries).forEach((uuid) => {
-					data.push({UUID: uuid});
+					data.push({ UUID: uuid });
 					client.write('scoreboard_team', {
 						team: uuid.slice(0, 16),
 						mode: 1
