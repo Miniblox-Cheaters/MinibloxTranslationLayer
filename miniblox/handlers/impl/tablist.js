@@ -83,7 +83,7 @@ const self = class TabListHandler extends Handler {
 			}
 
 			client.write('playerlist_header', {
-				header: JSON.stringify({ text: translateText('\\cyan\\You are playing on \\lime\\miniblox.online') }),
+				header: JSON.stringify({ text: translateText('\\cyan\\You are playing on \\lime\\miniblox.io') }),
 				footer: JSON.stringify({ text: translateText('\\gold\\Translation layer made by 7GrandDad') })
 			});
 		});

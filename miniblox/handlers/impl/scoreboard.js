@@ -29,7 +29,7 @@ const self = class TabListHandler extends Handler {
 			});
 			if (packet.content.length < 15) {
 				packet.content.push({ columns: [''] });
-				packet.content.push({ columns: ['\\yellow\\miniblox.online'] });
+				packet.content.push({ columns: ['\\yellow\\miniblox.io'] });
 			}
 
 			let index = 0;
