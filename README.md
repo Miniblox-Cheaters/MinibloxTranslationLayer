@@ -38,7 +38,8 @@ Rejoin for the changes to take effect.
 Syntax: `/join <server ID or invite code>`
 
 Joins a specific server.
-A server ID looks like this: `{server size, e.g. small, large, medium, or planet}-{ID 1}-{ID 2}`.
+A server ID looks like this:
+`{server size, e.g. small, large, medium, or planet}-{ID 1}-{ID 2}`.
 An invite code looks like this: `https://miniblox.io/?join=INVITECODE` or just `INVITECODE`
 
 ## /resync
@@ -47,7 +48,8 @@ Syntax: `/resync`
 
 Setbacks you to the last place you were teleported to,
 This helps fix view angle de-syncs caused by the "new" anti-cheat.
-You can also abuse this to go faster on the new anti-cheat, vector best developer of 2025!?!?!
+You can also abuse this to go faster on the new anti-cheat,
+vector best developer of 2025!?!?!
 
 ## /reloadchunks
 
