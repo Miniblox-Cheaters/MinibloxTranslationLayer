@@ -5,15 +5,46 @@ import { writeFile } from 'node:fs';
 let client, entity, connect, world, gui;
 
 /**
+ * Matches a server ID (e.g. https://miniblox.io/?join=JOINCODEHERE)
+ */
+const JOIN_CODE = /(?:https?:\/\/[A-z|a-z]+.io\/?join=)?([A-Z]+)/;
+
+/**
+ * Matches a server ID
+ */
+const SERVER_ID = /(large|small|medium|planet)-[A-z|0-9]+-[A-z|0-9]+/;
+
+/**
+ * resolves a join code to a server ID
+ * @param {string} code the invite code or a server ID.
+ * @return {Promise<string | null>} a server ID if the server resolved the invite code, otherwise `null`
+ */
+async function resolveJoinCodeToServerID(code) {
+	if (SERVER_ID.test(code))
+		return code; // no need for modifying, this is already a server ID.
+	const joinCode = JOIN_CODE.exec(code);
+	const serverId = await fetch("https://session.coolmathblox.ca/launch/invite_code", {
+		method: "POST",
+		body: JSON.stringify({
+			code: joinCode[1]
+		}),
+		headers: {
+			"Content-Type": "application/json"
+		}
+	}).then(r => r.json()).then(r => r.serverId);
+	return serverId;
+}
+
+/**
  * @param {string} cmd the command name
  * @param {...string} args the arguments to the command
  * @returns {boolean} if the command should be passed on to miniblox or not.
  */
-export function handleCommand(cmd, ...args) {
+export async function handleCommand(cmd, ...args) {
 	switch (cmd) {
 		case "queue":
 		case "play":
-			connect(client, true, msg.split(' ')[1]);
+			connect(client, true, args[0]);
 			return true;
 		case "login":
 			writeFile('./login.token', args.join(" "), (err) => {
@@ -38,7 +69,9 @@ export function handleCommand(cmd, ...args) {
 			});
 			return true;
 		case "join":
-			connect(client, true, undefined, args.join(" "));
+			const code = args.join(" ");
+			const resolved = await resolveJoinCodeToServerID(code) ?? code;
+			connect(client, true, undefined, resolved);
 			return true;
 		case "resync":
 			if (entity.teleport) {
