@@ -175,4 +175,6 @@ server.on('playerJoin', async function (client) {
 });
 
 Object.values(handlers).forEach((handler) => handler.obtainHandlers(handlers, connect));
-console.log('\x1b[33mMiniblox Translation Layer Started!\nDeveloped & maintained by 7GrandDad (https://youtube.com/c/7GrandDadVape)\nVersion: ' + VERSION + '\x1b[0m');
+console.log("\x1b[33mMiniblox Translation Layer Started!");
+console.log(`Originally developed & maintained by 7GrandDad (https://youtube.com/@7GrandDadVape)`);
+console.log(`Developed & maintained by datamodel for Miniblox v${VERSION} \x1b[0m`);
