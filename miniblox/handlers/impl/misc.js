@@ -7,7 +7,7 @@ let client, entity, connect, world, gui;
 /**
  * Matches a server ID (e.g. https://miniblox.io/?join=JOINCODEHERE)
  */
-const JOIN_CODE = /(?:https?:\/\/[A-z|a-z]+.io\/?join=)?([A-Z]+)/;
+const JOIN_CODE = /(?:https?:\/\/^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6}\/?join=)?([A-Z]+)/;
 
 /**
  * Matches a server ID
@@ -15,11 +15,12 @@ const JOIN_CODE = /(?:https?:\/\/[A-z|a-z]+.io\/?join=)?([A-Z]+)/;
 const SERVER_ID = /(large|small|medium|planet)-[A-z|0-9]+-[A-z|0-9]+/;
 
 /**
- * resolves a join code to a server ID
+ * Resolves a join code to a server ID,
+ * it will return {@link code} if {@link code} is already a server ID.
  * @param {string} code the invite code or a server ID.
  * @return {Promise<string | null>} a server ID if the server resolved the invite code, otherwise `null`
  */
-async function resolveJoinCodeToServerID(code) {
+async function resolveServerID(code) {
 	if (SERVER_ID.test(code))
 		return code; // no need for modifying, this is already a server ID.
 	const joinCode = JOIN_CODE.exec(code);
@@ -42,6 +43,7 @@ async function resolveJoinCodeToServerID(code) {
  */
 export async function handleCommand(cmd, ...args) {
 	switch (cmd) {
+		case "q":
 		case "queue":
 		case "play":
 			connect(client, true, args[0]);
@@ -70,7 +72,7 @@ export async function handleCommand(cmd, ...args) {
 			return true;
 		case "join":
 			const code = args.join(" ");
-			const resolved = await resolveJoinCodeToServerID(code) ?? code;
+			const resolved = await resolveServerID(code) ?? code;
 			connect(client, true, undefined, resolved);
 			return true;
 		case "resync":
