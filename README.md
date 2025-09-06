@@ -6,7 +6,9 @@ A middle man to translate Miniblox packets into Minecraft 1.8.9 packets.
 
 1. Install the latest NodeJS at (<https://nodejs.org/>)
 2. Download & extract the repository to a folder of your choosing
-3. Open a terminal inside said folder (on windows you can open the folder in explorer, select the path, and replace it all (<kbd>CTRL</kbd> + <kbd>A</kbd> and <kbd>Backspace</kbd>))
+3. Open a terminal inside said folder
+   (on windows you can open the folder in explorer, select the path,
+   and replace it all (<kbd>CTRL</kbd> + <kbd>A</kbd> and <kbd>Backspace</kbd>))
 4. Run `npm install` to install the dependencies
 5. Run `node .` to run the translation layer
 6. Connect to localhost on ANY(*) Minecraft 1.8.9 client.
@@ -14,7 +16,8 @@ A middle man to translate Miniblox packets into Minecraft 1.8.9 packets.
 *: servers which use the new anti-cheat
    (SkyWars, EggWars, the bridge, Classic PvP, and KitPvP)
    need custom code to send the C0CInput packet.
-   (sadly 1.21.2+ client send input packets that get discarded by ViaVersion if you're not in a boat)
+   (sadly 1.21.2+ client send input packets
+   that get discarded by ViaVersion if you're not in a boat)
 
 ## Commands
 
