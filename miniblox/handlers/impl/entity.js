@@ -2,7 +2,7 @@ import Handler from './../handler.js';
 import { ClientSocket, SPacketPlayerPosLook, SPacketPlayerInput, SPacketEntityAction, SPacketPlayerAbilities, SPacketHeldItemChange, SPacketClick, SPacketRespawn$1, SPacketUseEntity, PBVector3 } from './../../main.js';
 import ENTITIES from './../../types/entities.js';
 import GAMEMODES, { spectator } from './../../types/gamemodes.js';
-import { translateItem } from './../../utils.js';
+import { translateItem, translateText } from './../../utils.js';
 const DEG2RAD = Math.PI / 180, RAD2DEG = 180 / Math.PI;
 let client, tablist, world;
 
@@ -33,11 +33,11 @@ function convertToByte(num) {
 }
 
 function convertServerPos(pos) {
-	return {x: pos.x / 32, y: pos.y / 32, z: pos.z / 32};
+	return { x: pos.x / 32, y: pos.y / 32, z: pos.z / 32 };
 }
 
 function desyncMath(pos, serverPos, range) {
-	const moveVec = {x: (pos.x - serverPos.x), y: (pos.y - serverPos.y), z: (pos.z - serverPos.z)};
+	const moveVec = { x: (pos.x - serverPos.x), y: (pos.y - serverPos.y), z: (pos.z - serverPos.z) };
 	const moveMag = Math.sqrt(moveVec.x * moveVec.x + moveVec.y * moveVec.y + moveVec.z * moveVec.z);
 
 	return moveMag > range ? {
@@ -48,6 +48,12 @@ function desyncMath(pos, serverPos, range) {
 }
 
 const self = class EntityHandler extends Handler {
+	sentNewACInfo = false;
+	entities;
+	skins;
+	gamemodes;
+	desyncFlag = false;
+	local;
 	canSpawn(entity) {
 		if (entity.type == -1 && ((!tablist.entries[entity.id] && !entity.special) || this.gamemodes[entity.id] == spectator)) return false;
 		if (!world.isEntityLoaded(entity)) return false;
@@ -119,7 +125,7 @@ const self = class EntityHandler extends Handler {
 		if (entity.special) {
 			client.write('player_info', {
 				action: 4,
-				data: [{'UUID': tablist.entries[entity.id]}]
+				data: [{ 'UUID': tablist.entries[entity.id] }]
 			});
 		}
 
@@ -155,7 +161,7 @@ const self = class EntityHandler extends Handler {
 	}
 	abilities(_movement) {
 		if (this.local.flying == false) return;
-		ClientSocket.sendPacket(new SPacketPlayerAbilities({isFlying: false}));
+		ClientSocket.sendPacket(new SPacketPlayerAbilities({ isFlying: false }));
 		this.local.flying = false;
 	}
 	checkAll() {
@@ -165,10 +171,30 @@ const self = class EntityHandler extends Handler {
 		return id == this.local.id ? this.local.mcId : id;
 	}
 	miniblox() {
+		if (!this.sentNewACInfo) {
+			this.local.inputSequenceNumber ??= -1;
+			ClientSocket.sendPacket(new SPacketPlayerInput({
+				sequenceNumber: this.local.inputSequenceNumber++,
+				left: false,
+				right: false,
+				up: false,
+				down: false,
+				yaw: this.local.yaw ?? 0,
+				pitch: this.local.pitch ?? 0,
+				jump: false,
+				sneak: false,
+				sprint: false,
+				pos: this.local.pos ?? {
+					x: 0,
+					y: 0,
+					z: 0
+				}
+			}));
+		}
 		// UNIVERSAL
 		ClientSocket.on('CPacketSpawnEntity', packet => {
 			if (ENTITIES[packet.type] == undefined) return;
-			if (!packet.motion) packet.motion = {x: 0, y: 0, z: 0};
+			if (!packet.motion) packet.motion = { x: 0, y: 0, z: 0 };
 			this.entities[packet.id] = {
 				id: packet.id,
 				type: packet.type,
@@ -192,7 +218,7 @@ const self = class EntityHandler extends Handler {
 			if (packet.socketId == ClientSocket.id) {
 				delete this.gamemodes[packet.id];
 				this.local.id = packet.id;
-				this.local.pos = {x: packet.pos.x, y: packet.pos.y, z: packet.pos.z};
+				this.local.pos = { x: packet.pos.x, y: packet.pos.y, z: packet.pos.z };
 				this.teleport = this.local.pos;
 				client.write('position', {
 					x: packet.pos.x,
@@ -227,7 +253,7 @@ const self = class EntityHandler extends Handler {
 					id: packet.id,
 					type: -1,
 					special: packet.name && packet.name.includes(' '),
-					pos: {x: packet.pos.x * 32, y: packet.pos.y * 32, z: packet.pos.z * 32},
+					pos: { x: packet.pos.x * 32, y: packet.pos.y * 32, z: packet.pos.z * 32 },
 					yaw: yaw,
 					pitch: pitch,
 					metadata: entity ? entity.metadata : {},
@@ -275,7 +301,7 @@ const self = class EntityHandler extends Handler {
 				entity.metadata[0].value = entity.sneaking ? (entity.metadata[0].value | 1 << 1) : (entity.metadata[0].value & ~(1 << 1));
 				client.write('entity_metadata', {
 					entityId: packet.id,
-					metadata: [{key: 0, value: entity.metadata[0].value, type: 0}]
+					metadata: [{ key: 0, value: entity.metadata[0].value, type: 0 }]
 				});
 			}
 		});
@@ -341,7 +367,7 @@ const self = class EntityHandler extends Handler {
 						value = watched.intValue;
 						break;
 				}
-				props.push({key: watched.dataValueId, value: value, type: wType});
+				props.push({ key: watched.dataValueId, value: value, type: wType });
 			}
 
 			if (entity) {
@@ -357,7 +383,7 @@ const self = class EntityHandler extends Handler {
 		ClientSocket.on('CPacketEntityPositionAndRotation', packet => {
 			const entity = this.entities[packet.id];
 			if (!entity) return;
-			entity.pos = {x: packet.pos.x, y: packet.pos.y, z: packet.pos.z};
+			entity.pos = { x: packet.pos.x, y: packet.pos.y, z: packet.pos.z };
 			entity.yaw = convertAngle(packet.yaw, false, entity.type == -1 ? 180 : 0);
 			entity.pitch = convertAngle(packet.pitch);
 
@@ -386,10 +412,14 @@ const self = class EntityHandler extends Handler {
 				}
 
 				if (packet.pos) {
-					const {pos} = entity;
-					entity.pos = {x: pos.x + packet.pos.x, y: pos.y + packet.pos.y, z: pos.z + packet.pos.z};
+					const { pos } = entity;
+					entity.pos = { x: pos.x + packet.pos.x, y: pos.y + packet.pos.y, z: pos.z + packet.pos.z };
 
-					if (clampByte(packet.pos.x) != packet.pos.x || clampByte(packet.pos.y) != packet.pos.y || clampByte(packet.pos.z) != packet.pos.z) {
+					const malformed = clampByte(packet.pos.x) != packet.pos.x
+						|| clampByte(packet.pos.y) != packet.pos.y
+						|| clampByte(packet.pos.z) != packet.pos.z;
+
+					if (malformed) {
 						client.write('entity_teleport', {
 							entityId: entity.id,
 							x: entity.pos.x,
@@ -473,7 +503,7 @@ const self = class EntityHandler extends Handler {
 
 		// LOCAL
 		ClientSocket.on('CPacketPlayerPosition', packet => {
-			this.local.pos = {x: packet.x, y: packet.y, z: packet.z};
+			this.local.pos = { x: packet.x, y: packet.y, z: packet.z };
 			this.teleport = this.local.pos;
 			client.write('position', {
 				x: packet.x,
@@ -490,7 +520,7 @@ const self = class EntityHandler extends Handler {
 				return
 			}
 
-			this.local.pos = {x: packet.x, y: packet.y, z: packet.z};
+			this.local.pos = { x: packet.x, y: packet.y, z: packet.z };
 			this.teleport = this.local.pos;
 			client.write('position', {
 				x: packet.x,
@@ -502,9 +532,21 @@ const self = class EntityHandler extends Handler {
 			});
 		});
 		ClientSocket.on('CPacketPlayerReconciliation', packet => {
+			if (!this.sentNewACInfo) {
+				const ok = translateText(`\\yellow\\This server uses the new anti-cheat,
+you will need to send Input packets in order to move on the server.`);
+				client.write('chat', {
+					message: JSON.stringify({
+						extra: [ok],
+						text: ''
+					}),
+					position: 1
+				});
+				this.sentNewACInfo = true;
+			}
 			if (packet.reset) {
 				this.local.inputSequenceNumber = 0;
-				this.local.pos = {x: packet.x, y: packet.y, z: packet.z};
+				this.local.pos = { x: packet.x, y: packet.y, z: packet.z };
 				this.teleport = this.local.pos;
 				client.write('position', {
 					x: packet.x,
@@ -516,7 +558,7 @@ const self = class EntityHandler extends Handler {
 				});
 			}
 
-			this.local.serverPos = {x: packet.x, y: packet.y, z: packet.z};
+			this.local.serverPos = { x: packet.x, y: packet.y, z: packet.z };
 		});
 		ClientSocket.on('CPacketRespawn', packet => {
 			if (packet.client) {
@@ -542,14 +584,14 @@ const self = class EntityHandler extends Handler {
 		ClientSocket.on('CPacketUpdateStatus', packet => {
 			if (packet.mode) {
 				if (packet.id == this.local.id) {
-					client.write('game_state_change', {reason: 3, gameMode: GAMEMODES[packet.mode ?? 'survival']});
+					client.write('game_state_change', { reason: 3, gameMode: GAMEMODES[packet.mode ?? 'survival'] });
 				} else {
 					this.gamemodes[packet.id] = GAMEMODES[packet.mode ?? 'survival'];
 					if (tablist.entries[packet.id]) {
 						tablist.tabs[packet.id].gamemode = this.gamemodes[packet.id];
 						client.write('player_info', {
 							action: 1,
-							data: [{UUID: tablist.entries[packet.id], gamemode: this.gamemodes[packet.id]}]
+							data: [{ UUID: tablist.entries[packet.id], gamemode: this.gamemodes[packet.id] }]
 						});
 					}
 
@@ -568,16 +610,16 @@ const self = class EntityHandler extends Handler {
 		client.on('flying', ({ onGround } = {}) => {
 			if (this.local.id < 0) return;
 			this.actions();
-			ClientSocket.sendPacket(new SPacketPlayerPosLook({onGround: onGround}));
+			ClientSocket.sendPacket(new SPacketPlayerPosLook({ onGround }));
 			this.abilities();
 		});
 		client.on('position', ({ x, y, z, onGround } = {}) => {
 			if (this.local.id < 0) return;
-			this.local.pos = {x: x, y: y, z: z};
+			this.local.pos = { x: x, y: y, z: z };
 			this.actions();
 			ClientSocket.sendPacket(new SPacketPlayerPosLook({
 				pos: this.local.pos,
-				onGround: onGround
+				onGround
 			}));
 			this.abilities(true);
 		});
@@ -589,13 +631,13 @@ const self = class EntityHandler extends Handler {
 			ClientSocket.sendPacket(new SPacketPlayerPosLook({
 				yaw: this.local.yaw,
 				pitch: this.local.pitch,
-				onGround: onGround
+				onGround
 			}));
 			this.abilities();
 		});
 		client.on('position_look', ({ x, y, z, onGround, yaw, pitch } = {}) => {
 			if (this.local.id < 0) return;
-			this.local.pos = {x: x, y: y, z: z};
+			this.local.pos = { x: x, y: y, z: z };
 			this.local.yaw = ((yaw * -1) - 180) * DEG2RAD;
 			this.local.pitch = (pitch * -1) * DEG2RAD;
 			this.actions();
@@ -603,7 +645,7 @@ const self = class EntityHandler extends Handler {
 				pos: this.local.pos,
 				yaw: this.local.yaw,
 				pitch: this.local.pitch,
-				onGround: onGround
+				onGround
 			}));
 			this.abilities(true);
 		});
@@ -639,7 +681,7 @@ const self = class EntityHandler extends Handler {
 				pos: this.desyncFlag ? desyncMath(this.local.pos, this.local.serverPos, 1.98) : this.local.pos
 			}));
 		});
-		client.on('held_item_slot', packet => ClientSocket.sendPacket(new SPacketHeldItemChange({slot: packet.slotId ?? 0})));
+		client.on('held_item_slot', packet => ClientSocket.sendPacket(new SPacketHeldItemChange({ slot: packet.slotId ?? 0 })));
 		client.on('arm_animation', () => {
 			if (!world.breaking) ClientSocket.sendPacket(new SPacketClick({}));
 			this.local.state[0] = Date.now() + 300;
@@ -693,12 +735,13 @@ const self = class EntityHandler extends Handler {
 			inputSequenceNumber: 0,
 			yaw: 0,
 			pitch: 0,
-			pos: {x: 0, y: 0, z: 0},
-			serverPos: {x: 0, y: 0, z: 0},
+			pos: { x: 0, y: 0, z: 0 },
+			serverPos: { x: 0, y: 0, z: 0 },
 			state: [],
 			lastState: [],
-			health: {hp: 20, food: 20, foodSaturation: 20},
+			health: { hp: 20, food: 20, foodSaturation: 20 },
 		};
+		this.sentNewACInfo = false;
 	}
 	obtainHandlers(handlers) {
 		tablist = handlers.tablist;
