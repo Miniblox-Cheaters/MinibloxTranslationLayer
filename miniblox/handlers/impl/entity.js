@@ -627,15 +627,15 @@ const self = class EntityHandler extends Handler {
 
 			ClientSocket.sendPacket(new SPacketPlayerInput({
 				sequenceNumber: this.local.inputSequenceNumber,
-				left: true,
-				right: true,
-				up: true,
-				down: true,
+				left: sideways > 0,
+				right: sideways < 0,
+				up: forward > 0,
+				down: forward < 0,
 				yaw: this.local.yaw,
 				pitch: this.local.pitch,
-				jump: true,
-				sneak: true,
-				sprint: true,
+				jump: (jump & 1) > 0,
+				sneak: (jump & 2) > 0,
+				sprint: this.local.state[1] ?? false,
 				pos: this.desyncFlag ? desyncMath(this.local.pos, this.local.serverPos, 1.98) : this.local.pos
 			}));
 		});
