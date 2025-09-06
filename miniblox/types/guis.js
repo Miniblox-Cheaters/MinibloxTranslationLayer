@@ -2,7 +2,7 @@ import { SPacketMessage, SPacketCloseWindow } from './../main.js';
 const mcData = (await import('minecraft-data')).default("1.8.9");
 
 // thanks again roblox thot :money:
-function make_item(item) {
+export function make_item(item, nbt = {}) {
 	const realItem = mcData.itemsByName[item.item];
 	if (!realItem) return {blockId: -1};
 	return {
@@ -28,7 +28,8 @@ function make_item(item) {
 							}
 						}
 					}
-				}
+				},
+				...nbt
 			}
 		}
 	};
@@ -220,5 +221,19 @@ export const GUIS = {
 			make_item({ name: "Lime Team", item: "wool", itemDamage: 5 }),
 			make_item({ name: "Yellow Team", item: "wool", itemDamage: 4 })
 		]
+	},
+	Planets: {
+		name: "Planets",
+		command: function (item, _, client, __) {
+			if (item.nbtData) {
+				const itemName = item.nbtData.value.display.value.Name.value;
+				if (itemName) {
+					const team = itemName.toLocaleLowerCase().split(' ')[0];
+					if (team != "random") ClientSocket.sendPacket(new SPacketMessage({ text: '/team ' + team }));
+					ClientSocket.sendPacket(new SPacketCloseWindow({ windowId: 0 }));
+					client.write('close_window', { windowId: 255 });
+				}
+			}
+		},
 	}
 };

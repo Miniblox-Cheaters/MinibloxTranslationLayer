@@ -1,10 +1,43 @@
 import Handler from './../handler.js';
 import { ClientSocket, SPacketClickWindow, SPacketConfirmTransaction, SPacketCloseWindow } from './../../main.js';
-import { GUIS, SLOTS, WINDOW_NAMES, WINDOW_TYPES } from './../../types/guis.js';
+import { make_item, GUIS, SLOTS, WINDOW_NAMES, WINDOW_TYPES } from './../../types/guis.js';
 import { translateItem, translateItemBack } from './../../utils.js';
+import { handleCommand } from './misc.js';
 let client, entity;
 
+// https://stackoverflow.com/a/20856346
+/**
+ * Removes non-ASCII characters from a string
+ * @param {string} str a string which may have non-ASCII characters that we want to remove.
+ * @returns {string} a string that will never have non-ASCII characters
+ */
+function removeNonASCII(str) {
+	return str.replace(/[^\x00-\x7F]/g, "");
+}
+
+/**
+ * @typedef {{
+ * 	id: string;
+ * 	category: string;
+ * 	playerCount: number;
+ * 	maxPlayers: number;
+ * 	worldName: string;
+ * 	gameMode: string;
+ * 	worldType: string;
+ * 	timeAllocated: number;
+ * 	ownerUsername: string;
+ * }} Server
+ */
+
+/**
+ * @typedef {Server[]} ServerList
+ */
+
 const self = class GuiHandler extends Handler {
+	/**
+	 * @type {boolean}
+	 */
+	ignorePacket;
 	miniblox() {
 		ClientSocket.on('CPacketOpenWindow', packet => {
 			if (WINDOW_TYPES[packet.guiID]) {
@@ -13,7 +46,7 @@ const self = class GuiHandler extends Handler {
 				client.write('open_window', {
 					windowId: packet.windowId,
 					inventoryType: WINDOW_TYPES[packet.guiID],
-					windowTitle: translation ?? JSON.stringify({text: packet.title ?? 'None'}),
+					windowTitle: translation ?? JSON.stringify({ text: packet.title ?? 'None' }),
 					slotCount: packet.size ?? 0,
 					entityId: entity.local.mcId
 				});
@@ -26,13 +59,13 @@ const self = class GuiHandler extends Handler {
 				client.write('open_window', {
 					windowId: 255,
 					inventoryType: 'minecraft:container',
-					windowTitle: JSON.stringify({text: gui.name}),
+					windowTitle: JSON.stringify({ text: gui.name }),
 					slotCount: itemCount,
 					entityId: entity.local.mcId
 				});
 				this.currentlyOpen = packet.type;
 
-				const contents = Array(itemCount).fill({blockId: -1});
+				const contents = Array(itemCount).fill({ blockId: -1 });
 				for (let i = 0; i < gui.items.length; i++) {
 					contents[i] = gui.items[i];
 				}
@@ -49,7 +82,7 @@ const self = class GuiHandler extends Handler {
 				return;
 			}
 
-			let items = Array(packet.items.length).fill({blockId: -1});
+			let items = Array(packet.items.length).fill({ blockId: -1 });
 			for (let i = 0; i < packet.items.length; i++) {
 				items[packet.windowId == 0 && SLOTS[i] != undefined ? SLOTS[i] : i] = translateItem(packet.items[i]);
 			}
@@ -68,7 +101,7 @@ const self = class GuiHandler extends Handler {
 			slot: packet.windowId == 0 && SLOTS[packet.slot] != undefined ? SLOTS[packet.slot] : packet.slot,
 			item: translateItem(packet.slotData)
 		}));
-		ClientSocket.on('CPacketCloseWindow', packet => client.write('close_window', {windowId: packet.windowId}));
+		ClientSocket.on('CPacketCloseWindow', packet => client.write('close_window', { windowId: packet.windowId }));
 		ClientSocket.on('CPacketConfirmTransaction', packet => client.write('transaction', {
 			windowId: packet.windowId,
 			action: packet.uid,
@@ -84,6 +117,12 @@ const self = class GuiHandler extends Handler {
 			if (packet.windowId == 255) {
 				const gui = GUIS[this.currentlyOpen];
 				if (gui) gui.command(packet.item, ClientSocket, client, gui);
+				return;
+			}
+			if (packet.windowId === 69) {
+				const serverId = packet.item.nbtData.value.serverId.value;
+				if (serverId)
+					handleCommand("join", serverId);
 				return;
 			}
 			ClientSocket.sendPacket(new SPacketClickWindow({
@@ -102,7 +141,55 @@ const self = class GuiHandler extends Handler {
 				accepted: packet.accepted
 			}));
 		});
-		client.on('close_window', packet => ClientSocket.sendPacket(new SPacketCloseWindow({windowId: packet.windowId == 255 ? 0 : packet.windowId})));
+		client.on('close_window', packet => ClientSocket.sendPacket(new SPacketCloseWindow({ windowId: packet.windowId == 255 ? 0 : packet.windowId })));
+	}
+	async showPlanetsGUI() {
+		const sl = await fetch("https://session.coolmathblox.ca/launch/server_list/no_account", {
+			method: "POST",
+			body: ""
+		}).then(r => r.json())
+			.then(
+				/**
+				 * @param {{servers: ServerList}} r
+				 */
+				r => r.servers.filter(s => s.category === "planets")
+			);
+		const items = [];
+		for (const server of sl) {
+			items.push(make_item({
+				name: removeNonASCII(server.worldName),
+				item: "stained_glass_pane",
+				lore: [
+					`by ${server.ownerUsername}`,
+					`game mode: ${server.gameMode}`,
+					`max players: ${server.playerCount}/${server.maxPlayers}`
+				]
+			}, {
+				serverId: {
+					type: "string",
+					value: server.id
+				}
+			}));
+		}
+
+		const itemCount = Math.ceil(items.length / 9) * 9;
+		client.write('open_window', {
+			windowId: 69,
+			inventoryType: 'minecraft:container',
+			windowTitle: JSON.stringify({ text: "Planet Selection" }),
+			slotCount: itemCount,
+			entityId: entity.local.mcId
+		});
+
+		const contents = Array(itemCount).fill({ blockId: -1 });
+		for (let i = 0; i < items.length; i++) {
+			contents[i] = items[i];
+		}
+
+		client.write('window_items', {
+			windowId: 69,
+			items: contents
+		});
 	}
 	cleanup(requeue) {
 		client = requeue ? client : undefined;
