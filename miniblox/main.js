@@ -20,7 +20,7 @@ var ut = (j, _, $) => (xT(j, typeof _ != "symbol" ? _ + "" : _, $),
 
 const exports = {};
 
-const SPacketLoginStart = class extends Message {
+export class SPacketLoginStart extends Message {
 	constructor($) {
 		super();
 		ut(this, "session");
@@ -43,7 +43,6 @@ const SPacketLoginStart = class extends Message {
 		return proto2.util.equals(SPacketLoginStart, $, et)
 	}
 };
-export { SPacketLoginStart };
 ut(SPacketLoginStart, "runtime", proto2),
 	ut(SPacketLoginStart, "typeName", "SPacketLoginStart"),
 	ut(SPacketLoginStart, "fields", proto2.util.newFieldList(() => [{
@@ -75,7 +74,7 @@ ut(SPacketLoginStart, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const PBItemStack = class extends Message {
+export class PBItemStack extends Message {
 	constructor($) {
 		super();
 		ut(this, "present");
@@ -98,8 +97,7 @@ const PBItemStack = class extends Message {
 		return proto2.util.equals(PBItemStack, $, et)
 	}
 }
-	;
-export { PBItemStack };
+;
 ut(PBItemStack, "runtime", proto2),
 	ut(PBItemStack, "typeName", "PBItemStack"),
 	ut(PBItemStack, "fields", proto2.util.newFieldList(() => [{
@@ -132,7 +130,7 @@ ut(PBItemStack, "runtime", proto2),
 		T: 9,
 		opt: !0
 	}]));
-const PBBlockPos = class extends Message {
+export class PBBlockPos extends Message {
 	constructor($) {
 		super();
 		ut(this, "x");
@@ -153,7 +151,6 @@ const PBBlockPos = class extends Message {
 		return proto2.util.equals(PBBlockPos, $, et)
 	}
 };
-export { PBBlockPos };
 ut(PBBlockPos, "runtime", proto2),
 	ut(PBBlockPos, "typeName", "PBBlockPos"),
 	ut(PBBlockPos, "fields", proto2.util.newFieldList(() => [{
@@ -250,7 +247,7 @@ ut(PBFloatVector3, "runtime", proto2),
 		kind: "scalar",
 		T: 2
 	}]));
-const CPacketEntityVelocity = class extends Message {
+export class CPacketEntityVelocity extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -270,7 +267,6 @@ const CPacketEntityVelocity = class extends Message {
 		return proto2.util.equals(CPacketEntityVelocity, $, et)
 	}
 };
-export { CPacketEntityVelocity };
 ut(CPacketEntityVelocity, "runtime", proto2),
 	ut(CPacketEntityVelocity, "typeName", "CPacketEntityVelocity"),
 	ut(CPacketEntityVelocity, "fields", proto2.util.newFieldList(() => [{
@@ -284,7 +280,7 @@ ut(CPacketEntityVelocity, "runtime", proto2),
 		kind: "message",
 		T: PBFloatVector3
 	}]));
-const CPacketChunkData = class extends Message {
+export class CPacketChunkData extends Message {
 	constructor($) {
 		super();
 		ut(this, "x", 0);
@@ -344,7 +340,7 @@ ut(CPacketChunkData, "runtime", proto3),
 		T: 13,
 		repeated: !0
 	}]));
-const PBCell = class extends Message {
+export class PBCell extends Message {
 	constructor($) {
 		super();
 		ut(this, "y", 0);
@@ -396,7 +392,7 @@ ut(PBCell, "runtime", proto3),
 		kind: "scalar",
 		T: 13
 	}]));
-const PBTileEntity = class extends Message {
+export class PBTileEntity extends Message {
 	constructor($) {
 		super();
 		ut(this, "x", 0);
@@ -441,7 +437,7 @@ ut(PBTileEntity, "runtime", proto3),
 		kind: "scalar",
 		T: 12
 	}]));
-const CPacketEntityEquipment = class extends Message {
+export class CPacketEntityEquipment extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -461,7 +457,6 @@ const CPacketEntityEquipment = class extends Message {
 		return proto2.util.equals(CPacketEntityEquipment, $, et)
 	}
 };
-export { CPacketEntityEquipment };
 ut(CPacketEntityEquipment, "runtime", proto2),
 	ut(CPacketEntityEquipment, "typeName", "CPacketEntityEquipment"),
 	ut(CPacketEntityEquipment, "fields", proto2.util.newFieldList(() => [{
@@ -476,7 +471,7 @@ ut(CPacketEntityEquipment, "runtime", proto2),
 		T: Equipment,
 		repeated: !0
 	}]));
-const Equipment = class extends Message {
+export class Equipment extends Message {
 	constructor($) {
 		super();
 		ut(this, "slot");
@@ -496,7 +491,6 @@ const Equipment = class extends Message {
 		return proto2.util.equals(Equipment, $, et)
 	}
 };
-export { Equipment };
 ut(Equipment, "runtime", proto2),
 	ut(Equipment, "typeName", "Equipment"),
 	ut(Equipment, "fields", proto2.util.newFieldList(() => [{
@@ -540,7 +534,7 @@ proto2.util.setEnumType(Equipment_Slot, "Equipment.Slot", [{
 	no: 6,
 	name: "BOOTS"
 }]);
-const SPacketUpdateInventory = class extends Message {
+export class SPacketUpdateInventory extends Message {
 	constructor($) {
 		super();
 		ut(this, "main", []);
@@ -561,7 +555,6 @@ const SPacketUpdateInventory = class extends Message {
 		return proto2.util.equals(SPacketUpdateInventory, $, et)
 	}
 };
-export { SPacketUpdateInventory };
 ut(SPacketUpdateInventory, "runtime", proto2),
 	ut(SPacketUpdateInventory, "typeName", "SPacketUpdateInventory"),
 	ut(SPacketUpdateInventory, "fields", proto2.util.newFieldList(() => [{
@@ -582,7 +575,7 @@ ut(SPacketUpdateInventory, "runtime", proto2),
 		kind: "message",
 		T: PBItemStack
 	}]));
-const CPacketUpdateSign = class extends Message {
+export class CPacketUpdateSign extends Message {
 	constructor($) {
 		super();
 		ut(this, "pos");
@@ -602,7 +595,6 @@ const CPacketUpdateSign = class extends Message {
 		return proto2.util.equals(CPacketUpdateSign, $, et)
 	}
 };
-export { CPacketUpdateSign };
 ut(CPacketUpdateSign, "runtime", proto2),
 	ut(CPacketUpdateSign, "typeName", "CPacketUpdateSign"),
 	ut(CPacketUpdateSign, "fields", proto2.util.newFieldList(() => [{
@@ -617,7 +609,7 @@ ut(CPacketUpdateSign, "runtime", proto2),
 		T: 9,
 		repeated: !0
 	}]));
-const CPacketUpdateCommandBlock = class extends Message {
+export class CPacketUpdateCommandBlock extends Message {
 	constructor($) {
 		super();
 		ut(this, "pos");
@@ -639,7 +631,6 @@ const CPacketUpdateCommandBlock = class extends Message {
 		return proto2.util.equals(CPacketUpdateCommandBlock, $, et)
 	}
 };
-export { CPacketUpdateCommandBlock };
 ut(CPacketUpdateCommandBlock, "runtime", proto2),
 	ut(CPacketUpdateCommandBlock, "typeName", "CPacketUpdateCommandBlock"),
 	ut(CPacketUpdateCommandBlock, "fields", proto2.util.newFieldList(() => [{
@@ -666,7 +657,7 @@ ut(CPacketUpdateCommandBlock, "runtime", proto2),
 		T: 5,
 		opt: !0
 	}]));
-const SPacketCloseWindow = class extends Message {
+export class SPacketCloseWindow extends Message {
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -685,7 +676,6 @@ const SPacketCloseWindow = class extends Message {
 		return proto2.util.equals(SPacketCloseWindow, $, et)
 	}
 };
-export { SPacketCloseWindow };
 ut(SPacketCloseWindow, "runtime", proto2),
 	ut(SPacketCloseWindow, "typeName", "SPacketCloseWindow"),
 	ut(SPacketCloseWindow, "fields", proto2.util.newFieldList(() => [{
@@ -694,7 +684,7 @@ ut(SPacketCloseWindow, "runtime", proto2),
 		kind: "scalar",
 		T: 5
 	}]));
-const SPacketEntityAction = class extends Message {
+export class SPacketEntityAction extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -718,7 +708,6 @@ const SPacketEntityAction = class extends Message {
 		return proto2.util.equals(SPacketEntityAction, $, et)
 	}
 };
-export { SPacketEntityAction };
 ut(SPacketEntityAction, "runtime", proto2),
 	ut(SPacketEntityAction, "typeName", "SPacketEntityAction"),
 	ut(SPacketEntityAction, "fields", proto2.util.newFieldList(() => [{
@@ -757,7 +746,7 @@ ut(SPacketEntityAction, "runtime", proto2),
 		T: 8,
 		opt: !0
 	}]));
-const SPacketPlayerAbilities = class extends Message {
+export class SPacketPlayerAbilities extends Message {
 	constructor($) {
 		super();
 		ut(this, "isFlying");
@@ -776,7 +765,6 @@ const SPacketPlayerAbilities = class extends Message {
 		return proto2.util.equals(SPacketPlayerAbilities, $, et)
 	}
 };
-export { SPacketPlayerAbilities };
 ut(SPacketPlayerAbilities, "runtime", proto2),
 	ut(SPacketPlayerAbilities, "typeName", "SPacketPlayerAbilities"),
 	ut(SPacketPlayerAbilities, "fields", proto2.util.newFieldList(() => [{
@@ -786,7 +774,7 @@ ut(SPacketPlayerAbilities, "runtime", proto2),
 		T: 8,
 		opt: !0
 	}]));
-const SPacketPlayerPosLook = class extends Message {
+export class SPacketPlayerPosLook extends Message {
 	constructor($) {
 		super();
 		ut(this, "pos");
@@ -808,7 +796,6 @@ const SPacketPlayerPosLook = class extends Message {
 		return proto2.util.equals(SPacketPlayerPosLook, $, et)
 	}
 };
-export { SPacketPlayerPosLook };
 ut(SPacketPlayerPosLook, "runtime", proto2),
 	ut(SPacketPlayerPosLook, "typeName", "SPacketPlayerPosLook"),
 	ut(SPacketPlayerPosLook, "fields", proto2.util.newFieldList(() => [{
@@ -895,7 +882,7 @@ export let SPacketRespawn$1 = class extends Message {
 ut(SPacketRespawn$1, "runtime", proto2),
 	ut(SPacketRespawn$1, "typeName", "SPacketRespawn"),
 	ut(SPacketRespawn$1, "fields", proto2.util.newFieldList(() => []));
-const SPacketOpenShop = class extends Message {
+export class SPacketOpenShop extends Message {
 	constructor(_) {
 		super(),
 			proto2.util.initPartial(_, this)
@@ -913,7 +900,6 @@ const SPacketOpenShop = class extends Message {
 		return proto2.util.equals(SPacketOpenShop, _, $)
 	}
 };
-export { SPacketOpenShop };
 ut(SPacketOpenShop, "runtime", proto2),
 	ut(SPacketOpenShop, "typeName", "SPacketOpenShop"),
 	ut(SPacketOpenShop, "fields", proto2.util.newFieldList(() => []));
@@ -932,7 +918,6 @@ var WorldGenerationType = (j => (j.FLAT = "FLAT",
 		j[j.RELEASE_USE_ITEM = 5] = "RELEASE_USE_ITEM",
 		j))(PBAction || {});
 const _PBAction = PBAction;
-export { _PBAction as PBAction };
 proto2.util.setEnumType(PBAction, "PBAction", [{
 	no: 0,
 	name: "START_DESTROY_BLOCK"
@@ -961,7 +946,6 @@ var PBEnumFacing = (j => (j[j.UNDEFINED_FACE = 0] = "UNDEFINED_FACE",
 	j[j.EAST = 6] = "EAST",
 	j))(PBEnumFacing || {});
 const _PBEnumFacing = PBEnumFacing;
-export { _PBEnumFacing as PBEnumFacing };
 proto2.util.setEnumType(PBEnumFacing, "PBEnumFacing", [{
 	no: 0,
 	name: "UNDEFINED_FACE"
@@ -984,7 +968,7 @@ proto2.util.setEnumType(PBEnumFacing, "PBEnumFacing", [{
 	no: 6,
 	name: "EAST"
 }]);
-const SPacketBreakBlock = class extends Message {
+export class SPacketBreakBlock extends Message {
 	constructor($) {
 		super();
 		ut(this, "location");
@@ -1004,7 +988,6 @@ const SPacketBreakBlock = class extends Message {
 		return proto2.util.equals(SPacketBreakBlock, $, et)
 	}
 };
-export { SPacketBreakBlock };
 ut(SPacketBreakBlock, "runtime", proto2),
 	ut(SPacketBreakBlock, "typeName", "SPacketBreakBlock"),
 	ut(SPacketBreakBlock, "fields", proto2.util.newFieldList(() => [{
@@ -1019,7 +1002,7 @@ ut(SPacketBreakBlock, "runtime", proto2),
 		T: 8,
 		opt: !0
 	}]));
-const SPacketClick = class extends Message {
+export class SPacketClick extends Message {
 	constructor($) {
 		super();
 		ut(this, "location");
@@ -1038,7 +1021,6 @@ const SPacketClick = class extends Message {
 		return proto2.util.equals(SPacketClick, $, et)
 	}
 };
-export { SPacketClick };
 ut(SPacketClick, "runtime", proto2),
 	ut(SPacketClick, "typeName", "SPacketClick"),
 	ut(SPacketClick, "fields", proto2.util.newFieldList(() => [{
@@ -1048,7 +1030,7 @@ ut(SPacketClick, "runtime", proto2),
 		T: PBBlockPos,
 		opt: !0
 	}]));
-const SPacketPlaceBlock = class extends Message {
+export class SPacketPlaceBlock extends Message {
 	constructor($) {
 		super();
 		ut(this, "positionIn");
@@ -1071,7 +1053,6 @@ const SPacketPlaceBlock = class extends Message {
 		return proto2.util.equals(SPacketPlaceBlock, $, et)
 	}
 };
-export { SPacketPlaceBlock };
 ut(SPacketPlaceBlock, "runtime", proto2),
 	ut(SPacketPlaceBlock, "typeName", "SPacketPlaceBlock"),
 	ut(SPacketPlaceBlock, "fields", proto2.util.newFieldList(() => [{
@@ -1100,7 +1081,7 @@ ut(SPacketPlaceBlock, "runtime", proto2),
 		kind: "scalar",
 		T: 2
 	}]));
-const SPacketUseItem = class extends Message {
+export class SPacketUseItem extends Message {
 	constructor(_) {
 		super(),
 			proto2.util.initPartial(_, this)
@@ -1118,11 +1099,10 @@ const SPacketUseItem = class extends Message {
 		return proto2.util.equals(SPacketUseItem, _, $)
 	}
 };
-export { SPacketUseItem };
 ut(SPacketUseItem, "runtime", proto2),
 	ut(SPacketUseItem, "typeName", "SPacketUseItem"),
 	ut(SPacketUseItem, "fields", proto2.util.newFieldList(() => []));
-const SPacketClickWindow = class extends Message {
+export class SPacketClickWindow extends Message {
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -1146,7 +1126,6 @@ const SPacketClickWindow = class extends Message {
 		return proto2.util.equals(SPacketClickWindow, $, et)
 	}
 };
-export { SPacketClickWindow };
 ut(SPacketClickWindow, "runtime", proto2),
 	ut(SPacketClickWindow, "typeName", "SPacketClickWindow"),
 	ut(SPacketClickWindow, "fields", proto2.util.newFieldList(() => [{
@@ -1180,7 +1159,7 @@ ut(SPacketClickWindow, "runtime", proto2),
 		kind: "scalar",
 		T: 5
 	}]));
-const SPacketPlayerAction = class extends Message {
+export class SPacketPlayerAction extends Message {
 	constructor($) {
 		super();
 		ut(this, "position");
@@ -1201,7 +1180,6 @@ const SPacketPlayerAction = class extends Message {
 		return proto2.util.equals(SPacketPlayerAction, $, et)
 	}
 };
-export { SPacketPlayerAction };
 ut(SPacketPlayerAction, "runtime", proto2),
 	ut(SPacketPlayerAction, "typeName", "SPacketPlayerAction"),
 	ut(SPacketPlayerAction, "fields", proto2.util.newFieldList(() => [{
@@ -1220,7 +1198,7 @@ ut(SPacketPlayerAction, "runtime", proto2),
 		kind: "enum",
 		T: proto2.getEnumType(PBAction)
 	}]));
-const SPacketUseEntity = class extends Message {
+export class SPacketUseEntity extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -1241,7 +1219,6 @@ const SPacketUseEntity = class extends Message {
 		return proto2.util.equals(SPacketUseEntity, $, et)
 	}
 };
-export { SPacketUseEntity };
 ut(SPacketUseEntity, "runtime", proto2),
 	ut(SPacketUseEntity, "typeName", "SPacketUseEntity"),
 	ut(SPacketUseEntity, "fields", proto2.util.newFieldList(() => [{
@@ -1275,7 +1252,7 @@ proto2.util.setEnumType(SPacketUseEntity_Action, "SPacketUseEntity.Action", [{
 	no: 2,
 	name: "INTERACT_AT"
 }]);
-const SPacketMessage = class extends Message {
+export class SPacketMessage extends Message {
 	constructor($) {
 		super();
 		ut(this, "text");
@@ -1294,7 +1271,6 @@ const SPacketMessage = class extends Message {
 		return proto2.util.equals(SPacketMessage, $, et)
 	}
 };
-export { SPacketMessage };
 ut(SPacketMessage, "runtime", proto2),
 	ut(SPacketMessage, "typeName", "SPacketMessage"),
 	ut(SPacketMessage, "fields", proto2.util.newFieldList(() => [{
@@ -1303,7 +1279,7 @@ ut(SPacketMessage, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const CPacketAnimation = class extends Message {
+export class CPacketAnimation extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -1323,7 +1299,6 @@ const CPacketAnimation = class extends Message {
 		return proto2.util.equals(CPacketAnimation, $, et)
 	}
 };
-export { CPacketAnimation };
 ut(CPacketAnimation, "runtime", proto2),
 	ut(CPacketAnimation, "typeName", "CPacketAnimation"),
 	ut(CPacketAnimation, "fields", proto2.util.newFieldList(() => [{
@@ -1337,7 +1312,7 @@ ut(CPacketAnimation, "runtime", proto2),
 		kind: "scalar",
 		T: 13
 	}]));
-const CPacketBlockAction = class extends Message {
+export class CPacketBlockAction extends Message {
 	constructor($) {
 		super();
 		ut(this, "blockPos");
@@ -1359,7 +1334,6 @@ const CPacketBlockAction = class extends Message {
 		return proto2.util.equals(CPacketBlockAction, $, et)
 	}
 };
-export { CPacketBlockAction };
 ut(CPacketBlockAction, "runtime", proto2),
 	ut(CPacketBlockAction, "typeName", "CPacketBlockAction"),
 	ut(CPacketBlockAction, "fields", proto2.util.newFieldList(() => [{
@@ -1383,7 +1357,7 @@ ut(CPacketBlockAction, "runtime", proto2),
 		kind: "scalar",
 		T: 13
 	}]));
-const CPacketBlockUpdate = class extends Message {
+export class CPacketBlockUpdate extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -1406,7 +1380,6 @@ const CPacketBlockUpdate = class extends Message {
 		return proto2.util.equals(CPacketBlockUpdate, $, et)
 	}
 };
-export { CPacketBlockUpdate };
 ut(CPacketBlockUpdate, "runtime", proto2),
 	ut(CPacketBlockUpdate, "typeName", "CPacketBlockUpdate"),
 	ut(CPacketBlockUpdate, "fields", proto2.util.newFieldList(() => [{
@@ -1436,7 +1409,7 @@ ut(CPacketBlockUpdate, "runtime", proto2),
 		T: 8,
 		opt: !0
 	}]));
-const CPacketChangeServers = class extends Message {
+export class CPacketChangeServers extends Message {
 	constructor($) {
 		super();
 		ut(this, "url");
@@ -1455,7 +1428,6 @@ const CPacketChangeServers = class extends Message {
 		return proto2.util.equals(CPacketChangeServers, $, et)
 	}
 };
-export { CPacketChangeServers };
 ut(CPacketChangeServers, "runtime", proto2),
 	ut(CPacketChangeServers, "typeName", "CPacketChangeServers"),
 	ut(CPacketChangeServers, "fields", proto2.util.newFieldList(() => [{
@@ -1464,7 +1436,7 @@ ut(CPacketChangeServers, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const CPacketCloseWindow = class extends Message {
+export class CPacketCloseWindow extends Message {
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -1483,7 +1455,6 @@ const CPacketCloseWindow = class extends Message {
 		return proto2.util.equals(CPacketCloseWindow, $, et)
 	}
 };
-export { CPacketCloseWindow };
 ut(CPacketCloseWindow, "runtime", proto2),
 	ut(CPacketCloseWindow, "typeName", "CPacketCloseWindow"),
 	ut(CPacketCloseWindow, "fields", proto2.util.newFieldList(() => [{
@@ -1492,7 +1463,7 @@ ut(CPacketCloseWindow, "runtime", proto2),
 		kind: "scalar",
 		T: 13
 	}]));
-const CPacketConfirmTransaction = class extends Message {
+export class CPacketConfirmTransaction extends Message {
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -1513,7 +1484,6 @@ const CPacketConfirmTransaction = class extends Message {
 		return proto2.util.equals(CPacketConfirmTransaction, $, et)
 	}
 };
-export { CPacketConfirmTransaction };
 ut(CPacketConfirmTransaction, "runtime", proto2),
 	ut(CPacketConfirmTransaction, "typeName", "CPacketConfirmTransaction"),
 	ut(CPacketConfirmTransaction, "fields", proto2.util.newFieldList(() => [{
@@ -1532,7 +1502,7 @@ ut(CPacketConfirmTransaction, "runtime", proto2),
 		kind: "scalar",
 		T: 8
 	}]));
-const CPacketDestroyEntities = class extends Message {
+export class CPacketDestroyEntities extends Message {
 	constructor($) {
 		super();
 		ut(this, "ids", []);
@@ -1551,7 +1521,6 @@ const CPacketDestroyEntities = class extends Message {
 		return proto2.util.equals(CPacketDestroyEntities, $, et)
 	}
 };
-export { CPacketDestroyEntities };
 ut(CPacketDestroyEntities, "runtime", proto2),
 	ut(CPacketDestroyEntities, "typeName", "CPacketDestroyEntities"),
 	ut(CPacketDestroyEntities, "fields", proto2.util.newFieldList(() => [{
@@ -1561,7 +1530,7 @@ ut(CPacketDestroyEntities, "runtime", proto2),
 		T: 13,
 		repeated: !0
 	}]));
-const CPacketDisconnect = class extends Message {
+export class CPacketDisconnect extends Message {
 	constructor($) {
 		super();
 		ut(this, "reason");
@@ -1580,7 +1549,6 @@ const CPacketDisconnect = class extends Message {
 		return proto2.util.equals(CPacketDisconnect, $, et)
 	}
 };
-export { CPacketDisconnect };
 ut(CPacketDisconnect, "runtime", proto2),
 	ut(CPacketDisconnect, "typeName", "CPacketDisconnect"),
 	ut(CPacketDisconnect, "fields", proto2.util.newFieldList(() => [{
@@ -1589,7 +1557,7 @@ ut(CPacketDisconnect, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const CPacketEntityAction = class extends Message {
+export class CPacketEntityAction extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -1612,7 +1580,6 @@ const CPacketEntityAction = class extends Message {
 		return proto2.util.equals(CPacketEntityAction, $, et)
 	}
 };
-export { CPacketEntityAction };
 ut(CPacketEntityAction, "runtime", proto2),
 	ut(CPacketEntityAction, "typeName", "CPacketEntityAction"),
 	ut(CPacketEntityAction, "fields", proto2.util.newFieldList(() => [{
@@ -1645,7 +1612,7 @@ ut(CPacketEntityAction, "runtime", proto2),
 		T: 5,
 		opt: !0
 	}]));
-const CPacketEntityAttach = class extends Message {
+export class CPacketEntityAttach extends Message {
 	constructor($) {
 		super();
 		ut(this, "leash");
@@ -1666,7 +1633,6 @@ const CPacketEntityAttach = class extends Message {
 		return proto2.util.equals(CPacketEntityAttach, $, et)
 	}
 };
-export { CPacketEntityAttach };
 ut(CPacketEntityAttach, "runtime", proto2),
 	ut(CPacketEntityAttach, "typeName", "CPacketEntityAttach"),
 	ut(CPacketEntityAttach, "fields", proto2.util.newFieldList(() => [{
@@ -1685,7 +1651,7 @@ ut(CPacketEntityAttach, "runtime", proto2),
 		kind: "scalar",
 		T: 17
 	}]));
-const CPacketEntityMetadata = class extends Message {
+export class CPacketEntityMetadata extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -1705,7 +1671,6 @@ const CPacketEntityMetadata = class extends Message {
 		return proto2.util.equals(CPacketEntityMetadata, $, et)
 	}
 };
-export { CPacketEntityMetadata };
 ut(CPacketEntityMetadata, "runtime", proto2),
 	ut(CPacketEntityMetadata, "typeName", "CPacketEntityMetadata"),
 	ut(CPacketEntityMetadata, "fields", proto2.util.newFieldList(() => [{
@@ -1720,7 +1685,7 @@ ut(CPacketEntityMetadata, "runtime", proto2),
 		T: PBWatchableObject,
 		repeated: !0
 	}]));
-const PBWatchableObject = class extends Message {
+export class PBWatchableObject extends Message {
 	constructor($) {
 		super();
 		ut(this, "dataValueId");
@@ -1746,7 +1711,6 @@ const PBWatchableObject = class extends Message {
 		return proto2.util.equals(PBWatchableObject, $, et)
 	}
 };
-export { PBWatchableObject };
 ut(PBWatchableObject, "runtime", proto2),
 	ut(PBWatchableObject, "typeName", "PBWatchableObject"),
 	ut(PBWatchableObject, "fields", proto2.util.newFieldList(() => [{
@@ -1796,7 +1760,7 @@ ut(PBWatchableObject, "runtime", proto2),
 		T: PBBlockPos,
 		opt: !0
 	}]));
-const CPacketEntityPositionAndRotation = class extends Message {
+export class CPacketEntityPositionAndRotation extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -1820,7 +1784,6 @@ const CPacketEntityPositionAndRotation = class extends Message {
 		return proto2.util.equals(CPacketEntityPositionAndRotation, $, et)
 	}
 };
-export { CPacketEntityPositionAndRotation };
 ut(CPacketEntityPositionAndRotation, "runtime", proto2),
 	ut(CPacketEntityPositionAndRotation, "typeName", "CPacketEntityPositionAndRotation"),
 	ut(CPacketEntityPositionAndRotation, "fields", proto2.util.newFieldList(() => [{
@@ -1859,7 +1822,7 @@ ut(CPacketEntityPositionAndRotation, "runtime", proto2),
 		T: 8,
 		opt: !0
 	}]));
-const CPacketEntityRelativePositionAndRotation = class extends Message {
+export class CPacketEntityRelativePositionAndRotation extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -1883,7 +1846,6 @@ const CPacketEntityRelativePositionAndRotation = class extends Message {
 		return proto2.util.equals(CPacketEntityRelativePositionAndRotation, $, et)
 	}
 };
-export { CPacketEntityRelativePositionAndRotation };
 ut(CPacketEntityRelativePositionAndRotation, "runtime", proto2),
 	ut(CPacketEntityRelativePositionAndRotation, "typeName", "CPacketEntityRelativePositionAndRotation"),
 	ut(CPacketEntityRelativePositionAndRotation, "fields", proto2.util.newFieldList(() => [{
@@ -1922,7 +1884,7 @@ ut(CPacketEntityRelativePositionAndRotation, "runtime", proto2),
 		T: 8,
 		opt: !0
 	}]));
-const CPacketEntityStatus = class extends Message {
+export class CPacketEntityStatus extends Message {
 	constructor($) {
 		super();
 		ut(this, "entityId");
@@ -1942,7 +1904,6 @@ const CPacketEntityStatus = class extends Message {
 		return proto2.util.equals(CPacketEntityStatus, $, et)
 	}
 };
-export { CPacketEntityStatus };
 ut(CPacketEntityStatus, "runtime", proto2),
 	ut(CPacketEntityStatus, "typeName", "CPacketEntityStatus"),
 	ut(CPacketEntityStatus, "fields", proto2.util.newFieldList(() => [{
@@ -1956,7 +1917,7 @@ ut(CPacketEntityStatus, "runtime", proto2),
 		kind: "scalar",
 		T: 5
 	}]));
-const CPacketExplosion = class extends Message {
+export class CPacketExplosion extends Message {
 	constructor($) {
 		super();
 		ut(this, "pos");
@@ -1978,7 +1939,6 @@ const CPacketExplosion = class extends Message {
 		return proto2.util.equals(CPacketExplosion, $, et)
 	}
 };
-export { CPacketExplosion };
 ut(CPacketExplosion, "runtime", proto2),
 	ut(CPacketExplosion, "typeName", "CPacketExplosion"),
 	ut(CPacketExplosion, "fields", proto2.util.newFieldList(() => [{
@@ -2003,7 +1963,7 @@ ut(CPacketExplosion, "runtime", proto2),
 		kind: "message",
 		T: PBFloatVector3
 	}]));
-const PBCosmetics = class extends Message {
+export class PBCosmetics extends Message {
 	constructor($) {
 		super();
 		ut(this, "skin");
@@ -2027,7 +1987,6 @@ const PBCosmetics = class extends Message {
 		return proto2.util.equals(PBCosmetics, $, et)
 	}
 };
-export { PBCosmetics };
 ut(PBCosmetics, "runtime", proto2),
 	ut(PBCosmetics, "typeName", "PBCosmetics"),
 	ut(PBCosmetics, "fields", proto2.util.newFieldList(() => [{
@@ -2067,7 +2026,35 @@ ut(PBCosmetics, "runtime", proto2),
 		T: 9,
 		opt: !0
 	}]));
-const CPacketServerInfo = class extends Message {
+export class CPacketServerInfo extends Message {
+	/** @type {string} */
+	serverId;
+	/** @type {string} */
+	serverName;
+	/** @type {string} */
+	serverVersion;
+	/** @type {string} */
+	serverCategory;
+	/** @type {string} */
+	accessControl;
+	/** @type {string} */
+	worldType;
+	/** @type {boolean?} */
+	doDaylightCycle;
+	/** @type {string?} */
+	inviteCode;
+	/** @type {boolean?} */
+	cheats;
+	/** @type {boolean?} */
+	pvpEnabled;
+	/** @type {number} */
+	startTime;
+	/** @type {PlayerPermissionEntry[]} */
+	playerPermissionEntries;
+	/** @type {string?} */
+	metadata;
+	/** @type {boolean?} */
+	commandBlocksEnabled;
 	constructor($) {
 		super();
 		ut(this, "serverId");
@@ -2099,7 +2086,6 @@ const CPacketServerInfo = class extends Message {
 		return proto2.util.equals(CPacketServerInfo, $, et)
 	}
 };
-export { CPacketServerInfo };
 ut(CPacketServerInfo, "runtime", proto2),
 	ut(CPacketServerInfo, "typeName", "CPacketServerInfo"),
 	ut(CPacketServerInfo, "fields", proto2.util.newFieldList(() => [{
@@ -2180,7 +2166,21 @@ ut(CPacketServerInfo, "runtime", proto2),
 		T: 8,
 		opt: !0
 	}]));
-const PlayerPermissionEntry = class extends Message {
+export class PlayerPermissionEntry extends Message {
+	/** @type {string} */
+	uuid;
+	/** @type {string} */
+	username;
+	/** @type {number} */
+	permissionLevel;
+	/** @type {string?} */
+	color;
+	/** @type {number?} */
+	rank;
+	/** @type {number?} */
+	level;
+	/** @type {boolean?} */
+	verified;
 	constructor($) {
 		super();
 		ut(this, "uuid");
@@ -2204,8 +2204,10 @@ const PlayerPermissionEntry = class extends Message {
 	static equals($, et) {
 		return proto2.util.equals(PlayerPermissionEntry, $, et)
 	}
+	toString() {
+		return `${this.username} @ ${this.permissionLevel} R: ${this.rank} L: ${this.level} V?: ${this.verified}`;
+	}
 };
-export { PlayerPermissionEntry };
 ut(PlayerPermissionEntry, "runtime", proto2),
 	ut(PlayerPermissionEntry, "typeName", "PlayerPermissionEntry"),
 	ut(PlayerPermissionEntry, "fields", proto2.util.newFieldList(() => [{
@@ -2248,7 +2250,7 @@ ut(PlayerPermissionEntry, "runtime", proto2),
 		T: 8,
 		opt: !0
 	}]));
-const CPacketJoinGame = class extends Message {
+export class CPacketJoinGame extends Message {
 	constructor($) {
 		super();
 		ut(this, "canConnect");
@@ -2277,7 +2279,6 @@ const CPacketJoinGame = class extends Message {
 		return proto2.util.equals(CPacketJoinGame, $, et)
 	}
 };
-export { CPacketJoinGame };
 ut(CPacketJoinGame, "runtime", proto2),
 	ut(CPacketJoinGame, "typeName", "CPacketJoinGame"),
 	ut(CPacketJoinGame, "fields", proto2.util.newFieldList(() => [{
@@ -2346,7 +2347,7 @@ ut(CPacketJoinGame, "runtime", proto2),
 		T: 5,
 		opt: !0
 	}]));
-const CPacketLeaderboard = class extends Message {
+export class CPacketLeaderboard extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -2369,7 +2370,6 @@ const CPacketLeaderboard = class extends Message {
 		return proto2.util.equals(CPacketLeaderboard, $, et)
 	}
 };
-export { CPacketLeaderboard };
 ut(CPacketLeaderboard, "runtime", proto2),
 	ut(CPacketLeaderboard, "typeName", "CPacketLeaderboard"),
 	ut(CPacketLeaderboard, "fields", proto2.util.newFieldList(() => [{
@@ -2400,7 +2400,7 @@ ut(CPacketLeaderboard, "runtime", proto2),
 		T: 9,
 		repeated: !0
 	}]));
-const CPacketLocalStorage = class extends Message {
+export class CPacketLocalStorage extends Message {
 	constructor($) {
 		super();
 		ut(this, "action");
@@ -2421,7 +2421,6 @@ const CPacketLocalStorage = class extends Message {
 		return proto2.util.equals(CPacketLocalStorage, $, et)
 	}
 };
-export { CPacketLocalStorage };
 ut(CPacketLocalStorage, "runtime", proto2),
 	ut(CPacketLocalStorage, "typeName", "CPacketLocalStorage"),
 	ut(CPacketLocalStorage, "fields", proto2.util.newFieldList(() => [{
@@ -2455,7 +2454,7 @@ proto2.util.setEnumType(CPacketLocalStorage_Action, "CPacketLocalStorage.Action"
 	no: 2,
 	name: "SET"
 }]);
-const CPacketMessage = class extends Message {
+export class CPacketMessage extends Message {
 	constructor($) {
 		super();
 		ut(this, "text");
@@ -2479,7 +2478,6 @@ const CPacketMessage = class extends Message {
 		return proto2.util.equals(CPacketMessage, $, et)
 	}
 };
-export { CPacketMessage };
 ut(CPacketMessage, "runtime", proto2),
 	ut(CPacketMessage, "typeName", "CPacketMessage"),
 	ut(CPacketMessage, "fields", proto2.util.newFieldList(() => [{
@@ -2519,7 +2517,7 @@ ut(CPacketMessage, "runtime", proto2),
 		T: 5,
 		opt: !0
 	}]));
-const CPacketOpenShop = class extends Message {
+export class CPacketOpenShop extends Message {
 	constructor($) {
 		super();
 		ut(this, "type");
@@ -2538,7 +2536,6 @@ const CPacketOpenShop = class extends Message {
 		return proto2.util.equals(CPacketOpenShop, $, et)
 	}
 };
-export { CPacketOpenShop };
 ut(CPacketOpenShop, "runtime", proto2),
 	ut(CPacketOpenShop, "typeName", "CPacketOpenShop"),
 	ut(CPacketOpenShop, "fields", proto2.util.newFieldList(() => [{
@@ -2547,7 +2544,7 @@ ut(CPacketOpenShop, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const CPacketOpenWindow = class extends Message {
+export class CPacketOpenWindow extends Message {
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -2569,7 +2566,6 @@ const CPacketOpenWindow = class extends Message {
 		return proto2.util.equals(CPacketOpenWindow, $, et)
 	}
 };
-export { CPacketOpenWindow };
 ut(CPacketOpenWindow, "runtime", proto2),
 	ut(CPacketOpenWindow, "typeName", "CPacketOpenWindow"),
 	ut(CPacketOpenWindow, "fields", proto2.util.newFieldList(() => [{
@@ -2595,7 +2591,7 @@ ut(CPacketOpenWindow, "runtime", proto2),
 		T: 5,
 		opt: !0
 	}]));
-const CPacketParticles = class extends Message {
+export class CPacketParticles extends Message {
 	constructor($) {
 		super();
 		ut(this, "particleId");
@@ -2624,7 +2620,6 @@ const CPacketParticles = class extends Message {
 		return proto2.util.equals(CPacketParticles, $, et)
 	}
 };
-export { CPacketParticles };
 ut(CPacketParticles, "runtime", proto2),
 	ut(CPacketParticles, "typeName", "CPacketParticles"),
 	ut(CPacketParticles, "fields", proto2.util.newFieldList(() => [{
@@ -2693,7 +2688,7 @@ ut(CPacketParticles, "runtime", proto2),
 		T: 5,
 		repeated: !0
 	}]));
-const CPacketPlayerList = class extends Message {
+export class CPacketPlayerList extends Message {
 	constructor($) {
 		super();
 		ut(this, "players", []);
@@ -2712,7 +2707,6 @@ const CPacketPlayerList = class extends Message {
 		return proto2.util.equals(CPacketPlayerList, $, et)
 	}
 };
-export { CPacketPlayerList };
 ut(CPacketPlayerList, "runtime", proto2),
 	ut(CPacketPlayerList, "typeName", "CPacketPlayerList"),
 	ut(CPacketPlayerList, "fields", proto2.util.newFieldList(() => [{
@@ -2722,7 +2716,7 @@ ut(CPacketPlayerList, "runtime", proto2),
 		T: PlayerData,
 		repeated: !0
 	}]));
-const PlayerData = class extends Message {
+export class PlayerData extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -2749,7 +2743,6 @@ const PlayerData = class extends Message {
 		return proto2.util.equals(PlayerData, $, et)
 	}
 };
-export { PlayerData };
 ut(PlayerData, "runtime", proto2),
 	ut(PlayerData, "typeName", "PlayerData"),
 	ut(PlayerData, "fields", proto2.util.newFieldList(() => [{
@@ -2804,7 +2797,7 @@ ut(PlayerData, "runtime", proto2),
 		T: 8,
 		opt: !0
 	}]));
-const CPacketPlayerPosLook = class extends Message {
+export class CPacketPlayerPosLook extends Message {
 	constructor($) {
 		super();
 		ut(this, "x");
@@ -2827,7 +2820,6 @@ const CPacketPlayerPosLook = class extends Message {
 		return proto2.util.equals(CPacketPlayerPosLook, $, et)
 	}
 };
-export { CPacketPlayerPosLook };
 ut(CPacketPlayerPosLook, "runtime", proto2),
 	ut(CPacketPlayerPosLook, "typeName", "CPacketPlayerPosLook"),
 	ut(CPacketPlayerPosLook, "fields", proto2.util.newFieldList(() => [{
@@ -2856,7 +2848,7 @@ ut(CPacketPlayerPosLook, "runtime", proto2),
 		kind: "scalar",
 		T: 2
 	}]));
-const CPacketPlayerPosition = class extends Message {
+export class CPacketPlayerPosition extends Message {
 	constructor($) {
 		super();
 		ut(this, "x");
@@ -2877,7 +2869,6 @@ const CPacketPlayerPosition = class extends Message {
 		return proto2.util.equals(CPacketPlayerPosition, $, et)
 	}
 };
-export { CPacketPlayerPosition };
 ut(CPacketPlayerPosition, "runtime", proto2),
 	ut(CPacketPlayerPosition, "typeName", "CPacketPlayerPosition"),
 	ut(CPacketPlayerPosition, "fields", proto2.util.newFieldList(() => [{
@@ -2921,7 +2912,6 @@ const CPacketPlayerReconciliation = class CPacketPlayerReconciliation extends Me
 		return proto2.util.equals(CPacketPlayerReconciliation, $, et)
 	}
 };
-export { CPacketPlayerReconciliation };
 ut(CPacketPlayerReconciliation, "runtime", proto2),
 	ut(CPacketPlayerReconciliation, "typeName", "CPacketPlayerReconciliation"),
 	ut(CPacketPlayerReconciliation, "fields", proto2.util.newFieldList(() => [{
@@ -2961,7 +2951,7 @@ ut(CPacketPlayerReconciliation, "runtime", proto2),
 		T: 8,
 		opt: !0
 	}]));
-const CPacketPong = class extends Message {
+export class CPacketPong extends Message {
 	constructor($) {
 		super();
 		ut(this, "time");
@@ -2982,7 +2972,6 @@ const CPacketPong = class extends Message {
 		return proto2.util.equals(CPacketPong, $, et)
 	}
 };
-export { CPacketPong };
 ut(CPacketPong, "runtime", proto2),
 	ut(CPacketPong, "typeName", "CPacketPong"),
 	ut(CPacketPong, "fields", proto2.util.newFieldList(() => [{
@@ -3001,7 +2990,7 @@ ut(CPacketPong, "runtime", proto2),
 		kind: "scalar",
 		T: 13
 	}]));
-const CPacketRespawn = class extends Message {
+export class CPacketRespawn extends Message {
 	constructor($) {
 		super();
 		ut(this, "notDeath");
@@ -3022,7 +3011,6 @@ const CPacketRespawn = class extends Message {
 		return proto2.util.equals(CPacketRespawn, $, et)
 	}
 };
-export { CPacketRespawn };
 ut(CPacketRespawn, "runtime", proto2),
 	ut(CPacketRespawn, "typeName", "CPacketRespawn"),
 	ut(CPacketRespawn, "fields", proto2.util.newFieldList(() => [{
@@ -3044,7 +3032,7 @@ ut(CPacketRespawn, "runtime", proto2),
 		T: 5,
 		opt: !0
 	}]));
-const CPacketScoreboard = class extends Message {
+export class CPacketScoreboard extends Message {
 	constructor($) {
 		super();
 		ut(this, "title");
@@ -3064,7 +3052,6 @@ const CPacketScoreboard = class extends Message {
 		return proto2.util.equals(CPacketScoreboard, $, et)
 	}
 };
-export { CPacketScoreboard };
 ut(CPacketScoreboard, "runtime", proto2),
 	ut(CPacketScoreboard, "typeName", "CPacketScoreboard"),
 	ut(CPacketScoreboard, "fields", proto2.util.newFieldList(() => [{
@@ -3079,7 +3066,7 @@ ut(CPacketScoreboard, "runtime", proto2),
 		T: ScoreboardContent,
 		repeated: !0
 	}]));
-const ScoreboardContent = class extends Message {
+export class ScoreboardContent extends Message {
 	constructor($) {
 		super();
 		ut(this, "columns", []);
@@ -3098,7 +3085,6 @@ const ScoreboardContent = class extends Message {
 		return proto2.util.equals(ScoreboardContent, $, et)
 	}
 };
-export { ScoreboardContent };
 ut(ScoreboardContent, "runtime", proto2),
 	ut(ScoreboardContent, "typeName", "ScoreboardContent"),
 	ut(ScoreboardContent, "fields", proto2.util.newFieldList(() => [{
@@ -3108,7 +3094,7 @@ ut(ScoreboardContent, "runtime", proto2),
 		T: 9,
 		repeated: !0
 	}]));
-const CPacketServerMetadata = class extends Message {
+export class CPacketServerMetadata extends Message {
 	constructor($) {
 		super();
 		ut(this, "metadata");
@@ -3127,7 +3113,6 @@ const CPacketServerMetadata = class extends Message {
 		return proto2.util.equals(CPacketServerMetadata, $, et)
 	}
 };
-export { CPacketServerMetadata };
 ut(CPacketServerMetadata, "runtime", proto2),
 	ut(CPacketServerMetadata, "typeName", "CPacketServerMetadata"),
 	ut(CPacketServerMetadata, "fields", proto2.util.newFieldList(() => [{
@@ -3136,7 +3121,7 @@ ut(CPacketServerMetadata, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const CPacketSetSlot = class extends Message {
+export class CPacketSetSlot extends Message {
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -3157,7 +3142,6 @@ const CPacketSetSlot = class extends Message {
 		return proto2.util.equals(CPacketSetSlot, $, et)
 	}
 };
-export { CPacketSetSlot };
 ut(CPacketSetSlot, "runtime", proto2),
 	ut(CPacketSetSlot, "typeName", "CPacketSetSlot"),
 	ut(CPacketSetSlot, "fields", proto2.util.newFieldList(() => [{
@@ -3176,7 +3160,7 @@ ut(CPacketSetSlot, "runtime", proto2),
 		kind: "message",
 		T: PBItemStack
 	}]));
-const CPacketSignEditorOpen = class extends Message {
+export class CPacketSignEditorOpen extends Message {
 	constructor($) {
 		super();
 		ut(this, "signPosition");
@@ -3195,7 +3179,6 @@ const CPacketSignEditorOpen = class extends Message {
 		return proto2.util.equals(CPacketSignEditorOpen, $, et)
 	}
 };
-export { CPacketSignEditorOpen };
 ut(CPacketSignEditorOpen, "runtime", proto2),
 	ut(CPacketSignEditorOpen, "typeName", "CPacketSignEditorOpen"),
 	ut(CPacketSignEditorOpen, "fields", proto2.util.newFieldList(() => [{
@@ -3204,7 +3187,7 @@ ut(CPacketSignEditorOpen, "runtime", proto2),
 		kind: "message",
 		T: PBBlockPos
 	}]));
-const CPacketSoundEffect = class extends Message {
+export class CPacketSoundEffect extends Message {
 	constructor($) {
 		super();
 		ut(this, "sound");
@@ -3226,7 +3209,6 @@ const CPacketSoundEffect = class extends Message {
 		return proto2.util.equals(CPacketSoundEffect, $, et)
 	}
 };
-export { CPacketSoundEffect };
 ut(CPacketSoundEffect, "runtime", proto2),
 	ut(CPacketSoundEffect, "typeName", "CPacketSoundEffect"),
 	ut(CPacketSoundEffect, "fields", proto2.util.newFieldList(() => [{
@@ -3253,7 +3235,7 @@ ut(CPacketSoundEffect, "runtime", proto2),
 		T: 2,
 		opt: !0
 	}]));
-const CPacketSpawnEntity = class extends Message {
+export class CPacketSpawnEntity extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -3281,7 +3263,6 @@ const CPacketSpawnEntity = class extends Message {
 		return proto2.util.equals(CPacketSpawnEntity, $, et)
 	}
 };
-export { CPacketSpawnEntity };
 ut(CPacketSpawnEntity, "runtime", proto2),
 	ut(CPacketSpawnEntity, "typeName", "CPacketSpawnEntity"),
 	ut(CPacketSpawnEntity, "fields", proto2.util.newFieldList(() => [{
@@ -3343,7 +3324,7 @@ ut(CPacketSpawnEntity, "runtime", proto2),
 		T: 9,
 		opt: !0
 	}]));
-const CPacketSpawnExperienceOrb = class extends Message {
+export class CPacketSpawnExperienceOrb extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -3366,7 +3347,6 @@ const CPacketSpawnExperienceOrb = class extends Message {
 		return proto2.util.equals(CPacketSpawnExperienceOrb, $, et)
 	}
 };
-export { CPacketSpawnExperienceOrb };
 ut(CPacketSpawnExperienceOrb, "runtime", proto2),
 	ut(CPacketSpawnExperienceOrb, "typeName", "CPacketSpawnExperienceOrb"),
 	ut(CPacketSpawnExperienceOrb, "fields", proto2.util.newFieldList(() => [{
@@ -3395,7 +3375,7 @@ ut(CPacketSpawnExperienceOrb, "runtime", proto2),
 		kind: "scalar",
 		T: 13
 	}]));
-const CPacketSpawnPlayer = class extends Message {
+export class CPacketSpawnPlayer extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -3423,7 +3403,6 @@ const CPacketSpawnPlayer = class extends Message {
 		return proto2.util.equals(CPacketSpawnPlayer, $, et)
 	}
 };
-export { CPacketSpawnPlayer };
 ut(CPacketSpawnPlayer, "runtime", proto2),
 	ut(CPacketSpawnPlayer, "typeName", "CPacketSpawnPlayer"),
 	ut(CPacketSpawnPlayer, "fields", proto2.util.newFieldList(() => [{
@@ -3479,7 +3458,7 @@ ut(CPacketSpawnPlayer, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const CPacketTabComplete = class extends Message {
+export class CPacketTabComplete extends Message {
 	constructor($) {
 		super();
 		ut(this, "matches", []);
@@ -3498,7 +3477,6 @@ const CPacketTabComplete = class extends Message {
 		return proto2.util.equals(CPacketTabComplete, $, et)
 	}
 };
-export { CPacketTabComplete };
 ut(CPacketTabComplete, "runtime", proto2),
 	ut(CPacketTabComplete, "typeName", "CPacketTabComplete"),
 	ut(CPacketTabComplete, "fields", proto2.util.newFieldList(() => [{
@@ -3508,7 +3486,7 @@ ut(CPacketTabComplete, "runtime", proto2),
 		T: 9,
 		repeated: !0
 	}]));
-const CPacketTitle = class extends Message {
+export class CPacketTitle extends Message {
 	constructor($) {
 		super();
 		ut(this, "title");
@@ -3528,7 +3506,6 @@ const CPacketTitle = class extends Message {
 		return proto2.util.equals(CPacketTitle, $, et)
 	}
 };
-export { CPacketTitle };
 ut(CPacketTitle, "runtime", proto2),
 	ut(CPacketTitle, "typeName", "CPacketTitle"),
 	ut(CPacketTitle, "fields", proto2.util.newFieldList(() => [{
@@ -3542,7 +3519,7 @@ ut(CPacketTitle, "runtime", proto2),
 		kind: "scalar",
 		T: 13
 	}]));
-const CPacketUpdateHealth = class extends Message {
+export class CPacketUpdateHealth extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -3565,7 +3542,6 @@ const CPacketUpdateHealth = class extends Message {
 		return proto2.util.equals(CPacketUpdateHealth, $, et)
 	}
 };
-export { CPacketUpdateHealth };
 ut(CPacketUpdateHealth, "runtime", proto2),
 	ut(CPacketUpdateHealth, "typeName", "CPacketUpdateHealth"),
 	ut(CPacketUpdateHealth, "fields", proto2.util.newFieldList(() => [{
@@ -3598,7 +3574,7 @@ ut(CPacketUpdateHealth, "runtime", proto2),
 		T: 2,
 		opt: !0
 	}]));
-const CPacketUpdateLeaderboard = class extends Message {
+export class CPacketUpdateLeaderboard extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -3618,7 +3594,6 @@ const CPacketUpdateLeaderboard = class extends Message {
 		return proto2.util.equals(CPacketUpdateLeaderboard, $, et)
 	}
 };
-export { CPacketUpdateLeaderboard };
 ut(CPacketUpdateLeaderboard, "runtime", proto2),
 	ut(CPacketUpdateLeaderboard, "typeName", "CPacketUpdateLeaderboard"),
 	ut(CPacketUpdateLeaderboard, "fields", proto2.util.newFieldList(() => [{
@@ -3633,7 +3608,7 @@ ut(CPacketUpdateLeaderboard, "runtime", proto2),
 		T: 9,
 		repeated: !0
 	}]));
-const CPacketUpdateScoreboard = class extends Message {
+export class CPacketUpdateScoreboard extends Message {
 	constructor($) {
 		super();
 		ut(this, "index");
@@ -3653,7 +3628,6 @@ const CPacketUpdateScoreboard = class extends Message {
 		return proto2.util.equals(CPacketUpdateScoreboard, $, et)
 	}
 };
-export { CPacketUpdateScoreboard };
 ut(CPacketUpdateScoreboard, "runtime", proto2),
 	ut(CPacketUpdateScoreboard, "typeName", "CPacketUpdateScoreboard"),
 	ut(CPacketUpdateScoreboard, "fields", proto2.util.newFieldList(() => [{
@@ -3668,7 +3642,7 @@ ut(CPacketUpdateScoreboard, "runtime", proto2),
 		T: 9,
 		repeated: !0
 	}]));
-const CPacketUpdateStatus = class extends Message {
+export class CPacketUpdateStatus extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -3691,7 +3665,6 @@ const CPacketUpdateStatus = class extends Message {
 		return proto2.util.equals(CPacketUpdateStatus, $, et)
 	}
 };
-export { CPacketUpdateStatus };
 ut(CPacketUpdateStatus, "runtime", proto2),
 	ut(CPacketUpdateStatus, "typeName", "CPacketUpdateStatus"),
 	ut(CPacketUpdateStatus, "fields", proto2.util.newFieldList(() => [{
@@ -3724,7 +3697,7 @@ ut(CPacketUpdateStatus, "runtime", proto2),
 		T: 8,
 		opt: !0
 	}]));
-const CPacketUpdate = class extends Message {
+export class CPacketUpdate extends Message {
 	constructor($) {
 		super();
 		ut(this, "tick");
@@ -3745,7 +3718,6 @@ const CPacketUpdate = class extends Message {
 		return proto2.util.equals(CPacketUpdate, $, et)
 	}
 };
-export { CPacketUpdate };
 ut(CPacketUpdate, "runtime", proto2),
 	ut(CPacketUpdate, "typeName", "CPacketUpdate"),
 	ut(CPacketUpdate, "fields", proto2.util.newFieldList(() => [{
@@ -3764,7 +3736,7 @@ ut(CPacketUpdate, "runtime", proto2),
 		kind: "scalar",
 		T: 2
 	}]));
-const CPacketWindowItems = class extends Message {
+export class CPacketWindowItems extends Message {
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -3784,7 +3756,6 @@ const CPacketWindowItems = class extends Message {
 		return proto2.util.equals(CPacketWindowItems, $, et)
 	}
 };
-export { CPacketWindowItems };
 ut(CPacketWindowItems, "runtime", proto2),
 	ut(CPacketWindowItems, "typeName", "CPacketWindowItems"),
 	ut(CPacketWindowItems, "fields", proto2.util.newFieldList(() => [{
@@ -3799,7 +3770,7 @@ ut(CPacketWindowItems, "runtime", proto2),
 		T: PBItemStack,
 		repeated: !0
 	}]));
-const CPacketWindowProperty = class extends Message {
+export class CPacketWindowProperty extends Message {
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -3820,7 +3791,6 @@ const CPacketWindowProperty = class extends Message {
 		return proto2.util.equals(CPacketWindowProperty, $, et)
 	}
 };
-export { CPacketWindowProperty };
 ut(CPacketWindowProperty, "runtime", proto2),
 	ut(CPacketWindowProperty, "typeName", "CPacketWindowProperty"),
 	ut(CPacketWindowProperty, "fields", proto2.util.newFieldList(() => [{
@@ -3839,7 +3809,7 @@ ut(CPacketWindowProperty, "runtime", proto2),
 		kind: "scalar",
 		T: 5
 	}]));
-const SPacketRespawn = class extends Message {
+export class SPacketRespawn extends Message {
 	constructor(_) {
 		super(),
 			proto2.util.initPartial(_, this)
@@ -3857,7 +3827,6 @@ const SPacketRespawn = class extends Message {
 		return proto2.util.equals(SPacketRespawn, _, $)
 	}
 };
-export { SPacketRespawn };
 ut(SPacketRespawn, "runtime", proto2),
 	ut(SPacketRespawn, "typeName", "SPacketRespawn"),
 	ut(SPacketRespawn, "fields", proto2.util.newFieldList(() => []));
@@ -3889,7 +3858,7 @@ ut(SPacketTabComplete$1, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const SPacketCraftItem = class extends Message {
+export class SPacketCraftItem extends Message {
 	constructor($) {
 		super();
 		ut(this, "data");
@@ -3908,7 +3877,6 @@ const SPacketCraftItem = class extends Message {
 		return proto2.util.equals(SPacketCraftItem, $, et)
 	}
 };
-export { SPacketCraftItem };
 ut(SPacketCraftItem, "runtime", proto2),
 	ut(SPacketCraftItem, "typeName", "SPacketCraftItem"),
 	ut(SPacketCraftItem, "fields", proto2.util.newFieldList(() => [{
@@ -3917,7 +3885,7 @@ ut(SPacketCraftItem, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const SPacketRequestChunk = class extends Message {
+export class SPacketRequestChunk extends Message {
 	constructor($) {
 		super();
 		ut(this, "x");
@@ -3937,7 +3905,6 @@ const SPacketRequestChunk = class extends Message {
 		return proto2.util.equals(SPacketRequestChunk, $, et)
 	}
 };
-export { SPacketRequestChunk };
 ut(SPacketRequestChunk, "runtime", proto2),
 	ut(SPacketRequestChunk, "typeName", "SPacketRequestChunk"),
 	ut(SPacketRequestChunk, "fields", proto2.util.newFieldList(() => [{
@@ -3951,7 +3918,7 @@ ut(SPacketRequestChunk, "runtime", proto2),
 		kind: "scalar",
 		T: 5
 	}]));
-const SPacketAdminAction = class extends Message {
+export class SPacketAdminAction extends Message {
 	constructor($) {
 		super();
 		ut(this, "action", {
@@ -3972,7 +3939,6 @@ const SPacketAdminAction = class extends Message {
 		return proto2.util.equals(SPacketAdminAction, $, et)
 	}
 };
-export { SPacketAdminAction };
 ut(SPacketAdminAction, "runtime", proto2),
 	ut(SPacketAdminAction, "typeName", "SPacketAdminAction"),
 	ut(SPacketAdminAction, "fields", proto2.util.newFieldList(() => [{
@@ -4030,7 +3996,7 @@ ut(SPacketAdminAction, "runtime", proto2),
 		T: UpdatePvP,
 		oneof: "action"
 	}]));
-const KickPlayer = class extends Message {
+export class KickPlayer extends Message {
 	constructor($) {
 		super();
 		ut(this, "uuid");
@@ -4049,7 +4015,6 @@ const KickPlayer = class extends Message {
 		return proto2.util.equals(KickPlayer, $, et)
 	}
 };
-export { KickPlayer };
 ut(KickPlayer, "runtime", proto2),
 	ut(KickPlayer, "typeName", "KickPlayer"),
 	ut(KickPlayer, "fields", proto2.util.newFieldList(() => [{
@@ -4058,7 +4023,7 @@ ut(KickPlayer, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const BanPlayer = class extends Message {
+export class BanPlayer extends Message {
 	constructor($) {
 		super();
 		ut(this, "uuid");
@@ -4077,7 +4042,6 @@ const BanPlayer = class extends Message {
 		return proto2.util.equals(BanPlayer, $, et)
 	}
 };
-export { BanPlayer };
 ut(BanPlayer, "runtime", proto2),
 	ut(BanPlayer, "typeName", "BanPlayer"),
 	ut(BanPlayer, "fields", proto2.util.newFieldList(() => [{
@@ -4086,7 +4050,7 @@ ut(BanPlayer, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const UnbanPlayer = class extends Message {
+export class UnbanPlayer extends Message {
 	constructor($) {
 		super();
 		ut(this, "uuid");
@@ -4105,7 +4069,6 @@ const UnbanPlayer = class extends Message {
 		return proto2.util.equals(UnbanPlayer, $, et)
 	}
 };
-export { UnbanPlayer };
 ut(UnbanPlayer, "runtime", proto2),
 	ut(UnbanPlayer, "typeName", "UnbanPlayer"),
 	ut(UnbanPlayer, "fields", proto2.util.newFieldList(() => [{
@@ -4114,7 +4077,7 @@ ut(UnbanPlayer, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const StopServer = class extends Message {
+export class StopServer extends Message {
 	constructor(_) {
 		super(),
 			proto2.util.initPartial(_, this)
@@ -4132,11 +4095,10 @@ const StopServer = class extends Message {
 		return proto2.util.equals(StopServer, _, $)
 	}
 };
-export { StopServer };
 ut(StopServer, "runtime", proto2),
 	ut(StopServer, "typeName", "StopServer"),
 	ut(StopServer, "fields", proto2.util.newFieldList(() => []));
-const PromotePlayer = class extends Message {
+export class PromotePlayer extends Message {
 	constructor($) {
 		super();
 		ut(this, "uuid");
@@ -4155,7 +4117,6 @@ const PromotePlayer = class extends Message {
 		return proto2.util.equals(PromotePlayer, $, et)
 	}
 };
-export { PromotePlayer };
 ut(PromotePlayer, "runtime", proto2),
 	ut(PromotePlayer, "typeName", "PromotePlayer"),
 	ut(PromotePlayer, "fields", proto2.util.newFieldList(() => [{
@@ -4164,7 +4125,7 @@ ut(PromotePlayer, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const DemotePlayer = class extends Message {
+export class DemotePlayer extends Message {
 	constructor($) {
 		super();
 		ut(this, "uuid");
@@ -4183,7 +4144,6 @@ const DemotePlayer = class extends Message {
 		return proto2.util.equals(l1, $, et)
 	}
 };
-export { DemotePlayer };
 ut(DemotePlayer, "runtime", proto2),
 	ut(DemotePlayer, "typeName", "DemotePlayer"),
 	ut(DemotePlayer, "fields", proto2.util.newFieldList(() => [{
@@ -4192,7 +4152,7 @@ ut(DemotePlayer, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const UpdateAccessControl = class extends Message {
+export class UpdateAccessControl extends Message {
 	constructor($) {
 		super();
 		ut(this, "accessControl");
@@ -4211,7 +4171,6 @@ const UpdateAccessControl = class extends Message {
 		return proto2.util.equals(UpdateAccessControl, $, et)
 	}
 };
-export { UpdateAccessControl };
 ut(UpdateAccessControl, "runtime", proto2),
 	ut(UpdateAccessControl, "typeName", "UpdateAccessControl"),
 	ut(UpdateAccessControl, "fields", proto2.util.newFieldList(() => [{
@@ -4220,7 +4179,7 @@ ut(UpdateAccessControl, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const UpdateCheats = class extends Message {
+export class UpdateCheats extends Message {
 	constructor($) {
 		super();
 		ut(this, "cheats");
@@ -4239,7 +4198,6 @@ const UpdateCheats = class extends Message {
 		return proto2.util.equals(UpdateCheats, $, et)
 	}
 };
-export { UpdateCheats };
 ut(UpdateCheats, "runtime", proto2),
 	ut(UpdateCheats, "typeName", "UpdateCheats"),
 	ut(UpdateCheats, "fields", proto2.util.newFieldList(() => [{
@@ -4248,7 +4206,7 @@ ut(UpdateCheats, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const UpdatePvP = class extends Message {
+export class UpdatePvP extends Message {
 	constructor($) {
 		super();
 		ut(this, "enabled");
@@ -4267,7 +4225,6 @@ const UpdatePvP = class extends Message {
 		return proto2.util.equals(UpdatePvP, $, et)
 	}
 };
-export { UpdatePvP };
 ut(UpdatePvP, "runtime", proto2),
 	ut(UpdatePvP, "typeName", "UpdatePvP"),
 	ut(UpdatePvP, "fields", proto2.util.newFieldList(() => [{
@@ -4276,7 +4233,7 @@ ut(UpdatePvP, "runtime", proto2),
 		kind: "scalar",
 		T: 8
 	}]));
-const SPacketAnalytics = class extends Message {
+export class SPacketAnalytics extends Message {
 	constructor($) {
 		super();
 		ut(this, "fps");
@@ -4296,7 +4253,6 @@ const SPacketAnalytics = class extends Message {
 		return proto2.util.equals(SPacketAnalytics, $, et)
 	}
 };
-export { SPacketAnalytics };
 ut(SPacketAnalytics, "runtime", proto2),
 	ut(SPacketAnalytics, "typeName", "SPacketAnalytics"),
 	ut(SPacketAnalytics, "fields", proto2.util.newFieldList(() => [{
@@ -4310,7 +4266,7 @@ ut(SPacketAnalytics, "runtime", proto2),
 		kind: "scalar",
 		T: 2
 	}]));
-const SPacketConfirmTransaction = class extends Message {
+export class SPacketConfirmTransaction extends Message {
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -4331,7 +4287,6 @@ const SPacketConfirmTransaction = class extends Message {
 		return proto2.util.equals(SPacketConfirmTransaction, $, et)
 	}
 };
-export { SPacketConfirmTransaction };
 ut(SPacketConfirmTransaction, "runtime", proto2),
 	ut(SPacketConfirmTransaction, "typeName", "SPacketConfirmTransaction"),
 	ut(SPacketConfirmTransaction, "fields", proto2.util.newFieldList(() => [{
@@ -4350,7 +4305,7 @@ ut(SPacketConfirmTransaction, "runtime", proto2),
 		kind: "scalar",
 		T: 8
 	}]));
-const SPacketHeldItemChange = class extends Message {
+export class SPacketHeldItemChange extends Message {
 	constructor($) {
 		super();
 		ut(this, "slot");
@@ -4369,7 +4324,6 @@ const SPacketHeldItemChange = class extends Message {
 		return proto2.util.equals(SPacketHeldItemChange, $, et)
 	}
 };
-export { SPacketHeldItemChange };
 ut(SPacketHeldItemChange, "runtime", proto2),
 	ut(SPacketHeldItemChange, "typeName", "SPacketHeldItemChange"),
 	ut(SPacketHeldItemChange, "fields", proto2.util.newFieldList(() => [{
@@ -4378,7 +4332,7 @@ ut(SPacketHeldItemChange, "runtime", proto2),
 		kind: "scalar",
 		T: 5
 	}]));
-const SPacketPlayerInput = class extends Message {
+export class SPacketPlayerInput extends Message {
 	constructor($) {
 		super();
 		ut(this, "sequenceNumber");
@@ -4407,7 +4361,6 @@ const SPacketPlayerInput = class extends Message {
 		return proto2.util.equals(SPacketPlayerInput, $, et)
 	}
 };
-export { SPacketPlayerInput };
 ut(SPacketPlayerInput, "runtime", proto2),
 	ut(SPacketPlayerInput, "typeName", "SPacketPlayerInput"),
 	ut(SPacketPlayerInput, "fields", proto2.util.newFieldList(() => [{
@@ -4466,7 +4419,7 @@ ut(SPacketPlayerInput, "runtime", proto2),
 		kind: "message",
 		T: PBFloatVector3
 	}]));
-const SPacketPing = class extends Message {
+export class SPacketPing extends Message {
 	constructor($) {
 		super();
 		ut(this, "time");
@@ -4485,7 +4438,6 @@ const SPacketPing = class extends Message {
 		return proto2.util.equals(SPacketPing, $, et)
 	}
 };
-export { SPacketPing };
 ut(SPacketPing, "runtime", proto2),
 	ut(SPacketPing, "typeName", "SPacketPing"),
 	ut(SPacketPing, "fields", proto2.util.newFieldList(() => [{
@@ -4494,7 +4446,7 @@ ut(SPacketPing, "runtime", proto2),
 		kind: "scalar",
 		T: 4
 	}]));
-const SPacketUpdateSign = class extends Message {
+export class SPacketUpdateSign extends Message {
 	constructor($) {
 		super();
 		ut(this, "pos");
@@ -4514,7 +4466,6 @@ const SPacketUpdateSign = class extends Message {
 		return proto2.util.equals(SPacketUpdateSign, $, et)
 	}
 };
-export { SPacketUpdateSign };
 ut(SPacketUpdateSign, "runtime", proto2),
 	ut(SPacketUpdateSign, "typeName", "SPacketUpdateSign"),
 	ut(SPacketUpdateSign, "fields", proto2.util.newFieldList(() => [{
@@ -4529,7 +4480,7 @@ ut(SPacketUpdateSign, "runtime", proto2),
 		T: 9,
 		repeated: !0
 	}]));
-const CPacketEntityEffect = class extends Message {
+export class CPacketEntityEffect extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -4552,7 +4503,6 @@ const CPacketEntityEffect = class extends Message {
 		return proto2.util.equals(CPacketEntityEffect, $, et)
 	}
 };
-export { CPacketEntityEffect };
 ut(CPacketEntityEffect, "runtime", proto2),
 	ut(CPacketEntityEffect, "typeName", "CPacketEntityEffect"),
 	ut(CPacketEntityEffect, "fields", proto2.util.newFieldList(() => [{
@@ -4581,7 +4531,7 @@ ut(CPacketEntityEffect, "runtime", proto2),
 		kind: "scalar",
 		T: 8
 	}]));
-const CPacketEntityProperties = class extends Message {
+export class CPacketEntityProperties extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -4601,7 +4551,6 @@ const CPacketEntityProperties = class extends Message {
 		return proto2.util.equals(CPacketEntityProperties, $, et)
 	}
 };
-export { CPacketEntityProperties };
 ut(CPacketEntityProperties, "runtime", proto2),
 	ut(CPacketEntityProperties, "typeName", "CPacketEntityProperties"),
 	ut(CPacketEntityProperties, "fields", proto2.util.newFieldList(() => [{
@@ -4616,7 +4565,7 @@ ut(CPacketEntityProperties, "runtime", proto2),
 		T: PBSnapshot,
 		repeated: !0
 	}]));
-const PBSnapshot = class extends Message {
+export class PBSnapshot extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -4637,7 +4586,6 @@ const PBSnapshot = class extends Message {
 		return proto2.util.equals(PBSnapshot, $, et)
 	}
 };
-export { PBSnapshot };
 ut(PBSnapshot, "runtime", proto2),
 	ut(PBSnapshot, "typeName", "PBSnapshot"),
 	ut(PBSnapshot, "fields", proto2.util.newFieldList(() => [{
@@ -4657,7 +4605,7 @@ ut(PBSnapshot, "runtime", proto2),
 		T: PBModifier,
 		repeated: !0
 	}]));
-const PBModifier = class extends Message {
+export class PBModifier extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -4678,7 +4626,6 @@ const PBModifier = class extends Message {
 		return proto2.util.equals(PBModifier, $, et)
 	}
 };
-export { PBModifier };
 ut(PBModifier, "runtime", proto2),
 	ut(PBModifier, "typeName", "PBModifier"),
 	ut(PBModifier, "fields", proto2.util.newFieldList(() => [{
@@ -4697,7 +4644,7 @@ ut(PBModifier, "runtime", proto2),
 		kind: "scalar",
 		T: 13
 	}]));
-const CPacketQueueNext = class extends Message {
+export class CPacketQueueNext extends Message {
 	constructor($) {
 		super();
 		ut(this, "minigameId");
@@ -4717,7 +4664,6 @@ const CPacketQueueNext = class extends Message {
 		return proto2.util.equals(CPacketQueueNext, $, et)
 	}
 };
-export { CPacketQueueNext };
 ut(CPacketQueueNext, "runtime", proto2),
 	ut(CPacketQueueNext, "typeName", "CPacketQueueNext"),
 	ut(CPacketQueueNext, "fields", proto2.util.newFieldList(() => [{
@@ -4731,7 +4677,7 @@ ut(CPacketQueueNext, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
-const CPacketRemoveEntityEffect = class extends Message {
+export class CPacketRemoveEntityEffect extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -4751,7 +4697,6 @@ const CPacketRemoveEntityEffect = class extends Message {
 		return proto2.util.equals(CPacketRemoveEntityEffect, $, et)
 	}
 };
-export { CPacketRemoveEntityEffect };
 ut(CPacketRemoveEntityEffect, "runtime", proto2),
 	ut(CPacketRemoveEntityEffect, "typeName", "CPacketRemoveEntityEffect"),
 	ut(CPacketRemoveEntityEffect, "fields", proto2.util.newFieldList(() => [{
@@ -4765,7 +4710,7 @@ ut(CPacketRemoveEntityEffect, "runtime", proto2),
 		kind: "scalar",
 		T: 13
 	}]));
-const CPacketSetExperience = class extends Message {
+export class CPacketSetExperience extends Message {
 	constructor($) {
 		super();
 		ut(this, "experience");
@@ -4786,7 +4731,6 @@ const CPacketSetExperience = class extends Message {
 		return proto2.util.equals(CPacketSetExperience, $, et)
 	}
 };
-export { CPacketSetExperience };
 ut(CPacketSetExperience, "runtime", proto2),
 	ut(CPacketSetExperience, "typeName", "CPacketSetExperience"),
 	ut(CPacketSetExperience, "fields", proto2.util.newFieldList(() => [{
@@ -4805,7 +4749,7 @@ ut(CPacketSetExperience, "runtime", proto2),
 		kind: "scalar",
 		T: 5
 	}]));
-const CPacketShopProperty = class extends Message {
+export class CPacketShopProperty extends Message {
 	constructor($) {
 		super();
 		ut(this, "name");
@@ -4825,7 +4769,6 @@ const CPacketShopProperty = class extends Message {
 		return proto2.util.equals(CPacketShopProperty, $, et)
 	}
 };
-export { CPacketShopProperty };
 ut(CPacketShopProperty, "runtime", proto2),
 	ut(CPacketShopProperty, "typeName", "CPacketShopProperty"),
 	ut(CPacketShopProperty, "fields", proto2.util.newFieldList(() => [{
@@ -4841,7 +4784,7 @@ ut(CPacketShopProperty, "runtime", proto2),
 		T: 9,
 		opt: !0
 	}]));
-const CPacketShopProperties = class extends Message {
+export class CPacketShopProperties extends Message {
 	constructor($) {
 		super();
 		ut(this, "properties", []);
@@ -4860,7 +4803,6 @@ const CPacketShopProperties = class extends Message {
 		return proto2.util.equals(CPacketShopProperties, $, et)
 	}
 };
-export { CPacketShopProperties };
 ut(CPacketShopProperties, "runtime", proto2),
 	ut(CPacketShopProperties, "typeName", "CPacketShopProperties"),
 	ut(CPacketShopProperties, "fields", proto2.util.newFieldList(() => [{
@@ -4870,7 +4812,7 @@ ut(CPacketShopProperties, "runtime", proto2),
 		T: CPacketShopProperty,
 		repeated: !0
 	}]));
-const CPacketUseBed = class extends Message {
+export class CPacketUseBed extends Message {
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -4890,7 +4832,6 @@ const CPacketUseBed = class extends Message {
 		return proto2.util.equals(CPacketUseBed, $, et)
 	}
 };
-export { CPacketUseBed };
 ut(CPacketUseBed, "runtime", proto2),
 	ut(CPacketUseBed, "typeName", "CPacketUseBed"),
 	ut(CPacketUseBed, "fields", proto2.util.newFieldList(() => [{
@@ -4904,7 +4845,7 @@ ut(CPacketUseBed, "runtime", proto2),
 		kind: "message",
 		T: PBBlockPos
 	}]));
-const CPacketTimeUpdate = class extends Message {
+export class CPacketTimeUpdate extends Message {
 	constructor($) {
 		super();
 		ut(this, "totalTime");
@@ -4924,7 +4865,6 @@ const CPacketTimeUpdate = class extends Message {
 		return proto2.util.equals(CPacketTimeUpdate, $, et)
 	}
 };
-export { CPacketTimeUpdate };
 ut(CPacketTimeUpdate, "runtime", proto2),
 	ut(CPacketTimeUpdate, "typeName", "CPacketTimeUpdate"),
 	ut(CPacketTimeUpdate, "fields", proto2.util.newFieldList(() => [{
@@ -4938,7 +4878,7 @@ ut(CPacketTimeUpdate, "runtime", proto2),
 		kind: "scalar",
 		T: 13
 	}]));
-const ClientBoundCombined = class extends Message {
+export class ClientBoundCombined extends Message {
 	constructor($) {
 		super();
 		ut(this, "packets", []);
@@ -4957,7 +4897,6 @@ const ClientBoundCombined = class extends Message {
 		return proto2.util.equals(ClientBoundCombined, $, et)
 	}
 };
-export { ClientBoundCombined };
 ut(ClientBoundCombined, "runtime", proto2),
 	ut(ClientBoundCombined, "typeName", "ClientBoundCombined"),
 	ut(ClientBoundCombined, "fields", proto2.util.newFieldList(() => [{
@@ -4967,7 +4906,7 @@ ut(ClientBoundCombined, "runtime", proto2),
 		T: ClientBoundCombined_CPacket,
 		repeated: !0
 	}]));
-const ClientBoundCombined_CPacket = class extends Message {
+export class ClientBoundCombined_CPacket extends Message {
 	constructor($) {
 		super();
 		ut(this, "packet", {
@@ -4988,7 +4927,6 @@ const ClientBoundCombined_CPacket = class extends Message {
 		return proto2.util.equals(ClientBoundCombined_CPacket, $, et)
 	}
 };
-export { ClientBoundCombined_CPacket };
 ut(ClientBoundCombined_CPacket, "runtime", proto2),
 	ut(ClientBoundCombined_CPacket, "typeName", "ClientBoundCombined.CPacket"),
 	ut(ClientBoundCombined_CPacket, "fields", proto2.util.newFieldList(() => [{
@@ -5340,7 +5278,7 @@ ut(ClientBoundCombined_CPacket, "runtime", proto2),
 		T: CPacketPlayerReconciliation,
 		oneof: "packet"
 	}]));
-const SPacketEnchantItem = class extends Message {
+export class SPacketEnchantItem extends Message {
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -5360,7 +5298,6 @@ const SPacketEnchantItem = class extends Message {
 		return proto2.util.equals(SPacketEnchantItem, $, et)
 	}
 };
-export { SPacketEnchantItem };
 ut(SPacketEnchantItem, "runtime", proto2),
 	ut(SPacketEnchantItem, "typeName", "SPacketEnchantItem"),
 	ut(SPacketEnchantItem, "fields", proto2.util.newFieldList(() => [{
@@ -5374,7 +5311,7 @@ ut(SPacketEnchantItem, "runtime", proto2),
 		kind: "scalar",
 		T: 5
 	}]));
-const SPacketQueueNext = class extends Message {
+export class SPacketQueueNext extends Message {
 	constructor(_) {
 		super(),
 			proto2.util.initPartial(_, this)
@@ -5392,11 +5329,10 @@ const SPacketQueueNext = class extends Message {
 		return proto2.util.equals(SPacketQueueNext, _, $)
 	}
 };
-export { SPacketQueueNext };
 ut(SPacketQueueNext, "runtime", proto2),
 	ut(SPacketQueueNext, "typeName", "SPacketQueueNext"),
 	ut(SPacketQueueNext, "fields", proto2.util.newFieldList(() => []));
-const SPacketUpdateCommandBlock = class extends Message {
+export class SPacketUpdateCommandBlock extends Message {
 	constructor($) {
 		super();
 		ut(this, "pos");
@@ -5418,7 +5354,6 @@ const SPacketUpdateCommandBlock = class extends Message {
 		return proto2.util.equals(SPacketUpdateCommandBlock, $, et)
 	}
 };
-export { SPacketUpdateCommandBlock };
 ut(SPacketUpdateCommandBlock, "runtime", proto2),
 	ut(SPacketUpdateCommandBlock, "typeName", "SPacketUpdateCommandBlock"),
 	ut(SPacketUpdateCommandBlock, "fields", proto2.util.newFieldList(() => [{
