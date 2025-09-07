@@ -129,9 +129,9 @@ export async function handleCommand(cmd, ...args) {
 				extra: [
 					translateText(
 						`Invite code:
-miniblox.io/?join=\\yellow\\${self.INSTANCE.serverInfo.inviteCode}\\reset\\`
+miniblox.io/?join=\\yellow\\${self.serverInfo.inviteCode}\\reset\\`
 					),
-					translateText(`Server ID: \\yellow\\${self.INSTANCE.serverInfo.serverId}\\reset\\`),
+					translateText(`Server ID: \\yellow\\${self.serverInfo.serverId}\\reset\\`),
 					translateText(
 						`Want more info? Run \\yellow\\/serverinfo\\reset\\ for even more information!`
 					),
@@ -148,7 +148,7 @@ miniblox.io/?join=\\yellow\\${self.INSTANCE.serverInfo.inviteCode}\\reset\\`
 				commandBlocksEnabled, doDaylightCycle,
 				metadata, playerPermissionEntries,
 				pvpEnabled, startTime
-			} = self.INSTANCE.serverInfo;
+			} = self.serverInfo;
 			client.write('chat', {
 				message: JSON.stringify({
 					extra: [
@@ -177,9 +177,9 @@ miniblox.io/?join=\\yellow\\${self.INSTANCE.serverInfo.inviteCode}\\reset\\`
 	return false;
 }
 
-const self = class MiscHandler extends Handler {
+export class MiscHandler extends Handler {
 	static INSTANCE = new MiscHandler();
-	serverInfo = {
+	static serverInfo = {
 
 		/** @type {string} */
 		serverId: "???",
@@ -213,7 +213,7 @@ const self = class MiscHandler extends Handler {
 	/**
 	 * @param {CPacketServerInfo} packet
 	 */
-	setServerInfoData(packet) {
+	static setServerInfoData(packet) {
 		const {
 			serverName, serverId,
 			inviteCode, serverVersion,
@@ -235,7 +235,7 @@ const self = class MiscHandler extends Handler {
 		};
 	}
 	miniblox(gameType) {
-		ClientSocket.on('CPacketServerInfo', this.setServerInfoData);
+		ClientSocket.on('CPacketServerInfo', MiscHandler.setServerInfoData);
 		ClientSocket.on('CPacketMessage', packet => {
 			if (packet.text) {
 				client.write('chat', {
@@ -325,4 +325,4 @@ const self = class MiscHandler extends Handler {
 	}
 };
 
-export default self.INSTANCE;
+export default MiscHandler.INSTANCE;
