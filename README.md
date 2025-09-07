@@ -25,9 +25,10 @@ Here below is listed all of the commands from the translation layer.
 
 ### /play, /queue, and /q
 
-Syntax: `/q <gamemode>` (`<gamemode>` can be autocompleted using the <kbd>TAB</kbd>)
+Syntax: `/q [gamemode]` (`[gamemode]` can be autocompleted using the <kbd>TAB</kbd>)
 
 Joins a server matching the gamemode criteria.
+`skywars` is the default gamemode
 
 ## /login
 
@@ -68,10 +69,26 @@ Toggles if you are de-synced on the server or not.
 
 This makes the input sequence number not increment
 and interpolates your position to limit the speed to 1.98 bps (to not flag).
-While you are de-synced, you can do any movement, but you will be limited to effectively 2 BPS.
+While you are de-synced,
+you can do any movement,
+but you will be limited to effectively 2 BPS (and your rotations won't sync).
 You can also use this as a NoFall,
 simply desync when you are about to fall,
 and resync as soon as you hit the ground.
+
+## /serverid, /id, and /invite
+
+Syntax: `/id`
+
+Condensed version of /serverinfo that
+only shows the invite code and server ID, both can be used with `/join`.
+
+## /serverinfo
+
+Shows all the information about this server gathered.
+We get all the information from the CPacketServerInfo packet
+(which is sent as a packet when the server info changes,
+and included in the CPacketJoinGame packet)
 
 ## /planets
 

@@ -1,5 +1,5 @@
 import { ClientSocket, SPacketLoginStart } from './miniblox/main.js';
-import handlers, { entity } from './miniblox/handlers/init.js';
+import handlers, { entity, misc } from './miniblox/handlers/init.js';
 import { createServer } from 'minecraft-protocol';
 import { readFileSync } from 'node:fs';
 const server = createServer({
@@ -123,6 +123,7 @@ async function connect(client, requeue, gamemode, code) {
 				reducedDebugInfo: false
 			});
 		}
+		misc.setServerInfoData(packet.serverInfo);
 	});
 
 	ClientSocket.socket.io.on('reconnect_failed', () => {
