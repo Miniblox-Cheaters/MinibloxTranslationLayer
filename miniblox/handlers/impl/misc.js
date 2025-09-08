@@ -14,6 +14,24 @@ const JOIN_CODE = /(?:https?:\/\/^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6
  */
 const SERVER_ID = /(large|small|medium|planet)-[A-z|0-9]+-[A-z|0-9]+/;
 
+const descriptions = {
+	"Server Name": "The name of the server",
+	"Server ID": "The ID of the server, can be used with the /join command",
+	"Invite Code":
+		"The invite code of the server, can be used with the /join command and the miniblox site.",
+	"Server Version": "The version of the server.",
+	"Server Category": "The category of the server",
+	"Access Control": "If this server is public or private",
+	"World Type": "The type of world (e.g. VOID or FLAT)",
+	"Cheats?": "If cheat commands are enabled",
+	"Command Blocks?": "If command blocks are enabled",
+	"Daylight Cycle?": "If the daylight cycle should be done",
+	"Metadata": "A JSON object that I don't know what is used for.",
+	"Permissions": "Permission data",
+	"PvP?": "If PvP is enabled",
+	"Start Time": "When the server was started"
+};
+
 class IllegalArgumentException extends Error { }
 
 /**
@@ -188,23 +206,6 @@ but you can join it using /join ${serverId}`
 				metadata, playerPermissionEntries,
 				pvpEnabled, startTime
 			} = MiscHandler.serverInfo;
-			const descriptions = {
-				"Server Name": "The name of the server",
-				"Server ID": "The ID of the server, can be used with the /join command",
-				"Invite Code":
-					"The invite code of the server, can be used with the /join command and the miniblox site.",
-				"Server Version": "The version of the server.",
-				"Server Category": "The category of the server",
-				"Access Control": "If this server is public or private",
-				"World Type": "The type of world (e.g. VOID or FLAT)",
-				"Cheats?": "If cheat commands are enabled",
-				"Command Blocks?": "If command blocks are enabled",
-				"Daylight Cycle?": "If the daylight cycle should be done",
-				"Metadata": "A JSON object that I don't know what is used for.",
-				"Permissions": "Permission data",
-				"PvP?": "If PvP is enabled",
-				"Start Time": "When the server was started"
-			};
 			const perms = playerPermissionEntries.filter(e => e.permissionLevel > 0);
 			const tbl = {
 				"Server Name": serverName,
