@@ -40,6 +40,17 @@ async function resolveServerID(code) {
 }
 
 /**
+ * @param {boolean | null} b
+ * @returns {string}
+ */
+function stringifyBoolean(b) {
+	if (b === null)
+		return "\u00a7cNOT SPECIFIED";
+
+	return b ? "\u00a72yes" : "\u00a7cno";
+}
+
+/**
  * @param {string} cmd the command name
  * @param {...string} args the arguments to the command
  * @returns {boolean} if the command should be passed on to miniblox or not.
@@ -124,24 +135,49 @@ export async function handleCommand(cmd, ...args) {
 
 		case "serverid":
 		case "id":
-		case "invite":
+		case "invite": {
+			const { inviteCode, serverId } = MiscHandler.serverInfo;
 			client.write('chat', {
 				message: JSON.stringify({
 					extra: [
-						translateText(
-							`Invite code:
-	miniblox.io/?join=\\yellow\\${MiscHandler.serverInfo.inviteCode}\\reset\\`
-						),
-						translateText(`Server ID: \\yellow\\${MiscHandler.serverInfo.serverId}\\reset\\`),
-						translateText(
-							`Want more info? Run \\yellow\\/serverinfo\\reset\\ for even more information!`
-						),
+						"Invite code: https://miniblox.io/?join=",
+						{
+							text: MiscHandler.serverInfo.inviteCode,
+							color: "yellow",
+							hoverEvent: {
+								action: "show_text",
+								value: `This is the invite code for the server.
+You can join this using the link provided or with /join ${inviteCode}`
+							}
+						},
+						"\nServer ID: ",
+						{
+							text: serverId,
+							color: "yellow",
+							hoverEvent: {
+								action: "show_text",
+								value: `This is the ID of the server.
+You can't use this with the normal Miniblox site,
+but you can join it using /join ${serverId}`
+							}
+						},
+						"\nWant more? Run ",
+						{
+							text: "/serverinfo",
+							color: "yellow",
+							clickEvent: {
+								action: "run_command",
+								value: "/serverinfo"
+							}
+						},
+						" for even more (probably useless) info about this server"
 					],
 					text: ""
 				}),
 				position: 1
 			});
 			break;
+		}
 		case "serverinfo":
 			const {
 				serverName, serverId,
@@ -152,25 +188,56 @@ export async function handleCommand(cmd, ...args) {
 				metadata, playerPermissionEntries,
 				pvpEnabled, startTime
 			} = MiscHandler.serverInfo;
+			const descriptions = {
+				"Server Name": "The name of the server",
+				"Server ID": "The ID of the server, can be used with the /join command",
+				"Invite Code":
+					"The invite code of the server, can be used with the /join command and the miniblox site.",
+				"Server Version": "The version of the server.",
+				"Server Category": "The category of the server",
+				"Access Control": "If this server is public or private",
+				"World Type": "The type of world (e.g. VOID or FLAT)",
+				"Cheats?": "If cheat commands are enabled",
+				"Command Blocks?": "If command blocks are enabled",
+				"Daylight Cycle?": "If the daylight cycle should be done",
+				"Metadata": "A JSON object that I don't know what is used for.",
+				"Permissions": "Permission data",
+				"PvP?": "If PvP is enabled",
+				"Start Time": "When the server was started"
+			};
+			const perms = playerPermissionEntries.filter(e => e.permissionLevel > 0);
+			const tbl = {
+				"Server Name": serverName,
+				"Server ID": serverId,
+				"Invite Code": inviteCode ?? "missing",
+				"Server Version": serverVersion,
+				"Server Category": serverCategory,
+				"Access Control": accessControl,
+				"World Type": worldType,
+				"Cheats?": stringifyBoolean(cheats),
+				"Command Blocks?": stringifyBoolean(commandBlocksEnabled),
+				"Daylight Cycle?": stringifyBoolean(doDaylightCycle),
+				"Metadata": metadata ?? "missing",
+				"Permissions": perms.length > 0 ? perms.join(", ") : "None",
+				"PvP?": stringifyBoolean(pvpEnabled),
+				"Start Time": new Date(Number(startTime)).toLocaleString()
+			};
+			const built = [
+				"§2SERVER INFO:§r",
+				...Object.entries(tbl).flatMap(([k, v]) => {
+					return [`${k}: `, {
+						text: `${v}\n`,
+						color: "yellow",
+						hoverEvent: {
+							action: "show_text",
+							value: descriptions[k] ?? "Couldn't find a description for this"
+						}
+					}];
+				})
+			];
 			client.write('chat', {
 				message: JSON.stringify({
-					extra: [
-						"\\green\\SERVER INFO:\\reset\\",
-						`Server Name: \\yellow\\${serverName}\\reset\\`,
-						`Server ID: \\yellow\\${serverId}\\reset\\`,
-						`Invite Code: \\yellow\\${inviteCode}\\reset\\`,
-						`Server Version: \\yellow\\${serverVersion}\\reset\\`,
-						`Server Category: \\yellow\\${serverCategory}\\reset\\`,
-						`Access Control: \\yellow\\${accessControl}\\reset\\`,
-						`World Type: \\yellow\\${worldType}\\reset\\`,
-						`Cheats enabled: ${cheats ? "\\green\\YES" : "\\red\\NO"}\\reset\\`,
-						`Command blocks: ${commandBlocksEnabled ? "\\green\\YES" : "\\red\\NO"}\\reset\\`,
-						`Daylight Cycle: ${doDaylightCycle ? "\\green\\YES" : "\\red\\NO"}\\reset\\`,
-						`Metadata: \\yellow\\${metadata ?? "missing"}\\reset\\`,
-						`Permissions: ${playerPermissionEntries.filter(e => e.permissionLevel > 0).join(", ")}`,
-						`PvP?: ${pvpEnabled ? "\\green\\YES" : "\\red\\NO"}\\reset\\`,
-						`Start Time: ${startTime}`
-					].map(t => `${translateText(t)}\n`),
+					extra: built,
 					text: ''
 				}),
 				position: 1
@@ -204,8 +271,8 @@ export class MiscHandler extends Handler {
 		cheats: false,
 		/** @type {boolean?} */
 		pvpEnabled: true,
-		/** @type {number} */
-		startTime: -1,
+		/** @type {BigInt} */
+		startTime: -1n,
 		/** @type {PlayerPermissionEntry[]} */
 		playerPermissionEntries: [],
 		/** @type {string?} */

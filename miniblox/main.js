@@ -2047,7 +2047,7 @@ export class CPacketServerInfo extends Message {
 	cheats;
 	/** @type {boolean?} */
 	pvpEnabled;
-	/** @type {number} */
+	/** @type {BigInt} */
 	startTime;
 	/** @type {PlayerPermissionEntry[]} */
 	playerPermissionEntries;
