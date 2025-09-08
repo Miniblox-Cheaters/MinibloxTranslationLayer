@@ -129,9 +129,9 @@ export async function handleCommand(cmd, ...args) {
 				extra: [
 					translateText(
 						`Invite code:
-miniblox.io/?join=\\yellow\\${self.serverInfo.inviteCode}\\reset\\`
+miniblox.io/?join=\\yellow\\${MiscHandler.serverInfo.inviteCode}\\reset\\`
 					),
-					translateText(`Server ID: \\yellow\\${self.serverInfo.serverId}\\reset\\`),
+					translateText(`Server ID: \\yellow\\${MiscHandler.serverInfo.serverId}\\reset\\`),
 					translateText(
 						`Want more info? Run \\yellow\\/serverinfo\\reset\\ for even more information!`
 					),
@@ -224,7 +224,7 @@ export class MiscHandler extends Handler {
 			pvpEnabled, startTime
 		} = packet;
 
-		this.serverInfo = {
+		MiscHandler.serverInfo = {
 			serverName, serverId,
 			inviteCode, serverVersion,
 			serverCategory, accessControl,
