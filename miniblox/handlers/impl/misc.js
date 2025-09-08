@@ -148,7 +148,7 @@ miniblox.io/?join=\\yellow\\${self.serverInfo.inviteCode}\\reset\\`
 				commandBlocksEnabled, doDaylightCycle,
 				metadata, playerPermissionEntries,
 				pvpEnabled, startTime
-			} = self.serverInfo;
+			} = MiscHandler.serverInfo;
 			client.write('chat', {
 				message: JSON.stringify({
 					extra: [
