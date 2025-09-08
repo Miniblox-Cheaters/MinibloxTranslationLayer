@@ -71,7 +71,7 @@ function stringifyBoolean(b) {
 /**
  * @param {string} cmd the command name
  * @param {...string} args the arguments to the command
- * @returns {boolean} if the command should be passed on to miniblox or not.
+ * @returns {Promise<boolean>} if the command should be passed on to miniblox or not.
  */
 export async function handleCommand(cmd, ...args) {
 	switch (cmd) {
@@ -79,7 +79,7 @@ export async function handleCommand(cmd, ...args) {
 		case "queue":
 		case "play":
 			connect(client, true, args[0]);
-			return true;
+			break;
 		case "login":
 			writeFile('./login.token', args.join(" "), (err) => {
 				if (err) {
@@ -101,7 +101,7 @@ export async function handleCommand(cmd, ...args) {
 					position: 1
 				});
 			});
-			return true;
+			break;
 		case "join":
 			const code = args.join(" ");
 			try {
@@ -110,7 +110,7 @@ export async function handleCommand(cmd, ...args) {
 			} catch (e) {
 
 			}
-			return true;
+			break;
 		case "resync":
 			if (entity.teleport) {
 				client.write('position', {
@@ -130,11 +130,11 @@ export async function handleCommand(cmd, ...args) {
 					position: 1
 				});
 			}
-			return true;
+			break;
 		case "reloadchunks":
 			world.chunks = [];
 			world.queued = [];
-			return true;
+			break;
 		case "desync":
 			entity.desyncFlag = !entity.desyncFlag;
 			const desynced = entity.desyncFlag;
@@ -146,10 +146,15 @@ export async function handleCommand(cmd, ...args) {
 				}),
 				position: 1
 			});
-			return true;
+			break;
+
 		case "planets":
 			gui.showPlanetsGUI();
-			return true;
+			break;
+
+		case "next":
+			connect(client, true, MiscHandler.INSTANCE.gameType);
+			break;
 
 		case "serverid":
 		case "id":
@@ -243,9 +248,11 @@ but you can join it using /join ${serverId}`
 				}),
 				position: 1
 			});
-			return true;
+			break;
+		default:
+			return false;
 	}
-	return false;
+	return true;
 }
 
 export class MiscHandler extends Handler {
@@ -281,6 +288,10 @@ export class MiscHandler extends Handler {
 		/** @type {boolean?} */
 		commandBlocksEnabled: false
 	};
+
+	/** @type {string} */
+	gameType;
+
 	/**
 	 * @param {CPacketServerInfo} packet
 	 */
@@ -305,7 +316,11 @@ export class MiscHandler extends Handler {
 			pvpEnabled, startTime
 		};
 	}
+	/**
+	 * @param {string} gameType
+	 */
 	miniblox(gameType) {
+		this.gameType = gameType;
 		ClientSocket.on('CPacketServerInfo', MiscHandler.setServerInfoData);
 		ClientSocket.on('CPacketMessage', packet => {
 			if (packet.text) {
@@ -354,7 +369,7 @@ export class MiscHandler extends Handler {
 	}
 	minecraft(mcClient) {
 		client = mcClient;
-		client.on('chat', packet => {
+		client.on('chat', async packet => {
 			/**
 			 * @type {string}
 			 */
@@ -362,8 +377,7 @@ export class MiscHandler extends Handler {
 			if (msg.startsWith("/")) {
 				const parts = msg.split(" ");
 				const cmd = parts.shift().substring(1);
-				const handled = handleCommand(cmd, ...parts);
-				if (!!handled) return;
+				if (await handleCommand(cmd, ...parts)) return;
 			}
 			ClientSocket.sendPacket(new SPacketMessage({ text: msg }));
 		});
