@@ -224,7 +224,7 @@ but you can join it using /join ${serverId}`
 				"Start Time": new Date(Number(startTime)).toLocaleString()
 			};
 			const built = [
-				"§2SERVER INFO:§r",
+				"§2SERVER INFO:§r\n",
 				...Object.entries(tbl).flatMap(([k, v]) => {
 					return [`${k}: `, {
 						text: `${v}\n`,
