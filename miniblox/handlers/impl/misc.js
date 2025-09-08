@@ -126,7 +126,7 @@ export async function handleCommand(cmd, ...args) {
 		case "id":
 		case "invite":
 			client.write('chat', {
-				message: {
+				message: JSON.stringify({
 					extra: [
 						translateText(
 							`Invite code:
@@ -138,7 +138,7 @@ export async function handleCommand(cmd, ...args) {
 						),
 					],
 					text: ""
-				},
+				}),
 				position: 1
 			});
 			break;
