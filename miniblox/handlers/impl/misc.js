@@ -126,17 +126,20 @@ export async function handleCommand(cmd, ...args) {
 		case "id":
 		case "invite":
 			client.write('chat', {
-				extra: [
-					translateText(
-						`Invite code:
-miniblox.io/?join=\\yellow\\${MiscHandler.serverInfo.inviteCode}\\reset\\`
-					),
-					translateText(`Server ID: \\yellow\\${MiscHandler.serverInfo.serverId}\\reset\\`),
-					translateText(
-						`Want more info? Run \\yellow\\/serverinfo\\reset\\ for even more information!`
-					),
-				],
-				text: ""
+				message: {
+					extra: [
+						translateText(
+							`Invite code:
+	miniblox.io/?join=\\yellow\\${MiscHandler.serverInfo.inviteCode}\\reset\\`
+						),
+						translateText(`Server ID: \\yellow\\${MiscHandler.serverInfo.serverId}\\reset\\`),
+						translateText(
+							`Want more info? Run \\yellow\\/serverinfo\\reset\\ for even more information!`
+						),
+					],
+					text: ""
+				},
+				position: 1
 			});
 			break;
 		case "serverinfo":
