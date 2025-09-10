@@ -637,7 +637,7 @@ you will need to send Input packets in order to move on the server.`);
 		});
 		client.on('position_look', ({ x, y, z, onGround, yaw, pitch } = {}) => {
 			if (this.local.id < 0) return;
-			this.local.pos = { x: x, y: y, z: z };
+			this.local.pos = { x, y, z };
 			this.local.yaw = ((yaw * -1) - 180) * DEG2RAD;
 			this.local.pitch = (pitch * -1) * DEG2RAD;
 			this.actions();
@@ -678,7 +678,7 @@ you will need to send Input packets in order to move on the server.`);
 				jump: (jump & 1) > 0,
 				sneak: (jump & 2) > 0,
 				sprint: this.local.state[1] ?? false,
-				pos: this.desyncFlag ? desyncMath(this.local.pos, this.local.serverPos, 1.98) : this.local.pos
+				pos: this.desyncFlag ? desyncMath(this.local.pos, this.local.serverPos, 1.99) : this.local.pos
 			}));
 		});
 		client.on('held_item_slot', packet => ClientSocket.sendPacket(new SPacketHeldItemChange({ slot: packet.slotId ?? 0 })));
