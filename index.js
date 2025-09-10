@@ -131,7 +131,15 @@ async function connect(client, requeue, gamemode, code) {
 		client.end('Failed to connect to the server.');
 	});
 	ClientSocket.on('disconnect', reason => {
-		if (skipKick > Date.now()) return;
+		// fixes "io client disconnect" lol
+		if (skipKick > Date.now()) {
+			console.debug(`Server kicked us for ${reason}, ignoring it since skipKick is active.`);
+			return;
+		}
+		if (reason === "Server is full. Please try joining later.") {
+			console.warn("Got kicked because miniblox queued us into a server that was full, requeueing.")
+			return connect(client, requeue, gamemode, code);
+		}
 		client.end(reason);
 	});
 	Object.values(handlers).forEach((handler) => handler.miniblox(gameType));
