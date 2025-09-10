@@ -16,7 +16,7 @@ A middle man to translate Miniblox packets into Minecraft 1.8.9 packets.
 *: servers which use the new anti-cheat
    (SkyWars, EggWars, the bridge, Classic PvP, and KitPvP)
    need custom code to send the C0CInput packet.
-   (sadly 1.21.2+ client send input packets
+   (sadly 1.21.2+ clients send input packets
    that get discarded by ViaVersion if you're not in a boat)
 
 ## Commands

@@ -14,7 +14,7 @@ const DEG2RAD = Math.PI / 180, RAD2DEG = 180 / Math.PI;
 // 1.9999977 worked fine
 // 1.9999978 flags sometimes
 // desync sometimes takes a bit to start moving idk why
-const DESYNC_MAX_SPEED = 1.99999771;
+const DESYNC_MAX_SPEED = 1.99999761;
 let client, tablist, world;
 
 function convertAngle(ang, ignore, num) {
