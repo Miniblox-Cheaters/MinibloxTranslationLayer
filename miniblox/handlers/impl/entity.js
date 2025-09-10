@@ -4,6 +4,17 @@ import ENTITIES from './../../types/entities.js';
 import GAMEMODES, { spectator } from './../../types/gamemodes.js';
 import { translateItem, translateText } from './../../utils.js';
 const DEG2RAD = Math.PI / 180, RAD2DEG = 180 / Math.PI;
+// 1.98 / 1.99 is the original
+// 1.999999 flags sometimes
+// 1.999998 flags
+// 1.999995 doesn't flag
+// 1.999997 doesn't flag either
+// 1.9999979 flags sometimes
+// 1.9999978 idk
+// 1.9999977 worked fine
+// 1.9999978 flags sometimes
+// desync sometimes takes a bit to start moving idk why
+const DESYNC_MAX_SPEED = 1.99999771;
 let client, tablist, world;
 
 function convertAngle(ang, ignore, num) {
@@ -653,17 +664,18 @@ you will need to send Input packets in order to move on the server.`);
 			if (!this.desyncFlag) {
 				this.local.inputSequenceNumber++;
 			} else {
+				const offset = 0.25;
 				client.write('world_particles', {
 					particleId: 13,
 					longDistance: true,
-					x: this.local.serverPos.x - 0.25,
-					y: this.local.serverPos.y - 0.25,
-					z: this.local.serverPos.z - 0.25,
-					offsetX: 0.25,
-					offsetY: 0.25,
-					offsetZ: 0.25,
+					x: this.local.serverPos.x - offset,
+					y: this.local.serverPos.y - offset,
+					z: this.local.serverPos.z - offset,
+					offsetX: offset,
+					offsetY: offset,
+					offsetZ: offset,
 					particleData: 1,
-					particles: 4
+					particles: 2
 				});
 			}
 
@@ -678,7 +690,9 @@ you will need to send Input packets in order to move on the server.`);
 				jump: (jump & 1) > 0,
 				sneak: (jump & 2) > 0,
 				sprint: this.local.state[1] ?? false,
-				pos: this.desyncFlag ? desyncMath(this.local.pos, this.local.serverPos, 1.99) : this.local.pos
+				pos: this.desyncFlag
+					? desyncMath(this.local.pos, this.local.serverPos, DESYNC_MAX_SPEED)
+					: this.local.pos
 			}));
 		});
 		client.on('held_item_slot', packet => ClientSocket.sendPacket(new SPacketHeldItemChange({ slot: packet.slotId ?? 0 })));
