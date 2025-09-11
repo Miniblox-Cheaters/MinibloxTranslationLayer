@@ -135,13 +135,13 @@ async function connect(client, requeue, gamemode, code) {
 		console.info(`Supposed to be disconnected at any point, reason: ${packet.reason}`);
 		nextDisconnectReason = packet.reason;
 	})
-	ClientSocket.on('disconnect', reason => {
+	ClientSocket.on('disconnect', /** @param {string} reason **/reason => {
 		// fixes "io client disconnect" lol
 		if (skipKick > Date.now()) {
 			console.debug(`Server kicked us for ${reason}, ignoring it since skipKick is active.`);
 			return;
 		}
-		if (reason.contains("Server is full")) {
+		if (reason.includes("Server is full")) {
 			console.warn("Got kicked because miniblox queued us into a server that was full, requeueing.")
 			return connect(client, requeue, gamemode, code);
 		}
