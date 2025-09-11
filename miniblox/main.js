@@ -75,14 +75,27 @@ ut(SPacketLoginStart, "runtime", proto2),
 		T: 9
 	}]));
 export class PBItemStack extends Message {
-	constructor($) {
+	/**
+	 * @type {PBItemStack}
+	 */
+	static EMPTY;
+	/** @type {boolean} */
+	present = true;
+	/** @type {number} */
+	id;
+	/** @type {number} */
+	stackSize;
+	/** @type {number} */
+	durability;
+	data;
+	constructor(d) {
 		super();
 		ut(this, "present");
 		ut(this, "id");
 		ut(this, "stackSize");
 		ut(this, "durability");
 		ut(this, "data");
-		proto2.util.initPartial($, this)
+		proto2.util.initPartial(d, this)
 	}
 	static fromBinary($, et) {
 		return new PBItemStack().fromBinary($, et)
@@ -96,8 +109,7 @@ export class PBItemStack extends Message {
 	static equals($, et) {
 		return proto2.util.equals(PBItemStack, $, et)
 	}
-}
-;
+};
 ut(PBItemStack, "runtime", proto2),
 	ut(PBItemStack, "typeName", "PBItemStack"),
 	ut(PBItemStack, "fields", proto2.util.newFieldList(() => [{
@@ -130,7 +142,14 @@ ut(PBItemStack, "runtime", proto2),
 		T: 9,
 		opt: !0
 	}]));
+PBItemStack.EMPTY = new PBItemStack({ present: false });
 export class PBBlockPos extends Message {
+	/** @type {number} */
+	x;
+	/** @type {number} */
+	y;
+	/** @type {number} */
+	z;
 	constructor($) {
 		super();
 		ut(this, "x");
@@ -535,6 +554,12 @@ proto2.util.setEnumType(Equipment_Slot, "Equipment.Slot", [{
 	name: "BOOTS"
 }]);
 export class SPacketUpdateInventory extends Message {
+	/** @type {PBItemStack} */
+	main;
+	/** @type {PBItemStack} */
+	armor;
+	/** @type {PBItemStack} */
+	idkWhatThisIs;
 	constructor($) {
 		super();
 		ut(this, "main", []);
@@ -3095,6 +3120,8 @@ ut(ScoreboardContent, "runtime", proto2),
 		repeated: !0
 	}]));
 export class CPacketServerMetadata extends Message {
+	/** @type {string} */
+	metadata;
 	constructor($) {
 		super();
 		ut(this, "metadata");
@@ -3122,6 +3149,12 @@ ut(CPacketServerMetadata, "runtime", proto2),
 		T: 9
 	}]));
 export class CPacketSetSlot extends Message {
+	/** @type {number} */
+	windowId;
+	/** @type {number} */
+	slot;
+	/** @type {ItemStack} */
+	slotData;
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -3771,6 +3804,9 @@ ut(CPacketWindowItems, "runtime", proto2),
 		repeated: !0
 	}]));
 export class CPacketWindowProperty extends Message {
+	windowId;
+	varIndex;
+	varValue;
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -3830,8 +3866,9 @@ export class SPacketRespawn extends Message {
 ut(SPacketRespawn, "runtime", proto2),
 	ut(SPacketRespawn, "typeName", "SPacketRespawn"),
 	ut(SPacketRespawn, "fields", proto2.util.newFieldList(() => []));
-var su;
 export let SPacketTabComplete$1 = class extends Message {
+	/** @type {string} */
+	message;
 	constructor($) {
 		super();
 		ut(this, "message");
@@ -3859,6 +3896,8 @@ ut(SPacketTabComplete$1, "runtime", proto2),
 		T: 9
 	}]));
 export class SPacketCraftItem extends Message {
+	/** @type {string} */
+	data;
 	constructor($) {
 		super();
 		ut(this, "data");
@@ -3886,6 +3925,8 @@ ut(SPacketCraftItem, "runtime", proto2),
 		T: 9
 	}]));
 export class SPacketRequestChunk extends Message {
+	x;
+	z;
 	constructor($) {
 		super();
 		ut(this, "x");
@@ -4234,6 +4275,10 @@ ut(UpdatePvP, "runtime", proto2),
 		T: 8
 	}]));
 export class SPacketAnalytics extends Message {
+	/** @type {number} */
+	fps;
+	/** @type {number} */
+	ping;
 	constructor($) {
 		super();
 		ut(this, "fps");
@@ -4267,6 +4312,12 @@ ut(SPacketAnalytics, "runtime", proto2),
 		T: 2
 	}]));
 export class SPacketConfirmTransaction extends Message {
+	/** @type {number} */
+	windowId;
+	/** @type {number} */
+	actionNumber;
+	/** @type {boolean} */
+	accepted;
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -4306,6 +4357,8 @@ ut(SPacketConfirmTransaction, "runtime", proto2),
 		T: 8
 	}]));
 export class SPacketHeldItemChange extends Message {
+	/** @type {number} */
+	slot;
 	constructor($) {
 		super();
 		ut(this, "slot");
@@ -5333,6 +5386,14 @@ ut(SPacketQueueNext, "runtime", proto2),
 	ut(SPacketQueueNext, "typeName", "SPacketQueueNext"),
 	ut(SPacketQueueNext, "fields", proto2.util.newFieldList(() => []));
 export class SPacketUpdateCommandBlock extends Message {
+	/** @type {PBBlockPos} */
+	pos;
+	/** @type {string?} */
+	command;
+	/** @type {string[]?} */
+	commands;
+	/** @type {boolean?} */
+	repeat;
 	constructor($) {
 		super();
 		ut(this, "pos");

@@ -15,6 +15,7 @@ const VERSION = '3.41.33';
 import GAMEMODES from './miniblox/types/gamemodes.js';
 const DEFAULT_GAMEMODE = "skywars";
 let connected, skipKick = Date.now();
+let nextDisconnectReason;
 
 function cleanup(teleport) {
 	connected = teleport ?? false;
@@ -109,7 +110,7 @@ async function connect(client, requeue, gamemode, code) {
 	});
 	ClientSocket.once('CPacketJoinGame', packet => {
 		if (!packet.canConnect) {
-			client.end(packet.errorMessage ?? 'Disconnected');
+			client.end(packet.errorMessage ?? "Couldn't connect to server");
 			return;
 		}
 
@@ -130,6 +131,10 @@ async function connect(client, requeue, gamemode, code) {
 	ClientSocket.socket.io.on('reconnect_failed', () => {
 		client.end('Failed to connect to the server.');
 	});
+	ClientSocket.on("CPacketDisconnect", packet => {
+		console.info(`Supposed to be disconnected at any point, reason: ${packet.reason}`);
+		nextDisconnectReason = packet.reason;
+	})
 	ClientSocket.on('disconnect', reason => {
 		// fixes "io client disconnect" lol
 		if (skipKick > Date.now()) {
@@ -140,7 +145,8 @@ async function connect(client, requeue, gamemode, code) {
 			console.warn("Got kicked because miniblox queued us into a server that was full, requeueing.")
 			return connect(client, requeue, gamemode, code);
 		}
-		client.end(reason);
+		client.end(nextDisconnectReason ?? reason);
+		nextDisconnectReason = undefined;
 	});
 	Object.values(handlers).forEach((handler) => handler.miniblox(gameType));
 

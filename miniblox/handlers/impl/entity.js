@@ -1,8 +1,9 @@
 import Handler from './../handler.js';
-import { ClientSocket, SPacketPlayerPosLook, SPacketPlayerInput, SPacketEntityAction, SPacketPlayerAbilities, SPacketHeldItemChange, SPacketClick, SPacketRespawn$1, SPacketUseEntity, PBVector3 } from './../../main.js';
+import { ClientSocket, SPacketPlayerPosLook, SPacketPlayerInput, SPacketEntityAction, SPacketPlayerAbilities, SPacketHeldItemChange, SPacketClick, SPacketRespawn$1, SPacketUseEntity, PBVector3, SPacketUpdateInventory, CPacketSetSlot, PBItemStack } from './../../main.js';
 import ENTITIES from './../../types/entities.js';
 import GAMEMODES, { spectator } from './../../types/gamemodes.js';
-import { translateItem, translateText } from './../../utils.js';
+import { translateItem, translateItemBack, translateText } from './../../utils.js';
+import { SLOTS, SLOTS_REVERSE } from '../../types/guis.js';
 const DEG2RAD = Math.PI / 180, RAD2DEG = 180 / Math.PI;
 // 1.98 / 1.99 is the original
 // 1.999999 flags sometimes
@@ -14,16 +15,27 @@ const DEG2RAD = Math.PI / 180, RAD2DEG = 180 / Math.PI;
 // 1.9999977 worked fine
 // 1.9999978 flags sometimes
 // desync sometimes takes a bit to start moving idk why
-const DESYNC_MAX_SPEED = 1.99999761;
+const DESYNC_MAX_SPEED = 1.9999974;
 let client, tablist, world;
 
-function convertAngle(ang, ignore, num) {
+/**
+ * 
+ * @param {number} ang angle to convert
+ * @param {boolean} ignore don't limit the angle value
+ * @param {number} num thing
+ * @returns converted angle
+ */
+function convertAngle(ang, ignore, num = 0) {
 	let angle = ang;
 	if (!ignore) angle = angle / 256 * Math.PI * 2;
 	angle = (((angle * -1) * RAD2DEG) - (num != undefined ? num : 0)) * 256 / 360;
 	return convertToByte(angle);
 }
 
+/**
+ * @param {number} byte
+ * @returns {number} clamped
+ */
 function clampByte(byte) {
 	return Math.min(Math.max(byte, -128), 127);
 }
@@ -37,16 +49,32 @@ function clampToBox(pos, box) {
 	};
 }
 
+/**
+ * 
+ * @param {number} num to convert to byte
+ * @returns {number} {@link num} converted to a byte
+ */
 function convertToByte(num) {
 	let converted = num & 0xFF;
 	converted = converted > 127 ? converted - 256 : converted;
 	return converted;
 }
 
+/**
+ * @param {Vector3} pos
+ * @returns {Vector3}
+ */
 function convertServerPos(pos) {
 	return { x: pos.x / 32, y: pos.y / 32, z: pos.z / 32 };
 }
 
+/**
+ * 
+ * @param {Vector3} pos 
+ * @param {Vector3} serverPos 
+ * @param {number} range 
+ * @returns 
+ */
 function desyncMath(pos, serverPos, range) {
 	const moveVec = { x: (pos.x - serverPos.x), y: (pos.y - serverPos.y), z: (pos.z - serverPos.z) };
 	const moveMag = Math.sqrt(moveVec.x * moveVec.x + moveVec.y * moveVec.y + moveVec.z * moveVec.z);
@@ -69,6 +97,20 @@ const self = class EntityHandler extends Handler {
 		if (entity.type == -1 && ((!tablist.entries[entity.id] && !entity.special) || this.gamemodes[entity.id] == spectator)) return false;
 		if (!world.isEntityLoaded(entity)) return false;
 		return true;
+	}
+	/**
+	 * @param {ItemStack} stack 
+	 * @returns {number}
+	 */
+	findHotbarSlotForPickBlock(stack) {
+		const { main } = this.local.inventory;
+		for (let i = 0; i < 9; i++)
+			if (main[i] && main[i].item.equals(stack))
+				return i;
+
+		for (let i = 0; i < 9; i++) if (!main[i]) return i;
+
+		return this.local.selectedSlot;
 	}
 	spawn(entity) {
 		if (!entity || entity.spawned) return;
@@ -323,10 +365,14 @@ const self = class EntityHandler extends Handler {
 				if (equip.slot == 2) continue;
 				const slot = equip.slot == 1 ? 0 : 7 - equip.slot, item = translateItem(equip.item);
 				if (entity) entity.equipment[slot] = item;
+
+				if (this.local.id === packet.id)
+					this.local.inventory.armor[slot] = equip.item;
+
 				client.write('entity_equipment', {
 					entityId: packet.id,
-					slot: slot,
-					item: item
+					slot,
+					item
 				});
 			}
 		});
@@ -338,6 +384,14 @@ const self = class EntityHandler extends Handler {
 				let value;
 				let wType = watched.objectType;
 				switch (watched.objectType) {
+					case 0:
+						value = convertToByte(watched.intValue);
+						console.info(`On fire?: ${(value & 1 << 0) != 0}`);
+						client.write("entity_status", {
+							entityId: this.convertId(packet.id),
+							entityStatus: value
+						});
+						break;
 					case 2:
 						value = watched.intValue;
 						if (watched.dataValueId != 7 && (watched.dataValueId != 18 || entity && entity.type != -1)) {
@@ -457,8 +511,8 @@ const self = class EntityHandler extends Handler {
 					dX: clampByte(packet.pos.x),
 					dY: clampByte(packet.pos.y),
 					dZ: clampByte(packet.pos.z),
-					yaw: yaw,
-					pitch: pitch,
+					yaw,
+					pitch,
 					onGround: packet.onGround
 				});
 			} else if (packet.pos) {
@@ -615,6 +669,12 @@ you will need to send Input packets in order to move on the server.`);
 			level: packet.level,
 			totalExperience: packet.experienceTotal
 		}));
+
+		ClientSocket.on("CPacketSetSlot",
+			/** @param {CPacketSetSlot} packet */
+			packet => {
+				this.local.inventory.main[packet.slot] = packet.slotData;
+			});
 	}
 	minecraft(mcClient) {
 		client = mcClient;
@@ -695,7 +755,10 @@ you will need to send Input packets in order to move on the server.`);
 					: this.local.pos
 			}));
 		});
-		client.on('held_item_slot', packet => ClientSocket.sendPacket(new SPacketHeldItemChange({ slot: packet.slotId ?? 0 })));
+		client.on('held_item_slot', ({ slotId }) => {
+			this.local.selectedSlot = slotId ?? -1;
+			ClientSocket.sendPacket(new SPacketHeldItemChange({ slot: slotId ?? 0 }));
+		});
 		client.on('arm_animation', () => {
 			if (!world.breaking) ClientSocket.sendPacket(new SPacketClick({}));
 			this.local.state[0] = Date.now() + 300;
@@ -736,6 +799,31 @@ you will need to send Input packets in order to move on the server.`);
 				ClientSocket.sendPacket(new SPacketRespawn$1);
 			}
 		});
+		client.on('set_creative_slot', packet => {
+			const { slot: mcSlot, item: stack } = packet;
+			const tlStack = translateItemBack(stack);
+
+			const slt = (SLOTS_REVERSE[mcSlot] ?? mcSlot) ?? this.findHotbarSlotForPickBlock(tlStack);
+
+			this.local.inventory.main[slt] = tlStack;
+
+			// Update selectedSlot to the new slot if not explicitly provided (for pickBlock cases)
+			if (mcSlot === undefined || mcSlot === -1) {
+				this.local.selectedSlot = slt;
+			}
+
+			const { main, armor } = this.local.inventory;
+
+			const data = {
+				main: main.map(s =>
+					s == null || s.stackSize == 0 ? PBItemStack.EMPTY : s,
+				),
+				armor: armor.map(a => a ?? PBItemStack.EMPTY),
+				idkWhatThisIs: this.local.inventory.main[this.local.selectedSlot] ?? PBItemStack.EMPTY,
+			};
+
+			ClientSocket.sendPacket(new SPacketUpdateInventory(data));
+		});
 	}
 	cleanup(requeue) {
 		client = requeue ? client : undefined;
@@ -754,6 +842,14 @@ you will need to send Input packets in order to move on the server.`);
 			state: [],
 			lastState: [],
 			health: { hp: 20, food: 20, foodSaturation: 20 },
+			inventory: {
+				main: new Array(36).fill(null),
+				armor: new Array(4).fill(null)
+			},
+			selectedStack: undefined,
+			get selectedStack() {
+				return this.inventory.main[this.selectedSlot];
+			}
 		};
 		this.sentNewACInfo = false;
 	}

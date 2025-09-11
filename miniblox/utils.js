@@ -93,7 +93,7 @@ export function translateItemBack(item) {
 		id: itemId,
 		stackSize: item.itemCount,
 		durability: Math.floor(item.itemDamage),
-		data: data
+		data
 	}) : new PBItemStack({present: false});
 }
 

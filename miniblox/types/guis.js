@@ -58,6 +58,9 @@ function updateGui(gui, client) {
 	});
 }
 
+/**
+ * converts mc slots to miniblox slots
+ */
 export const SLOTS = {
 	0: 36,
 	1: 37,
@@ -73,6 +76,12 @@ export const SLOTS = {
 	38: 7,
 	39: 8
 };
+/**
+ * converts miniblox slots to mc slots
+ * @type {{[slot: number]: number}}
+ */
+export const SLOTS_REVERSE = Object.fromEntries(Object.entries(SLOTS).map(([k, v]) => [v, k]));
+
 export const WINDOW_NAMES = {
 	'Chest': '{"translate":"container.chest"}',
 	'Large Chest': '{"translate":"container.chestDouble"}',

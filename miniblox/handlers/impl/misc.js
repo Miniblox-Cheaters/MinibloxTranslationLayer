@@ -1,7 +1,7 @@
 import Handler from './../handler.js';
-import { ClientSocket, SPacketMessage, SPacketTabComplete$1, CPacketServerInfo, PlayerPermissionEntry } from './../../main.js';
+import { ClientSocket, SPacketMessage, SPacketTabComplete$1, CPacketServerInfo, PlayerPermissionEntry, SPacketQueueNext } from './../../main.js';
 import { translateText } from './../../utils.js';
-import { writeFile } from 'node:fs';
+import { writeFile } from 'node:fs/promises';
 let client, entity, connect, world, gui;
 
 /**
@@ -81,18 +81,8 @@ export async function handleCommand(cmd, ...args) {
 			connect(client, true, args[0]);
 			break;
 		case "login":
-			writeFile('./login.token', args.join(" "), (err) => {
-				if (err) {
-					client.write('chat', {
-						message: JSON.stringify({
-							extra: [translateText('\\red\\Failed to save file!' + err.message)],
-							text: ''
-						}),
-						position: 1
-					});
-					throw err;
-				}
-
+			try {
+				await writeFile('./login.token', args.join(" "));
 				client.write('chat', {
 					message: JSON.stringify({
 						extra: [translateText('\\green\\Successfully logged in! Rejoin the game.')],
@@ -100,7 +90,16 @@ export async function handleCommand(cmd, ...args) {
 					}),
 					position: 1
 				});
-			});
+			} catch (err) {
+				client.write('chat', {
+					message: JSON.stringify({
+						extra: [translateText(`\\red\\Failed to save file! ${err.message}`)],
+						text: ''
+					}),
+					position: 1
+				});
+				console.error(err);
+			}
 			break;
 		case "join":
 			const code = args.join(" ");
@@ -153,7 +152,8 @@ export async function handleCommand(cmd, ...args) {
 			break;
 
 		case "next":
-			connect(client, true, MiscHandler.INSTANCE.gameType);
+			ClientSocket.sendPacket(new SPacketQueueNext);
+			//connect(client, true, MiscHandler.INSTANCE.gameType);
 			break;
 
 		case "serverid":
@@ -322,6 +322,16 @@ export class MiscHandler extends Handler {
 	miniblox(gameType) {
 		this.gameType = gameType;
 		ClientSocket.on('CPacketServerInfo', MiscHandler.setServerInfoData);
+		ClientSocket.on("CPacketMetadata", packet => {
+			MiscHandler.serverInfo.metadata = packet.metadata;
+		});
+		ClientSocket.on("CPacketChangeServers", packet => {
+			console.info(`Got change server packet, url: ${packet.url}`)
+		});
+		ClientSocket.on("CPacketQueueNext", packet => {
+			console.log(`Got queue next packet, minigame id = ${packet.minigameId}, config = ${packet.minigameConfig}`)
+			connect(client, true, packet.minigameId);
+		})
 		ClientSocket.on('CPacketMessage', packet => {
 			if (packet.text) {
 				client.write('chat', {
