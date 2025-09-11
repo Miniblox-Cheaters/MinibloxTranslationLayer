@@ -1,5 +1,5 @@
 import Handler from './../handler.js';
-import { ClientSocket, SPacketPlayerPosLook, SPacketPlayerInput, SPacketEntityAction, SPacketPlayerAbilities, SPacketHeldItemChange, SPacketClick, SPacketRespawn$1, SPacketUseEntity, PBVector3, SPacketUpdateInventory, CPacketSetSlot, PBItemStack } from './../../main.js';
+import { ClientSocket, SPacketPlayerPosLook, SPacketPlayerInput, SPacketEntityAction, SPacketPlayerAbilities, SPacketHeldItemChange, SPacketClick, SPacketRespawn$1, SPacketUseEntity, PBVector3, SPacketUpdateInventory, CPacketSetSlot, PBItemStack, CPacketExplosion } from './../../main.js';
 import ENTITIES from './../../types/entities.js';
 import GAMEMODES, { spectator } from './../../types/gamemodes.js';
 import { translateItem, translateItemBack, translateText } from './../../utils.js';
@@ -543,6 +543,25 @@ const self = class EntityHandler extends Handler {
 			entityId: this.convertId(packet.entityId),
 			entityStatus: packet.entityStatus
 		}));
+		ClientSocket.on("CPacketExplosion", /** @type {CPacketExplosion} */
+			packet => {
+				console.log("Explosion packet:", packet);
+				client.write('explosion', {
+					...packet.pos,
+					radius: packet.strength,
+					affectedBlockOffsetsLength: packet.blocks.length,
+					affectedBlockOffsets: packet.blocks.map(v => {
+						return {
+							x: v.x,
+							y: v.y,
+							z: v.z
+						};
+					}),
+					playerMotionX: player.playerPos.x ?? 0,
+					playerMotionY: player.playerPos.y ?? 0,
+					playerMotionZ: player.playerPos.z ?? 0,
+				})
+			})
 		ClientSocket.on('CPacketEntityVelocity', packet => client.write('entity_velocity', {
 			entityId: this.convertId(packet.id),
 			velocityX: Math.max(Math.min(packet.motion.x * 8000, 32767), -32768),

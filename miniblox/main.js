@@ -228,6 +228,9 @@ ut(PBVector3, "runtime", proto2),
 		T: 17
 	}]));
 export const PBFloatVector3 = class extends Message {
+	x;
+	y;
+	z;
 	constructor($) {
 		super();
 		ut(this, "x");
@@ -1943,6 +1946,14 @@ ut(CPacketEntityStatus, "runtime", proto2),
 		T: 5
 	}]));
 export class CPacketExplosion extends Message {
+	/** @type {PBFloatVector3} */
+	pos;
+	/** @type {number} */
+	strength;
+	/** @type {PBBlockPos[]} */
+	blocks;
+	/** @type {PBFloatVector3} */
+	playerPos;
 	constructor($) {
 		super();
 		ut(this, "pos");
@@ -2426,6 +2437,12 @@ ut(CPacketLeaderboard, "runtime", proto2),
 		repeated: !0
 	}]));
 export class CPacketLocalStorage extends Message {
+	/** @type {CPacketLocalStorage_Action} */
+	action;
+	/** @type {string} */
+	key;
+	/** @type {string?} */
+	value;
 	constructor($) {
 		super();
 		ut(this, "action");
@@ -2465,10 +2482,15 @@ ut(CPacketLocalStorage, "runtime", proto2),
 		T: 9,
 		opt: !0
 	}]));
-var CPacketLocalStorage_Action = (j => (j[j.DEFAULT = 0] = "DEFAULT",
-	j[j.REMOVE = 1] = "REMOVE",
-	j[j.SET = 2] = "SET",
-	j))(CPacketLocalStorage_Action || {});
+/** @enum */
+export const CPacketLocalStorage_Action = {
+	DEFAULT: 0,
+	0: "DEFAULT",
+	REMOVE: 1,
+	1: "REMOVE",
+	SET: 2,
+	2: "SET"
+};
 proto2.util.setEnumType(CPacketLocalStorage_Action, "CPacketLocalStorage.Action", [{
 	no: 0,
 	name: "DEFAULT"

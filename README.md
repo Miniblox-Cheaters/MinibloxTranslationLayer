@@ -2,6 +2,114 @@
 
 A middle man to translate Miniblox packets into Minecraft 1.8.9 packets.
 
+## Progress
+
+### Improvements from the original
+
+- `/planets` selection gui
+   (it's not really good since there's no filtering and paging, but better than nothing)
+- `/join` accepts miniblox invite codes along with server IDs
+- more commands: `/serverinfo`, `/serverid` / `/id` / `/invite`, and `/next`
+- migrated to ESM (better code)
+- more items are mapped
+- handles more packets
+  (disconnect packet, queue next packet, and the creative mode set slot packet)
+
+### Handled S2C Packets
+
+- [x] CPacketAnimation
+- [x] CPacketBlockAction
+- [x] CPacketBlockUpdate
+- [ ] CPacketChangeServers (idk what this does, just logs the url field to the console)
+- [x] CPacketChunkData
+- [x] CPacketCloseWindow
+- [x] CPacketConfirmTransaction
+- [x] CPacketDestroyEntities
+- [x] CPacketDisconnect
+      (waits for the connection to actually be closed)
+- [x] CPacketEntityAction
+- [x] CPacketEntityEquipment
+- [x] CPacketEntityMetadata
+- [x] CPacketEntityPositionAndRotation
+- [x] CPacketEntityRelativePositionAndRotation
+- [x] CPacketEntityStatus
+- [x] CPacketEntityVelocity
+- [ ] CPacketExplosion (working on it)
+- [x] CPacketJoinGame
+- [ ] CPacketLeaderboard
+- [ ] CPacketLocalStorage
+- [x] CPacketMessage
+- [x] CPacketOpenWindow
+- [x] CPacketParticles
+- [x] CPacketPlayerList
+- [x] CPacketPlayerPosition
+- [x] CPacketPlayerPosLook
+- [x] CPacketPlayerReconciliation
+- [x] CPacketPong
+- [x] CPacketRespawn
+- [x] CPacketScoreboard
+- [x] CPacketServerInfo
+- [x] CPacketSetSlot
+- [x] CPacketSignEditorOpen
+- [x] CPacketSoundEffect
+- [x] CPacketSpawnEntity
+- [x] CPacketSpawnPlayer
+- [x] CPacketTabComplete
+- [x] CPacketTitle
+- [ ] CPacketUpdate
+- [x] CPacketUpdateHealth
+- [ ] CPacketUpdateLeaderboard
+- [x] CPacketUpdateScoreboard
+- [x] CPacketUpdateSign
+- [x] CPacketUpdateStatus
+- [x] CPacketWindowItems
+- [x] CPacketWindowProperty
+- [x] CPacketUseBed
+- [x] CPacketQueueNext
+- [x] CPacketSpawnExperienceOrb
+- [x] CPacketSetExperience
+- [x] CPacketOpenShop
+- [ ] CPacketShopProperties
+- [ ] CPacketEntityProperties
+- [x] CPacketEntityEffect
+- [x] CPacketRemoveEntityEffect
+- [ ] CPacketUpdateCommandBlock
+- [x] CPacketEntityAttach
+- [ ] CPacketServerMetadata
+- [x] CPacketTimeUpdate
+
+### Handled C2S Packets
+
+- [ ] SPacketAdminAction
+- [x] SPacketAnalytics (sends fake data)
+- [x] SPacketClickWindow
+- [x] SPacketCloseWindow
+- [x] SPacketConfirmTransaction
+- [ ] SPacketEnchantItem
+- [x] SPacketEntityAction
+- [x] SPacketHeldItemChange
+- [x] SPacketLoginStart
+- [x] SPacketMessage
+- [ ] SPacketOpenShop
+- [x] SPacketPing
+- [x] SPacketPlayerAbilities
+- [x] SPacketPlayerAction
+- [x] SPacketPlayerPosLook
+- [x] SPacketRespawn
+- [x] SPacketTabComplete
+- [x] SPacketUpdateSign
+- [x] SPacketUseEntity
+- [ ] SPacketUpdateCommandBlock
+- [x] SPacketQueueNext
+- [x] SPacketPlayerInput
+- [x] SPacketBreakBlock
+- [x] SPacketClick
+- [ ] SPacketCraftItem
+- [x] SPacketPlaceBlock
+- [x] SPacketRequestChunk
+- [x] SPacketUpdateInventory (creative mode)
+- [x] SPacketUseItem
+
 ## Use Steps
 
 1. Install the latest NodeJS at (<https://nodejs.org/>)

@@ -54,8 +54,8 @@ const self = class TabListHandler extends Handler {
 						team: uuid.slice(0, 16),
 						mode: 0,
 						name: uuid.slice(0, 32),
-						prefix: prefix,
-						suffix: suffix,
+						prefix,
+						suffix,
 						friendlyFire: true,
 						nameTagVisibility: 'all',
 						color: 0,
@@ -106,8 +106,19 @@ const self = class TabListHandler extends Handler {
 				client.write('keep_alive', { keepAliveId: Math.floor(Math.random() * 10000) });
 			}, 1000);
 			this.analyticsLoop = setInterval(() => {
+				const randomBuffer = new Uint32Array(1);
+				crypto.getRandomValues(randomBuffer);
+
+				let randomNumber = randomBuffer[0] / (0xffffffff + 1);
+
+				const max = 125;
+				const min = 60;
+
+				let fps = Math.floor(randomNumber * (max - min + 1)) + min;
+				console.log(`Fake FPS: ${fps}. Ping: ${this.filteredPing}`);
+
 				ClientSocket.sendPacket(new SPacketAnalytics({
-					fps: 60 - Math.random(),
+					fps,
 					ping: this.filteredPing
 				}));
 			}, 30000);

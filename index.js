@@ -141,7 +141,7 @@ async function connect(client, requeue, gamemode, code) {
 			console.debug(`Server kicked us for ${reason}, ignoring it since skipKick is active.`);
 			return;
 		}
-		if (reason === "Server is full. Please try joining later.") {
+		if (reason.contains("Server is full")) {
 			console.warn("Got kicked because miniblox queued us into a server that was full, requeueing.")
 			return connect(client, requeue, gamemode, code);
 		}

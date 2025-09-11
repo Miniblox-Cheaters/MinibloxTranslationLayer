@@ -1,5 +1,5 @@
 import Handler from './../handler.js';
-import { ClientSocket, SPacketMessage, SPacketTabComplete$1, CPacketServerInfo, PlayerPermissionEntry, SPacketQueueNext } from './../../main.js';
+import { ClientSocket, SPacketMessage, SPacketTabComplete$1, CPacketServerInfo, PlayerPermissionEntry, SPacketQueueNext, CPacketLocalStorage, CPacketLocalStorage_Action } from './../../main.js';
 import { translateText } from './../../utils.js';
 import { writeFile } from 'node:fs/promises';
 let client, entity, connect, world, gui;
@@ -31,6 +31,8 @@ const descriptions = {
 	"PvP?": "If PvP is enabled",
 	"Start Time": "When the server was started"
 };
+
+const fakeLocalStorage = {};
 
 class IllegalArgumentException extends Error { }
 
@@ -374,6 +376,23 @@ export class MiscHandler extends Handler {
 				action: 0,
 				text: JSON.stringify({ text: translateText(packet.title) })
 			});
+		});
+		ClientSocket.on("CPacketLocalStorage", /** @param {CPacketLocalStorage} packet **/packet => {
+			const action = packet.action;
+			const act = CPacketLocalStorage_Action[action];
+			console.log(`local storage: ${act} ${packet.key}${packet.value ? `${packet.value}` : ""}`);
+			switch (packet.action) {
+				case CPacketLocalStorage_Action.SET:
+					fakeLocalStorage[packet.key] = packet.value;
+					break;
+
+				case CPacketLocalStorage_Action.REMOVE:
+					delete fakeLocalStorage[packet.key];
+
+				case CPacketLocalStorage_Action.DEFAULT:
+					console.info("don't know how to handle 'default' local storage actions")
+					break;
+			}
 		});
 		ClientSocket.on('CPacketTabComplete', packet => client.write('tab_complete', { matches: packet.matches }));
 	}
