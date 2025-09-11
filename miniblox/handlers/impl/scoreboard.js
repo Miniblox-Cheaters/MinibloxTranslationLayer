@@ -1,7 +1,6 @@
 import Handler from './../handler.js';
 import { ClientSocket } from './../../main.js';
 import { translateText } from './../../utils.js';
-import * as SKINS from './../../types/skins.js';
 let client;
 
 const self = class TabListHandler extends Handler {

@@ -2384,6 +2384,16 @@ ut(CPacketJoinGame, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketLeaderboard extends Message {
+	/** @type {string} */
+	id;
+	/** @type {PBVector3} */
+	pos;
+	/** @type {number?} */
+	yaw;
+	/** @type {string} */
+	title;
+	/** @type {string[]} */
+	content;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -3630,6 +3640,10 @@ ut(CPacketUpdateHealth, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketUpdateLeaderboard extends Message {
+	/** @type {string} */
+	id;
+	/** @type {string[]} */
+	content;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -4607,6 +4621,10 @@ ut(CPacketEntityEffect, "runtime", proto2),
 		T: 8
 	}]));
 export class CPacketEntityProperties extends Message {
+	/** @type {number} */
+	id;
+	/** @type {PBSnapshot[]} */
+	data;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -4641,6 +4659,12 @@ ut(CPacketEntityProperties, "runtime", proto2),
 		repeated: !0
 	}]));
 export class PBSnapshot extends Message {
+	/** @type {string} */
+	id;
+	/** @type {number} */
+	value;
+	/** @type {PBModifier[]} */
+	modifiers;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -4681,6 +4705,12 @@ ut(PBSnapshot, "runtime", proto2),
 		repeated: !0
 	}]));
 export class PBModifier extends Message {
+	/** @type {string} */
+	id;
+	/** @type {number} */
+	amount;
+	/** @type {number} */
+	operation;
 	constructor($) {
 		super();
 		ut(this, "id");

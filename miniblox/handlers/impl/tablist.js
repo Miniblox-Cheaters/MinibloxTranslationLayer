@@ -115,7 +115,6 @@ const self = class TabListHandler extends Handler {
 				const min = 60;
 
 				let fps = Math.floor(randomNumber * (max - min + 1)) + min;
-				console.log(`Fake FPS: ${fps}. Ping: ${this.filteredPing}`);
 
 				ClientSocket.sendPacket(new SPacketAnalytics({
 					fps,

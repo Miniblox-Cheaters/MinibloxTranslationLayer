@@ -1,5 +1,5 @@
 import Handler from './../handler.js';
-import { ClientSocket, SPacketPlayerPosLook, SPacketPlayerInput, SPacketEntityAction, SPacketPlayerAbilities, SPacketHeldItemChange, SPacketClick, SPacketRespawn$1, SPacketUseEntity, PBVector3, SPacketUpdateInventory, CPacketSetSlot, PBItemStack, CPacketExplosion } from './../../main.js';
+import { ClientSocket, SPacketPlayerPosLook, SPacketPlayerInput, SPacketEntityAction, SPacketPlayerAbilities, SPacketHeldItemChange, SPacketClick, SPacketRespawn$1, SPacketUseEntity, PBVector3, SPacketUpdateInventory, CPacketSetSlot, PBItemStack, CPacketExplosion, CPacketEntityProperties } from './../../main.js';
 import ENTITIES from './../../types/entities.js';
 import GAMEMODES, { spectator } from './../../types/gamemodes.js';
 import { translateItem, translateItemBack, translateText } from './../../utils.js';
@@ -266,6 +266,27 @@ const self = class EntityHandler extends Handler {
 			};
 			this.check(this.entities[packet.id]);
 		});
+		ClientSocket.on("CPacketEntityProperties", /** @param {CPacketEntityProperties} packet */packet => {
+			const properties = packet.data.map(s => {
+				return {
+					key: s.id,
+					value: s.value,
+					modifiersLength: s.modifiers.length,
+					modifiers: s.modifiers.map(mod => {
+						return {
+							uuid: mod.id,
+							amount: mod.amount,
+							operation: mod.operation
+						};
+					})
+				}
+			});
+			client.write("update_attributes", {
+				entityId: packet.id,
+				propertiesLength: packet.data.length,
+				properties
+			})
+		})
 		ClientSocket.on('CPacketSpawnPlayer', packet => {
 			const yaw = convertAngle(packet.yaw, true, 180), pitch = convertAngle(packet.pitch, true);
 			if (packet.socketId == ClientSocket.id) {

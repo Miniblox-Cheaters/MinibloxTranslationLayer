@@ -34,10 +34,10 @@ A middle man to translate Miniblox packets into Minecraft 1.8.9 packets.
 - [x] CPacketEntityRelativePositionAndRotation
 - [x] CPacketEntityStatus
 - [x] CPacketEntityVelocity
-- [ ] CPacketExplosion (working on it)
+- [x] CPacketExplosion (should work)
 - [x] CPacketJoinGame
-- [ ] CPacketLeaderboard
-- [ ] CPacketLocalStorage
+- [x] CPacketLeaderboard (untested)
+- [ ] CPacketLocalStorage (not required, so no)
 - [x] CPacketMessage
 - [x] CPacketOpenWindow
 - [x] CPacketParticles
@@ -58,7 +58,7 @@ A middle man to translate Miniblox packets into Minecraft 1.8.9 packets.
 - [x] CPacketTitle
 - [ ] CPacketUpdate
 - [x] CPacketUpdateHealth
-- [ ] CPacketUpdateLeaderboard
+- [x] CPacketUpdateLeaderboard (untested)
 - [x] CPacketUpdateScoreboard
 - [x] CPacketUpdateSign
 - [x] CPacketUpdateStatus
@@ -70,12 +70,12 @@ A middle man to translate Miniblox packets into Minecraft 1.8.9 packets.
 - [x] CPacketSetExperience
 - [x] CPacketOpenShop
 - [ ] CPacketShopProperties
-- [ ] CPacketEntityProperties
+- [x] CPacketEntityProperties
 - [x] CPacketEntityEffect
 - [x] CPacketRemoveEntityEffect
 - [ ] CPacketUpdateCommandBlock
 - [x] CPacketEntityAttach
-- [ ] CPacketServerMetadata
+- [x] CPacketServerMetadata
 - [x] CPacketTimeUpdate
 
 ### Handled C2S Packets

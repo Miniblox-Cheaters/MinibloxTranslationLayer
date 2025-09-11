@@ -1,6 +1,7 @@
 import Handler from './../handler.js';
-import { ClientSocket, SPacketRequestChunk, SPacketUseItem, SPacketPlaceBlock, SPacketBreakBlock, SPacketPlayerAction, SPacketClick, SPacketUpdateSign, BitArray, PBBlockPos } from './../../main.js';
+import { ClientSocket, SPacketRequestChunk, SPacketUseItem, SPacketPlaceBlock, SPacketBreakBlock, SPacketPlayerAction, SPacketClick, SPacketUpdateSign, BitArray, PBBlockPos, CPacketLeaderboard, CPacketUpdateLeaderboard } from './../../main.js';
 import { BLOCKS, BLOCK_ID } from './../../types/blocks.js';
+const mcData = (await import('minecraft-data')).default("1.8.9");
 const Chunk = (await import('prismarine-chunk')).default('1.8.9');
 import Vec3 from 'vec3';
 const viewDistance = 7, CELL_VOLUME = 16 * 16 * 16;
@@ -19,6 +20,12 @@ lightData = lightData.dump();
 function getBlockIndex(x, y, z) {
 	return (y & 15) << 8 | (z & 15) << 4 | x & 15
 }
+
+/** @type {Map<string, CPacketLeaderboard} */
+const leaderboards = new Map();
+let nextLeaderboardID = -2;
+/** @type {Map<string, number>} */
+const leaderboardIdToMcID = new Map();
 
 const self = class WorldHandler extends Handler {
 	createChunk(packet) {
@@ -167,6 +174,77 @@ const self = class WorldHandler extends Handler {
 			entityId: packet.id == entity.local.id ? mcClientId : packet.id,
 			location: packet.bedPos
 		}));
+		ClientSocket.on("CPacketLeaderboard", /**@param {CPacketLeaderboard} packet */packet => {
+			console.info("got leaderboard packet");
+			const id = packet.id;
+
+			if (leaderboards.has(id)) return;
+
+			const mcId = nextLeaderboardID--;
+			leaderboardIdToMcID.set(id, mcId);
+
+			const { pos, title, content } = packet;
+			const yaw = convertAngle(packet.yaw, true) ?? 0;
+
+			leaderboards.set(id, packet);
+			client.write("spawn_entity", {
+				entityId: mcId,
+				type: mcData.entitiesByName.ArmorStand.id,
+				...pos,
+				yaw,
+				pitch: 0,
+				objectData: {
+					intField: -1,
+				}
+			});
+			client.write("update_entity_nbt", {
+				entityId: mcId,
+				tag: {
+					name: "",
+					type: "compound",
+					value: {
+						CustomName: {
+							type: "string",
+							value: `${title}\n${content}`
+						},
+						CustomNameVisible: {
+							type: "byte",
+							value: 1
+						}
+					}
+				}
+			});
+		})
+		ClientSocket.on("CPacketUpdateLeaderboard", /**@param {CPacketUpdateLeaderboard} packet */packet => {
+			console.info("got leaderboard UPDATE packet");
+			const id = packet.id;
+			const leaderboard = leaderboards.get(id);
+			const mcId = leaderboardIdToMcID.get(id);
+
+			if (!mcId) return;
+
+			const { content } = packet;
+
+			leaderboard.content = content;
+
+			client.write("update_entity_nbt", {
+				entityId: mcId,
+				tag: {
+					name: "",
+					type: "compound",
+					value: {
+						CustomName: {
+							type: "string",
+							value: `${leaderboard.title}\n${content}`
+						},
+						CustomNameVisible: {
+							type: "byte",
+							value: 1
+						}
+					}
+				}
+			});
+		})
 	}
 	minecraft(mcClient) {
 		client = mcClient;

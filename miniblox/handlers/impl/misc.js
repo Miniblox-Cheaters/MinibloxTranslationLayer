@@ -32,7 +32,7 @@ const descriptions = {
 	"Start Time": "When the server was started"
 };
 
-const fakeLocalStorage = {};
+// const fakeLocalStorage = {};
 
 class IllegalArgumentException extends Error { }
 
@@ -324,7 +324,7 @@ export class MiscHandler extends Handler {
 	miniblox(gameType) {
 		this.gameType = gameType;
 		ClientSocket.on('CPacketServerInfo', MiscHandler.setServerInfoData);
-		ClientSocket.on("CPacketMetadata", packet => {
+		ClientSocket.on("CPacketServerMetadata", packet => {
 			MiscHandler.serverInfo.metadata = packet.metadata;
 		});
 		ClientSocket.on("CPacketChangeServers", packet => {
@@ -377,23 +377,23 @@ export class MiscHandler extends Handler {
 				text: JSON.stringify({ text: translateText(packet.title) })
 			});
 		});
-		ClientSocket.on("CPacketLocalStorage", /** @param {CPacketLocalStorage} packet **/packet => {
-			const action = packet.action;
-			const act = CPacketLocalStorage_Action[action];
-			console.log(`local storage: ${act} ${packet.key}${packet.value ? `${packet.value}` : ""}`);
-			switch (packet.action) {
-				case CPacketLocalStorage_Action.SET:
-					fakeLocalStorage[packet.key] = packet.value;
-					break;
+		// ClientSocket.on("CPacketLocalStorage", /** @param {CPacketLocalStorage} packet **/packet => {
+		// 	const action = packet.action;
+		// 	const act = CPacketLocalStorage_Action[action];
+		// 	console.log(`local storage: ${act} ${packet.key}${packet.value ? `${packet.value}` : ""}`);
+		// 	switch (packet.action) {
+		// 		case CPacketLocalStorage_Action.SET:
+		// 			fakeLocalStorage[packet.key] = packet.value;
+		// 			break;
 
-				case CPacketLocalStorage_Action.REMOVE:
-					delete fakeLocalStorage[packet.key];
+		// 		case CPacketLocalStorage_Action.REMOVE:
+		// 			delete fakeLocalStorage[packet.key];
 
-				case CPacketLocalStorage_Action.DEFAULT:
-					console.info("don't know how to handle 'default' local storage actions")
-					break;
-			}
-		});
+		// 		case CPacketLocalStorage_Action.DEFAULT:
+		// 			console.info("don't know how to handle 'default' local storage actions")
+		// 			break;
+		// 	}
+		// });
 		ClientSocket.on('CPacketTabComplete', packet => client.write('tab_complete', { matches: packet.matches }));
 	}
 	minecraft(mcClient) {
