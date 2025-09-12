@@ -1,7 +1,8 @@
 import Handler from './../handler.js';
-import { ClientSocket, SPacketMessage, SPacketTabComplete$1, CPacketServerInfo, PlayerPermissionEntry, SPacketQueueNext, CPacketLocalStorage, CPacketLocalStorage_Action } from './../../main.js';
+import { ClientSocket, SPacketMessage, SPacketTabComplete$1, CPacketServerInfo, PlayerPermissionEntry, SPacketQueueNext, CPacketLocalStorage, CPacketLocalStorage_Action, CPacketMessage } from './../../main.js';
 import { translateText } from './../../utils.js';
 import { writeFile } from 'node:fs/promises';
+import { CN_TO_CC } from '../../types/colors.js';
 let client, entity, connect, world, gui;
 
 /**
@@ -334,27 +335,35 @@ export class MiscHandler extends Handler {
 			console.log(`Got queue next packet, minigame id = ${packet.minigameId}, config = ${packet.minigameConfig}`)
 			connect(client, true, packet.minigameId);
 		})
-		ClientSocket.on('CPacketMessage', packet => {
-			if (packet.text) {
+		ClientSocket.on('CPacketMessage', /**  @param {CPacketMessage} packet **/packet => {
+			const msg = packet.text;
+			if (msg !== undefined) {
+				const extra = [translateText(msg)];
+				if (packet.color !== undefined && CN_TO_CC[packet.color] !== undefined)
+					extra.splice(0, 0, CN_TO_CC[packet.color]);
+
+				const toast = packet.toast ?? false;
+				const position = toast ? 2 : packet.id === undefined ? 1 : 0;
+
 				client.write('chat', {
 					message: JSON.stringify({
-						extra: [translateText(packet.text)],
+						extra,
 						text: ''
 					}),
-					position: packet.id == undefined ? 1 : 0
+					position
 				});
 
-				if (packet.id == undefined && packet.text.includes('Summary')) {
+				if (packet.id === undefined && msg.includes('Summary')) {
 					client.write('chat', {
 						message: JSON.stringify({
 							text: '',
 							extra: [
 								{
-									text: 'Click here',
-									color: 'aqua',
+									text: "Click here",
+									color: "aqua",
 									clickEvent: {
-										action: 'run_command',
-										value: '/play ' + gameType
+										action: "run_command",
+										value: "/next"
 									}
 								},
 								' to play again!'
@@ -406,7 +415,8 @@ export class MiscHandler extends Handler {
 			if (msg.startsWith("/")) {
 				const parts = msg.split(" ");
 				const cmd = parts.shift().substring(1);
-				if (await handleCommand(cmd, ...parts)) return;
+				const handled = await handleCommand(cmd, ...parts);
+				if (handled) return;
 			}
 			ClientSocket.sendPacket(new SPacketMessage({ text: msg }));
 		});

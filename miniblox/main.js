@@ -2512,6 +2512,18 @@ proto2.util.setEnumType(CPacketLocalStorage_Action, "CPacketLocalStorage.Action"
 	name: "SET"
 }]);
 export class CPacketMessage extends Message {
+	/** @type {string | undefined} */
+	text;
+	/** @type {string | undefined} */
+	id;
+	/** @type {string | undefined} */
+	color;
+	/** @type {boolean | undefined} */
+	discard;
+	/** @type {boolean | undefined} */
+	toast;
+	/** @type {number | undefined} */
+	timer;
 	constructor($) {
 		super();
 		ut(this, "text");

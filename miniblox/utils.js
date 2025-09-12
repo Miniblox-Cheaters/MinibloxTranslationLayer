@@ -1,6 +1,6 @@
 import { PBItemStack } from './main.js';
 import ITEMS from './types/items.js';
-import { COLOR_PALETTE, COLOR_REGEX, COLOR_CODES } from './types/colors.js';
+import { COLOR_PALETTE, COLOR_REGEX, FMT_CODES } from './types/colors.js';
 export { LEVEL_TO_COLOUR } from './types/colors.js';
 
 export function colorDistance(color1, color2) {
@@ -42,7 +42,7 @@ export function translateItem(item) {
 		if (parsed.ench) {
 			let enchants = [];
 			for (const ench of parsed.ench) {
-				enchants.push({lvl: {type: "short", value: ench.lvl}, id: {type: "short", value: ench.id}});
+				enchants.push({ lvl: { type: "short", value: ench.lvl }, id: { type: "short", value: ench.id } });
 			}
 			data = {
 				name: "",
@@ -66,7 +66,7 @@ export function translateItem(item) {
 		itemCount: item.stackSize,
 		itemDamage: (typeof itemData == 'number' ? item.durability : itemData[1]),
 		nbtData: data
-	} : {blockId: -1}
+	} : { blockId: -1 }
 }
 
 export function translateItemBack(item) {
@@ -81,9 +81,9 @@ export function translateItemBack(item) {
 	}
 
 	if (item.nbtData && item.nbtData.value.ench) {
-		data = {ench: []};
+		data = { ench: [] };
 		for (const ench of item.nbtData.value.ench.value.value) {
-			data.ench.push({id: ench.id.value, lvl: ench.lvl.value});
+			data.ench.push({ id: ench.id.value, lvl: ench.lvl.value });
 		}
 		data = JSON.stringify(data);
 	}
@@ -94,10 +94,14 @@ export function translateItemBack(item) {
 		stackSize: item.itemCount,
 		durability: Math.floor(item.itemDamage),
 		data
-	}) : new PBItemStack({present: false});
+	}) : new PBItemStack({ present: false });
 }
 
+/**
+ * @param {string} text to translate
+ * @returns translated
+ */
 export function translateText(text) {
-	for (const [code, color] of Object.entries(COLOR_CODES)) text = text.replaceAll(code, color);
-	return text.replaceAll(COLOR_REGEX, (match) => {return findClosestColor(match.replaceAll("\\",''))});
+	for (const [code, color] of Object.entries(FMT_CODES)) text = text.replaceAll(code, color);
+	return text.replaceAll(COLOR_REGEX, (match) => { return findClosestColor(match.replaceAll("\\", '')) });
 }

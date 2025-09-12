@@ -1,26 +1,32 @@
 export const COLOR_REGEX = /\\#[A-Za-z0-9]+\\/g;
-export const COLOR_CODES = {
-    "\\lime\\": "\u00a7a",
-    "\\aqua\\": "\u00a7b",
-    "\\cyan\\": "\u00a7b",
-    "\\red\\": "\u00a7c",
-    "\\pink\\": "\u00a7d",
-    "\\yellow\\": "\u00a7e",
-    "\\white\\": "\u00a7f",
-    "\\green\\": "\u00a72",
-    "\\orange\\": "\u00a76",
-    "\\gold\\": "\u00a76",
-    "\\gray\\": "\u00a77",
-    "\\grey\\": "\u00a77",
-    "\\silver\\": "\u00a77",
-    "\\magenta\\": "\u00a7d",
-    "\\blue\\": "\u00a79",
-    "\\black\\": "\u00a70",
-    "\\bold\\": "\u00a7l",
-    "\\italic\\": "\u00a7o",
-    "\\reset\\": "\u00a7r",
-    "\\glow\\": ""
+export const CN_TO_CC = {
+    "lime": "\u00a7a",
+    "aqua": "\u00a7b",
+    "cyan": "\u00a7b",
+    "red": "\u00a7c",
+    "pink": "\u00a7d",
+    "yellow": "\u00a7e",
+    "white": "\u00a7f",
+    "green": "\u00a72",
+    "orange": "\u00a76",
+    "gold": "\u00a76",
+    "gray": "\u00a77",
+    "grey": "\u00a77",
+    "silver": "\u00a77",
+    "magenta": "\u00a7d",
+    "blue": "\u00a79",
+    "black": "\u00a70",
+    "bold": "\u00a7l",
+    "italic": "\u00a7o",
+    "reset": "\u00a7r"
 };
+export const COLOR_CODES = Object.fromEntries(Object.entries(CN_TO_CC).map(([k, v]) => {
+    return [`\\${k}\\`, v];
+}));
+export const FMT_CODES = {
+    ...COLOR_CODES,
+    "\\glow\\": ""
+}
 export const COLOR_PALETTE = {
     "#AA0000": "\u00a7a",
     "#FF5555": "\u00A7c",

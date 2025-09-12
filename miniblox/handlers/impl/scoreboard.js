@@ -3,7 +3,7 @@ import { ClientSocket } from './../../main.js';
 import { translateText } from './../../utils.js';
 let client;
 
-const self = class TabListHandler extends Handler {
+const self = class ScoreboardHandler extends Handler {
 	clear() {
 		if (this.score.length > 0) {
 			client.write('scoreboard_objective', {

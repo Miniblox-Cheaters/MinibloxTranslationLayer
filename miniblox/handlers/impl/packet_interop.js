@@ -14,8 +14,8 @@ const SEND_RECV_PACKET_PAYLOAD = false;
 // - they send too much data
 // - or are handled well enough by the translation layer
 const C_BLACKLIST = [
-	"CPacketChunkData",
-	"CPacketJoinGame",
+	"CPacketChunkData", // a lot of data
+	"CPacketJoinGame", // why?
 	"CPacketTabComplete",
 	"CPacketSoundEffect",
 	"CPacketBlockUpdate",
@@ -54,28 +54,36 @@ function parseSendPacketBuf(buffer) {
 }
 
 export class PacketInterop extends Handler {
+	/**
+	 * 
+	 * @param {string} pkt name of the packet
+	 * @param {Message} body packet data
+	 */
+	static handleSocketPacket(pkt, body) {
+		if (C_BLACKLIST.includes(pkt))
+			return;
+
+		console.log(pkt);
+
+		const j = JSON.stringify(body);
+		const len = pkt.length + j.length;
+
+		if (len > 32767) {
+			console.info(`Not including packet ${pkt} since it is too long`);
+			return;
+		}
+
+		const data = Buffer.alloc(len);
+		const off = writeString(data, 0, pkt);
+		writeString(data, off, j);
+		mcClient.write('custom_payload', {
+			channel: 'layer:receive_packet',
+			data
+		});
+	}
 	miniblox() {
 		if (!SEND_RECV_PACKET_PAYLOAD) return;
-		ClientSocket.socket.onAny((pkt, body) => {
-			if (C_BLACKLIST.includes(pkt))
-				return;
-
-			console.log(pkt);
-
-			const j = JSON.stringify(body);
-			const len = pkt.length + j.length;
-
-			if (len > 32767)
-				return console.info(`Not including packet ${pkt} since it is too long`);
-
-			const data = Buffer.alloc(len);
-			const off = writeString(data, 0, pkt);
-			writeString(data, off, j);
-			mcClient.write('custom_payload', {
-				channel: 'layer:receive_packet',
-				data
-			});
-		})
+		ClientSocket.socket.onAny(handleSocketPacket)
 	}
 	/** @param {import("minecraft-protocol").ServerClient} client */
 	minecraft(client) {
