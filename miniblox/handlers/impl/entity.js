@@ -564,7 +564,7 @@ const self = class EntityHandler extends Handler {
 			entityId: this.convertId(packet.entityId),
 			entityStatus: packet.entityStatus
 		}));
-		ClientSocket.on("CPacketExplosion", /** @type {CPacketExplosion} */
+		ClientSocket.on("CPacketExplosion", /** @param {CPacketExplosion} packet */
 			packet => {
 				console.log("Explosion packet:", packet);
 				client.write('explosion', {
@@ -578,9 +578,9 @@ const self = class EntityHandler extends Handler {
 							z: v.z
 						};
 					}),
-					playerMotionX: player.playerPos.x ?? 0,
-					playerMotionY: player.playerPos.y ?? 0,
-					playerMotionZ: player.playerPos.z ?? 0,
+					playerMotionX: packet.playerPos.x ?? 0,
+					playerMotionY: packet.playerPos.y ?? 0,
+					playerMotionZ: packet.playerPos.z ?? 0,
 				})
 			})
 		ClientSocket.on('CPacketEntityVelocity', packet => client.write('entity_velocity', {
