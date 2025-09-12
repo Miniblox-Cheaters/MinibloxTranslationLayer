@@ -72,6 +72,12 @@ let Message$2 = class {
         return tt.readMessage(et, _, rt, this),
         this
     }
+    /**
+     * 
+     * @param {string} _ json data
+     * @param {any?} $ idk
+     * @returns
+     */
     fromJsonString(_, $) {
         let et;
         try {

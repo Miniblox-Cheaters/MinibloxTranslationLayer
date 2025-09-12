@@ -5493,7 +5493,7 @@ ut(SPacketUpdateCommandBlock, "runtime", proto2),
 		T: 5,
 		opt: !0
 	}]));
-const CPACKET_MAP = {
+export const CPACKET_MAP = {
 	CPacketAnimation,
 	CPacketBlockAction,
 	CPacketBlockUpdate,
