@@ -1,0 +1,22 @@
+{
+	"name": "miniblox-translation-layer",
+	"version": "1.2.6",
+	"license": "AGPL-3.0-or-later",
+	"tasks": {
+		"run": "deno run --allow-net --allow-sys --allow-read --allow-env --allow-write index.js"
+	},
+	"exports": {},
+	"imports": {
+		"@msgpack/msgpack": "npm:@msgpack/msgpack@^3.1.2",
+		"brotli": "npm:brotli@^1.3.3",
+		"minecraft-protocol": "npm:minecraft-protocol@^1.58.0",
+		"minecraft-data": "npm:minecraft-data@3.85.0",
+		"prismarine-chunk": "npm:prismarine-chunk@^1.39.0",
+		"socket.io-client": "npm:socket.io-client@^4.8.1",
+		"socket.io-msgpack-parser": "npm:socket.io-msgpack-parser@^3.0.2",
+		"vec3": "npm:vec3@^0.1.10"
+	},
+	"fmt": {
+		"useTabs": true
+	}
+}

@@ -1,7 +1,6 @@
 import Handler from './../handler.js';
 import { ClientSocket, SPacketMessage, SPacketTabComplete$1, CPacketServerInfo, PlayerPermissionEntry, SPacketQueueNext, CPacketLocalStorage, CPacketLocalStorage_Action, CPacketMessage } from './../../main.js';
 import { translateText } from './../../utils.js';
-import { writeFile } from 'node:fs/promises';
 import { CN_TO_CC } from '../../types/colors.js';
 let client, entity, connect, world, gui;
 
@@ -85,7 +84,7 @@ export async function handleCommand(cmd, ...args) {
 			break;
 		case "login":
 			try {
-				await writeFile('./login.token', args.join(" "));
+				await Deno.writeTextFile("./login.token", args.join(" "));
 				client.write('chat', {
 					message: JSON.stringify({
 						extra: [translateText('\\green\\Successfully logged in! Rejoin the game.')],
@@ -104,15 +103,22 @@ export async function handleCommand(cmd, ...args) {
 				console.error(err);
 			}
 			break;
-		case "join":
+		case "join": {
 			const code = args.join(" ");
 			try {
 				const resolved = await resolveServerID(code) ?? code;
 				connect(client, true, undefined, resolved);
 			} catch (e) {
-
+				client.write('chat', {
+					message: JSON.stringify({
+						extra: [translateText(`\\red\\Failed to join server! ${e.message}`)],
+						text: ''
+					}),
+					position: 1
+				});
 			}
 			break;
+		}
 		case "resync":
 			if (entity.teleport) {
 				client.write('position', {
@@ -137,7 +143,7 @@ export async function handleCommand(cmd, ...args) {
 			world.chunks = [];
 			world.queued = [];
 			break;
-		case "desync":
+		case "desync": {
 			entity.desyncFlag = !entity.desyncFlag;
 			const desynced = entity.desyncFlag;
 			const lol = desynced ? "Desync" : "Resync";
@@ -149,7 +155,7 @@ export async function handleCommand(cmd, ...args) {
 				position: 1
 			});
 			break;
-
+		}
 		case "planets":
 			gui.showPlanetsGUI();
 			break;
@@ -204,7 +210,7 @@ but you can join it using /join ${serverId}`
 			});
 			break;
 		}
-		case "serverinfo":
+		case "serverinfo": {
 			const {
 				serverName, serverId,
 				inviteCode, serverVersion,
@@ -252,6 +258,7 @@ but you can join it using /join ${serverId}`
 				position: 1
 			});
 			break;
+		}
 		default:
 			return false;
 	}

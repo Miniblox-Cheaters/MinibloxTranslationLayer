@@ -3,7 +3,6 @@ import * as handlers from './miniblox/handlers/init.js';
 import { entity } from './miniblox/handlers/init.js';
 import { MiscHandler } from "./miniblox/handlers/impl/misc.js";
 import { createServer } from 'minecraft-protocol';
-import { readFileSync } from 'node:fs';
 
 const server = createServer({
 	'online-mode': false,
@@ -97,8 +96,10 @@ async function connect(client, requeue, gamemode, code) {
 	ClientSocket.setUrl(`https://${fetched.serverId}.servers.coolmathblox.ca`, void 0);
 	let session = '';
 	try {
-		session = await readFileSync('login.token', { encoding: 'utf8' });
-	} catch (exception) { }
+		session = await Deno.readTextFile("login.token");
+	} catch (_e) {
+		// ignore
+	}
 
 	// MINIBLOX CONNECTION
 	ClientSocket.once('connect', () => {
