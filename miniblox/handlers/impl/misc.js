@@ -350,7 +350,11 @@ export class MiscHandler extends Handler {
 					extra.splice(0, 0, CN_TO_CC[packet.color]);
 
 				const toast = packet.toast ?? false;
-				const position = toast ? 2 : packet.id === undefined ? 1 : 0;
+				const position = toast
+					? 2
+					: packet.id === undefined
+						? 1
+						: 0;
 
 				client.write('chat', {
 					message: JSON.stringify({
