@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-unused-vars
 class Handler {
 	constructor() { this.cleanup(); }
 	miniblox() {}
@@ -8,9 +9,9 @@ class Handler {
 	cleanup() {}
 	/**
 	 * 
-	 * @param {import("./init")} handler 
+	 * @param {import("./init.js")} handler 
 	 */
-	obtainHandlers(handler) {}
+	obtainHandlers(handler, connectFunction) {}
 }
 
 export default Handler;

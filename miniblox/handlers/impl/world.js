@@ -174,7 +174,7 @@ const self = class WorldHandler extends Handler {
 			entityId: packet.id == entity.local.id ? mcClientId : packet.id,
 			location: packet.bedPos
 		}));
-		ClientSocket.on("CPacketLeaderboard", /**@param {CPacketLeaderboard} packet */packet => {
+		ClientSocket.on("CPacketLeaderboard", packet => {
 			console.info("got leaderboard packet");
 			const id = packet.id;
 
@@ -215,7 +215,7 @@ const self = class WorldHandler extends Handler {
 				}
 			});
 		})
-		ClientSocket.on("CPacketUpdateLeaderboard", /**@param {CPacketUpdateLeaderboard} packet */packet => {
+		ClientSocket.on("CPacketUpdateLeaderboard", packet => {
 			console.info("got leaderboard UPDATE packet");
 			const id = packet.id;
 			const leaderboard = leaderboards.get(id);

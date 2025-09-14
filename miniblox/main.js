@@ -1559,6 +1559,8 @@ ut(CPacketDestroyEntities, "runtime", proto2),
 		repeated: !0
 	}]));
 export class CPacketDisconnect extends Message {
+	/** @type {string} */
+	reason;
 	constructor($) {
 		super();
 		ut(this, "reason");
@@ -1586,13 +1588,18 @@ ut(CPacketDisconnect, "runtime", proto2),
 		T: 9
 	}]));
 export class CPacketEntityAction extends Message {
+	/** @type {number} */
+	id;
+	/** @type {boolean?} */
+	sneak;
+	/** @type {boolean?} */
+	sprinting;
+	/** @type {boolean?} */
+	punching;
+	/** @type {boolean?} */
+	fire;
 	constructor($) {
 		super();
-		ut(this, "id");
-		ut(this, "sneak");
-		ut(this, "sprinting");
-		ut(this, "punching");
-		ut(this, "fire");
 		proto2.util.initPartial($, this)
 	}
 	static fromBinary($, et) {
@@ -2287,6 +2294,28 @@ ut(PlayerPermissionEntry, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketJoinGame extends Message {
+	/** @type {boolean} */
+	canConnect;
+	/** @type {string | undefined} */
+	errorMessage;
+	/** @type {number | undefined} */
+	tick;
+	/** @type {string | undefined} */
+	gamemode;
+	/** @type {string | undefined} */
+	name;
+	/** @type {boolean | undefined} */
+	enablePlayerCollision;
+	/** @type {PBCosmetics | undefined} */
+	cosmetics;
+	/** @type {number | undefined} */
+	rank;
+	/** @type {CPacketServerInfo} */
+	serverInfo;
+	/** @type {string} */
+	uuid;
+	/** @type {string} */
+	dimension;
 	constructor($) {
 		super();
 		ut(this, "canConnect");
@@ -5750,8 +5779,12 @@ const parser = {
 };
 
 export class ClientSocket {
-	static setUrl(_, $) {
-		this.socket = io(_, {
+	/**
+	 * @param {string} url
+	 * @param {string} [path="/socket.io"]
+	 */
+	static setUrl(url, path = "/socket.io") {
+		this.socket = io(url, {
 			transports: ["websocket"],
 			extraHeaders: {
 				'Origin': 'https://miniblox.io',
@@ -5763,7 +5796,7 @@ export class ClientSocket {
 			closeOnBeforeunload: !1,
 			parser,
 			reconnectionDelay: 2e3,
-			path: $ || "/socket.io"
+			path: path || "/socket.io"
 		})
 	}
 	static connect() {
@@ -5780,25 +5813,108 @@ export class ClientSocket {
 		}
 		this.socket.disconnect()
 	}
-	static once(_, $) {
-		this.socket.once(_, $)
+
+	/**
+	 * @typedef {Object} EventMap
+	 * @property {string} disconnect
+	 * @property {CPacketAnimation} CPacketAnimation
+	 * @property {CPacketBlockAction} CPacketBlockAction
+	 * @property {CPacketBlockUpdate} CPacketBlockUpdate
+	 * @property {CPacketChangeServers} CPacketChangeServers
+	 * @property {CPacketChunkData} CPacketChunkData
+	 * @property {CPacketCloseWindow} CPacketCloseWindow
+	 * @property {CPacketConfirmTransaction} CPacketConfirmTransaction
+	 * @property {CPacketDestroyEntities} CPacketDestroyEntities
+	 * @property {CPacketDisconnect} CPacketDisconnect
+	 * @property {CPacketEntityAction} CPacketEntityAction
+	 * @property {CPacketEntityEquipment} CPacketEntityEquipment
+	 * @property {CPacketEntityMetadata} CPacketEntityMetadata
+	 * @property {CPacketEntityPositionAndRotation} CPacketEntityPositionAndRotation
+	 * @property {CPacketEntityRelativePositionAndRotation} CPacketEntityRelativePositionAndRotation
+	 * @property {CPacketEntityStatus} CPacketEntityStatus
+	 * @property {CPacketEntityVelocity} CPacketEntityVelocity
+	 * @property {CPacketExplosion} CPacketExplosion
+	 * @property {CPacketJoinGame} CPacketJoinGame
+	 * @property {CPacketLeaderboard} CPacketLeaderboard
+	 * @property {CPacketLocalStorage} CPacketLocalStorage
+	 * @property {CPacketMessage} CPacketMessage
+	 * @property {CPacketOpenWindow} CPacketOpenWindow
+	 * @property {CPacketParticles} CPacketParticles
+	 * @property {CPacketPlayerList} CPacketPlayerList
+	 * @property {CPacketPlayerPosition} CPacketPlayerPosition
+	 * @property {CPacketPlayerPosLook} CPacketPlayerPosLook
+	 * @property {CPacketPlayerReconciliation} CPacketPlayerReconciliation
+	 * @property {CPacketPong} CPacketPong
+	 * @property {CPacketRespawn} CPacketRespawn
+	 * @property {CPacketScoreboard} CPacketScoreboard
+	 * @property {CPacketServerInfo} CPacketServerInfo
+	 * @property {CPacketSetSlot} CPacketSetSlot
+	 * @property {CPacketSignEditorOpen} CPacketSignEditorOpen
+	 * @property {CPacketSoundEffect} CPacketSoundEffect
+	 * @property {CPacketSpawnEntity} CPacketSpawnEntity
+	 * @property {CPacketSpawnPlayer} CPacketSpawnPlayer
+	 * @property {CPacketTabComplete} CPacketTabComplete
+	 * @property {CPacketTitle} CPacketTitle
+	 * @property {CPacketUpdate} CPacketUpdate
+	 * @property {CPacketUpdateHealth} CPacketUpdateHealth
+	 * @property {CPacketUpdateLeaderboard} CPacketUpdateLeaderboard
+	 * @property {CPacketUpdateScoreboard} CPacketUpdateScoreboard
+	 * @property {CPacketUpdateSign} CPacketUpdateSign
+	 * @property {CPacketUpdateStatus} CPacketUpdateStatus
+	 * @property {CPacketWindowItems} CPacketWindowItems
+	 * @property {CPacketWindowProperty} CPacketWindowProperty
+	 * @property {CPacketUseBed} CPacketUseBed
+	 * @property {CPacketQueueNext} CPacketQueueNext
+	 * @property {CPacketSpawnExperienceOrb} CPacketSpawnExperienceOrb
+	 * @property {CPacketSetExperience} CPacketSetExperience
+	 * @property {CPacketOpenShop} CPacketOpenShop
+	 * @property {CPacketShopProperties} CPacketShopProperties
+	 * @property {CPacketEntityProperties} CPacketEntityProperties
+	 * @property {CPacketEntityEffect} CPacketEntityEffect
+	 * @property {CPacketRemoveEntityEffect} CPacketRemoveEntityEffect
+	 * @property {CPacketUpdateCommandBlock} CPacketUpdateCommandBlock
+	 * @property {CPacketEntityAttach} CPacketEntityAttach
+	 * @property {CPacketServerMetadata} CPacketServerMetadata
+	 * @property {CPacketTimeUpdate} CPacketTimeUpdate
+	 * @property {ClientBoundCombined} ClientBoundCombined 
+	 * @property {void} connect
+	 */
+
+	/**
+	 * @template {keyof EventMap} T
+	 * @param {T} name name of the packet
+	 * @param {(data: EventMap[T]) => void} callback the callback
+	 */
+	static once(name, callback) {
+		this.socket.once(name, callback)
 	}
-	static on(_, $) {
-		let et = !0;
-		const tt = (...rt) => {
+
+	/**
+	 * @template {keyof EventMap} T
+	 * @param {T} name name of the packet
+	 * @param {(data: EventMap[T]) => void} callback the callback
+	 */
+	static on(name, callback) {
+		let b = !0;
+		const bound = (...args) => {
 			try {
-				$.apply(null, rt)
+				// args[0] is the event data, which is either string or CPacketDisconnect
+				callback(args[0]);
 			} catch (nt) {
-				if (et)
-					throw et = !1,
+				if (b)
+					throw b = !1,
 					nt
 			}
 		};
-		this.socket.on(_, tt)
+		this.socket.on(name, bound)
 	}
-	static sendPacket(_) {
-		var $;
-		($ = this.socket) == null || $.emit(_.constructor.typeName, _)
+	/**
+	 * @param {Message$2} packet
+	 */
+	static sendPacket(packet) {
+		let sock;
+		(sock = this.socket) == null || sock.emit(packet.constructor.typeName, packet)
 	}
 }
+
 export default exports;

@@ -397,7 +397,7 @@ export class MiscHandler extends Handler {
 				text: JSON.stringify({ text: translateText(packet.title) })
 			});
 		});
-		// ClientSocket.on("CPacketLocalStorage", /** @param {CPacketLocalStorage} packet **/packet => {
+		// ClientSocket.on("CPacketLocalStorage", packet => {
 		// 	const action = packet.action;
 		// 	const act = CPacketLocalStorage_Action[action];
 		// 	console.log(`local storage: ${act} ${packet.key}${packet.value ? `${packet.value}` : ""}`);

@@ -6,14 +6,6 @@ import { translateItem, translateItemBack, translateText } from './../../utils.j
 import { SLOTS, SLOTS_REVERSE } from '../../types/guis.js';
 const DEG2RAD = Math.PI / 180, RAD2DEG = 180 / Math.PI;
 // 1.98 / 1.99 is the original
-// 1.999999 flags sometimes
-// 1.999998 flags
-// 1.999995 doesn't flag
-// 1.999997 doesn't flag either
-// 1.9999979 flags sometimes
-// 1.9999978 idk
-// 1.9999977 worked fine
-// 1.9999978 flags sometimes
 // desync sometimes takes a bit to start moving idk why
 const DESYNC_MAX_SPEED = 1.9999974;
 let client, tablist, world;
@@ -266,7 +258,7 @@ const self = class EntityHandler extends Handler {
 			};
 			this.check(this.entities[packet.id]);
 		});
-		ClientSocket.on("CPacketEntityProperties", /** @param {CPacketEntityProperties} packet */packet => {
+		ClientSocket.on("CPacketEntityProperties", packet => {
 			const properties = packet.data.map(s => {
 				return {
 					key: s.id,
@@ -564,25 +556,23 @@ const self = class EntityHandler extends Handler {
 			entityId: this.convertId(packet.entityId),
 			entityStatus: packet.entityStatus
 		}));
-		ClientSocket.on("CPacketExplosion", /** @param {CPacketExplosion} packet */
-			packet => {
-				console.log("Explosion packet:", packet);
-				client.write('explosion', {
-					...packet.pos,
-					radius: packet.strength,
-					affectedBlockOffsetsLength: packet.blocks.length,
-					affectedBlockOffsets: packet.blocks.map(v => {
-						return {
-							x: v.x,
-							y: v.y,
-							z: v.z
-						};
-					}),
-					playerMotionX: packet.playerPos.x ?? 0,
-					playerMotionY: packet.playerPos.y ?? 0,
-					playerMotionZ: packet.playerPos.z ?? 0,
-				})
+		ClientSocket.on("CPacketExplosion", packet => {
+			client.write('explosion', {
+				...packet.pos,
+				radius: packet.strength,
+				affectedBlockOffsetsLength: packet.blocks.length,
+				affectedBlockOffsets: packet.blocks.map(v => {
+					return {
+						x: v.x,
+						y: v.y,
+						z: v.z
+					};
+				}),
+				playerMotionX: packet.playerPos.x ?? 0,
+				playerMotionY: packet.playerPos.y ?? 0,
+				playerMotionZ: packet.playerPos.z ?? 0,
 			})
+		})
 		ClientSocket.on('CPacketEntityVelocity', packet => client.write('entity_velocity', {
 			entityId: this.convertId(packet.id),
 			velocityX: Math.max(Math.min(packet.motion.x * 8000, 32767), -32768),
@@ -710,11 +700,9 @@ you will need to send Input packets in order to move on the server.`);
 			totalExperience: packet.experienceTotal
 		}));
 
-		ClientSocket.on("CPacketSetSlot",
-			/** @param {CPacketSetSlot} packet */
-			packet => {
-				this.local.inventory.main[packet.slot] = packet.slotData;
-			});
+		ClientSocket.on("CPacketSetSlot", packet => {
+			this.local.inventory.main[packet.slot] = packet.slotData;
+		});
 	}
 	minecraft(mcClient) {
 		client = mcClient;

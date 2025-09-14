@@ -1,4 +1,4 @@
-import { readString, writeString } from "../../buf_utils.js";
+import { readString, writeString } from "../../buf_utils.ts";
 import Handler from "../handler.js";
 import { ClientSocket, SPACKET_MAP } from "../../main.js";
 
@@ -8,7 +8,8 @@ let mcClient;
 const S_PACKET_N2C = new Map(Object.entries(SPACKET_MAP));
 // off by default since it seems to slow down stuff a lot
 const SEND_RECV_PACKET_PAYLOAD = false;
-// these (c2s packets) are blacklisted for one of the following reasons:
+
+// these (s2c packets) are blacklisted for one of the following reasons:
 // - they are sent uselessly
 // - you probably don't need them
 // - they send too much data
@@ -67,11 +68,6 @@ export class PacketInterop extends Handler {
 
 		const j = JSON.stringify(body);
 		const len = pkt.length + j.length;
-
-		if (len > 32767) {
-			console.info(`Not including packet ${pkt} since it is too long`);
-			return;
-		}
 
 		const data = Buffer.alloc(len);
 		const off = writeString(data, 0, pkt);
