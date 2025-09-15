@@ -1,7 +1,7 @@
 import { ClientSocket, SPacketLoginStart } from "./miniblox/main.js";
 import * as handlers from "./miniblox/handlers/init.js";
 import { entity } from "./miniblox/handlers/init.js";
-import { MiscHandler } from "./miniblox/handlers/impl/misc.js";
+import { MiscHandler } from "./miniblox/handlers/impl/misc.ts";
 import { createServer } from "minecraft-protocol";
 import GAMEMODES from "./miniblox/types/gamemodes.js";
 import type { ServerClient } from "minecraft-protocol";
@@ -145,17 +145,20 @@ async function connect(
 
 		if (!requeue) {
 			const gm = packet.gamemode ?? "survival";
+			entity.dimension = packet.dimension;
 			client.write("login", {
 				entityId: entity.local.mcId,
 				gameMode: GAMEMODES[gm],
-				dimension: 0,
+				dimension: packet.dimension,
 				difficulty: 2,
 				maxPlayers: server.maxPlayers,
 				levelType: "default",
 				reducedDebugInfo: false,
 			});
 		}
-		MiscHandler.setServerInfoData(packet.serverInfo);
+		const si = packet.serverInfo;
+		if (si !== undefined)
+			MiscHandler.setServerInfoData(si);
 	});
 
 	ClientSocket.socket?.io.on("reconnect_failed", () => {

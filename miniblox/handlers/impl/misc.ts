@@ -1,8 +1,9 @@
-import Handler from './../handler.js';
-import { ClientSocket, SPacketMessage, SPacketTabComplete$1, CPacketServerInfo, PlayerPermissionEntry, SPacketQueueNext, CPacketLocalStorage, CPacketLocalStorage_Action, CPacketMessage } from './../../main.js';
-import { translateText } from './../../utils.js';
+import Handler from '../handler.ts';
+import { ClientSocket, SPacketMessage, SPacketTabComplete$1, SPacketQueueNext, CPacketServerInfo } from '../../main.js';
+import { translateText } from '../../utils.js';
 import { CN_TO_CC } from '../../types/colors.js';
-let client, entity, connect, world, gui;
+import type { ServerClient } from "minecraft-protocol";
+let client: ServerClient, entity: EntityHandler, connect, world: WorldHandler, gui: GuiHandler;
 
 /**
  * Matches a server ID (e.g. https://miniblox.io/?join=JOINCODEHERE)
@@ -42,7 +43,7 @@ class IllegalArgumentException extends Error { }
  * @param {string} code the invite code or a server ID.
  * @return {Promise<string | null>} a server ID if the server resolved the invite code, otherwise `null`
  */
-async function resolveServerID(code) {
+async function resolveServerID(code: string): Promise<string | null> {
 	if (SERVER_ID.test(code))
 		return code; // no need for modifying, this is already a server ID.
 	const joinCode = JOIN_CODE.exec(code);
@@ -59,11 +60,7 @@ async function resolveServerID(code) {
 	return serverId;
 }
 
-/**
- * @param {boolean | null} b
- * @returns {string}
- */
-function stringifyBoolean(b) {
+function stringifyBoolean(b: boolean | null): string {
 	if (b === null)
 		return "\u00a7cNOT SPECIFIED";
 
@@ -75,7 +72,7 @@ function stringifyBoolean(b) {
  * @param {...string} args the arguments to the command
  * @returns {Promise<boolean>} if the command should be passed on to miniblox or not.
  */
-export async function handleCommand(cmd, ...args) {
+export async function handleCommand(cmd: string, ...args: string[]): Promise<boolean> {
 	switch (cmd) {
 		case "q":
 		case "queue":
@@ -281,31 +278,30 @@ export class MiscHandler extends Handler {
 		accessControl: "???",
 		/** @type {string} */
 		worldType: "???",
-		/** @type {boolean?} */
+		/** @type {boolean | undefined} */
 		doDaylightCycle: true,
-		/** @type {string?} */
+		/** @type {string | undefined} */
 		inviteCode: "???",
-		/** @type {boolean?} */
+		/** @type {boolean | undefined} */
 		cheats: false,
-		/** @type {boolean?} */
+		/** @type {boolean | undefined} */
 		pvpEnabled: true,
 		/** @type {BigInt} */
 		startTime: -1n,
 		/** @type {PlayerPermissionEntry[]} */
 		playerPermissionEntries: [],
-		/** @type {string?} */
+		/** @type {string | undefined} */
 		metadata: "???",
-		/** @type {boolean?} */
+		/** @type {boolean | undefined} */
 		commandBlocksEnabled: false
 	};
 
-	/** @type {string} */
-	gameType;
+	gameType: string = "???";
 
 	/**
 	 * @param {CPacketServerInfo} packet
 	 */
-	static setServerInfoData(packet) {
+	static setServerInfoData(packet: CPacketServerInfo) {
 		const {
 			serverName, serverId,
 			inviteCode, serverVersion,
@@ -329,7 +325,7 @@ export class MiscHandler extends Handler {
 	/**
 	 * @param {string} gameType
 	 */
-	miniblox(gameType) {
+	override miniblox(gameType: string) {
 		this.gameType = gameType;
 		ClientSocket.on('CPacketServerInfo', MiscHandler.setServerInfoData);
 		ClientSocket.on("CPacketServerMetadata", packet => {
@@ -342,17 +338,17 @@ export class MiscHandler extends Handler {
 			console.log(`Got queue next packet, minigame id = ${packet.minigameId}, config = ${packet.minigameConfig}`)
 			connect(client, true, packet.minigameId);
 		})
-		ClientSocket.on('CPacketMessage', /**  @param {CPacketMessage} packet **/packet => {
+		ClientSocket.on('CPacketMessage', /**  @param {CPacketMessage} packet **/(packet: CPacketMessage) => {
 			const msg = packet.text;
 			if (msg !== undefined) {
 				const extra = [translateText(msg)];
 				if (packet.color !== undefined && CN_TO_CC[packet.color] !== undefined)
 					extra.splice(0, 0, CN_TO_CC[packet.color]);
 
-				const toast = packet.toast ?? false;
-				const position = toast
+				// const toast = packet.toast ?? false;
+				const position = /*toast
 					? 2
-					: packet.id === undefined
+					: */packet.id === undefined
 						? 1
 						: 0;
 
@@ -422,7 +418,7 @@ export class MiscHandler extends Handler {
 			/**
 			 * @type {string}
 			 */
-			const msg = packet.message;
+			const msg: string = packet.message;
 			if (msg.startsWith("/")) {
 				const parts = msg.split(" ");
 				const cmd = parts.shift().substring(1);
@@ -449,10 +445,10 @@ export class MiscHandler extends Handler {
 			ClientSocket.sendPacket(new SPacketTabComplete$1({ message: packet.text }));
 		});
 	}
-	cleanup(requeue) {
+	override cleanup(requeue = false) {
 		client = requeue ? client : undefined;
 	}
-	obtainHandlers(handlers, connectFunction) {
+	override obtainHandlers(handlers: typeof import("../init.js"), connectFunction: (client: ServerClient, requeue?: boolean, gamemode?: string, code?: string) => Promise<void>) {
 		connect = connectFunction;
 		entity = handlers.entity;
 		world = handlers.world;

@@ -1,5 +1,5 @@
 const mcData = (await import('minecraft-data')).default("1.8.9");
-let BLOCKS = {}, BLOCK_ID = {};
+const BLOCKS = {}, BLOCK_ID = {};
 
 function createStair(start, id) {
 	for (let i = 0; i < 80; i++) BLOCKS[start + i] = id;

@@ -1,23 +1,27 @@
-import Handler from './../handler.js';
-import { ClientSocket, SPacketRequestChunk, SPacketUseItem, SPacketPlaceBlock, SPacketBreakBlock, SPacketPlayerAction, SPacketClick, SPacketUpdateSign, BitArray, PBBlockPos, CPacketLeaderboard, CPacketUpdateLeaderboard } from './../../main.js';
-import { BLOCKS, BLOCK_ID } from './../../types/blocks.js';
+import Handler from '../handler.ts';
+import { ClientSocket, SPacketRequestChunk, SPacketUseItem, SPacketPlaceBlock, SPacketBreakBlock, SPacketPlayerAction, SPacketClick, SPacketUpdateSign, BitArray, PBBlockPos, CPacketLeaderboard, CPacketUpdateLeaderboard } from '../../main.js';
+import { BLOCKS, BLOCK_ID } from '../../types/blocks.js';
 const mcData = (await import('minecraft-data')).default("1.8.9");
-const Chunk = (await import('prismarine-chunk')).default('1.8.9');
-import Vec3 from 'vec3';
-const viewDistance = 7, CELL_VOLUME = 16 * 16 * 16;
-let client, entity, gui;
+import ChunkF, {type PCChunk} from "prismarine-chunk";
+import {Vec3} from 'vec3';
+import type { ServerClient } from "minecraft-protocol";
 
-let lightData = new Chunk();
+const Chunk = (ChunkF as unknown as (ver: string) => typeof PCChunk)('1.8.9') as typeof PCChunk;
+const viewDistance = 7, CELL_VOLUME = 16 * 16 * 16;
+let client: ServerClient, entity, gui;
+
+const lightDataChunk = new Chunk({});
 for (let x = 0; x < 16; x++) {
 	for (let z = 0; z < 16; z++) {
 		for (let skyY = 0; skyY < 256; skyY++) {
-			lightData.setSkyLight(new Vec3(x, skyY, z), 15);
+			lightDataChunk.setSkyLight(new Vec3(x, skyY, z), 15);
 		}
 	}
 }
-lightData = lightData.dump();
 
-function getBlockIndex(x, y, z) {
+const lightData = lightDataChunk.dump();
+
+function getBlockIndex(x: number, y: number, z: number): number {
 	return (y & 15) << 8 | (z & 15) << 4 | x & 15
 }
 
@@ -28,6 +32,12 @@ let nextLeaderboardID = -2;
 const leaderboardIdToMcID = new Map();
 
 const self = class WorldHandler extends Handler {
+	chunks;
+	queued;
+	reload() {
+		this.chunks = [];
+		this.queued = [];
+	}
 	createChunk(packet) {
 		const chunk = new Chunk();
 		chunk.load(lightData);
@@ -148,15 +158,15 @@ const self = class WorldHandler extends Handler {
 		}));
 		ClientSocket.on('CPacketSignEditorOpen', packet => client.write('open_sign_entity', {location: packet.signPosition}));
 		ClientSocket.on('CPacketSoundEffect', packet => {
-			if (!packet.location) packet.location = {x: entity.local.pos.x * 8, y: entity.local.pos.y * 8, z: entity.local.pos.z * 8};
-
+			const loc = packet.location ?? {x: entity.local.pos.x * 8, y: entity.local.pos.y * 8, z: entity.local.pos.z * 8};
+			// console.log(packet.sound);
 			client.write('named_sound_effect', {
 				soundName: packet.sound,
-				x: packet.location.x,
-				y: packet.location.y,
-				z: packet.location.z,
+				x: loc.x,
+				y: loc.y,
+				z: loc.z,
 				volume: packet.volume,
-				pitch: packet.pitch * 63
+				pitch: (packet.pitch ?? 1) * 63
 			});
 		});
 		ClientSocket.on('CPacketTimeUpdate', packet => client.write('update_time', {
@@ -289,7 +299,7 @@ const self = class WorldHandler extends Handler {
 			lines: [packet.text1, packet.text2, packet.text3, packet.text4]
 		})));
 	}
-	cleanup(requeue) {
+	override cleanup(requeue = false) {
 		client = requeue ? client : undefined;
 		this.chunks = [];
 		this.queued = [];

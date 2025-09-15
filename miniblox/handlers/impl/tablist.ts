@@ -1,23 +1,31 @@
-import Handler from './../handler.js';
-import { ClientSocket, SPacketPing, SPacketAnalytics } from './../../main.js';
-import { translateText, LEVEL_TO_COLOUR } from './../../utils.js';
-import * as SKINS from './../../types/skins.js';
-import { granddad } from './../../types/skins.js';
-let client, entities;
+import Handler from '../handler.ts';
+import { ClientSocket, SPacketPing, SPacketAnalytics } from '../../main.js';
+import { translateText, LEVEL_TO_COLOUR } from '../../utils.js';
+import * as SKINS from '../../types/skins.ts';
+import { granddad } from '../../types/skins.ts';
+import type { ServerClient } from "minecraft-protocol";
+import type { EntityHandler } from "./entity.ts";
+
+let client: ServerClient, entityH: EntityHandler;
 
 const self = class TabListHandler extends Handler {
-	miniblox() {
+	tabs: any;
+	entries: any;
+	filteredPing: number;
+	pingLoop: any;
+	analyticsLoop: any;
+	override miniblox() {
 		ClientSocket.on('CPacketPlayerList', packet => {
 			let lists = [[], [], [], [], []], exists = {};
 			for (const entry of packet.players) {
 				let nameSplit = entry.name.split(' ');
-				if (entry.id == entities.local.id) nameSplit[nameSplit.length - 1] = client.username;
+				if (entry.id == entityH.local.id) nameSplit[nameSplit.length - 1] = client.username;
 				const name = nameSplit[nameSplit.length - 1].slice(0, 16);
-				const uuid = entry.id == entities.local.id ? client.uuid : entry.uuid;
-				const skin = entities.skins[entry.id] != undefined ? (SKINS[entities.skins[entry.id]] ?? granddad) : granddad;
-				const prefix = (nameSplit.length > 1 ? translateText(nameSplit.slice(0, nameSplit.length - 1).join(' ')) + ' ' : '').slice(0, 14) + translateText(`\\${(entry.color != 'white' ? entry.color : undefined) ?? (entry.id == entities.local.id ? 'white' : 'reset')}\\`);
+				const uuid = entry.id == entityH.local.id ? client.uuid : entry.uuid;
+				const skin = entityH.skins[entry.id] != undefined ? (SKINS[entityH.skins[entry.id]] ?? granddad) : granddad;
+				const prefix = (nameSplit.length > 1 ? translateText(nameSplit.slice(0, nameSplit.length - 1).join(' ')) + ' ' : '').slice(0, 14) + translateText(`\\${(entry.color != 'white' ? entry.color : undefined) ?? (entry.id == entityH.local.id ? 'white' : 'reset')}\\`);
 				const suffix = (entry.level && entry.level > 0) ? translateText(`\\${entry.level ? LEVEL_TO_COLOUR[entry.level] : 'white'}\\ (${entry.level})`) : '';
-				const gamemode = entities.gamemodes[entry.id] ?? 0;
+				const gamemode = entityH.gamemodes[entry.id] ?? 0;
 				let oldTab = this.tabs[entry.id];
 				this.entries[entry.id] = uuid;
 				this.tabs[entry.id] = {
@@ -79,12 +87,12 @@ const self = class TabListHandler extends Handler {
 					action: i,
 					data: list
 				});
-				if (i == 0 || i == 4) entities.checkAll();
+				if (i == 0 || i == 4) entityH.checkAll();
 			}
 
 			client.write('playerlist_header', {
 				header: JSON.stringify({ text: translateText('\\cyan\\You are playing on \\lime\\miniblox.io') }),
-				footer: JSON.stringify({ text: translateText('\\gold\\Translation layer made by 7GrandDad') })
+				footer: JSON.stringify({ text: translateText('\\gold\\Translation layer made by datamodel') })
 			});
 		});
 		ClientSocket.on("CPacketPong", packet => {
@@ -97,7 +105,7 @@ const self = class TabListHandler extends Handler {
 			if (packet.keepAliveId > 0) ClientSocket.sendPacket(new SPacketPing({ time: BigInt(Date.now()) }));
 		});
 	}
-	cleanup(requeue) {
+	override cleanup(requeue = false) {
 		client = requeue ? client : undefined;
 		if (this.pingLoop) clearInterval(this.pingLoop);
 		if (this.analyticsLoop) clearInterval(this.analyticsLoop);
@@ -140,8 +148,8 @@ const self = class TabListHandler extends Handler {
 		this.tabs = {};
 		this.filteredPing = 0;
 	}
-	obtainHandlers(handlers) {
-		entities = handlers.entity;
+	override obtainHandlers(handlers) {
+		entityH = handlers.entity;
 	}
 };
 

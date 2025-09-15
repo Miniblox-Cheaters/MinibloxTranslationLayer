@@ -1,6 +1,6 @@
 const mcData = (await import('minecraft-data')).default("1.8.9");
 
-let exports = [];
+const exports = [];
 for (let i = 0; i < 14; i++) exports[1 + i] = [mcData.itemsByName.stone.id, i];
 exports[14] = mcData.itemsByName.grass.id;
 for (let i = 0; i < 2; i++) exports[15 + i] = mcData.itemsByName.dirt.id;

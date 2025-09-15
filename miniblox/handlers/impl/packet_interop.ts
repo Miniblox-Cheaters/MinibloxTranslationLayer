@@ -1,9 +1,9 @@
 import { readString, writeString } from "../../buf_utils.ts";
-import Handler from "../handler.js";
+import Handler from "../handler.ts";
 import { ClientSocket, SPACKET_MAP } from "../../main.js";
+import { ServerClient } from "minecraft-protocol";
 
-/** @type {import("minecraft-protocol").ServerClient} */
-let mcClient;
+let mcClient: ServerClient;
 
 const S_PACKET_N2C = new Map(Object.entries(SPACKET_MAP));
 // off by default since it seems to slow down stuff a lot
@@ -43,7 +43,7 @@ const C_BLACKLIST = [
 ];
 
 /** @param {Buffer} buffer */
-function parseSendPacketBuf(buffer) {
+function parseSendPacketBuf(buffer: Buffer) {
 	try {
 		const { value: id, end: e } = readString(buffer);
 		const { value: json } = readString(buffer, e);
@@ -60,7 +60,7 @@ export class PacketInterop extends Handler {
 	 * @param {string} pkt name of the packet
 	 * @param {Message} body packet data
 	 */
-	static handleSocketPacket(pkt, body) {
+	static handleSocketPacket(pkt: string, body: Message) {
 		if (C_BLACKLIST.includes(pkt))
 			return;
 
@@ -77,22 +77,26 @@ export class PacketInterop extends Handler {
 			data
 		});
 	}
-	miniblox() {
+	override miniblox() {
 		if (!SEND_RECV_PACKET_PAYLOAD) return;
-		ClientSocket.socket.onAny(handleSocketPacket)
+		ClientSocket.socket?.onAny(PacketInterop.handleSocketPacket)
 	}
 	/** @param {import("minecraft-protocol").ServerClient} client */
-	minecraft(client) {
+	minecraft(client: import("minecraft-protocol").ServerClient) {
 		mcClient = client;
 		client.on('custom_payload', packet => {
 			/** @type {string} */
-			const channel = packet.channel;
+			const channel: string = packet.channel;
 
 			if (channel == 'layer:send_packet') {
 				const _ = parseSendPacketBuf(packet.data);
 				if (_ === undefined) return;
 				const { id, data } = _;
 				const pkt = S_PACKET_N2C.get(id);
+				if (!pkt) {
+					console.info("unknown packet:", id);
+					return;
+				}
 				console.info(`Received packet from minecraft: ${id} -> `, pkt, "data:", data);
 				ClientSocket.sendPacket(pkt.fromJson(data));
 			}
