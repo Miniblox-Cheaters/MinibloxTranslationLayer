@@ -1,7 +1,7 @@
 import { PBItemStack } from './main.js';
 import ITEMS from './types/items.js';
 import { COLOR_PALETTE, COLOR_REGEX, FMT_CODES } from './types/colors.js';
-export { LEVEL_TO_COLOUR } from './types/colors.js';
+export { LEVEL_TO_COLOR } from './types/colors.js';
 
 export function colorDistance(color1, color2) {
 	const rgb1 = hexToRgb(color1);

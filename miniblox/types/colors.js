@@ -45,7 +45,8 @@ export const COLOR_PALETTE = {
     "#555555": "\u00A78",
     "#000000": "\u00A70"
 };
-export const LEVEL_TO_COLOUR = {
+/** @type {{ [key: number]: string }} */
+export const LEVEL_TO_COLOR = {
     0: "#aba9a5",
     1: "#afa99d",
     2: "#b3a995",
