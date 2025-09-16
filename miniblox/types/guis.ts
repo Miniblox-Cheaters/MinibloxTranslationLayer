@@ -1,8 +1,9 @@
 import type { ServerClient } from "minecraft-protocol";
 import { SPacketCloseWindow, SPacketMessage } from "../main.js";
 import type { NBT } from "prismarine-nbt";
+import { DATA as mcData } from "./data.ts";
 
-interface Slot {
+export interface Slot {
 	blockId: number;
 }
 
@@ -20,8 +21,6 @@ interface BIDSlot<T extends number> extends Slot {
 interface N1Slot extends Slot {
 	blockId: -1;
 }
-
-const mcData = (await import("minecraft-data")).default("1.8.9");
 
 interface GUI {
 	name: string;
@@ -44,6 +43,7 @@ interface BasicItem {
 export function makeItem(item: BasicItem, nbt = {}): Slot {
 	const realItem = mcData.itemsByName[item.item];
 	if (!realItem) return { blockId: -1 };
+	const l = item.lore ?? [];
 	return {
 		blockId: realItem.id as NonNegativeInteger<1>,
 		itemCount: 1,
@@ -63,7 +63,7 @@ export function makeItem(item: BasicItem, nbt = {}): Slot {
 							type: "list",
 							value: {
 								type: "string",
-								value: item.lore ?? [],
+								value: mcData.supportFeature("itemLoreIsAString") ? l.join("\n") : l,
 							},
 						},
 					},

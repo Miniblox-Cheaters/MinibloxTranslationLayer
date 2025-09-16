@@ -3,7 +3,7 @@ export const creative = 1;
 export const adventure = 2;
 export const spectator = 3;
 /**
- * @type {[mode: string]: number}
+ * @type {{[mode: string]: number}}
  */
 const modes = {
     survival,

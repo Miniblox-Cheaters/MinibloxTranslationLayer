@@ -13,77 +13,65 @@ import {
 	SPacketUpdateInventory,
 	SPacketUseEntity,
 } from "../../main.js";
-import ENTITIES from "../../types/entities.js";
+import ENTITIES from "../../types/entities.ts";
 import GAMEMODES, { spectator } from "../../types/gamemodes.js";
 import {
 	translateItem,
 	translateItemBack,
 	translateText,
 } from "../../utils.js";
-import { SLOTS_REVERSE } from "../../types/guis.ts";
+import { type Slot, SLOTS_REVERSE } from "../../types/guis.ts";
 import type { ServerClient } from "minecraft-protocol";
-const DEG2RAD = Math.PI / 180, RAD2DEG = 180 / Math.PI;
+import {
+	clampByte,
+	clampToBox,
+	convertAngle,
+	convertToByte,
+	DEG2RAD,
+	RAD2DEG,
+	type Vector3,
+} from "../../types/standard.ts";
+import type { WorldHandler } from "./world.ts";
+import type { TabListHandler } from "./tablist.ts";
+
 // 1.98 / 1.99 is the original
 // desync sometimes takes a bit to start moving idk why
 const DESYNC_MAX_SPEED = 1.9999974;
 let client: ServerClient, tablist: TabListHandler, world: WorldHandler;
-
-interface Vector3 {
-	x: number;
-	y: number;
-	z: number;
-}
-
-/**
- * @param {number} ang angle to convert
- * @param {boolean} ignore don't limit the angle value
- * @param {number} num thing
- * @returns converted angle
- */
-function convertAngle(ang: number, ignore: boolean, num: number = 0) {
-	let angle = ang;
-	if (!ignore) angle = angle / 256 * Math.PI * 2;
-	angle = (((angle * -1) * RAD2DEG) - (num != undefined ? num : 0)) * 256 / 360;
-	return convertToByte(angle);
-}
-
-/**
- * @param {number} byte
- * @returns {number} clamped
- */
-function clampByte(byte: number): number {
-	return Math.min(Math.max(byte, -128), 127);
-}
-
-function clampToBox(pos: Vector3, box: Vector3) {
-	let convertedBox = convertServerPos(box);
-	return {
-		x: Math.min(Math.max(pos.x, convertedBox.x - 0.4), convertedBox.x + 0.4),
-		y: Math.min(
-			Math.max(pos.y + 1.62, convertedBox.y - 0.1),
-			convertedBox.y + 1.9,
-		),
-		z: Math.min(Math.max(pos.z, convertedBox.z - 0.4), convertedBox.z + 0.4),
-	};
-}
-
-/**
- * @param {number} num to convert to byte
- * @returns {number} {@link num} converted to a byte
- */
-function convertToByte(num: number): number {
-	let converted = num & 0xFF;
-	converted = converted > 127 ? converted - 256 : converted;
-	return converted;
-}
-
-/**
- * @param {Vector3} pos
- * @returns {Vector3}
- */
-function convertServerPos(pos: Vector3): Vector3 {
-	return { x: pos.x / 32, y: pos.y / 32, z: pos.z / 32 };
-}
+export type EntityMetadata1_8 = [
+	number, // i8
+	number, // i16
+	number, // i32
+	number, // f32
+	string,
+	Slot,
+	Vector3, // i32 vector
+	{
+		//all f32
+		pitch: number;
+		yaw: number;
+		roll: number;
+	},
+];
+export type EntityMetadata1_9 = [
+	number, // i8 0
+	number, // varint 1
+	number, // i32 2
+	string, // f32 3
+	string, // 4
+	Slot, // 5
+	Vector3, // i32 vector 6
+	{
+		//all f32
+		pitch: number;
+		yaw: number;
+		roll: number;
+	}, //7
+	Vector3, // position 8
+	unknown, // unlisted 9
+	number, // varint 10
+	number, // varint
+];
 
 /**
  * @param {number} range
@@ -109,6 +97,7 @@ function desyncMath(pos: Vector3, serverPos: Vector3, range: number) {
 }
 
 interface LocalData {
+	flying?: boolean;
 	id: number;
 	mcId: number;
 	inputSequenceNumber: number;
@@ -148,14 +137,16 @@ const DEFAULT_LOCAL_DATA: LocalData = {
 };
 
 interface Entity {
+	special?: boolean;
+	name?: string;
 	id: number;
-	type: string;
+	type: number;
 	pos: Vector3;
 	yaw: number;
 	pitch: number;
-	metadata: {};
-	equipment: {};
-	objectData: {
+	metadata: { [n: number]: any };
+	equipment: { [slot: number]: Slot };
+	objectData?: {
 		intField: number;
 		velocityX: number;
 		velocityY: number;
@@ -168,14 +159,14 @@ interface Entity {
 export class EntityHandler extends Handler {
 	sentNewACInfo = false;
 	entities: { [id: number]: Entity } = [];
-	skins: { [eid: number]: string } = {};
-	gamemodes: { [eid: number]: string } = {};
+	skins: { [eid: number]: string | undefined } = {};
+	gamemodes: { [eid: number]: number } = {};
 	desyncFlag = false;
 	local: LocalData = DEFAULT_LOCAL_DATA;
 	teleport?: Vector3;
 	dimension: string = "??";
 
-	canSpawn(entity) {
+	canSpawn(entity: Entity) {
 		if (
 			entity.type == -1 &&
 			((!tablist.entries[entity.id] && !entity.special) ||
@@ -187,7 +178,8 @@ export class EntityHandler extends Handler {
 	findHotbarSlotForPickBlock(stack: PBItemStack): number {
 		const { main } = this.local.inventory;
 		for (let i = 0; i < 9; i++) {
-			if (main[i] && main[i].item.equals(stack)) {
+			const it = main[i];
+			if (it && it.equals(stack)) {
 				return i;
 			}
 		}
@@ -196,7 +188,7 @@ export class EntityHandler extends Handler {
 
 		return this.local.selectedSlot;
 	}
-	spawn(entity) {
+	spawn(entity: Entity) {
 		if (!entity || entity.spawned) return;
 		if (entity.special) {
 			tablist.entries[entity.id] = crypto.randomUUID();
@@ -268,7 +260,7 @@ export class EntityHandler extends Handler {
 
 		return true;
 	}
-	remove(entity) {
+	remove(entity: Entity) {
 		if (!entity || !entity.spawned) return;
 
 		entity.spawned = false;
@@ -276,7 +268,7 @@ export class EntityHandler extends Handler {
 			entityIds: [entity.id],
 		});
 	}
-	check(entity) {
+	check(entity: Entity) {
 		if (!entity) return;
 		if (this.canSpawn(entity) != entity.spawned) {
 			if (entity.spawned) this.remove(entity);
@@ -305,7 +297,7 @@ export class EntityHandler extends Handler {
 		);
 		this.local.lastState = newState;
 	}
-	abilities(_movement) {
+	abilities(_movement: boolean) {
 		if (this.local.flying == false) return;
 		ClientSocket.sendPacket(new SPacketPlayerAbilities({ isFlying: false }));
 		this.local.flying = false;
@@ -342,22 +334,24 @@ export class EntityHandler extends Handler {
 		// UNIVERSAL
 		ClientSocket.on("CPacketSpawnEntity", (packet) => {
 			if (ENTITIES[packet.type] == undefined) return;
-			if (!packet.motion) packet.motion = { x: 0, y: 0, z: 0 };
+			const motion: Vector3 = packet.motion ?? { x: 0, y: 0, z: 0 };
+			const yaw = packet.yaw ?? 0;
+			const pitch = packet.pitch ?? 0;
 			this.entities[packet.id] = {
 				id: packet.id,
 				type: packet.type,
-				pos: packet.pos,
-				yaw: convertAngle(packet.yaw, true),
-				pitch: convertAngle(packet.pitch, true),
+				pos: packet.pos ?? { x: 0, y: 0, z: 0 },
+				yaw: convertAngle(yaw, true),
+				pitch: convertAngle(pitch, true),
 				metadata: {},
 				equipment: {},
 				objectData: {
 					intField: packet.shooterId != null
 						? this.convertId(packet.shooterId)
 						: 1,
-					velocityX: Math.max(Math.min(packet.motion.x * 8000, 32767), -32768),
-					velocityY: Math.max(Math.min(packet.motion.y * 8000, 32767), -32768),
-					velocityZ: Math.max(Math.min(packet.motion.z * 8000, 32767), -32768),
+					velocityX: Math.max(Math.min(motion.x * 8000, 32767), -32768),
+					velocityY: Math.max(Math.min(motion.y * 8000, 32767), -32768),
+					velocityZ: Math.max(Math.min(motion.z * 8000, 32767), -32768),
 				},
 				spawned: false,
 			};
@@ -402,7 +396,8 @@ export class EntityHandler extends Handler {
 				});
 			} else {
 				const entity = this.entities[packet.id];
-				this.gamemodes[packet.id] = GAMEMODES[packet.gamemode ?? "survival"];
+				const gm = packet.gamemode ?? "survival";
+				this.gamemodes[packet.id] = GAMEMODES[gm];
 				this.skins[packet.id] = packet.cosmetics.skin;
 
 				if (entity && entity.spawned) {
@@ -424,7 +419,7 @@ export class EntityHandler extends Handler {
 				this.entities[packet.id] = {
 					id: packet.id,
 					type: -1,
-					special: packet.name && packet.name.includes(" "),
+					special: packet.name.includes(" "),
 					pos: {
 						x: packet.pos.x * 32,
 						y: packet.pos.y * 32,
@@ -517,7 +512,7 @@ export class EntityHandler extends Handler {
 				let wType = watched.objectType;
 				switch (watched.objectType) {
 					case 0:
-						value = convertToByte(watched.intValue);
+						value = convertToByte(watched.intValue!);
 						console.info(`On fire?: ${(value & 1 << 0) != 0}`);
 						client.write("entity_status", {
 							entityId: this.convertId(packet.id),
@@ -533,7 +528,7 @@ export class EntityHandler extends Handler {
 							wType = 0;
 							value = watched.dataValueId == 10
 								? 127
-								: convertToByte(watched.intValue);
+								: convertToByte(watched.intValue ?? 0);
 							if (watched.dataValueId == 0 && entity) {
 								value = entity.sneaking
 									? (value | 1 << 1)
@@ -567,11 +562,11 @@ export class EntityHandler extends Handler {
 						value = watched.blockPos;
 						break;
 					case 7:
-						value = new Vector3(
-							watched.vector.x,
-							watched.vector.y,
-							watched.vector.z,
-						);
+						value = {
+							yaw: watched.vector!.x,
+							pitch: watched.vector!.y,
+							roll: watched.vector!.z,
+						};
 						break;
 					default:
 						value = watched.intValue;
@@ -1058,7 +1053,6 @@ you will need to send Input packets in order to move on the server.`);
 		});
 	}
 	override cleanup(requeue = false) {
-		client = requeue ? client : undefined;
 		this.entities = {};
 		this.skins = {};
 		this.gamemodes = {};
@@ -1070,6 +1064,6 @@ you will need to send Input packets in order to move on the server.`);
 		tablist = handlers.tablist;
 		world = handlers.world;
 	}
-};
+}
 
 export default new EntityHandler();

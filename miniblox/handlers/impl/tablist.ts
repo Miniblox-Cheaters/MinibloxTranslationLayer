@@ -12,7 +12,7 @@ interface Tab {
 	prefix: string;
 	suffix: string;
 	ping: number;
-	gamemode: string;
+	gamemode: number;
 }
 
 interface WithUUID {
@@ -27,12 +27,12 @@ interface Add extends WithUUID {
 		value: string;
 		signature: string;
 	}];
-	gamemode: string;
+	gamemode: number;
 	ping: number;
 }
 
 interface UpdateGamemode extends WithUUID {
-	gamemode: string;
+	gamemode: number;
 }
 
 interface UpdatePing extends WithUUID {
@@ -42,7 +42,7 @@ interface UpdatePing extends WithUUID {
 type Remove = WithUUID;
 type UpdateDisplayName = WithUUID;
 
-const self = class TabListHandler extends Handler {
+export class TabListHandler extends Handler {
 	tabs: { [entryId: string]: Tab } = {};
 	entries: { [eid: string]: string } = {};
 	filteredPing = -1;
@@ -66,8 +66,9 @@ const self = class TabListHandler extends Handler {
 				const name = nameSplit[nameSplit.length - 1].slice(0, 16);
 				const uuid = entry.id == entityH.local.id ? client.uuid : entry.uuid;
 				const a = SKINS as unknown as Record<string, [string, string]>;
-				const skin = entityH.skins[entry.id] != undefined
-					? (a[entityH.skins[entry.id]] ?? granddad)
+				const b = entityH.skins[entry.id];
+				const skin = b != undefined
+					? (a[b] ?? granddad)
 					: granddad;
 				const prefix = (nameSplit.length > 1
 					? translateText(nameSplit.slice(0, nameSplit.length - 1).join(" ")) +
@@ -233,4 +234,4 @@ const self = class TabListHandler extends Handler {
 	}
 };
 
-export default new self();
+export default new TabListHandler();

@@ -1,5 +1,43 @@
-const mcData = (await import('minecraft-data')).default("1.8.9");
+import { DATA as mcData, v1_13, v1_16 } from "./data.ts";
+
 const BLOCKS = {}, BLOCK_ID = {};
+
+
+/**
+ * @param {number} startIdx
+ * @param {string} name
+ * @param {string[]} prefixes
+ */
+function arrSequence(startIdx, name, prefixes, postfix = false, sep = "_") {
+	const FORMAT = postfix ? `${name}${sep}%s` : `%s${sep}${name}`
+	for (let i = 0; i < prefixes.length - 1; i++)
+		BLOCKS[startIdx + i] = FORMAT.replace("%s", prefixes[i]);
+}
+
+/**
+ * @param {number} startIdx
+ * @param {string} name
+ * @param {boolean} [extra=false]
+ * @param {(a: string) => string} [transform=a => a]
+ */
+function woodSequence(
+	startIdx, name, extra = false,
+	postfix = false, transform = a => a
+) {
+	const prefixes = [
+		"oak",
+		"spruce",
+		"birch",
+		"jungle",
+		"acacia",
+		"dark_oak"
+	];
+	if (extra) {
+		prefixes.push(v1_16 ? "crimson" : "acacia", v1_16 ? "warped" : "acacia");
+	}
+	arrSequence(startIdx, name, prefixes.map(transform), postfix);
+}
+
 
 function createStair(start, id) {
 	for (let i = 0; i < 80; i++) BLOCKS[start + i] = id;
@@ -74,14 +112,22 @@ function createTorch(offset, id) {
 
 BLOCKS[0] = mcData.blocksByName.air.id;
 for (let i = 0; i < 7; i++) BLOCKS[1 + i] = [mcData.blocksByName.stone.id, i];
-for (let i = 0; i < 2; i++) BLOCKS[8 + i] = mcData.blocksByName.grass.id;
+for (let i = 0; i < 2; i++) BLOCKS[8 + i] = mcData.blocksByName[v1_13 ? "grass_block" : "grass"].id;
 for (let i = 0; i < 4; i++) BLOCKS[10 + i] = [mcData.blocksByName.dirt.id, Math.min(i, 2)];
 BLOCKS[14] = mcData.blocksByName.cobblestone.id;
-for (let i = 0; i < 6; i++) BLOCKS[15 + i] = [mcData.blocksByName.planks.id, i];
-for (let i = 0; i < 6; i++) {
-	BLOCKS[21 + i] = [mcData.blocksByName.sapling.id, i];
-	BLOCKS[21 + i + 1] = [mcData.blocksByName.sapling.id, i + 8];
+woodSequence(15, "planks", false);
+if (v1_13)
+	woodSequence(30, "sapling");
+else
+	for (let i = 0; i < 6; i++) BLOCKS[30 + i] = [mcData.blocksByName.sapling, i];
+if (v1_13) {
+	// TODO
 }
+else
+	for (let i = 0; i < 6; i++) {
+		BLOCKS[21 + i] = [mcData.blocksByName.sapling.id, i];
+		BLOCKS[21 + i + 1] = [mcData.blocksByName.sapling.id, i + 8];
+	}
 BLOCKS[33] = mcData.blocksByName.bedrock.id;
 for (let i = 0; i < 16; i++) BLOCKS[34 + i] = [mcData.blocksByName.water.id, i];
 for (let i = 0; i < 16; i++) BLOCKS[50 + i] = [mcData.blocksByName.lava.id, i];
@@ -91,30 +137,34 @@ for (let i = 0; i < 2; i++) BLOCKS[69 + i] = mcData.blocksByName.gold_ore.id;
 for (let i = 0; i < 2; i++) BLOCKS[71 + i] = mcData.blocksByName.iron_ore.id;
 for (let i = 0; i < 2; i++) BLOCKS[73 + i] = mcData.blocksByName.coal_ore.id;
 BLOCKS[75] = mcData.blocksByName.gold_ore.id;
-for (let i = 0; i < 5; i++) {
-	BLOCKS[76 + (i * 3)] = [mcData.blocksByName.log.id, (i % 4) + 4];
-	BLOCKS[76 + (i * 3) + 1] = [mcData.blocksByName.log.id, (i % 4)];
-	BLOCKS[76 + (i * 3) + 2] = [mcData.blocksByName.log.id, (i % 4) + 8];
-	BLOCKS[112 + (i * 3)] = [mcData.blocksByName.log.id, (i % 4) + 12];
-	BLOCKS[112 + (i * 3) + 1] = [mcData.blocksByName.log.id, (i % 4) + 12];
-	BLOCKS[112 + (i * 3) + 2] = [mcData.blocksByName.log.id, (i % 4) + 12];
+if (v1_13) {
+	// TODO
+} else {
+	for (let i = 0; i < 5; i++) {
+		BLOCKS[76 + (i * 3)] = [mcData.blocksByName.log.id, (i % 4) + 4];
+		BLOCKS[76 + (i * 3) + 1] = [mcData.blocksByName.log.id, (i % 4)];
+		BLOCKS[76 + (i * 3) + 2] = [mcData.blocksByName.log.id, (i % 4) + 8];
+		BLOCKS[112 + (i * 3)] = [mcData.blocksByName.log.id, (i % 4) + 12];
+		BLOCKS[112 + (i * 3) + 1] = [mcData.blocksByName.log.id, (i % 4) + 12];
+		BLOCKS[112 + (i * 3) + 2] = [mcData.blocksByName.log.id, (i % 4) + 12];
+	}
+	for (let i = 0; i < 2; i++) {
+		BLOCKS[88 + (i * 3)] = [mcData.blocksByName.log2.id, (i % 4) + 4];
+		BLOCKS[88 + (i * 3) + 1] = [mcData.blocksByName.log2.id, (i % 4)];
+		BLOCKS[88 + (i * 3) + 2] = [mcData.blocksByName.log2.id, (i % 4) + 8];
+		BLOCKS[124 + (i * 3)] = [mcData.blocksByName.log2.id, (i % 4) + 4];
+		BLOCKS[124 + (i * 3) + 1] = [mcData.blocksByName.log2.id, (i % 4)];
+		BLOCKS[124 + (i * 3) + 2] = [mcData.blocksByName.log2.id, (i % 4) + 8];
+	}
+	for (let i = 0; i < 112; i++) BLOCKS[148 + i] = [mcData.blocksByName.leaves.id, Math.floor(i / 14) % 4];
 }
-for (let i = 0; i < 2; i++) {
-	BLOCKS[88 + (i * 3)] = [mcData.blocksByName.log2.id, (i % 4) + 4];
-	BLOCKS[88 + (i * 3) + 1] = [mcData.blocksByName.log2.id, (i % 4)];
-	BLOCKS[88 + (i * 3) + 2] = [mcData.blocksByName.log2.id, (i % 4) + 8];
-	BLOCKS[124 + (i * 3)] = [mcData.blocksByName.log2.id, (i % 4) + 4];
-	BLOCKS[124 + (i * 3) + 1] = [mcData.blocksByName.log2.id, (i % 4)];
-	BLOCKS[124 + (i * 3) + 2] = [mcData.blocksByName.log2.id, (i % 4) + 8];
-}
-for (let i = 0; i < 112; i++) BLOCKS[148 + i] = [mcData.blocksByName.leaves.id, Math.floor(i / 14) % 4];
 for (let i = 0; i < 2; i++) BLOCKS[260 + i] = [mcData.blocksByName.sponge.id, i];
 BLOCKS[262] = mcData.blocksByName.glass.id;
 for (let i = 0; i < 2; i++) BLOCKS[263 + i] = mcData.blocksByName.lapis_ore.id;
 BLOCKS[265] = mcData.blocksByName.lapis_block.id;
 for (let i = 0; i < 12; i++) BLOCKS[266 + i] = mcData.blocksByName.dispenser.id;
 for (let i = 0; i < 3; i++) BLOCKS[278 + i] = [mcData.blocksByName.sandstone.id, i];
-for (let i = 0; i < 800; i++) BLOCKS[281 + i] = mcData.blocksByName.noteblock.id;
+for (let i = 0; i < 800; i++) BLOCKS[281 + i] = mcData.blocksByName[v1_13 ? "note_block" : "noteblock"].id;
 for (let i = 0; i < 256; i += 16) {
 	for (let i2 = 0; i2 < 16; i2 += 4) {
 		BLOCKS[1081 + i + i2] = [mcData.blocksByName.bed.id, 8 + Math.floor(i2 / 4)];

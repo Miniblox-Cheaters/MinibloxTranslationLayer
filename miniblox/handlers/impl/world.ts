@@ -1,16 +1,16 @@
 import Handler from '../handler.ts';
 import { ClientSocket, SPacketRequestChunk, SPacketUseItem, SPacketPlaceBlock, SPacketBreakBlock, SPacketPlayerAction, SPacketClick, SPacketUpdateSign, BitArray, PBBlockPos, CPacketLeaderboard, CPacketUpdateLeaderboard } from '../../main.js';
 import { BLOCKS, BLOCK_ID } from '../../types/blocks.js';
-const mcData = (await import('minecraft-data')).default("1.8.9");
-import ChunkF, {type PCChunk} from "prismarine-chunk";
+import {DATA as mcData, Chunk} from "../../types/data.ts";
 import {Vec3} from 'vec3';
 import type { ServerClient } from "minecraft-protocol";
+import type { EntityHandler } from "./entity.ts";
+import type { GuiHandler } from "./gui.ts";
 
-const Chunk = (ChunkF as unknown as (ver: string) => typeof PCChunk)('1.8.9') as typeof PCChunk;
 const viewDistance = 7, CELL_VOLUME = 16 * 16 * 16;
-let client: ServerClient, entity, gui;
+let client: ServerClient, entity: EntityHandler, gui: GuiHandler;
 
-const lightDataChunk = new Chunk({});
+const lightDataChunk = new Chunk();
 for (let x = 0; x < 16; x++) {
 	for (let z = 0; z < 16; z++) {
 		for (let skyY = 0; skyY < 256; skyY++) {
@@ -19,28 +19,28 @@ for (let x = 0; x < 16; x++) {
 	}
 }
 
-const lightData = lightDataChunk.dump();
+const mask = lightDataChunk.getMask();
+const lightData = lightDataChunk.dump(lightDataChunk.getMask(), true);
 
 function getBlockIndex(x: number, y: number, z: number): number {
 	return (y & 15) << 8 | (z & 15) << 4 | x & 15
 }
 
-/** @type {Map<string, CPacketLeaderboard} */
-const leaderboards = new Map();
+const leaderboards: Map<string, CPacketLeaderboard> = new Map();
 let nextLeaderboardID = -2;
-/** @type {Map<string, number>} */
-const leaderboardIdToMcID = new Map();
+const leaderboardIdToMcID: Map<string, number> = new Map();
 
-const self = class WorldHandler extends Handler {
-	chunks;
-	queued;
+export class WorldHandler extends Handler {
+	chunks: string[] = [];
+	queued: string[] = [];
+	breaking: boolean;
 	reload() {
 		this.chunks = [];
 		this.queued = [];
 	}
 	createChunk(packet) {
 		const chunk = new Chunk();
-		chunk.load(lightData);
+		chunk.load(lightData, mask, true);
 		for (const cell of packet.cells) {
 			const array = new BitArray(CELL_VOLUME, cell.bitsPerEntry, cell.bitArray);
 			if (!array) continue;
@@ -62,10 +62,10 @@ const self = class WorldHandler extends Handler {
 		}
 		return chunk;
 	}
-	isLoaded(x, z) {
+	isLoaded(x: number, z: number) {
 		return this.chunks.includes([Math.floor(x / 16), Math.floor(z / 16)].join());
 	}
-	isEntityLoaded(entity) {
+	isEntityLoaded(entity: {pos: Vector3}) {
 		return this.isLoaded((entity.pos.x / 32), (entity.pos.z / 32));
 	}
 	update(pos) {
@@ -88,8 +88,9 @@ const self = class WorldHandler extends Handler {
 			return bDist - aDist
 		});
 
-		for (; positions.length > 0 && this.queued.length < 8; ) {
+		for (; positions.length > 0 && this.queued.length < 8;) {
 			const chunk = positions.pop();
+			if (chunk === undefined) this.reload();
 			this.queued.push(chunk.join());
 			ClientSocket.sendPacket(new SPacketRequestChunk({
 				x: chunk[0],
@@ -112,7 +113,7 @@ const self = class WorldHandler extends Handler {
 			}
 		}
 	}
-	miniblox() {
+	override miniblox() {
 		ClientSocket.on('CPacketChunkData', packet => {
 			const chunk = this.createChunk(packet), chunkInd = [packet.x, packet.z].join();
 			const ind = this.queued.indexOf(chunkInd);
@@ -181,7 +182,7 @@ const self = class WorldHandler extends Handler {
 			text4: JSON.stringify({text: packet.lines[3] ?? ''})
 		}));
 		ClientSocket.on('CPacketUseBed', packet => client.write('bed', {
-			entityId: packet.id == entity.local.id ? mcClientId : packet.id,
+			entityId: packet.id == entity.local.id ? entity.local.mcId : packet.id,
 			location: packet.bedPos
 		}));
 		ClientSocket.on("CPacketLeaderboard", packet => {
@@ -231,7 +232,7 @@ const self = class WorldHandler extends Handler {
 			const leaderboard = leaderboards.get(id);
 			const mcId = leaderboardIdToMcID.get(id);
 
-			if (!mcId) return;
+			if (!mcId || !leaderboard) return;
 
 			const { content } = packet;
 
@@ -256,7 +257,7 @@ const self = class WorldHandler extends Handler {
 			});
 		})
 	}
-	minecraft(mcClient) {
+	minecraft(mcClient: ServerClient) {
 		client = mcClient;
 		client.on('block_place', packet => {
 			if (packet.direction == -1) {
@@ -299,16 +300,16 @@ const self = class WorldHandler extends Handler {
 			lines: [packet.text1, packet.text2, packet.text3, packet.text4]
 		})));
 	}
-	override cleanup(requeue = false) {
-		client = requeue ? client : undefined;
+	override cleanup() {
+		// client = requeue ? client : undefined;
 		this.chunks = [];
 		this.queued = [];
 		this.breaking = false;
 	}
-	obtainHandlers(handlers) {
+	override obtainHandlers(handlers: typeof import("../init.js")) {
 		entity = handlers.entity;
 		gui = handlers.gui;
 	}
 };
 
-export default new self();
+export default new WorldHandler();

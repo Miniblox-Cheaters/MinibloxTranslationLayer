@@ -1,7 +1,11 @@
 import { PBItemStack } from './main.js';
 import ITEMS from './types/items.js';
 import { COLOR_PALETTE, COLOR_REGEX, FMT_CODES } from './types/colors.js';
+import { DATA } from "./types/data.ts";
 export { LEVEL_TO_COLOR } from './types/colors.js';
+
+const ENCHANT = DATA.supportFeature("nbtNameForEnchant");
+const E_TYPE = DATA.supportFeature("typeOfValueForEnchantLevel");
 
 export function colorDistance(color1, color2) {
 	const rgb1 = hexToRgb(color1);
@@ -38,17 +42,17 @@ export function hexToRgb(hex) {
 export function translateItem(item) {
 	let data;
 	if (item.data) {
-		let parsed = JSON.parse(item.data);
-		if (parsed.ench) {
-			let enchants = [];
-			for (const ench of parsed.ench) {
-				enchants.push({ lvl: { type: "short", value: ench.lvl }, id: { type: "short", value: ench.id } });
+		const parsed = JSON.parse(item.data);
+		if (parsed[ENCHANT]) {
+			const enchants = [];
+			for (const ench of parsed[ENCHANT]) {
+				enchants.push({ lvl: { type: E_TYPE, value: ench.lvl }, id: { type: "short", value: ench.id } });
 			}
 			data = {
 				name: "",
 				type: "compound",
 				value: {
-					ench: {
+					[ENCHANT]: {
 						type: "list",
 						value: {
 							type: "compound",
@@ -80,10 +84,10 @@ export function translateItemBack(item) {
 		}
 	}
 
-	if (item.nbtData && item.nbtData.value.ench) {
+	if (item.nbtData && item.nbtData.value[ENCHANT]) {
 		data = { ench: [] };
-		for (const ench of item.nbtData.value.ench.value.value) {
-			data.ench.push({ id: ench.id.value, lvl: ench.lvl.value });
+		for (const e of item.nbtData.value[ENCHANT].value.value) {
+			data.ench.push({ id: e.id.value, lvl: e.lvl.value });
 		}
 		data = JSON.stringify(data);
 	}

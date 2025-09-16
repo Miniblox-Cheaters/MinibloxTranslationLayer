@@ -3,7 +3,8 @@
 	"version": "1.2.6",
 	"license": "AGPL-3.0-or-later",
 	"tasks": {
-		"run": "deno run --allow-net --allow-sys --allow-read --allow-env --allow-write index.ts"
+		"run": "deno run --allow-net --allow-sys --allow-read --allow-env --allow-write index.ts",
+		"dev": "deno run --allow-net --allow-sys --allow-read --allow-env --allow-write --watch index.ts"
 	},
 	"exports": {},
 	"imports": {

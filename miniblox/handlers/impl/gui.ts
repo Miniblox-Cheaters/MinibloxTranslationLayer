@@ -41,7 +41,7 @@ type Server = {
 
 type ServerList = Server[];
 
-const self = class GuiHandler extends Handler {
+export class GuiHandler extends Handler {
 	ignorePacket = false;
 	currentlyOpen = "";
 	override miniblox() {
@@ -151,15 +151,17 @@ const self = class GuiHandler extends Handler {
 				}
 				return;
 			}
+			const data = {
+				windowId: packet.windowId,
+				slotId: slot,
+				button: packet.mouseButton,
+				mode: packet.mode,
+				itemStack: translateItemBack(packet.item),
+				transactionId: packet.action,
+			};
+			console.log(data);
 			ClientSocket.sendPacket(
-				new SPacketClickWindow({
-					windowId: packet.windowId,
-					slotId: slot,
-					button: packet.mouseButton,
-					mode: packet.mode,
-					itemStack: translateItemBack(packet.item),
-					transactionId: packet.action,
-				}),
+				new SPacketClickWindow(data),
 			);
 		});
 		client.on("transaction", (packet) => {
@@ -245,6 +247,6 @@ const self = class GuiHandler extends Handler {
 	override obtainHandlers(handlers: typeof import("../init.js")) {
 		entity = handlers.entity;
 	}
-};
+}
 
-export default new self();
+export default new GuiHandler();
