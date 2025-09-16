@@ -115,7 +115,8 @@ for (let i = 0; i < 7; i++) BLOCKS[1 + i] = [mcData.blocksByName.stone.id, i];
 for (let i = 0; i < 2; i++) BLOCKS[8 + i] = mcData.blocksByName[v1_13 ? "grass_block" : "grass"].id;
 for (let i = 0; i < 4; i++) BLOCKS[10 + i] = [mcData.blocksByName.dirt.id, Math.min(i, 2)];
 BLOCKS[14] = mcData.blocksByName.cobblestone.id;
-woodSequence(15, "planks", false);
+if (v1_13) woodSequence(15, "planks", false);
+else for (let i = 0; i < 6; i++) BLOCKS[15 + i] = [mcData.blocksByName.planks.id, i];
 if (v1_13)
 	woodSequence(30, "sapling");
 else
@@ -242,7 +243,9 @@ for (let i = 0; i < 4; i++) BLOCKS[3952 + i] = mcData.blocksByName.redstone_ore.
 for (let i = 0; i < 2; i++) BLOCKS[3956 + i] = [mcData.blocksByName.redstone_torch.id, 5];
 for (let i = 0; i < 8; i++) BLOCKS[3958 + i] = [mcData.blocksByName.redstone_torch.id, 1 + (i % 4)];
 createButton(3966, mcData.blocksByName.stone_button.id);
-//for (let i = 0; i < 24; i++) BLOCKS[3966 + i] = [mcData.blocksByName.stone_button.id, (i % 14)];
+if (v1_13)
+	;
+else for (let i = 0; i < 24; i++) BLOCKS[3966 + i] = [mcData.blocksByName.stone_button.id, (i % 14)];
 for (let i = 0; i < 8; i++) BLOCKS[3990 + i] = [mcData.blocksByName.snow_layer.id, i];
 BLOCKS[3998] = mcData.blocksByName.ice.id;
 BLOCKS[3999] = mcData.blocksByName.snow.id;

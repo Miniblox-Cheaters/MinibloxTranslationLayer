@@ -137,8 +137,7 @@ export async function handleCommand(cmd: string, ...args: string[]): Promise<boo
 			}
 			break;
 		case "reloadchunks":
-			world.chunks = [];
-			world.queued = [];
+			world.reload();
 			break;
 		case "desync": {
 			entity.desyncFlag = !entity.desyncFlag;

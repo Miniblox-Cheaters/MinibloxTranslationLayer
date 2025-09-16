@@ -828,8 +828,8 @@ you will need to send Input packets in order to move on the server.`);
 					volume: 1,
 					pitch: 64,
 				});
-				this.dimension = packet.dimension ?? this.dimension;
 			}
+			console.log("hi");
 			world.reload();
 			client.write("respawn", {
 				dimension: packet.dimension,
