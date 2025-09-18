@@ -1,8 +1,7 @@
 
 /node_modules
-login.token
+login.*
 miniblox/1.8blockstates.txt
-recaptcha.token
 miniblox/minibloxblockstates.txt
 deno.lock
 package-lock.json
