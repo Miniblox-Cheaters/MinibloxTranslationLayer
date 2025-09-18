@@ -668,13 +668,14 @@ you will need to send Input packets in order to move on the server.`);
 		ClientSocket.on('CPacketRespawn', packet => {
 			if (packet.client) {
 				ClientSocket.sendPacket(new SPacketRespawn$1);
-				client.write('respawn', {
-					dimension: packet.dimension,
-					difficulty: 2,
-					gamemode: 2,
-					levelType: 'FLAT'
-				});
 			}
+			client.write('respawn', {
+				dimension: packet.dimension,
+				difficulty: 2,
+				gamemode: 2,
+				levelType: 'FLAT'
+			});
+			world.reload();
 		});
 		ClientSocket.on('CPacketUpdateHealth', packet => {
 			if (packet.id == this.local.id) {

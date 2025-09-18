@@ -28,6 +28,10 @@ let nextLeaderboardID = -2;
 const leaderboardIdToMcID = new Map();
 
 const self = class WorldHandler extends Handler {
+	reload() {
+		world.chunks = [];
+		world.queued = [];
+	}
 	createChunk(packet) {
 		const chunk = new Chunk();
 		chunk.load(lightData);
