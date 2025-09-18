@@ -1,24 +1,24 @@
 export const COLOR_REGEX = /\\#[A-Za-z0-9]+\\/g;
 export const CN_TO_CC = {
-    "lime": "\u00a7a",
-    "aqua": "\u00a7b",
-    "cyan": "\u00a7b",
-    "red": "\u00a7c",
-    "pink": "\u00a7d",
-    "yellow": "\u00a7e",
-    "white": "\u00a7f",
-    "green": "\u00a72",
-    "orange": "\u00a76",
-    "gold": "\u00a76",
-    "gray": "\u00a77",
-    "grey": "\u00a77",
-    "silver": "\u00a77",
-    "magenta": "\u00a7d",
-    "blue": "\u00a79",
-    "black": "\u00a70",
-    "bold": "\u00a7l",
-    "italic": "\u00a7o",
-    "reset": "\u00a7r"
+    lime: "\u00a7a",
+    aqua: "\u00a7b",
+    cyan: "\u00a7b",
+    red: "\u00a7c",
+    pink: "\u00a7d",
+    yellow: "\u00a7e",
+    white: "\u00a7f",
+    green: "\u00a72",
+    orange: "\u00a76",
+    gold: "\u00a76",
+    gray: "\u00a77",
+    grey: "\u00a77",
+    silver: "\u00a77",
+    magenta: "\u00a7d",
+    blue: "\u00a79",
+    black: "\u00a70",
+    bold: "\u00a7l",
+    italic: "\u00a7o",
+    reset: "\u00a7r"
 };
 export const COLOR_CODES = Object.fromEntries(Object.entries(CN_TO_CC).map(([k, v]) => {
     return [`\\${k}\\`, v];
@@ -45,7 +45,8 @@ export const COLOR_PALETTE = {
     "#555555": "\u00A78",
     "#000000": "\u00A70"
 };
-export const LEVEL_TO_COLOUR = {
+/** @type {{ [key: number]: string }} */
+export const LEVEL_TO_COLOR = {
     0: "#aba9a5",
     1: "#afa99d",
     2: "#b3a995",

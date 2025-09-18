@@ -1,6 +1,6 @@
-import Handler from './../handler.js';
-import { ClientSocket } from './../../main.js';
-import { translateText } from './../../utils.js';
+import Handler from '../handler.ts';
+import { ClientSocket } from '../../main.js';
+import { translateText } from '../../utils.js';
 let client;
 
 const self = class ScoreboardHandler extends Handler {
@@ -64,7 +64,7 @@ const self = class ScoreboardHandler extends Handler {
 	minecraft(mcClient) {
 		client = mcClient;
 	}
-	cleanup(requeue) {
+	override cleanup(requeue = false) {
 		client = requeue ? client : undefined;
 		if (client) this.clear();
 		this.score = [];

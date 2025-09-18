@@ -4,4 +4,5 @@ login.token
 miniblox/1.8blockstates.txt
 recaptcha.token
 miniblox/minibloxblockstates.txt
+deno.lock
 package-lock.json
