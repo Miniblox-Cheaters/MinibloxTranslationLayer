@@ -1,5 +1,5 @@
 import Handler from '../handler.ts';
-import { ClientSocket, SPacketRequestChunk, SPacketUseItem, SPacketPlaceBlock, SPacketBreakBlock, SPacketPlayerAction, SPacketClick, SPacketUpdateSign, BitArray, PBBlockPos, CPacketLeaderboard, CPacketUpdateLeaderboard } from '../../main.js';
+import { ClientSocket, SPacketRequestChunk, SPacketUseItem, SPacketPlaceBlock, SPacketBreakBlock, SPacketPlayerAction, SPacketClick, SPacketUpdateSign, BitArray, PBBlockPos, CPacketLeaderboard, CPacketUpdateLeaderboard, CPacketChunkData } from '../../main.js';
 import { BLOCKS, BLOCK_ID } from '../../types/blocks.js';
 import {DATA as mcData, Chunk} from "../../types/data.ts";
 import {Vec3} from 'vec3';
@@ -9,8 +9,9 @@ import type { GuiHandler } from "./gui.ts";
 
 const viewDistance = 7, CELL_VOLUME = 16 * 16 * 16;
 let client: ServerClient, entity: EntityHandler, gui: GuiHandler;
+const lol = undefined as unknown as null;
 
-const lightDataChunk = new Chunk();
+const lightDataChunk = new Chunk(lol);
 for (let x = 0; x < 16; x++) {
 	for (let z = 0; z < 16; z++) {
 		for (let skyY = 0; skyY < 256; skyY++) {
@@ -19,8 +20,7 @@ for (let x = 0; x < 16; x++) {
 	}
 }
 
-const mask = lightDataChunk.getMask();
-const lightData = lightDataChunk.dump(lightDataChunk.getMask(), true);
+const lightData = lightDataChunk.dump();
 
 function getBlockIndex(x: number, y: number, z: number): number {
 	return (y & 15) << 8 | (z & 15) << 4 | x & 15
@@ -33,14 +33,15 @@ const leaderboardIdToMcID: Map<string, number> = new Map();
 export class WorldHandler extends Handler {
 	chunks: string[] = [];
 	queued: string[] = [];
-	breaking: boolean;
+	breaking = false;
 	reload() {
 		this.chunks = [];
 		this.queued = [];
 	}
-	createChunk(packet) {
-		const chunk = new Chunk();
-		chunk.load(lightData, mask, true);
+	createChunk(packet: CPacketChunkData) {
+		const chunk = new Chunk(lol);
+		chunk.load(lightData);
+		const B = BLOCKS as {[id: number]: number | number[]};
 		for (const cell of packet.cells) {
 			const array = new BitArray(CELL_VOLUME, cell.bitsPerEntry, cell.bitArray);
 			if (!array) continue;
@@ -49,7 +50,8 @@ export class WorldHandler extends Handler {
 					for (let y = 0; y < 16; y++) {
 						const offset = array.get(getBlockIndex(x, y, z));
 						if (offset == 0) continue;
-						const blockdata = BLOCKS[cell.palette[offset]] ?? BLOCKS[9], vec = new Vec3(x, cell.y + y, z);
+						const id = cell.palette[offset];
+						const blockdata = B[id] ?? B[9], vec = new Vec3(x, cell.y + y, z);
 						if (typeof blockdata == 'number') {
 							chunk.setBlockType(vec, blockdata);
 						} else {
@@ -60,6 +62,7 @@ export class WorldHandler extends Handler {
 				}
 			}
 		}
+		chunk.loadBiomes(packet.biomes);
 		return chunk;
 	}
 	isLoaded(x: number, z: number) {
