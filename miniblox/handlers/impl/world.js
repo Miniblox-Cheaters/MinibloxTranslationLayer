@@ -28,9 +28,13 @@ let nextLeaderboardID = -2;
 const leaderboardIdToMcID = new Map();
 
 const self = class WorldHandler extends Handler {
+	/** @type {string[]} */
+	chunks;
+	/** @type {string[]} */
+	queued;
 	reload() {
-		world.chunks = [];
-		world.queued = [];
+		this.chunks = [];
+		this.queued = [];
 	}
 	createChunk(packet) {
 		const chunk = new Chunk();
