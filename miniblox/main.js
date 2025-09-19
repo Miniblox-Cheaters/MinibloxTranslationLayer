@@ -80,12 +80,12 @@ export class PBItemStack extends Message {
 	 */
 	static EMPTY;
 	/** @type {boolean} */
-	present = true;
-	/** @type {number} */
+	present = false;
+	/** @type {number | undefined} */
 	id;
-	/** @type {number} */
+	/** @type {number | undefined} */
 	stackSize;
-	/** @type {number} */
+	/** @type {number | undefined} */
 	durability;
 	data;
 	constructor(d) {
