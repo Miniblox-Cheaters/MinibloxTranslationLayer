@@ -90,7 +90,7 @@ export class PBItemStack extends Message {
 	 */
 	static EMPTY;
 	/** @type {boolean} */
-	present = true;
+	present = false;
 	/** @type {number} */
 	id;
 	/** @type {number} */
