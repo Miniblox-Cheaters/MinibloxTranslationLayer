@@ -21,6 +21,16 @@ var ut = (j, _, $) => (xT(j, typeof _ != "symbol" ? _ + "" : _, $),
 const exports = {};
 
 export class SPacketLoginStart extends Message {
+	/** @type {string | undefined} */
+	session;
+	/** @type {string | undefined} */
+	hydration;
+	/** @type {string} */
+	metricsId;
+	/** @type {string | undefined} */
+	requestedUuid;
+	/** @type {string} */
+	clientVersion;
 	constructor($) {
 		super();
 		ut(this, "session");
@@ -270,6 +280,10 @@ ut(PBFloatVector3, "runtime", proto2),
 		T: 2
 	}]));
 export class CPacketEntityVelocity extends Message {
+	/** @type {number} */
+	id;
+	/** @type {PBFloatVector3} */
+	motion;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -303,6 +317,18 @@ ut(CPacketEntityVelocity, "runtime", proto2),
 		T: PBFloatVector3
 	}]));
 export class CPacketChunkData extends Message {
+	/** @type {number} */
+	x;
+	/** @type {number} */
+	z;
+	/** @type {PBCell[]} */
+	cells;
+	/** @type {PBTileEntity[]} */
+	tileEntities;
+	/** @type {number} */
+	dimension;
+	/** @type {number[]} */
+	biomes;
 	constructor($) {
 		super();
 		ut(this, "x", 0);
@@ -363,6 +389,15 @@ ut(CPacketChunkData, "runtime", proto3),
 		repeated: !0
 	}]));
 export class PBCell extends Message {
+	/** @type {number} */
+	y = 0;
+	bitsPerEntry = 0;
+	/** @type {number} */
+	palette = [];
+	/** @type {Uint8Array} */
+	bitArray = new Uint8Array(0);
+	/** @type {number} */
+	blockRefCount = 0;
 	constructor($) {
 		super();
 		ut(this, "y", 0);
@@ -415,12 +450,13 @@ ut(PBCell, "runtime", proto3),
 		T: 13
 	}]));
 export class PBTileEntity extends Message {
+	x = 0;
+	y = 0;
+	z = 0;
+	/** @type {Uint8Array} */
+	nbt = new Uint8Array(0);
 	constructor($) {
 		super();
-		ut(this, "x", 0);
-		ut(this, "y", 0);
-		ut(this, "z", 0);
-		ut(this, "nbt", new Uint8Array(0));
 		proto3.util.initPartial($, this)
 	}
 	static fromBinary($, et) {
@@ -460,6 +496,10 @@ ut(PBTileEntity, "runtime", proto3),
 		T: 12
 	}]));
 export class CPacketEntityEquipment extends Message {
+	/** @type {number} */
+	id;
+	/** @type {Equipment[]} */
+	equipment = [];
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -494,6 +534,10 @@ ut(CPacketEntityEquipment, "runtime", proto2),
 		repeated: !0
 	}]));
 export class Equipment extends Message {
+	/** @type {Equipment_Slot} */
+	slot;
+	/** @type {PBItemStack} */
+	item;
 	constructor($) {
 		super();
 		ut(this, "slot");
@@ -557,10 +601,10 @@ proto2.util.setEnumType(Equipment_Slot, "Equipment.Slot", [{
 	name: "BOOTS"
 }]);
 export class SPacketUpdateInventory extends Message {
-	/** @type {PBItemStack} */
-	main;
-	/** @type {PBItemStack} */
-	armor;
+	/** @type {PBItemStack[]} */
+	main = [];
+	/** @type {PBItemStack[]} */
+	armor = [];
 	/** @type {PBItemStack} */
 	idkWhatThisIs;
 	constructor($) {
@@ -604,6 +648,10 @@ ut(SPacketUpdateInventory, "runtime", proto2),
 		T: PBItemStack
 	}]));
 export class CPacketUpdateSign extends Message {
+	/** @type {PBBlockPos} */
+	pos;
+	/** @type {string[]} */
+	lines = [];
 	constructor($) {
 		super();
 		ut(this, "pos");
@@ -638,6 +686,14 @@ ut(CPacketUpdateSign, "runtime", proto2),
 		repeated: !0
 	}]));
 export class CPacketUpdateCommandBlock extends Message {
+	/** @type {PBBlockPos} */
+	pos;
+	/** @type {string | undefined} */
+	command;
+	/** @type {string[]} */
+	commands = [];
+	/** @type {boolean} */
+	repeat;
 	constructor($) {
 		super();
 		ut(this, "pos");
@@ -686,6 +742,8 @@ ut(CPacketUpdateCommandBlock, "runtime", proto2),
 		opt: !0
 	}]));
 export class SPacketCloseWindow extends Message {
+	/** @type {number} */
+	windowId;
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -713,6 +771,18 @@ ut(SPacketCloseWindow, "runtime", proto2),
 		T: 5
 	}]));
 export class SPacketEntityAction extends Message {
+	/** @type {number} */
+	id;
+	/** @type {boolean | undefined} */
+	sneak;
+	/** @type {boolean | undefined} */
+	sprinting;
+	/** @type {boolean | undefined} */
+	punching;
+	/** @type {boolean | undefined} */
+	fire;
+	/** @type {boolean | undefined} */
+	stopSleeping;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -775,6 +845,8 @@ ut(SPacketEntityAction, "runtime", proto2),
 		opt: !0
 	}]));
 export class SPacketPlayerAbilities extends Message {
+	/** @type {boolean} */
+	isFlying;
 	constructor($) {
 		super();
 		ut(this, "isFlying");
@@ -803,6 +875,14 @@ ut(SPacketPlayerAbilities, "runtime", proto2),
 		opt: !0
 	}]));
 export class SPacketPlayerPosLook extends Message {
+	/** @type {PBFloatVector3 | undefined} */
+	pos;
+	/** @type {number | undefined} */
+	yaw;
+	/** @type {number | undefined} */
+	pitch;
+	/** @type {boolean} */
+	onGround;
 	constructor($) {
 		super();
 		ut(this, "pos");
@@ -851,6 +931,12 @@ ut(SPacketPlayerPosLook, "runtime", proto2),
 		T: 8
 	}]));
 export const Vector3 = class extends Message {
+	/** @type {number} */
+	x;
+	/** @type {number} */
+	y;
+	/** @type {number} */
+	z;
 	constructor($) {
 		super();
 		ut(this, "x");
@@ -997,6 +1083,10 @@ proto2.util.setEnumType(PBEnumFacing, "PBEnumFacing", [{
 	name: "EAST"
 }]);
 export class SPacketBreakBlock extends Message {
+	/** @type {PBBlockPos} */
+	location;
+	/** @type {boolean | undefined} */
+	start;
 	constructor($) {
 		super();
 		ut(this, "location");
@@ -1031,6 +1121,8 @@ ut(SPacketBreakBlock, "runtime", proto2),
 		opt: !0
 	}]));
 export class SPacketClick extends Message {
+	/** @type {PBBlockPos | undefined} */
+	location;
 	constructor($) {
 		super();
 		ut(this, "location");
@@ -1059,6 +1151,16 @@ ut(SPacketClick, "runtime", proto2),
 		opt: !0
 	}]));
 export class SPacketPlaceBlock extends Message {
+	/** @type {PBBlockPos} */
+	positionIn;
+	/** @type {PBEnumFacing} */
+	side;
+	/** @type {number} */
+	hitX;
+	/** @type {number} */
+	hitY;
+	/** @type {number} */
+	hitZ;
 	constructor($) {
 		super();
 		ut(this, "positionIn");
@@ -1131,6 +1233,18 @@ ut(SPacketUseItem, "runtime", proto2),
 	ut(SPacketUseItem, "typeName", "SPacketUseItem"),
 	ut(SPacketUseItem, "fields", proto2.util.newFieldList(() => []));
 export class SPacketClickWindow extends Message {
+	/** @type {number} */
+	windowId;
+	/** @type {number} */
+	slotId;
+	/** @type {number} */
+	button;
+	/** @type {number} */
+	mode;
+	/** @type {PBItemStack} */
+	itemStack;
+	/** @type {number} */
+	transactionId;
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -1188,6 +1302,12 @@ ut(SPacketClickWindow, "runtime", proto2),
 		T: 5
 	}]));
 export class SPacketPlayerAction extends Message {
+	/** @type {PBBlockPos} */
+	position;
+	/** @type {PBEnumFacing} */
+	facing;
+	/** @type {PBAction} */
+	action;
 	constructor($) {
 		super();
 		ut(this, "position");
@@ -1227,6 +1347,12 @@ ut(SPacketPlayerAction, "runtime", proto2),
 		T: proto2.getEnumType(PBAction)
 	}]));
 export class SPacketUseEntity extends Message {
+	/** @type {number} */
+	id;
+	/** @type {SPacketUseEntity_Action} */
+	action;
+	/** @type {PBFloatVector3 | undefined} */
+	hitVec;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -1281,6 +1407,8 @@ proto2.util.setEnumType(SPacketUseEntity_Action, "SPacketUseEntity.Action", [{
 	name: "INTERACT_AT"
 }]);
 export class SPacketMessage extends Message {
+	/** @type {string} */
+	text;
 	constructor($) {
 		super();
 		ut(this, "text");
@@ -1308,6 +1436,10 @@ ut(SPacketMessage, "runtime", proto2),
 		T: 9
 	}]));
 export class CPacketAnimation extends Message {
+	/** @type {number} */
+	id;
+	/** @type {number} */
+	type;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -1341,6 +1473,14 @@ ut(CPacketAnimation, "runtime", proto2),
 		T: 13
 	}]));
 export class CPacketBlockAction extends Message {
+	/** @type {PBBlockPos} */
+	blockPos;
+	/** @type {number} */
+	instrument;
+	/** @type {number} */
+	pitch;
+	/** @type {number} */
+	blockId;
 	constructor($) {
 		super();
 		ut(this, "blockPos");
@@ -1386,6 +1526,16 @@ ut(CPacketBlockAction, "runtime", proto2),
 		T: 13
 	}]));
 export class CPacketBlockUpdate extends Message {
+	/** @type {number} */
+	id;
+	/** @type {number} */
+	x;
+	/** @type {number} */
+	y;
+	/** @type {number} */
+	z;
+	/** @type {boolean | undefined} */
+	prerender;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -1438,6 +1588,8 @@ ut(CPacketBlockUpdate, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketChangeServers extends Message {
+	/** @type {string} */
+	url;
 	constructor($) {
 		super();
 		ut(this, "url");
@@ -1465,6 +1617,8 @@ ut(CPacketChangeServers, "runtime", proto2),
 		T: 9
 	}]));
 export class CPacketCloseWindow extends Message {
+	/** @type {number} */
+	windowId;
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -1492,6 +1646,12 @@ ut(CPacketCloseWindow, "runtime", proto2),
 		T: 13
 	}]));
 export class CPacketConfirmTransaction extends Message {
+	/** @type {number} */
+	windowId;
+	/** @type {number} */
+	uid;
+	/** @type {boolean} */
+	accepted;
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -1531,9 +1691,10 @@ ut(CPacketConfirmTransaction, "runtime", proto2),
 		T: 8
 	}]));
 export class CPacketDestroyEntities extends Message {
+	/** @type {number[]} */
+	ids = [];
 	constructor($) {
 		super();
-		ut(this, "ids", []);
 		proto2.util.initPartial($, this)
 	}
 	static fromBinary($, et) {
@@ -1559,6 +1720,8 @@ ut(CPacketDestroyEntities, "runtime", proto2),
 		repeated: !0
 	}]));
 export class CPacketDisconnect extends Message {
+	/** @type {string} */
+	reason;
 	constructor($) {
 		super();
 		ut(this, "reason");
@@ -1586,6 +1749,16 @@ ut(CPacketDisconnect, "runtime", proto2),
 		T: 9
 	}]));
 export class CPacketEntityAction extends Message {
+	/** @type {number} */
+	id;
+	/** @type {boolean | undefined} */
+	sneak;
+	/** @type {boolean | undefined} */
+	sprinting;
+	/** @type {boolean | undefined} */
+	punching;
+	/** @type {boolean | undefined} */
+	fire;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -1641,6 +1814,12 @@ ut(CPacketEntityAction, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketEntityAttach extends Message {
+	/** @type {number} */
+	leash;
+	/** @type {number} */
+	entity;
+	/** @type {number} */
+	vehicle;
 	constructor($) {
 		super();
 		ut(this, "leash");
@@ -1680,10 +1859,13 @@ ut(CPacketEntityAttach, "runtime", proto2),
 		T: 17
 	}]));
 export class CPacketEntityMetadata extends Message {
+	/** @type {number} */
+	id;
+	/** @type {PBWatchableObject[]} */
+	data = [];
 	constructor($) {
 		super();
 		ut(this, "id");
-		ut(this, "data", []);
 		proto2.util.initPartial($, this)
 	}
 	static fromBinary($, et) {
@@ -1714,6 +1896,22 @@ ut(CPacketEntityMetadata, "runtime", proto2),
 		repeated: !0
 	}]));
 export class PBWatchableObject extends Message {
+	/** @type {number} */
+	dataValueId;
+	/** @type {number} */
+	objectType;
+	/** @type {number | undefined} */
+	intValue;
+	/** @type {number | undefined} */
+	floatValue;
+	/** @type {string | undefined} */
+	stringValue;
+	/** @type {PBVector3 | undefined} */
+	vector;
+	/** @type {PBItemStack | undefined} */
+	itemStack;
+	/** @type {PBBlockPos | undefined} */
+	blockPos;
 	constructor($) {
 		super();
 		ut(this, "dataValueId");
@@ -1789,6 +1987,18 @@ ut(PBWatchableObject, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketEntityPositionAndRotation extends Message {
+	/** @type {number} */
+	id;
+	/** @type {PBVector3 | undefined} */
+	pos;
+	/** @type {PBVector3 | undefined} */
+	vel;
+	/** @type {number | undefined} */
+	yaw;
+	/** @type {number | undefined} */
+	pitch;
+	/** @type {boolean | undefined} */
+	onGround;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -1851,6 +2061,18 @@ ut(CPacketEntityPositionAndRotation, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketEntityRelativePositionAndRotation extends Message {
+	/** @type {number} */
+	id;
+	/** @type {PBVector3 | undefined} */
+	pos;
+	/** @type {PBVector3 | undefined} */
+	vel;
+	/** @type {number | undefined} */
+	yaw;
+	/** @type {number | undefined} */
+	pitch;
+	/** @type {boolean | undefined} */
+	onGround;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -1913,6 +2135,10 @@ ut(CPacketEntityRelativePositionAndRotation, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketEntityStatus extends Message {
+	/** @type {number} */
+	entityId;
+	/** @type {number} */
+	entityStatus;
 	constructor($) {
 		super();
 		ut(this, "entityId");
@@ -1951,7 +2177,7 @@ export class CPacketExplosion extends Message {
 	/** @type {number} */
 	strength;
 	/** @type {PBBlockPos[]} */
-	blocks;
+	blocks = [];
 	/** @type {PBFloatVector3} */
 	playerPos;
 	constructor($) {
@@ -2000,6 +2226,18 @@ ut(CPacketExplosion, "runtime", proto2),
 		T: PBFloatVector3
 	}]));
 export class PBCosmetics extends Message {
+	/** @type {string | undefined} */
+	skin;
+	/** @type {string | undefined} */
+	cape;
+	/** @type {string | undefined} */
+	aura;
+	/** @type {string | undefined} */
+	trail;
+	/** @type {string | undefined} */
+	color;
+	/** @type {string | undefined} */
+	hat;
 	constructor($) {
 		super();
 		ut(this, "skin");
@@ -2086,27 +2324,13 @@ export class CPacketServerInfo extends Message {
 	/** @type {BigInt} */
 	startTime;
 	/** @type {PlayerPermissionEntry[]} */
-	playerPermissionEntries;
+	playerPermissionEntries = [];
 	/** @type {string?} */
 	metadata;
 	/** @type {boolean?} */
 	commandBlocksEnabled;
 	constructor($) {
 		super();
-		ut(this, "serverId");
-		ut(this, "serverName");
-		ut(this, "serverVersion");
-		ut(this, "serverCategory");
-		ut(this, "accessControl");
-		ut(this, "worldType");
-		ut(this, "doDaylightCycle");
-		ut(this, "inviteCode");
-		ut(this, "cheats");
-		ut(this, "pvpEnabled");
-		ut(this, "startTime");
-		ut(this, "playerPermissionEntries", []);
-		ut(this, "metadata");
-		ut(this, "commandBlocksEnabled");
 		proto2.util.initPartial($, this)
 	}
 	static fromBinary($, et) {
@@ -2219,13 +2443,6 @@ export class PlayerPermissionEntry extends Message {
 	verified;
 	constructor($) {
 		super();
-		ut(this, "uuid");
-		ut(this, "username");
-		ut(this, "permissionLevel");
-		ut(this, "color");
-		ut(this, "rank");
-		ut(this, "level");
-		ut(this, "verified");
 		proto2.util.initPartial($, this)
 	}
 	static fromBinary($, et) {
@@ -2287,19 +2504,30 @@ ut(PlayerPermissionEntry, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketJoinGame extends Message {
+	/** @type {boolean} */
+	canConnect;
+	/** @type {string | undefined} */
+	errorMessage;
+	/** @type {number | undefined} */
+	tick;
+	/** @type {string | undefined} */
+	gamemode;
+	/** @type {string | undefined} */
+	name;
+	/** @type {boolean | undefined} */
+	enablePlayerCollision;
+	/** @type {PBCosmetics | undefined} */
+	cosmetics;
+	/** @type {string | undefined} */
+	rank;
+	/** @type {CPacketServerInfo | undefined} */
+	serverInfo;
+	/** @type {string | undefined} */
+	uuid;
+	/** @type {number | undefined} */
+	dimension;
 	constructor($) {
 		super();
-		ut(this, "canConnect");
-		ut(this, "errorMessage");
-		ut(this, "tick");
-		ut(this, "gamemode");
-		ut(this, "name");
-		ut(this, "enablePlayerCollision");
-		ut(this, "cosmetics");
-		ut(this, "rank");
-		ut(this, "serverInfo");
-		ut(this, "uuid");
-		ut(this, "dimension");
 		proto2.util.initPartial($, this)
 	}
 	static fromBinary($, et) {
@@ -2587,6 +2815,8 @@ ut(CPacketMessage, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketOpenShop extends Message {
+	/** @type {string} */
+	type;
 	constructor($) {
 		super();
 		ut(this, "type");
@@ -2613,13 +2843,18 @@ ut(CPacketOpenShop, "runtime", proto2),
 		kind: "scalar",
 		T: 9
 	}]));
+
 export class CPacketOpenWindow extends Message {
+	/** @type {number} */
+	windowId;
+	/** @type {string} */
+	guiID;
+	/** @type {string | undefined} */
+	title;
+	/** @type {number | undefined} */
+	size;
 	constructor($) {
 		super();
-		ut(this, "windowId");
-		ut(this, "guiID");
-		ut(this, "title");
-		ut(this, "size");
 		proto2.util.initPartial($, this)
 	}
 	static fromBinary($, et) {
@@ -2661,19 +2896,30 @@ ut(CPacketOpenWindow, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketParticles extends Message {
+	/** @type {number} */
+	particleId;
+	/** @type {boolean | undefined} */
+	longDistance;
+	/** @type {number | undefined} */
+	x;
+	/** @type {number | undefined} */
+	y;
+	/** @type {number | undefined} */
+	z;
+	/** @type {number | undefined} */
+	xOffset;
+	/** @type {number | undefined} */
+	yOffset;
+	/** @type {number | undefined} */
+	zOffset;
+	/** @type {number | undefined} */
+	speed;
+	/** @type {number | undefined} */
+	count;
+	/** @type {number[]} */
+	particleArguments = [];
 	constructor($) {
 		super();
-		ut(this, "particleId");
-		ut(this, "longDistance");
-		ut(this, "x");
-		ut(this, "y");
-		ut(this, "z");
-		ut(this, "xOffset");
-		ut(this, "yOffset");
-		ut(this, "zOffset");
-		ut(this, "speed");
-		ut(this, "count");
-		ut(this, "particleArguments", []);
 		proto2.util.initPartial($, this)
 	}
 	static fromBinary($, et) {
@@ -2758,6 +3004,8 @@ ut(CPacketParticles, "runtime", proto2),
 		repeated: !0
 	}]));
 export class CPacketPlayerList extends Message {
+	/** @type {PlayerData[]} */
+	players;
 	constructor($) {
 		super();
 		ut(this, "players", []);
@@ -2786,6 +3034,24 @@ ut(CPacketPlayerList, "runtime", proto2),
 		repeated: !0
 	}]));
 export class PlayerData extends Message {
+	/** @type {number} */
+	id;
+	/** @type {string} */
+	uuid;
+	/** @type {number} */
+	permissionLevel;
+	/** @type {number | undefined} */
+	ping;
+	/** @type {string | undefined} */
+	name;
+	/** @type {string | undefined} */
+	color;
+	/** @type {string | undefined} */
+	rank;
+	/** @type {number | undefined} */
+	level;
+	/** @type {boolean | undefined} */
+	verified;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -2867,6 +3133,16 @@ ut(PlayerData, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketPlayerPosLook extends Message {
+	/** @type {number} */
+	x;
+	/** @type {number} */
+	y;
+	/** @type {number} */
+	z;
+	/** @type {number} */
+	yaw;
+	/** @type {number} */
+	pitch;
 	constructor($) {
 		super();
 		ut(this, "x");
@@ -2918,11 +3194,14 @@ ut(CPacketPlayerPosLook, "runtime", proto2),
 		T: 2
 	}]));
 export class CPacketPlayerPosition extends Message {
+	/** @type {number} */
+	x;
+	/** @type {number} */
+	y;
+	/** @type {number} */
+	z;
 	constructor($) {
 		super();
-		ut(this, "x");
-		ut(this, "y");
-		ut(this, "z");
 		proto2.util.initPartial($, this)
 	}
 	static fromBinary($, et) {
@@ -2956,16 +3235,23 @@ ut(CPacketPlayerPosition, "runtime", proto2),
 		kind: "scalar",
 		T: 2
 	}]));
-const CPacketPlayerReconciliation = class CPacketPlayerReconciliation extends Message {
+export class CPacketPlayerReconciliation extends Message {
+	/** @type {number} */
+	x;
+	/** @type {number} */
+	y;
+	/** @type {number} */
+	z;
+	/** @type {number} */
+	yaw;
+	/** @type {number} */
+	pitch;
+	/** @type {number} */
+	lastProcessedInput;
+	/** @type {boolean | undefined} */
+	reset;
 	constructor($) {
 		super();
-		ut(this, "x");
-		ut(this, "y");
-		ut(this, "z");
-		ut(this, "yaw");
-		ut(this, "pitch");
-		ut(this, "lastProcessedInput");
-		ut(this, "reset");
 		proto2.util.initPartial($, this)
 	}
 	static fromBinary($, et) {
@@ -3021,6 +3307,12 @@ ut(CPacketPlayerReconciliation, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketPong extends Message {
+	/** @type {number} */
+	time;
+	/** @type {number} */
+	mspt;
+	/** @type {number} */
+	tick;
 	constructor($) {
 		super();
 		ut(this, "time");
@@ -3060,6 +3352,12 @@ ut(CPacketPong, "runtime", proto2),
 		T: 13
 	}]));
 export class CPacketRespawn extends Message {
+	/** @type {boolean | undefined} */
+	notDeath;
+	/** @type {boolean | undefined} */
+	client;
+	/** @type {number | undefined} */
+	dimension;
 	constructor($) {
 		super();
 		ut(this, "notDeath");
@@ -3102,6 +3400,10 @@ ut(CPacketRespawn, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketScoreboard extends Message {
+	/** @type {string} */
+	title;
+	/** @type {ScoreboardContent[]} */
+	content;
 	constructor($) {
 		super();
 		ut(this, "title");
@@ -3136,6 +3438,8 @@ ut(CPacketScoreboard, "runtime", proto2),
 		repeated: !0
 	}]));
 export class ScoreboardContent extends Message {
+	/** @type {string[]} */
+	columns;
 	constructor($) {
 		super();
 		ut(this, "columns", []);
@@ -3197,7 +3501,7 @@ export class CPacketSetSlot extends Message {
 	windowId;
 	/** @type {number} */
 	slot;
-	/** @type {ItemStack} */
+	/** @type {PBItemStack} */
 	slotData;
 	constructor($) {
 		super();
@@ -3238,6 +3542,8 @@ ut(CPacketSetSlot, "runtime", proto2),
 		T: PBItemStack
 	}]));
 export class CPacketSignEditorOpen extends Message {
+	/** @type {PBBlockPos} */
+	signPosition;
 	constructor($) {
 		super();
 		ut(this, "signPosition");
@@ -3265,12 +3571,16 @@ ut(CPacketSignEditorOpen, "runtime", proto2),
 		T: PBBlockPos
 	}]));
 export class CPacketSoundEffect extends Message {
+	/** @type {string} */
+	sound;
+	/** @type {PBVector3 | undefined} */
+	location;
+	/** @type {number | undefined} */
+	volume;
+	/** @type {number | undefined} */
+	pitch;
 	constructor($) {
 		super();
-		ut(this, "sound");
-		ut(this, "location");
-		ut(this, "volume");
-		ut(this, "pitch");
 		proto2.util.initPartial($, this)
 	}
 	static fromBinary($, et) {
@@ -3313,18 +3623,28 @@ ut(CPacketSoundEffect, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketSpawnEntity extends Message {
+	/** @type {number} */
+	id;
+	/** @type {number} */
+	type;
+	/** @type {PBVector3 | undefined} */
+	pos;
+	/** @type {number | undefined} */
+	yaw;
+	/** @type {number | undefined} */
+	pitch;
+	/** @type {PBFloatVector3 | undefined} */
+	motion;
+	/** @type {PBItemStack | undefined} */
+	item;
+	/** @type {number | undefined} */
+	shooterId;
+	/** @type {number | undefined} */
+	state;
+	/** @type {string | undefined} */
+	texture;
 	constructor($) {
 		super();
-		ut(this, "id");
-		ut(this, "type");
-		ut(this, "pos");
-		ut(this, "yaw");
-		ut(this, "pitch");
-		ut(this, "motion");
-		ut(this, "item");
-		ut(this, "shooterId");
-		ut(this, "state");
-		ut(this, "texture");
 		proto2.util.initPartial($, this)
 	}
 	static fromBinary($, et) {
@@ -3402,6 +3722,16 @@ ut(CPacketSpawnEntity, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketSpawnExperienceOrb extends Message {
+	/** @type {number} */
+	id;
+	/** @type {number} */
+	x;
+	/** @type {number} */
+	y;
+	/** @type {number} */
+	z;
+	/** @type {number} */
+	xpValue;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -3453,18 +3783,28 @@ ut(CPacketSpawnExperienceOrb, "runtime", proto2),
 		T: 13
 	}]));
 export class CPacketSpawnPlayer extends Message {
+	/** @type {number} */
+	id;
+	/** @type {string} */
+	name;
+	/** @type {string} */
+	gamemode;
+	/** @type {boolean | undefined} */
+	operator;
+	/** @type {PBFloatVector3} */
+	pos;
+	/** @type {number} */
+	yaw;
+	/** @type {number} */
+	pitch;
+	/** @type {PBCosmetics} */
+	cosmetics;
+	/** @type {string | undefined} */
+	rank;
+	/** @type {} */
+	socketId;
 	constructor($) {
 		super();
-		ut(this, "id");
-		ut(this, "name");
-		ut(this, "gamemode");
-		ut(this, "operator");
-		ut(this, "pos");
-		ut(this, "yaw");
-		ut(this, "pitch");
-		ut(this, "cosmetics");
-		ut(this, "rank");
-		ut(this, "socketId");
 		proto2.util.initPartial($, this)
 	}
 	static fromBinary($, et) {
@@ -3536,6 +3876,8 @@ ut(CPacketSpawnPlayer, "runtime", proto2),
 		T: 9
 	}]));
 export class CPacketTabComplete extends Message {
+	/** @type {string[]} */
+	matches;
 	constructor($) {
 		super();
 		ut(this, "matches", []);
@@ -3564,6 +3906,10 @@ ut(CPacketTabComplete, "runtime", proto2),
 		repeated: !0
 	}]));
 export class CPacketTitle extends Message {
+	/** @type {string} */
+	title;
+	/** @type {number} */
+	duration;
 	constructor($) {
 		super();
 		ut(this, "title");
@@ -3597,6 +3943,16 @@ ut(CPacketTitle, "runtime", proto2),
 		T: 13
 	}]));
 export class CPacketUpdateHealth extends Message {
+	/** @type {number} */
+	id;
+	/** @type {number | undefined} */
+	hp;
+	/** @type {number | undefined} */
+	food;
+	/** @type {number | undefined} */
+	foodSaturation;
+	/** @type {number | undefined} */
+	oxygen;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -3690,6 +4046,10 @@ ut(CPacketUpdateLeaderboard, "runtime", proto2),
 		repeated: !0
 	}]));
 export class CPacketUpdateScoreboard extends Message {
+	/** @type {number} */
+	index;
+	/** @type {string[]} */
+	columns;
 	constructor($) {
 		super();
 		ut(this, "index");
@@ -3724,6 +4084,16 @@ ut(CPacketUpdateScoreboard, "runtime", proto2),
 		repeated: !0
 	}]));
 export class CPacketUpdateStatus extends Message {
+	/** @type {number} */
+	id;
+	/** @type {number | undefined} */
+	mode;
+	/** @type {string | undefined} */
+	rank;
+	/** @type {string | undefined} */
+	color;
+	/** @type {boolean | undefined} */
+	hidePlayers;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -3779,6 +4149,12 @@ ut(CPacketUpdateStatus, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketUpdate extends Message {
+	/** @type {number} */
+	tick;
+	/** @type {number} */
+	t;
+	/** @type {number} */
+	mspt;
 	constructor($) {
 		super();
 		ut(this, "tick");
@@ -3818,6 +4194,10 @@ ut(CPacketUpdate, "runtime", proto2),
 		T: 2
 	}]));
 export class CPacketWindowItems extends Message {
+	/** @type {number} */
+	windowId;
+	/** @type {PBItemStack[]} */
+	items;
 	constructor($) {
 		super();
 		ut(this, "windowId");
@@ -3852,8 +4232,11 @@ ut(CPacketWindowItems, "runtime", proto2),
 		repeated: !0
 	}]));
 export class CPacketWindowProperty extends Message {
+	/** @type {number} */
 	windowId;
+	/** @type {number} */
 	varIndex;
+	/** @type {number} */
 	varValue;
 	constructor($) {
 		super();
@@ -3973,7 +4356,9 @@ ut(SPacketCraftItem, "runtime", proto2),
 		T: 9
 	}]));
 export class SPacketRequestChunk extends Message {
+	/** @type {number} */
 	x;
+	/** @type {number} */
 	z;
 	constructor($) {
 		super();
@@ -4008,6 +4393,7 @@ ut(SPacketRequestChunk, "runtime", proto2),
 		T: 5
 	}]));
 export class SPacketAdminAction extends Message {
+	action = { case: undefined };
 	constructor($) {
 		super();
 		ut(this, "action", {
@@ -4113,6 +4499,8 @@ ut(KickPlayer, "runtime", proto2),
 		T: 9
 	}]));
 export class BanPlayer extends Message {
+	/** @type {string} */
+	uuid;
 	constructor($) {
 		super();
 		ut(this, "uuid");
@@ -4140,6 +4528,8 @@ ut(BanPlayer, "runtime", proto2),
 		T: 9
 	}]));
 export class UnbanPlayer extends Message {
+	/** @type {string} */
+	uuid;
 	constructor($) {
 		super();
 		ut(this, "uuid");
@@ -4188,6 +4578,8 @@ ut(StopServer, "runtime", proto2),
 	ut(StopServer, "typeName", "StopServer"),
 	ut(StopServer, "fields", proto2.util.newFieldList(() => []));
 export class PromotePlayer extends Message {
+	/** @type {string} */
+	uuid;
 	constructor($) {
 		super();
 		ut(this, "uuid");
@@ -4215,6 +4607,8 @@ ut(PromotePlayer, "runtime", proto2),
 		T: 9
 	}]));
 export class DemotePlayer extends Message {
+	/** @type {string} */
+	uuid;
 	constructor($) {
 		super();
 		ut(this, "uuid");
@@ -4242,6 +4636,8 @@ ut(DemotePlayer, "runtime", proto2),
 		T: 9
 	}]));
 export class UpdateAccessControl extends Message {
+	/** @type {string} */
+	accessControl;
 	constructor($) {
 		super();
 		ut(this, "accessControl");
@@ -4269,6 +4665,8 @@ ut(UpdateAccessControl, "runtime", proto2),
 		T: 9
 	}]));
 export class UpdateCheats extends Message {
+	/** @type {string} */
+	cheats;
 	constructor($) {
 		super();
 		ut(this, "cheats");
@@ -4296,6 +4694,8 @@ ut(UpdateCheats, "runtime", proto2),
 		T: 9
 	}]));
 export class UpdatePvP extends Message {
+	/** @type {boolean} */
+	enabled;
 	constructor($) {
 		super();
 		ut(this, "enabled");
@@ -4434,6 +4834,28 @@ ut(SPacketHeldItemChange, "runtime", proto2),
 		T: 5
 	}]));
 export class SPacketPlayerInput extends Message {
+	/** @type {number} */
+	sequenceNumber;
+	/** @type {boolean} */
+	left;
+	/** @type {boolean} */
+	right;
+	/** @type {boolean} */
+	up;
+	/** @type {boolean} */
+	down;
+	/** @type {number} */
+	yaw;
+	/** @type {number} */
+	pitch;
+	/** @type {boolean} */
+	jump;
+	/** @type {boolean} */
+	sneak;
+	/** @type {boolean} */
+	sprint;
+	/** @type {PBFloatVector3} */
+	pos;
 	constructor($) {
 		super();
 		ut(this, "sequenceNumber");
@@ -4521,6 +4943,8 @@ ut(SPacketPlayerInput, "runtime", proto2),
 		T: PBFloatVector3
 	}]));
 export class SPacketPing extends Message {
+	/** @type {number} */
+	time;
 	constructor($) {
 		super();
 		ut(this, "time");
@@ -4548,6 +4972,10 @@ ut(SPacketPing, "runtime", proto2),
 		T: 4
 	}]));
 export class SPacketUpdateSign extends Message {
+	/** @type {PBBlockPos} */
+	pos;
+	/** @type {string[]} */
+	lines = [];
 	constructor($) {
 		super();
 		ut(this, "pos");
@@ -4582,13 +5010,18 @@ ut(SPacketUpdateSign, "runtime", proto2),
 		repeated: !0
 	}]));
 export class CPacketEntityEffect extends Message {
+	/** @type {number} */
+	id;
+	/** @type {number} */
+	effectId;
+	/** @type {number} */
+	amplifier;
+	/** @type {number} */
+	duration;
+	/** @type {boolean} */
+	hideParticles;
 	constructor($) {
 		super();
-		ut(this, "id");
-		ut(this, "effectId");
-		ut(this, "amplifier");
-		ut(this, "duration");
-		ut(this, "hideParticles");
 		proto2.util.initPartial($, this)
 	}
 	static fromBinary($, et) {
@@ -4762,6 +5195,10 @@ ut(PBModifier, "runtime", proto2),
 		T: 13
 	}]));
 export class CPacketQueueNext extends Message {
+	/** @type {string} */
+	minigameId;
+	/** @type {string} */
+	minigameConfig;
 	constructor($) {
 		super();
 		ut(this, "minigameId");
@@ -4795,6 +5232,10 @@ ut(CPacketQueueNext, "runtime", proto2),
 		T: 9
 	}]));
 export class CPacketRemoveEntityEffect extends Message {
+	/** @type {number} */
+	id;
+	/** @type {number} */
+	effectId;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -4828,6 +5269,12 @@ ut(CPacketRemoveEntityEffect, "runtime", proto2),
 		T: 13
 	}]));
 export class CPacketSetExperience extends Message {
+	/** @type {number} */
+	experience;
+	/** @type {number} */
+	experienceTotal;
+	/** @type {number} */
+	level;
 	constructor($) {
 		super();
 		ut(this, "experience");
@@ -4867,6 +5314,10 @@ ut(CPacketSetExperience, "runtime", proto2),
 		T: 5
 	}]));
 export class CPacketShopProperty extends Message {
+	/** @type {string | undefined} */
+	name;
+	/** @type {string | undefined} */
+	value;
 	constructor($) {
 		super();
 		ut(this, "name");
@@ -4902,6 +5353,8 @@ ut(CPacketShopProperty, "runtime", proto2),
 		opt: !0
 	}]));
 export class CPacketShopProperties extends Message {
+	/** @type {CPacketShopProperty[]} */
+	properties = [];
 	constructor($) {
 		super();
 		ut(this, "properties", []);
@@ -4930,6 +5383,10 @@ ut(CPacketShopProperties, "runtime", proto2),
 		repeated: !0
 	}]));
 export class CPacketUseBed extends Message {
+	/** @type {number} */
+	id;
+	/** @type {PBBlockPos} */
+	bedPos;
 	constructor($) {
 		super();
 		ut(this, "id");
@@ -4963,6 +5420,10 @@ ut(CPacketUseBed, "runtime", proto2),
 		T: PBBlockPos
 	}]));
 export class CPacketTimeUpdate extends Message {
+	/** @type {number} */
+	totalTime;
+	/** @type {number} */
+	worldTime;
 	constructor($) {
 		super();
 		ut(this, "totalTime");
@@ -4996,6 +5457,7 @@ ut(CPacketTimeUpdate, "runtime", proto2),
 		T: 13
 	}]));
 export class ClientBoundCombined extends Message {
+	packets;
 	constructor($) {
 		super();
 		ut(this, "packets", []);
@@ -5614,6 +6076,11 @@ for (const [j, _] of Object.entries(SPACKET_MAP))
 		currentId++;
 
 export class BitArray {
+	capacity;
+	bitsPerValue;
+	valueMask;
+	valuesPerLong;
+	data;
 	constructor(_, $, et) {
 		ut(this, "capacity");
 		ut(this, "bitsPerValue");
