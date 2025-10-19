@@ -223,7 +223,7 @@ const self = class EntityHandler extends Handler {
 	convertId(id) {
 		return id == this.local.id ? this.local.mcId : id;
 	}
-	miniblox() {
+	sendFakeInput() {
 		if (!this.sentNewACInfo) {
 			this.local.inputSequenceNumber ??= -1;
 			ClientSocket.sendPacket(new SPacketPlayerInput({
@@ -244,6 +244,9 @@ const self = class EntityHandler extends Handler {
 				}
 			}));
 		}
+	}
+	miniblox() {
+		this.sendFakeInput();
 		// UNIVERSAL
 		ClientSocket.on('CPacketSpawnEntity', packet => {
 			if (ENTITIES[packet.type] == undefined) return;
@@ -290,6 +293,7 @@ const self = class EntityHandler extends Handler {
 		ClientSocket.on('CPacketSpawnPlayer', packet => {
 			const yaw = convertAngle(packet.yaw, true, 180), pitch = convertAngle(packet.pitch, true);
 			if (packet.socketId == ClientSocket.id) {
+				this.sendFakeInput();
 				delete this.gamemodes[packet.id];
 				this.local.id = packet.id;
 				this.local.pos = { x: packet.pos.x, y: packet.pos.y, z: packet.pos.z };
@@ -608,6 +612,7 @@ const self = class EntityHandler extends Handler {
 
 		// LOCAL
 		ClientSocket.on('CPacketPlayerPosition', packet => {
+			this.sendFakeInput();
 			this.local.pos = { x: packet.x, y: packet.y, z: packet.z };
 			this.teleport = this.local.pos;
 			client.write('position', {
