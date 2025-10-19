@@ -1,6 +1,6 @@
 import Handler from './../handler.js';
 import { ClientSocket } from './../../main.js';
-import { translateText } from './../../utils.js';
+import { translateText } from '../../utils/item_utils.js';
 let client;
 
 const self = class ScoreboardHandler extends Handler {

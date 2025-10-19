@@ -1,7 +1,7 @@
 import Handler from './../handler.js';
 import { ClientSocket, SPacketClickWindow, SPacketConfirmTransaction, SPacketCloseWindow } from './../../main.js';
 import { make_item, GUIS, SLOTS, WINDOW_NAMES, WINDOW_TYPES } from './../../types/guis.js';
-import { translateItem, translateItemBack } from './../../utils.js';
+import { translateItem, translateItemBack } from '../../utils/item_utils.js';
 import { handleCommand } from './misc.js';
 let client, entity;
 

@@ -1,6 +1,6 @@
 import Handler from './../handler.js';
 import { ClientSocket, SPacketPing, SPacketAnalytics } from './../../main.js';
-import { translateText, LEVEL_TO_COLOUR } from './../../utils.js';
+import { translateText, LEVEL_TO_COLOUR } from '../../utils/item_utils.js';
 import * as SKINS from './../../types/skins.js';
 import { granddad } from './../../types/skins.js';
 let client, entities;

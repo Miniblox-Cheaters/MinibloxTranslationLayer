@@ -15,7 +15,7 @@ const server = createServer({
 });
 const VERSION = '3.41.33';
 import GAMEMODES from './miniblox/types/gamemodes.js';
-const DEFAULT_GAMEMODE = "skywars";
+const DEFAULT_GAMEMODE = "survival";
 let connected, skipKick = Date.now();
 let nextDisconnectReason;
 
@@ -117,6 +117,7 @@ async function connect(client, requeue, gamemode, code) {
 		}
 
 		if (!requeue) {
+			console.log(packet.gamemode);
 			client.write('login', {
 				entityId: entity.local.mcId,
 				gameMode: GAMEMODES[packet.gamemode ?? 'survival'],

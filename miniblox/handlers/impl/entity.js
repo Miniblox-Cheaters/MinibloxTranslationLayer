@@ -2,8 +2,8 @@ import Handler from './../handler.js';
 import { ClientSocket, SPacketPlayerPosLook, SPacketPlayerInput, SPacketEntityAction, SPacketPlayerAbilities, SPacketHeldItemChange, SPacketClick, SPacketRespawn$1, SPacketUseEntity, PBVector3, SPacketUpdateInventory, CPacketSetSlot, PBItemStack, CPacketExplosion, CPacketEntityProperties } from './../../main.js';
 import ENTITIES from './../../types/entities.js';
 import GAMEMODES, { spectator } from './../../types/gamemodes.js';
-import { translateItem, translateItemBack, translateText } from './../../utils.js';
-import { SLOTS, SLOTS_REVERSE } from '../../types/guis.js';
+import { translateItem, translateItemBack, translateText } from '../../utils/item_utils.js';
+import { SLOTS_REVERSE } from '../../types/guis.js';
 const DEG2RAD = Math.PI / 180, RAD2DEG = 180 / Math.PI;
 // 1.98 / 1.99 is the original
 // 1.999999 flags sometimes
@@ -592,7 +592,7 @@ const self = class EntityHandler extends Handler {
 		ClientSocket.on('CPacketEntityEffect', packet => client.write('entity_effect', {
 			entityId: this.convertId(packet.id),
 			effectId: packet.effectId,
-			amplifier: packet.amplifier,
+			amplifier: Math.min(Math.max(packet.amplifier, -127), 127),
 			duration: packet.duration,
 			hideParticles: !packet.hideParticles
 		}));

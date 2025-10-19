@@ -1,4 +1,4 @@
-import { readString, writeString } from "../../buf_utils.js";
+import { readString, writeString } from "../../utils/buf_utils.js";
 import Handler from "../handler.js";
 import { ClientSocket, SPACKET_MAP } from "../../main.js";
 

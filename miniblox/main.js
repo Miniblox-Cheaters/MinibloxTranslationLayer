@@ -18,8 +18,6 @@ var ST = (j, _) => () => (_ || j((_ = {
 var ut = (j, _, $) => (xT(j, typeof _ != "symbol" ? _ + "" : _, $),
 	$);
 
-const exports = {};
-
 export class SPacketLoginStart extends Message {
 	/** @type {string | undefined} */
 	session;
@@ -6268,4 +6266,3 @@ export class ClientSocket {
 		($ = this.socket) == null || $.emit(_.constructor.typeName, _)
 	}
 }
-export default exports;

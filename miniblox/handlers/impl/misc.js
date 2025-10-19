@@ -1,6 +1,6 @@
 import Handler from './../handler.js';
 import { ClientSocket, SPacketMessage, SPacketTabComplete$1, CPacketServerInfo, PlayerPermissionEntry, SPacketQueueNext, CPacketLocalStorage, CPacketLocalStorage_Action, CPacketMessage } from './../../main.js';
-import { translateText } from './../../utils.js';
+import { translateText } from '../../utils/item_utils.js';
 import { writeFile } from 'node:fs/promises';
 import { CN_TO_CC } from '../../types/colors.js';
 let client, entity, connect, world, gui;
@@ -51,7 +51,7 @@ async function resolveServerID(code) {
 	const serverId = await fetch("https://session.coolmathblox.ca/launch/invite_code", {
 		method: "POST",
 		body: JSON.stringify({
-			code: joinCode[1]
+			code: joinCode[2]
 		}),
 		headers: {
 			"Content-Type": "application/json"
@@ -251,6 +251,14 @@ but you can join it using /join ${serverId}`
 				}),
 				position: 1
 			});
+			break;
+		case "friend":
+			const mode = args[0];
+			switch (mode) {
+				case "add":
+				case "remove":
+					break;
+			}
 			break;
 		default:
 			return false;
