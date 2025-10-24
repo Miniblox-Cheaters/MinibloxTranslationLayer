@@ -3,7 +3,7 @@ const mcData = (await import('minecraft-data')).default("1.8.9");
 let exports = [];
 for (let i = 0; i < 14; i++) exports[1 + i] = [mcData.itemsByName.stone.id, i];
 exports[14] = mcData.itemsByName.grass.id;
-for (let i = 0; i < 2; i++) exports[15 + i] = mcData.itemsByName.dirt.id;
+for (let i = 0; i < 4; i++) exports[15 + i] = mcData.itemsByName.dirt.id;
 exports[21] = mcData.itemsByName.cobblestone.id;
 for (let i = 0; i < 8; i++) exports[22 + i] = [mcData.itemsByName.planks.id, i % 6];
 for (let i = 0; i < 6; i++) exports[30 + i] = [mcData.itemsByName.sapling, i];
@@ -17,6 +17,7 @@ for (let i = 0; i < 2; i++) exports[48 + i] = mcData.itemsByName.redstone_ore.id
 for (let i = 0; i < 2; i++) exports[50 + i] = mcData.itemsByName.emerald_ore.id;
 for (let i = 0; i < 2; i++) exports[52 + i] = mcData.itemsByName.lapis_ore.id;
 for (let i = 0; i < 2; i++) exports[54 + i] = mcData.itemsByName.diamond_ore.id;
+exports[59] = mcData.itemsByName.coal_block.id;
 exports[65] = mcData.itemsByName.iron_block.id;
 exports[67] = mcData.itemsByName.gold_block.id;
 for (let i = 0; i < 2; i++) exports[68 + i] = mcData.itemsByName.diamond_block.id;
@@ -310,4 +311,16 @@ exports[1109] = mcData.itemsByName.diamond_boots.id;
 exports[1110] = mcData.itemsByName.ladder.id;
 exports[1111] = mcData.itemsByName.apple.id;
 exports[1112] = mcData.itemsByName.apple.id;
+
+exports[1114] = mcData.itemsByName.diamond_sword.id;
+exports[1115] = mcData.itemsByName.diamond_pickaxe.id;
+exports[1116] = mcData.itemsByName.diamond_axe.id;
+exports[1117] = mcData.itemsByName.diamond_helmet.id;
+exports[1118] = mcData.itemsByName.diamond_chestplate.id;
+exports[1119] = mcData.itemsByName.diamond_leggings.id;
+exports[1120] = mcData.itemsByName.diamond_boots.id;
+exports[1121] = mcData.itemsByName.diamond_ore.id;
+exports[1122] = mcData.itemsByName.diamond.id;
+exports[1123] = mcData.itemsByName.diamond_block.id;
+
 export default exports;
