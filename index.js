@@ -13,9 +13,8 @@ const server = createServer({
 	keepAlive: false,
 	version: '1.8.9'
 });
-const VERSION = '3.41.33';
+const VERSION = '3.41.46';
 import GAMEMODES from './miniblox/types/gamemodes.js';
-import { writeString } from './miniblox/utils/buf_utils.js';
 const DEFAULT_GAMEMODE = "survival";
 let connected, skipKick = Date.now();
 let nextDisconnectReason;
