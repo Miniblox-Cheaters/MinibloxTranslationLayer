@@ -82,11 +82,6 @@ for (let i = 0; i < 6; i++) {
 	BLOCKS[21 + i] = [mcData.blocksByName.sapling.id, i];
 	BLOCKS[21 + i + 1] = [mcData.blocksByName.sapling.id, i + 8];
 }
-BLOCKS[28] = mcData.blocksByName.sand.id;
-BLOCKS[29] = mcData.blocksByName.red_sandstone.id;
-BLOCKS[30] = mcData.blocksByName.gravel.id;
-BLOCKS[31] = mcData.blocksByName.gold_ore.id;
-BLOCKS[32] = mcData.blocksByName.gold_ore.id;
 BLOCKS[33] = mcData.blocksByName.bedrock.id;
 for (let i = 0; i < 16; i++) BLOCKS[34 + i] = [mcData.blocksByName.water.id, i];
 for (let i = 0; i < 16; i++) BLOCKS[50 + i] = [mcData.blocksByName.lava.id, i];
@@ -104,38 +99,6 @@ for (let i = 0; i < 5; i++) {
 	BLOCKS[112 + (i * 3) + 1] = [mcData.blocksByName.log.id, (i % 4) + 12];
 	BLOCKS[112 + (i * 3) + 2] = [mcData.blocksByName.log.id, (i % 4) + 12];
 }
-BLOCKS[94] = mcData.blocksByName.bed.id;
-BLOCKS[95] = mcData.blocksByName.bed.id;
-BLOCKS[96] = mcData.blocksByName.bed.id;
-BLOCKS[97] = mcData.blocksByName.golden_rail.id;
-BLOCKS[98] = mcData.blocksByName.detector_rail.id;
-BLOCKS[99] = mcData.blocksByName.sticky_piston.id;
-BLOCKS[100] = mcData.blocksByName.web.id;
-BLOCKS[101] = mcData.blocksByName.tallgrass.id;
-BLOCKS[102] = mcData.blocksByName.tallgrass.id;
-BLOCKS[103] = mcData.blocksByName.deadbush.id;
-BLOCKS[104] = mcData.blocksByName.tallgrass.id;
-BLOCKS[105] = mcData.blocksByName.tallgrass.id;
-BLOCKS[106] = mcData.blocksByName.piston.id;
-BLOCKS[107] = mcData.blocksByName.piston_head.id;
-for (let i = 0; i < 16; i++) BLOCKS[108 + i] = [mcData.blocksByName.wool.id, i];
-BLOCKS[130] = mcData.blocksByName.red_flower.id;
-BLOCKS[131] = mcData.blocksByName.yellow_flower.id;
-BLOCKS[132] = mcData.blocksByName.red_flower.id;
-BLOCKS[133] = mcData.blocksByName.red_flower.id;
-BLOCKS[134] = mcData.blocksByName.yellow_flower.id;
-BLOCKS[135] = mcData.blocksByName.red_flower.id;
-BLOCKS[136] = mcData.blocksByName.red_flower.id;
-BLOCKS[137] = mcData.blocksByName.red_flower.id;
-BLOCKS[138] = mcData.blocksByName.brown_mushroom.id;
-BLOCKS[139] = mcData.blocksByName.red_mushroom.id;
-BLOCKS[140] = mcData.blocksByName.gold_block.id;
-BLOCKS[141] = mcData.blocksByName.iron_block.id;
-BLOCKS[142] = mcData.blocksByName.brick_block.id;
-BLOCKS[143] = mcData.blocksByName.tnt.id;
-BLOCKS[144] = mcData.blocksByName.bookshelf.id;
-BLOCKS[145] = mcData.blocksByName.mossy_cobblestone.id;
-BLOCKS[146] = mcData.blocksByName.obsidian.id;
 for (let i = 0; i < 2; i++) {
 	BLOCKS[88 + (i * 3)] = [mcData.blocksByName.log2.id, (i % 4) + 4];
 	BLOCKS[88 + (i * 3) + 1] = [mcData.blocksByName.log2.id, (i % 4)];
@@ -385,7 +348,6 @@ BLOCKS[20349] = [mcData.blocksByName.ladder.id, 5];
 
 BLOCK_ID[80] = mcData.blocksByName.noteblock.id;
 BLOCK_ID[80] = mcData.blocksByName.noteblock.id;
-createTorch(147, mcData.blocksByName.torch.id);
 BLOCK_ID[151] = mcData.blocksByName.mob_spawner.id;
 BLOCK_ID[153] = mcData.blocksByName.chest.id;
 BLOCK_ID[283] = mcData.blocksByName.ender_chest.id;
