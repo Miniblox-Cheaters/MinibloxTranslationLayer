@@ -15,6 +15,7 @@ const server = createServer({
 });
 const VERSION = '3.41.33';
 import GAMEMODES from './miniblox/types/gamemodes.js';
+import { writeString } from './miniblox/utils/buf_utils.js';
 const DEFAULT_GAMEMODE = "survival";
 let connected, skipKick = Date.now();
 let nextDisconnectReason;
@@ -128,6 +129,11 @@ async function connect(client, requeue, gamemode, code) {
 				reducedDebugInfo: false
 			});
 		}
+
+		if (packet.name !== undefined) {
+			entity.local.name = packet.name;
+		}
+
 		MiscHandler.setServerInfoData(packet.serverInfo);
 	});
 

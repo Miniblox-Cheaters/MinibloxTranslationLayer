@@ -179,7 +179,7 @@ const self = class WorldHandler extends Handler {
 			text4: JSON.stringify({text: packet.lines[3] ?? ''})
 		}));
 		ClientSocket.on('CPacketUseBed', packet => client.write('bed', {
-			entityId: packet.id == entity.local.id ? mcClientId : packet.id,
+			entityId: entity.convertId(packet.entityId),
 			location: packet.bedPos
 		}));
 		ClientSocket.on("CPacketLeaderboard", /**@param {CPacketLeaderboard} packet */packet => {

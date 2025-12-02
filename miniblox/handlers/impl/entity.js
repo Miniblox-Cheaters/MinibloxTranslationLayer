@@ -86,13 +86,16 @@ function desyncMath(pos, serverPos, range) {
 	} : pos;
 }
 
-const self = class EntityHandler extends Handler {
+export class EntityHandler extends Handler {
 	sentNewACInfo = false;
 	entities;
 	skins;
 	gamemodes;
 	desyncFlag = false;
 	local;
+	/** @type {SPacketPlayerInput} */
+	lastInputPacket;
+	desyncTicks = 0;
 	canSpawn(entity) {
 		if (entity.type == -1 && ((!tablist.entries[entity.id] && !entity.special) || this.gamemodes[entity.id] == spectator)) return false;
 		if (!world.isEntityLoaded(entity)) return false;
@@ -296,6 +299,7 @@ const self = class EntityHandler extends Handler {
 				this.sendFakeInput();
 				delete this.gamemodes[packet.id];
 				this.local.id = packet.id;
+				if (this.local.name == "") this.local.name = packet.name;
 				this.local.pos = { x: packet.pos.x, y: packet.pos.y, z: packet.pos.z };
 				this.teleport = this.local.pos;
 				client.write('position', {
@@ -668,6 +672,19 @@ you will need to send Input packets in order to move on the server.`);
 				});
 			}
 
+			const diff = packet.yaw - this.local.yaw;
+			if (diff > (30 * DEG2RAD)) {
+				const sY = packet.yaw * RAD2DEG;
+				const cY = this.local.yaw * RAD2DEG;
+				/*client.write('chat', {
+					message: JSON.stringify({
+						extra: [],
+						text: `Yaw desync! sY = ${sY}, cY = ${cY} diff = ${diff}`
+					}),
+					position: 1
+				});*/
+			}
+
 			this.local.serverPos = { x: packet.x, y: packet.y, z: packet.z };
 		});
 		ClientSocket.on('CPacketRespawn', packet => {
@@ -767,6 +784,21 @@ you will need to send Input packets in order to move on the server.`);
 			this.abilities(true);
 		});
 		client.on('steer_vehicle', ({ sideways, forward, jump } = {}) => {
+			ClientSocket.sendPacket(this.lastInputPacket = new SPacketPlayerInput({
+				sequenceNumber: this.local.inputSequenceNumber,
+				left: sideways > 0,
+				right: sideways < 0,
+				up: forward > 0,
+				down: forward < 0,
+				yaw: this.local.yaw,
+				pitch: this.local.pitch,
+				jump: (jump & 1) > 0,
+				sneak: (jump & 2) > 0,
+				sprint: this.local.state[1] ?? false,
+				pos: this.desyncFlag
+					? desyncMath(this.local.pos, this.local.serverPos, DESYNC_MAX_SPEED)
+					: this.local.pos
+			}));
 			if (!this.desyncFlag) {
 				this.local.inputSequenceNumber++;
 			} else {
@@ -783,23 +815,12 @@ you will need to send Input packets in order to move on the server.`);
 					particleData: 1,
 					particles: 2
 				});
+				// tried making desync faster, doesn't work
+				// if (this.desyncTicks++ % 3 == 0) {
+				// 	console.log(`send on ${this.desyncTicks}`);
+				// 	ClientSocket.sendPacket(this.lastInputPacket);
+				// }
 			}
-
-			ClientSocket.sendPacket(new SPacketPlayerInput({
-				sequenceNumber: this.local.inputSequenceNumber,
-				left: sideways > 0,
-				right: sideways < 0,
-				up: forward > 0,
-				down: forward < 0,
-				yaw: this.local.yaw,
-				pitch: this.local.pitch,
-				jump: (jump & 1) > 0,
-				sneak: (jump & 2) > 0,
-				sprint: this.local.state[1] ?? false,
-				pos: this.desyncFlag
-					? desyncMath(this.local.pos, this.local.serverPos, DESYNC_MAX_SPEED)
-					: this.local.pos
-			}));
 		});
 		client.on('held_item_slot', ({ slotId }) => {
 			this.local.selectedSlot = slotId ?? -1;
@@ -877,7 +898,9 @@ you will need to send Input packets in order to move on the server.`);
 		this.skins = {};
 		this.gamemodes = {};
 		this.desyncFlag = false;
+		this.desyncTicks = 0;
 		this.local = {
+			name: "",
 			id: -1,
 			mcId: 99999,
 			inputSequenceNumber: 0,
@@ -905,4 +928,4 @@ you will need to send Input packets in order to move on the server.`);
 	}
 };
 
-export default new self();
+export default new EntityHandler();

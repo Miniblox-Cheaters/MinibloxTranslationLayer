@@ -1,6 +1,7 @@
 import { readString, writeString } from "../../utils/buf_utils.js";
 import Handler from "../handler.js";
 import { ClientSocket, SPACKET_MAP } from "../../main.js";
+import { EntityHandler } from "./entity.js";
 
 /** @type {import("minecraft-protocol").ServerClient} */
 let mcClient;
@@ -53,6 +54,11 @@ function parseSendPacketBuf(buffer) {
 	}
 }
 
+/**
+ * @type {EntityHandler}
+ */
+let entity;
+
 export class PacketInterop extends Handler {
 	/**
 	 * 
@@ -83,7 +89,7 @@ export class PacketInterop extends Handler {
 	}
 	miniblox() {
 		if (!SEND_RECV_PACKET_PAYLOAD) return;
-		ClientSocket.socket.onAny(handleSocketPacket)
+		ClientSocket.socket.onAny(PacketInterop.handleSocketPacket)
 	}
 	/** @param {import("minecraft-protocol").ServerClient} client */
 	minecraft(client) {
@@ -92,15 +98,32 @@ export class PacketInterop extends Handler {
 			/** @type {string} */
 			const channel = packet.channel;
 
-			if (channel == 'layer:send_packet') {
-				const _ = parseSendPacketBuf(packet.data);
-				if (_ === undefined) return;
-				const { id, data } = _;
-				const pkt = S_PACKET_N2C.get(id);
-				console.info(`Received packet from minecraft: ${id} -> `, pkt, "data:", data);
-				ClientSocket.sendPacket(pkt.fromJson(data));
+			switch (channel) {
+				case "layer:send_packet": {
+					const _ = parseSendPacketBuf(packet.data);
+					if (_ === undefined) return;
+					const { id, data } = _;
+					const pkt = S_PACKET_N2C.get(id);
+					console.info(`Received packet from minecraft: ${id} -> `, pkt, "data:", data);
+					ClientSocket.sendPacket(pkt.fromJson(data));
+					break;
+				}
+				case "layer:name_c2s": {
+					const n = entity.local.name;
+					console.log(`name = ${n}`);
+					const data = Buffer.alloc(n.length * 2 + 1);
+					writeString(data, 0, n);
+					mcClient.write('custom_payload', {
+						channel: 'layer:name_s2c',
+						data
+					});
+					break;
+				}
 			}
 		});
+	}
+	obtainHandlers(handler) {
+		entity = handler.entity;
 	}
 }
 

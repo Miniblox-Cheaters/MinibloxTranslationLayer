@@ -4,4 +4,4 @@ export const tablist = (await import("./impl/tablist.js")).default;
 export const gui = (await import("./impl/gui.js")).default;
 export const scoreboard = (await import("./impl/scoreboard.js")).default;
 export const misc = (await import("./impl/misc.js")).default;
-export const packetInterop = (await import("./impl/packet_interop.js")).default;
+export const interop = (await import("./impl/interop.js")).default;
